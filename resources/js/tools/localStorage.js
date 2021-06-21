@@ -22,7 +22,8 @@ export const saveTokens = tokens => {
 export const removeTokens = () => {
     try {
         localStorage.removeItem("tokens");
+        console.log("Tokens should be deleted")
     } catch {
-        //
+        console.log("It didnt work");
     }
 };

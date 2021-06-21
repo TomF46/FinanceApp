@@ -4,5 +4,94 @@
 // Variables
 @import 'variables';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+@import "tailwindcss/base";
+
+@import "tailwindcss/components";
+
+@import "tailwindcss/utilities";
+
+body {
+    background-color: #f9f9f9;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.pageHeader {
+    border-bottom: 1px solid #dedede;
+}
+nav {
+    z-index: 999;
+}
+
+.centerFormCardContainer {
+    width: 100%;
+    .centerFormCard {
+        margin: 0 auto;
+    }
+}
+
+.card,
+.page {
+    background-color: #fff;
+}
+
+.page {
+    padding-bottom: 1.4rem;
+}
+
+.overflow-visible {
+    overflow: visible;
+}
+
+
+#react-confirm-alert {
+    .react-confirm-alert-overlay {
+        background-color: #2d3748;
+        .react-confirm-alert-button-group {
+            justify-content: center;
+            button {
+                background-color: #2d3748;
+                color: #fff;
+            }
+        }
+    }
+}
+
+
+.centered {
+    margin: 0 auto;
+}
+
+.vertical-centered {
+    margin: auto 0;
+}
+
+.fade-enter {
+    opacity: 0.01;
+}
+
+.fade-enter.fade-enter-active {
+    opacity: 1;
+    transition: opacity 150ms ease-in;
+}
+
+.fade-exit {
+    opacity: 1;
+}
+
+.fade-exit.fade-exit-active {
+    opacity: 0.01;
+    transition: opacity 150ms ease-in;
+}
+
+div.transition-group {
+    position: relative;
+}
+section.route-section {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+}

@@ -32,6 +32,7 @@ export function login(userLoginDetails) {
 export function logout() {
     return function (dispatch) {
         removeTokens();
+        console.log("Call remove tokens");
         dispatch(userLogoutSuccess());
     };
 }
