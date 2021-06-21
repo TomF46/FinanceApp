@@ -22,6 +22,7 @@ class User extends Authenticatable
         'lastName',
         'email',
         'password',
+        'role'
     ];
 
     /**
@@ -42,4 +43,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function map()
+    {
+        return [
+            'id' => $this->id,
+            'firstName' => $this->firstName,
+            'lastName' => $this->lastName,
+            'fullName' => "{$this->firstName} {$this->lastName}",
+            'email' => $this->email,
+            'role' => $this->role,
+        ];
+    }
 }

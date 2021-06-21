@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\User;
+use App\Enums\Roles;
 
 class AuthController extends Controller
 {
@@ -21,6 +22,36 @@ class AuthController extends Controller
         $user->save();
         return response()->json([
             'message' => 'Successfully created user!'
+        ], 201);
+    }
+
+    public function registerHeadOffice(Request $request)
+    {
+        $attributes = $this->validateRegistration($request);
+        $this->registerWithRole($attributes, Roles::HeadOffice);
+        
+        return response()->json([
+            'message' => 'Successfully created head office user!'
+        ], 201);
+    }
+
+    public function registerAreaManager(Request $request)
+    {
+        $attributes = $this->validateRegistration($request);
+        $this->registerWithRole($attributes, Roles::AreaManager);
+        
+        return response()->json([
+            'message' => 'Successfully created area manager!'
+        ], 201);
+    }
+
+    public function registerRetailer(Request $request)
+    {
+        $attributes = $this->validateRegistration($request);
+        $this->registerWithRole($attributes, Roles::RetailManager);
+        
+        return response()->json([
+            'message' => 'Successfully created retail manager!'
         ], 201);
     }
 
@@ -63,14 +94,22 @@ class AuthController extends Controller
 
     public function user(Request $request)
     {
-        return response()->json($request->user());
+        return response()->json($request->user()->map());
     }
 
-    public function test(){
-        return response()->noContent();
+    protected function registerWithRole($attributes, $role)
+    {
+        $user = new User([
+            'firstName' => $attributes['firstName'],
+            'lastName' => $attributes['lastName'],
+            'email' => $attributes['email'],
+            'role' => $role,
+            'password' => bcrypt($attributes['password'])
+        ]);
+        $user->save();
     }
 
-    public function validateRegistration(Request $request)
+    protected function validateRegistration(Request $request)
     {
         return $request->validate([
             'firstName' => 'required|string|max:255',
@@ -80,7 +119,7 @@ class AuthController extends Controller
         ]);
     }
 
-    public function validateLogin(Request $request)
+    protected function validateLogin(Request $request)
     {
         return $request->validate([
             'email' => 'required|string|email',

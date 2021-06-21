@@ -22,6 +22,39 @@ export function Register(userRegistrationDetails) {
         });
 }
 
+export function RegisterRetailer(userRegistrationDetails) {
+    return axiosClient
+        .post("/api/retailer/register", userRegistrationDetails)
+        .then(response => {
+            return response;
+        })
+        .catch(error => {
+            throw error.response;
+        });
+}
+
+export function RegisterAreaManager(userRegistrationDetails) {
+    return axiosClient
+        .post("/api/area/register", userRegistrationDetails)
+        .then(response => {
+            return response;
+        })
+        .catch(error => {
+            throw error.response;
+        });
+}
+
+export function RegisterHeadOffice(userRegistrationDetails) {
+    return axiosClient
+        .post("/api/headoffice/register", userRegistrationDetails)
+        .then(response => {
+            return response;
+        })
+        .catch(error => {
+            throw error.response;
+        });
+}
+
 export function getCurrentUser() {
     return axiosClient
         .get("/api/auth/user")

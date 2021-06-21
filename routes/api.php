@@ -27,3 +27,9 @@ Route::group([
         Route::get('user', [App\Http\Controllers\AuthController::class, 'user']);
     });
 });
+
+Route::middleware(['auth:api', 'admin'])->group(function () {
+    Route::post('/retailer/register', [App\Http\Controllers\AuthController::class, 'registerRetailer']);
+    Route::post('/area/register', [App\Http\Controllers\AuthController::class, 'registerAreaManager']);
+    Route::post('/headoffice/register', [App\Http\Controllers\AuthController::class, 'registerHeadOffice']);
+});
