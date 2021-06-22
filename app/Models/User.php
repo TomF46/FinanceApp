@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use App\Enums\Roles;
+use App\Models\RetailLocation;
+use App\Models\Area;
 
 class User extends Authenticatable
 {
@@ -50,6 +52,16 @@ class User extends Authenticatable
         return $this->role == Roles::Administrator;
     }
 
+    public function retailLocations()
+    {
+        return $this->belongsToMany(RetailLocation::class, 'manager_location');
+    }
+
+    public function areas()
+    {
+        return $this->belongsToMany(Area::class, 'manager_area');
+    }
+
     public function map()
     {
         return [
@@ -60,6 +72,20 @@ class User extends Authenticatable
             'email' => $this->email,
             'role' => $this->role,
             "roleTitle" => $this->getRoleTitle()
+        ];
+    }
+
+    public function mapAsRetailManager()
+    {
+        return [
+            'id' => $this->id,
+            'firstName' => $this->firstName,
+            'lastName' => $this->lastName,
+            'fullName' => "{$this->firstName} {$this->lastName}",
+            'email' => $this->email,
+            'role' => $this->role,
+            "roleTitle" => $this->getRoleTitle(),
+            "retailLocationsManaged" => $this->retailLocations
         ];
     }
 
