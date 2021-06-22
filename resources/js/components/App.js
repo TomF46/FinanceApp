@@ -5,8 +5,14 @@ import "react-toastify/dist/ReactToastify.css";
 
 import Header from "./DisplayComponents/Header";
 import AuthenticatedRoute from "../AuthenticatedRoute";
+import AdminRoute from "../AdminRoute";
+
 import DashboardPage from "./Dashboard/Dashboard";
 import LoginPage from "./Authentication/Login/LoginPage";
+import HeadOfficeRegisterPage from "./Dashboard/AdminDashboard/UsersManagement/HeadOfficeAdmin/HeadOfficeRegisterPage";
+import AreaManagerRegisterPage from "./Dashboard/AdminDashboard/UsersManagement/AreaManagerAdmin/AreaManagerRegisterPage";
+import RetailManagerRegisterPage from "./Dashboard/AdminDashboard/UsersManagement/RetailManagerAdmin/RetailManagerRegisterPage";
+import UsersManagementPage from "./Dashboard/AdminDashboard/UsersManagement/UserManagementPage.js";
 
 const Main = ({ location }) => (
     <>
@@ -20,6 +26,22 @@ const Main = ({ location }) => (
                         component={DashboardPage}
                     />
                     <Route path="/login" component={LoginPage} />
+                    <AdminRoute
+                        path="/admin/users/headOffice/register"
+                        component={HeadOfficeRegisterPage}
+                    />
+                    <AdminRoute
+                        path="/admin/users/areaManager/register"
+                        component={AreaManagerRegisterPage}
+                    />
+                    <AdminRoute
+                        path="/admin/users/retailManager/register"
+                        component={RetailManagerRegisterPage}
+                    />
+                    <AdminRoute
+                        path="/admin/users"
+                        component={UsersManagementPage}
+                    />
                 </Switch>
             </div>
         </div>
