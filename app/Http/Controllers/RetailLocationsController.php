@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\RetailLocation;
 use App\Models\Area;
+use App\Models\User;
+use App\Enums\Roles;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -31,6 +33,7 @@ class RetailLocationsController extends Controller
     {
         return response()->json($retailLocation->map());
     }
+    
 
     public function store(Request $request)
     {
@@ -69,6 +72,29 @@ class RetailLocationsController extends Controller
         return response()->noContent();
     }
 
+    public function addManager(Request $request, RetailLocation $retailLocation)
+    {
+        $attributes = $this->validateAddManager($request);
+
+        $user = User::find($attributes['user_id']);
+        if (!$user) return response()->json(['error' => 'User must exist.'], 400);
+        if ($user->role != Roles::RetailManager ) return response()->json(['error' => 'User must be a retail manager.'], 400);
+
+        $retailLocation->managers()->save($user);
+        $retailLocation = $retailLocation->fresh();
+
+        return response()->json($retailLocation);
+    }
+
+    public function removeManager(RetailLocation $retailLocation, User $user)
+    {
+        $retailLocation->managers()->detach($user);
+        $retailLocation = $retailLocation->fresh();
+
+        return response()->json($retailLocation);
+    }
+
+
     protected function validateRetailLocation(Request $request)
     {
         return $request->validate([
@@ -84,6 +110,13 @@ class RetailLocationsController extends Controller
             'name' => ['required', 'max:40', Rule::unique('retail_locations')->ignore($retailLocation)],
             'location' => ['required', 'max:60', Rule::unique('retail_locations')->ignore($retailLocation)],
             'area_id' => ['required', 'exists:areas,id']
+        ]);
+    }
+
+    protected function validateAddManager(Request $request)
+    {
+        return $request->validate([
+            'user_id' => ['required', 'exists:users,id'],
         ]);
     }
 }
