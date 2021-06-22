@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import HeadOfficeRegisterForm from "./HeadOfficeAdmin/HeadOfficeRegisterForm";
-import AreaManagerRegisterForm from "./AreaManagerAdmin/AreaManagerRegisterForm";
-import RetailManagerRegisterForm from "./RetailManagerAdmin/RetailManagerRegisterForm";
+import { Link } from "react-router-dom";
 
 const AdminDashboard = ({ user }) => {
     return (
@@ -10,17 +8,9 @@ const AdminDashboard = ({ user }) => {
             <p className="text-center"> Admin Dashboard</p>
 
             <div className="my-4">
-                <HeadOfficeRegisterForm />
-            </div>
+                <Link to={`/admin/users`} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded pointer mr-2">User Admin</Link>
 
-            <div className="my-4">
-                <AreaManagerRegisterForm />
             </div>
-
-            <div className="my-4">
-                <RetailManagerRegisterForm />
-            </div>
-
         </div>
     );
 };

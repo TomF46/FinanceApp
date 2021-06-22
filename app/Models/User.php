@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use App\Enums\Roles;
 
 class User extends Authenticatable
 {
@@ -44,6 +45,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function isAdmin()
+    {
+        return $this->role == Roles::Administrator;
+    }
+
     public function map()
     {
         return [
@@ -53,6 +59,27 @@ class User extends Authenticatable
             'fullName' => "{$this->firstName} {$this->lastName}",
             'email' => $this->email,
             'role' => $this->role,
+            "roleTitle" => $this->getRoleTitle()
         ];
+    }
+
+    public function getRoleTitle()
+    {
+        switch ($this->role) {
+            case Roles::Administrator:
+                return "Administrator";
+                break;
+            case Roles::HeadOffice:
+                return "Head Office";
+                break;
+            case Roles::AreaManager:
+                return "Area Manager";
+                break;
+            case Roles::RetailManager:
+                return "Retail Manager";
+                break;
+            default:
+                return "Unassigned";
+        }
     }
 }

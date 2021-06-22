@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Redirect, Route, withRouter } from "react-router-dom";
-import { getUserIsAdmin } from "./api/userApi";
+import { getUserIsAdmin } from "./api/authenticationApi";
 
 const AdminRoute = ({
     component: Component,

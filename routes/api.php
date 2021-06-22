@@ -28,8 +28,17 @@ Route::group([
     });
 });
 
+Route::middleware(['auth:api'])->group(function () {
+    Route::get('/me/isAdmin', [App\Http\Controllers\MeController::class, 'isAdmin']);
+});
+
+
 Route::middleware(['auth:api', 'admin'])->group(function () {
     Route::post('/retailer/register', [App\Http\Controllers\AuthController::class, 'registerRetailer']);
     Route::post('/area/register', [App\Http\Controllers\AuthController::class, 'registerAreaManager']);
     Route::post('/headoffice/register', [App\Http\Controllers\AuthController::class, 'registerHeadOffice']);
+
+    Route::get('/users', [App\Http\Controllers\UsersController::class, 'index']);
+    Route::get('/users/{user}', [App\Http\Controllers\UsersController::class, 'show']);
+    Route::put('/users/{user}', [App\Http\Controllers\UsersController::class, 'update']);
 });

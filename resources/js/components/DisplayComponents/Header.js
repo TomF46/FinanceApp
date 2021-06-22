@@ -42,6 +42,11 @@ const Header = ({ userIsAuthenticated, isAdmin, checkUserIsAdmin, logout }) => {
 
     return (
         <nav className="flex items-center justify-between flex-wrap p-4 shadow-md">
+            <div className="flex items-center flex-shrink-0  mr-6">
+                <Link to="/">
+                    <h1 className="text-grey-800 text-xl">Mentior Corp Finance Tool</h1>
+                </Link>
+            </div>
             <div className="block md:hidden">
                 <button className="flex items-center px-3 py-2 border rounded text-white border-teal-400 hover:text-white hover:border-white pointer" onClick={toggleMobileNavigation}>
                     <svg
@@ -60,7 +65,7 @@ const Header = ({ userIsAuthenticated, isAdmin, checkUserIsAdmin, logout }) => {
                         <>
                             <Link
                                 to="/"
-                                className="block mt-4 md:inline-block md:mt-0 text-white hover:text-white md:mx-4"
+                                className="block mt-4 md:inline-block md:mt-0 text-grey-800 hover:text-grey-400 md:mx-4"
                             >
                                 Dashboard
                             </Link>
