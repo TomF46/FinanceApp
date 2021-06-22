@@ -13,6 +13,9 @@ import HeadOfficeRegisterPage from "./Dashboard/AdminDashboard/UsersManagement/H
 import AreaManagerRegisterPage from "./Dashboard/AdminDashboard/UsersManagement/AreaManagerAdmin/AreaManagerRegisterPage";
 import RetailManagerRegisterPage from "./Dashboard/AdminDashboard/UsersManagement/RetailManagerAdmin/RetailManagerRegisterPage";
 import UsersManagementPage from "./Dashboard/AdminDashboard/UsersManagement/UserManagementPage.js";
+import LocationsManagementPage from "./Dashboard/AdminDashboard/LocationsManagement/LocationsManagementPage";
+import AreaCreatePage from "./Dashboard/AdminDashboard/LocationsManagement/AreasManagement/AreaCreatePage";
+import RetailLocationCreatePage from "./Dashboard/AdminDashboard/LocationsManagement/RetailLocationManagement/RetailLocationCreatePage";
 
 const Main = ({ location }) => (
     <>
@@ -41,6 +44,21 @@ const Main = ({ location }) => (
                     <AdminRoute
                         path="/admin/users"
                         component={UsersManagementPage}
+                    />
+                    <AdminRoute
+                        path="/admin/locations/areas/create"
+                        component={AreaCreatePage
+                        }
+                    />
+                    <AdminRoute
+                        path="/admin/locations/retail/create"
+                        component={RetailLocationCreatePage
+                        }
+                    />
+                    <AdminRoute
+                        path="/admin/locations"
+                        component={LocationsManagementPage
+                        }
                     />
                 </Switch>
             </div>

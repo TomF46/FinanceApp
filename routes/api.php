@@ -30,6 +30,12 @@ Route::group([
 
 Route::middleware(['auth:api'])->group(function () {
     Route::get('/me/isAdmin', [App\Http\Controllers\MeController::class, 'isAdmin']);
+
+    Route::get('/areas', [App\Http\Controllers\AreasController::class, 'index']);
+    Route::get('/areas/{area}', [App\Http\Controllers\AreasController::class, 'show']);
+
+    Route::get('/retailLocations', [App\Http\Controllers\RetailLocationsController::class, 'index']);
+    Route::get('/retailLocations/{retailLocation}', [App\Http\Controllers\RetailLocationsController::class, 'show']);
 });
 
 
@@ -41,4 +47,12 @@ Route::middleware(['auth:api', 'admin'])->group(function () {
     Route::get('/users', [App\Http\Controllers\UsersController::class, 'index']);
     Route::get('/users/{user}', [App\Http\Controllers\UsersController::class, 'show']);
     Route::put('/users/{user}', [App\Http\Controllers\UsersController::class, 'update']);
+
+    Route::post('/areas', [App\Http\Controllers\AreasController::class, 'store']);
+    Route::delete('/area/{area}', [App\Http\Controllers\AreasController::class, 'destroy']);
+    Route::put('/areas/{area}', [App\Http\Controllers\AreasController::class, 'update']);
+
+    Route::post('/retailLocations', [App\Http\Controllers\RetailLocationsController::class, 'store']);
+    Route::delete('/retailLocations/{retailLocation}', [App\Http\Controllers\RetailLocationsController::class, 'destroy']);
+    Route::put('/retailLocations/{retailLocation}', [App\Http\Controllers\RetailLocationsController::class, 'update']);
 });
