@@ -41,6 +41,8 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/areaManagers/{user}', [App\Http\Controllers\AreaManagersController::class, 'show']);
 
     Route::get('/years', [App\Http\Controllers\YearsController::class, 'index']);
+    Route::get('/applications/{application}', [App\Http\Controllers\ApplicationsController::class, 'show']);
+
 });
 
 

@@ -20,6 +20,7 @@ import AreaPage from "./Dashboard/AdminDashboard/LocationsManagement/AreasManage
 import RetailLocationPage from "./Dashboard/AdminDashboard/LocationsManagement/RetailLocationManagement/RetailLocationPage";
 import YearsPage from "./Dashboard/HeadOfficeDashboard/YearsAdmin/YearsPage";
 import AddYearPage from "./Dashboard/HeadOfficeDashboard/YearsAdmin/AddYearPage";
+import ApplicationPage from "./Dashboard/RetailManagerDashboard/Application/ApplicationPage";
 
 const Main = ({ location }) => (
     <>
@@ -76,6 +77,8 @@ const Main = ({ location }) => (
                     />
                     <Route path="/headOffice/years/add" component={AddYearPage} />
                     <Route path="/headOffice/years" component={YearsPage} />
+                    <Route path="/retail/applications/:applicationId" component={ApplicationPage} />
+
                 </Switch>
             </div>
         </div>
