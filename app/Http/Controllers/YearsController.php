@@ -23,6 +23,8 @@ class YearsController extends Controller
             'year' => $attributes['year']
         ]);
 
+        $year->generateApplications();
+
         return response()->json($year, 201);
     }
 
@@ -32,4 +34,5 @@ class YearsController extends Controller
             'year' => 'required|unique:years|max:40'
         ]);
     }
+
 }
