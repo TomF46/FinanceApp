@@ -69,6 +69,19 @@ export function getAreaManagers() {
         });
 }
 
+export function getAreaManagerById(id) {
+    return axiosClient
+        .get(`/api/areaManagers/${id}`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+
+
 export function getRetailManagers() {
     return axiosClient
         .get("/api/retailManagers")

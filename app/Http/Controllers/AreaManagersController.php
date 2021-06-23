@@ -19,4 +19,9 @@ class AreaManagersController extends Controller
         });
         return response()->json($areaManagers);
     }
+
+    public function show(Request $request, User $user)
+    {
+        return response()->json($user->mapAsAreaManager());
+    }
 }

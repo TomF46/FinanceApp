@@ -70,9 +70,29 @@ class User extends Authenticatable
         });
     }
 
+    protected function mapAreas()
+    {
+        return $this->areas->map(function ($area) {
+            return $area->map();
+        });
+    }
+
     protected function mapApplications()
     {
         $ids = $this->retailLocations->pluck('id');
+        $applications = Application::whereIn('retail_location_id', $ids)->get()->map(function ($application) {
+            return $application->map();
+        });
+
+        return $applications;
+    }
+
+    protected function mapAreaApplications()
+    {
+        $ids = $this->areas->pluck('id');
+        $locations = RetailLocation::whereIn('area_id', $ids)->get();
+
+        $locationIds = $locations->pluck('id');
         $applications = Application::whereIn('retail_location_id', $ids)->get()->map(function ($application) {
             return $application->map();
         });
@@ -105,6 +125,21 @@ class User extends Authenticatable
             "roleTitle" => $this->getRoleTitle(),
             "retailLocationsManaged" => $this->mapLocations(),
             "applications" => $this->mapApplications()
+        ];
+    }
+
+    public function mapAsAreaManager()
+    {
+        return [
+            'id' => $this->id,
+            'firstName' => $this->firstName,
+            'lastName' => $this->lastName,
+            'fullName' => "{$this->firstName} {$this->lastName}",
+            'email' => $this->email,
+            'role' => $this->role,
+            "roleTitle" => $this->getRoleTitle(),
+            "areasManaged" => $this->mapAreas(),
+            "applications" => $this->mapAreaApplications()
         ];
     }
 
