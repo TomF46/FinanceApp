@@ -28,6 +28,13 @@ class RetailLocation extends Model
         return $this->belongsToMany(User::class, 'manager_location');
     }
 
+    protected function mapManagers()
+    {
+        return $this->managers->map(function ($manager) {
+            return $manager->map();
+        });
+    }
+
     public function map()
     {
         return [
@@ -35,7 +42,7 @@ class RetailLocation extends Model
             'name' => $this->name,
             'location' => $this->location,
             'area' => $this->area->name,
-            "managers" => $this->managers
+            "managers" => $this->mapManagers()
 
         ];
     }

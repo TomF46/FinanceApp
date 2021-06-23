@@ -54,3 +54,32 @@ export function getUsersWithPaginator(url) {
             throw error;
         });
 }
+
+export function getAreaManagers() {
+    return axiosClient
+        .get("/api/areaManagers")
+        .then(response => {
+            let areaManagers = response.data.map(manager => {
+                return { value: manager.id, text: manager.fullName }
+            });
+            return areaManagers;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+export function getRetailManagers() {
+    return axiosClient
+        .get("/api/retailManagers")
+        .then(response => {
+            let retailManagers = response.data.map(manager => {
+                return { value: manager.id, text: manager.fullName }
+            });
+            return retailManagers;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+

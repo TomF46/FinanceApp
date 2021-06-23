@@ -37,7 +37,6 @@ const RetailLocationCreatePage = () => {
         if (!name) errors.name = "Name is required";
         if (!location) errors.location = "Location is required";
         if (!area_id) errors.area_id = "Area is required";
-        console.log(errors);
         setErrors(errors);
         return Object.keys(errors).length === 0;
     }

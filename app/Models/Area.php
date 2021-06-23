@@ -25,13 +25,28 @@ class Area extends Model
         return $this->belongsToMany(User::class, 'manager_area');
     }
 
+    protected function mapLocations()
+    {
+        return $this->retailLocations->map(function ($location) {
+            return $location->map();
+        });
+    }
+
+    protected function mapManagers()
+    {
+        return $this->managers->map(function ($manager) {
+            return $manager->map();
+        });
+    }
+
     public function map()
     {
         return [
             'id' => $this->id,
             'name' => $this->name,
             'locationCount' => Count($this->retailLocations),
-            "managers" => $this->managers
+            'locations' => $this->mapLocations(),
+            "managers" => $this->mapManagers()
         ];
     }
 }

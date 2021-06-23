@@ -16,6 +16,8 @@ import UsersManagementPage from "./Dashboard/AdminDashboard/UsersManagement/User
 import LocationsManagementPage from "./Dashboard/AdminDashboard/LocationsManagement/LocationsManagementPage";
 import AreaCreatePage from "./Dashboard/AdminDashboard/LocationsManagement/AreasManagement/AreaCreatePage";
 import RetailLocationCreatePage from "./Dashboard/AdminDashboard/LocationsManagement/RetailLocationManagement/RetailLocationCreatePage";
+import AreaPage from "./Dashboard/AdminDashboard/LocationsManagement/AreasManagement/AreaPage";
+import RetailLocationPage from "./Dashboard/AdminDashboard/LocationsManagement/RetailLocationManagement/RetailLocationPage";
 
 const Main = ({ location }) => (
     <>
@@ -51,8 +53,18 @@ const Main = ({ location }) => (
                         }
                     />
                     <AdminRoute
+                        path="/admin/locations/areas/:areaId"
+                        component={AreaPage
+                        }
+                    />
+                    <AdminRoute
                         path="/admin/locations/retail/create"
                         component={RetailLocationCreatePage
+                        }
+                    />
+                    <AdminRoute
+                        path="/admin/locations/retail/:retailLocationId"
+                        component={RetailLocationPage
                         }
                     />
                     <AdminRoute

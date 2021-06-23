@@ -1,5 +1,27 @@
 import axiosClient from "../tools/axiosClient";
 
+export function getAreaById(id) {
+    return axiosClient
+        .get(`/api/areas/${id}`)
+        .then(response => {
+            return response.data
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+export function getRetailLocationById(id) {
+    return axiosClient
+        .get(`/api/retailLocations/${id}`)
+        .then(response => {
+            return response.data
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
 export function CreateArea(area) {
     return axiosClient
         .post("/api/areas", area)
@@ -71,5 +93,49 @@ export function getRetailLocationsWithUrl(url) {
         })
         .catch(error => {
             throw error;
+        });
+}
+
+export function AddAreaManager(area, manager) {
+    return axiosClient
+        .post(`/api/areas/${area.id}/managers`, manager)
+        .then(response => {
+            return response;
+        })
+        .catch(error => {
+            throw error.response;
+        });
+}
+
+export function RemoveAreaManager(area, id) {
+    return axiosClient
+        .post(`/api/areas/${area.id}/managers/${id}/remove`)
+        .then(response => {
+            return response;
+        })
+        .catch(error => {
+            throw error.response;
+        });
+}
+
+export function AddRetailManager(retailLocation, manager) {
+    return axiosClient
+        .post(`/api/retailLocations/${retailLocation.id}/managers`, manager)
+        .then(response => {
+            return response;
+        })
+        .catch(error => {
+            throw error.response;
+        });
+}
+
+export function RemoveRetailManager(retailLocation, id) {
+    return axiosClient
+        .post(`/api/retailLocations/${retailLocation.id}/managers/${id}/remove`)
+        .then(response => {
+            return response;
+        })
+        .catch(error => {
+            throw error.response;
         });
 }

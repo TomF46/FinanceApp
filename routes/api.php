@@ -60,7 +60,9 @@ Route::middleware(['auth:api', 'admin'])->group(function () {
     Route::post('/retailLocations/{retailLocation}/managers', [App\Http\Controllers\RetailLocationsController::class, 'addManager']);
     Route::post('/retailLocations/{retailLocation}/managers/{user}/remove', [App\Http\Controllers\RetailLocationsController::class, 'removeManager']);
 
-    
+    Route::get('/areaManagers', [App\Http\Controllers\AreaManagersController::class, 'index']);
+    Route::get('/retailManagers', [App\Http\Controllers\RetailManagersController::class, 'index']);
+
 
 
 });
