@@ -10,6 +10,7 @@ use Laravel\Passport\HasApiTokens;
 use App\Enums\Roles;
 use App\Models\RetailLocation;
 use App\Models\Area;
+use App\Models\Application;
 
 class User extends Authenticatable
 {
@@ -62,6 +63,23 @@ class User extends Authenticatable
         return $this->belongsToMany(Area::class, 'manager_area');
     }
 
+    protected function mapLocations()
+    {
+        return $this->retailLocations->map(function ($location) {
+            return $location->map();
+        });
+    }
+
+    protected function mapApplications()
+    {
+        $ids = $this->retailLocations->pluck('id');
+        $applications = Application::whereIn('retail_location_id', $ids)->get()->map(function ($application) {
+            return $application->map();
+        });
+
+        return $applications;
+    }
+
     public function map()
     {
         return [
@@ -85,7 +103,8 @@ class User extends Authenticatable
             'email' => $this->email,
             'role' => $this->role,
             "roleTitle" => $this->getRoleTitle(),
-            "retailLocationsManaged" => $this->retailLocations
+            "retailLocationsManaged" => $this->mapLocations(),
+            "applications" => $this->mapApplications()
         ];
     }
 

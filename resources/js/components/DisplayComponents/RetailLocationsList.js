@@ -21,8 +21,8 @@ const RetailLocationsList = ({ retailLocations }) => {
                             <p>{retailLocation.area}</p>
                         </div>
                         <div className="lg:block col-span-2">
-                            <p className="text-sm text-gray-600">TBC:</p>
-                            <p>TBC</p>
+                            <p className="text-sm text-gray-600">Applications:</p>
+                            <p>{retailLocation.totalApplications}</p>
                         </div>
                     </div>
                 )

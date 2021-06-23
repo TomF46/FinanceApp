@@ -30,4 +30,13 @@ class Year extends Model
             ]);
         }
     }
+
+    public function map()
+    {
+        return [
+            'id' => $this->id,
+            'year' => $this->year,
+            'totalApplications' => Count($this->applications)
+        ];
+    }
 }

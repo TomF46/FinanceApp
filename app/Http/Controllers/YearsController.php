@@ -11,7 +11,9 @@ class YearsController extends Controller
 {
     public function index(Request $request)
     {
-        $years = Year::all();
+        $years = Year::all()->map(function ($year) {
+            return $year->map();
+        });
         return response()->json($years);
     }
 

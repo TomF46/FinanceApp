@@ -19,4 +19,9 @@ class RetailManagersController extends Controller
         });
         return response()->json($retailManagers);
     }
+
+    public function show(Request $request, User $user)
+    {
+        return response()->json($user->mapAsRetailManager());
+    }
 }

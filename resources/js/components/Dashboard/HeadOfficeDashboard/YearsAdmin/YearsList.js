@@ -38,15 +38,15 @@ const YearsList = () => {
                                                 <p className="font-medium text-lg items-center pointer">{year.year}</p>
                                             </div>
                                             <div className="lg:block col-span-4">
-                                                <p className="text-sm text-gray-600">TBC:</p>
+                                                <p className="text-sm text-gray-600">Total Applications:</p>
+                                                <p>{year.totalApplications}</p>
+                                            </div>
+                                            <div className="lg:block col-span-2">
+                                                <p className="text-sm text-gray-600">Not Started:</p>
                                                 <p>TBC</p>
                                             </div>
                                             <div className="lg:block col-span-2">
-                                                <p className="text-sm text-gray-600">TBC:</p>
-                                                <p>TBC</p>
-                                            </div>
-                                            <div className="lg:block col-span-2">
-                                                <p className="text-sm text-gray-600">TBC:</p>
+                                                <p className="text-sm text-gray-600">Submitted:</p>
                                                 <p>TBC</p>
                                             </div>
                                         </div>

@@ -83,3 +83,14 @@ export function getRetailManagers() {
         });
 }
 
+export function getRetailManagerById(id) {
+    return axiosClient
+        .get(`/api/retailManagers/${id}`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+

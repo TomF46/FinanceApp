@@ -37,6 +37,9 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/retailLocations', [App\Http\Controllers\RetailLocationsController::class, 'index']);
     Route::get('/retailLocations/{retailLocation}', [App\Http\Controllers\RetailLocationsController::class, 'show']);
 
+    Route::get('/retailManagers/{user}', [App\Http\Controllers\RetailManagersController::class, 'show']);
+
+
     Route::get('/years', [App\Http\Controllers\YearsController::class, 'index']);
 });
 
