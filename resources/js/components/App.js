@@ -18,6 +18,8 @@ import AreaCreatePage from "./Dashboard/AdminDashboard/LocationsManagement/Areas
 import RetailLocationCreatePage from "./Dashboard/AdminDashboard/LocationsManagement/RetailLocationManagement/RetailLocationCreatePage";
 import AreaPage from "./Dashboard/AdminDashboard/LocationsManagement/AreasManagement/AreaPage";
 import RetailLocationPage from "./Dashboard/AdminDashboard/LocationsManagement/RetailLocationManagement/RetailLocationPage";
+import YearsPage from "./Dashboard/HeadOfficeDashboard/YearsAdmin/YearsPage";
+import AddYearPage from "./Dashboard/HeadOfficeDashboard/YearsAdmin/AddYearPage";
 
 const Main = ({ location }) => (
     <>
@@ -72,6 +74,8 @@ const Main = ({ location }) => (
                         component={LocationsManagementPage
                         }
                     />
+                    <Route path="/headOffice/years/add" component={AddYearPage} />
+                    <Route path="/headOffice/years" component={YearsPage} />
                 </Switch>
             </div>
         </div>

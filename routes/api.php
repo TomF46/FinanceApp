@@ -36,6 +36,8 @@ Route::middleware(['auth:api'])->group(function () {
 
     Route::get('/retailLocations', [App\Http\Controllers\RetailLocationsController::class, 'index']);
     Route::get('/retailLocations/{retailLocation}', [App\Http\Controllers\RetailLocationsController::class, 'show']);
+
+    Route::get('/years', [App\Http\Controllers\YearsController::class, 'index']);
 });
 
 
@@ -62,7 +64,8 @@ Route::middleware(['auth:api', 'admin'])->group(function () {
 
     Route::get('/areaManagers', [App\Http\Controllers\AreaManagersController::class, 'index']);
     Route::get('/retailManagers', [App\Http\Controllers\RetailManagersController::class, 'index']);
+});
 
-
-
+Route::middleware(['auth:api', 'headOffice'])->group(function () {
+    Route::post('/years', [App\Http\Controllers\YearsController::class, 'store']);
 });
