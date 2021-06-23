@@ -43,6 +43,9 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/years', [App\Http\Controllers\YearsController::class, 'index']);
     Route::get('/applications/{application}', [App\Http\Controllers\ApplicationsController::class, 'show']);
 
+    Route::get('/products', [App\Http\Controllers\ProductsController::class, 'index']);
+
+
 });
 
 
@@ -69,6 +72,9 @@ Route::middleware(['auth:api', 'admin'])->group(function () {
 
     Route::get('/areaManagers', [App\Http\Controllers\AreaManagersController::class, 'index']);
     Route::get('/retailManagers', [App\Http\Controllers\RetailManagersController::class, 'index']);
+
+    Route::post('/products', [App\Http\Controllers\ProductsController::class, 'store']);
+
 });
 
 Route::middleware(['auth:api', 'headOffice'])->group(function () {

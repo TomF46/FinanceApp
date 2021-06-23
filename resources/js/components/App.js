@@ -21,6 +21,8 @@ import RetailLocationPage from "./Dashboard/AdminDashboard/LocationsManagement/R
 import YearsPage from "./Dashboard/HeadOfficeDashboard/YearsAdmin/YearsPage";
 import AddYearPage from "./Dashboard/HeadOfficeDashboard/YearsAdmin/AddYearPage";
 import ApplicationPage from "./Dashboard/RetailManagerDashboard/Application/ApplicationPage";
+import ProductsManagementPage from "./Dashboard/AdminDashboard/ProductsManagement/ProductsManagementPage";
+import AddProductPage from "./Dashboard/AdminDashboard/ProductsManagement/AddProductPage";
 
 const Main = ({ location }) => (
     <>
@@ -73,6 +75,16 @@ const Main = ({ location }) => (
                     <AdminRoute
                         path="/admin/locations"
                         component={LocationsManagementPage
+                        }
+                    />
+                    <AdminRoute
+                        path="/admin/products/add"
+                        component={AddProductPage
+                        }
+                    />
+                    <AdminRoute
+                        path="/admin/products"
+                        component={ProductsManagementPage
                         }
                     />
                     <Route path="/headOffice/years/add" component={AddYearPage} />
