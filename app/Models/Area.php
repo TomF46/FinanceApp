@@ -39,14 +39,32 @@ class Area extends Model
         });
     }
 
+    protected function mapApplications()
+    {
+        $locationIds = $this->retailLocations->pluck('id');
+        return Application::whereIn('retail_location_id', $locationIds)->get()->map(function ($application) {
+            return $application->map();
+        });
+    }
+
     public function map()
     {
         return [
             'id' => $this->id,
             'name' => $this->name,
             'locationCount' => Count($this->retailLocations),
+        ];
+    }
+
+    public function mapDetail()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'locationCount' => Count($this->retailLocations),
             'locations' => $this->mapLocations(),
-            "managers" => $this->mapManagers()
+            'managers' => $this->mapManagers(),
+            'applications' => $this->mapApplications()
         ];
     }
 }

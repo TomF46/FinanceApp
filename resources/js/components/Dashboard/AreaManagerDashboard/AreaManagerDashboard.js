@@ -33,11 +33,11 @@ const AreaManagerDashboard = ({ user }) => {
                 <>
                     <div className="my-4">
                         <p>My Areas Managed</p>
-                        <AreasList areas={areaManager.areasManaged} />
+                        <AreasList areas={areaManager.areasManaged} isAdmin={false} />
                     </div>
 
                     <div className="my-4">
-                        <p>My Applications</p>
+                        <p>My Open Applications</p>
                         <ApplicationsList applications={areaManager.applications} />
                     </div>
                 </>

@@ -40,6 +40,13 @@ class RetailLocation extends Model
         });
     }
 
+    protected function mapApplications()
+    {
+        return $this->applications->map(function ($application) {
+            return $application->map();
+        });
+    }
+
     public function map()
     {
         return [
@@ -47,9 +54,20 @@ class RetailLocation extends Model
             'name' => $this->name,
             'location' => $this->location,
             'area' => $this->area->name,
-            "managers" => $this->mapManagers(),
             "totalApplications" => Count($this->applications)
+        ];
+    }
 
+    public function mapDetailed()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'location' => $this->location,
+            'area' => $this->area->name,
+            "managers" => $this->mapManagers(),
+            "totalApplications" => Count($this->applications),
+            "applications" => $this->mapApplications()
         ];
     }
 }

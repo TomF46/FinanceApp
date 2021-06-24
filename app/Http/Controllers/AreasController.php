@@ -31,7 +31,7 @@ class AreasController extends Controller
 
     public function show(Area $area)
     {
-        return response()->json($area->map());
+        return response()->json($area->mapDetail());
     }
 
     public function store(Request $request)

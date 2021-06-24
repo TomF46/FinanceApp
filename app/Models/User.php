@@ -93,7 +93,7 @@ class User extends Authenticatable
         $locations = RetailLocation::whereIn('area_id', $ids)->get();
 
         $locationIds = $locations->pluck('id');
-        $applications = Application::whereIn('retail_location_id', $ids)->get()->map(function ($application) {
+        $applications = Application::whereIn('retail_location_id', $locationIds)->get()->map(function ($application) {
             return $application->map();
         });
 

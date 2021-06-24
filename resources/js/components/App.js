@@ -16,13 +16,15 @@ import UsersManagementPage from "./Dashboard/AdminDashboard/UsersManagement/User
 import LocationsManagementPage from "./Dashboard/AdminDashboard/LocationsManagement/LocationsManagementPage";
 import AreaCreatePage from "./Dashboard/AdminDashboard/LocationsManagement/AreasManagement/AreaCreatePage";
 import RetailLocationCreatePage from "./Dashboard/AdminDashboard/LocationsManagement/RetailLocationManagement/RetailLocationCreatePage";
-import AreaPage from "./Dashboard/AdminDashboard/LocationsManagement/AreasManagement/AreaPage";
-import RetailLocationPage from "./Dashboard/AdminDashboard/LocationsManagement/RetailLocationManagement/RetailLocationPage";
+import AreaAdminPage from "./Dashboard/AdminDashboard/LocationsManagement/AreasManagement/AreaAdminPage";
+import RetailLocationAdminPage from "./Dashboard/AdminDashboard/LocationsManagement/RetailLocationManagement/RetailLocationAdminPage";
 import YearsPage from "./Dashboard/HeadOfficeDashboard/YearsAdmin/YearsPage";
 import AddYearPage from "./Dashboard/HeadOfficeDashboard/YearsAdmin/AddYearPage";
 import ApplicationPage from "./Dashboard/RetailManagerDashboard/Application/ApplicationPage";
 import ProductsManagementPage from "./Dashboard/AdminDashboard/ProductsManagement/ProductsManagementPage";
 import AddProductPage from "./Dashboard/AdminDashboard/ProductsManagement/AddProductPage";
+import RetailLocationDetailPage from "./Dashboard/RetailManagerDashboard/RetailLocation/RetailLocationDetailPage";
+import AreaDetailPage from "./Dashboard/AreaManagerDashboard/AreaDetailPage";
 
 const Main = ({ location }) => (
     <>
@@ -59,7 +61,7 @@ const Main = ({ location }) => (
                     />
                     <AdminRoute
                         path="/admin/locations/areas/:areaId"
-                        component={AreaPage
+                        component={AreaAdminPage
                         }
                     />
                     <AdminRoute
@@ -69,7 +71,7 @@ const Main = ({ location }) => (
                     />
                     <AdminRoute
                         path="/admin/locations/retail/:retailLocationId"
-                        component={RetailLocationPage
+                        component={RetailLocationAdminPage
                         }
                     />
                     <AdminRoute
@@ -89,7 +91,10 @@ const Main = ({ location }) => (
                     />
                     <Route path="/headOffice/years/add" component={AddYearPage} />
                     <Route path="/headOffice/years" component={YearsPage} />
-                    <Route path="/retail/applications/:applicationId" component={ApplicationPage} />
+                    <Route path="/retail/:retailLocationId/applications/:applicationId" component={ApplicationPage} />
+                    <Route path="/retail/:retailLocationId" component={RetailLocationDetailPage} />
+                    <Route path="/areas/:areaId" component={AreaDetailPage} />
+
 
                 </Switch>
             </div>

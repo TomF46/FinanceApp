@@ -39,7 +39,7 @@ const AreaList = () => {
                     <>
                         <h1 className="font-bold text-4xl my-4 text-center">Areas</h1>
                         {areasPaginator.total > 0 ? (
-                            <AreasListWithPagination paginationData={areasPaginator} onPageChange={getAreasPage} />
+                            <AreasListWithPagination paginationData={areasPaginator} isAdmin={true} onPageChange={getAreasPage} />
                         ) : (
                             <p className="text-center">There are currently no areas added.</p>
                         )}

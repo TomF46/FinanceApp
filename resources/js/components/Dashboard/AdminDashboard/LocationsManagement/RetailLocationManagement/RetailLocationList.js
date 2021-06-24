@@ -39,7 +39,7 @@ const RetailLocationList = () => {
                     <>
                         <h1 className="font-bold text-4xl my-4 text-center">Retail Locations</h1>
                         {retailLocationsPaginator.total > 0 ? (
-                            <RetailLocationsListWithPagination paginationData={retailLocationsPaginator} onPageChange={getRetailLocationsPage} />
+                            <RetailLocationsListWithPagination paginationData={retailLocationsPaginator} onPageChange={getRetailLocationsPage} isAdmin={true} />
                         ) : (
                             <p className="text-center">There are currently no retail locations added.</p>
                         )}

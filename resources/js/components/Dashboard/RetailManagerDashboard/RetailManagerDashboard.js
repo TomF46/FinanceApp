@@ -33,11 +33,11 @@ const RetailManagerDashboard = ({ user }) => {
                 <>
                     <div className="my-4">
                         <p>My Locations Managed</p>
-                        <RetailLocationsList retailLocations={retailManager.retailLocationsManaged} />
+                        <RetailLocationsList retailLocations={retailManager.retailLocationsManaged} isAdmin={false} />
                     </div>
 
                     <div className="my-4">
-                        <p>My Applications</p>
+                        <p>My Open Applications</p>
                         <ApplicationsList applications={retailManager.applications} />
                     </div>
                 </>

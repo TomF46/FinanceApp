@@ -31,7 +31,7 @@ class RetailLocationsController extends Controller
 
     public function show(RetailLocation $retailLocation)
     {
-        return response()->json($retailLocation->map());
+        return response()->json($retailLocation->mapDetailed());
     }
     
 

@@ -32,6 +32,7 @@ class Application extends Model
             'id' => $this->id,
             'year' => $this->year,
             'retailLocationName' => $this->retailLocation->name,
+            'retailLocationId' => $this->retailLocation->id,
             'status' => $this->getStatusText()
         ];
     }
