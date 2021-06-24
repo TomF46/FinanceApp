@@ -8,6 +8,7 @@ use App\Models\Year;
 use App\Models\RetailLocation;
 use App\Models\Sale;
 use App\Models\IncomeRecord;
+use App\Models\ExpensesRecord;
 use App\Enums\ApplicationStatus;
 
 class Application extends Model
@@ -38,6 +39,11 @@ class Application extends Model
         return $this->hasOne(IncomeRecord::class);
     }
 
+    public function expensesRecord()
+    {
+        return $this->hasOne(ExpensesRecord::class);
+    }
+
 
     protected function mapSales()
     {
@@ -66,7 +72,8 @@ class Application extends Model
             'retailLocationId' => $this->retailLocation->id,
             'status' => $this->getStatusText(),
             'sales' => $this->mapSales(),
-            'incomeRecord' => $this->incomeRecord ? $this->incomeRecord->map() : null
+            'incomeRecord' => $this->incomeRecord ? $this->incomeRecord->map() : null,
+            'expensesRecord' => $this->expensesRecord ? $this->expensesRecord->map() : null,
         ];
     }
 
