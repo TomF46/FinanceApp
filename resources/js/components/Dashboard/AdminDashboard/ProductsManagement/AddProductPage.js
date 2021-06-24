@@ -16,6 +16,11 @@ const AddProductPage = () => {
 
     function handleChange(event) {
         const { name, value } = event.target;
+
+        if (name == "price") {
+            if (!isValidMoney(value)) return;
+        }
+
         setProduct(prevProduct => ({
             ...prevProduct,
             [name]: value
@@ -61,6 +66,14 @@ const AddProductPage = () => {
         }
 
         return errorText;
+    }
+
+    function isValidMoney(value) {
+        let $decimals = 0;
+        if ((value % 1) != 0)
+            $decimals = value.toString().split(".")[1].length;
+
+        return $decimals <= 2
     }
 
     return (

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import TextInput from "../../../FormComponents/TextInput";
-import NumberInput from "../../../FormComponents/NumberInput";
+import MoneyInput from "../../../FormComponents/MoneyInput";
 
 const ProductCreateForm = ({
     product,
@@ -41,7 +41,7 @@ const ProductCreateForm = ({
 
 
             <div className="mb-6">
-                <NumberInput
+                <MoneyInput
                     name="price"
                     label="Price"
                     value={product.price}

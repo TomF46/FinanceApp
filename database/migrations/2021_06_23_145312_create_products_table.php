@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('productCode')->unique();
-            $table->integer('price');
+            $table->decimal('price', $precision = 8, $scale = 2);
         });
     }
 
