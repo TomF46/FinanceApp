@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Year;
 use App\Models\RetailLocation;
+use App\Models\Sale;
 use App\Enums\ApplicationStatus;
 
 class Application extends Model
@@ -26,6 +27,19 @@ class Application extends Model
         return $this->belongsTo(RetailLocation::class);
     }
 
+    public function sales()
+    {
+        return $this->hasMany(Sale::class);
+    }
+
+
+    protected function mapSales()
+    {
+        return $this->sales->map(function ($sale) {
+            return $sale->map();
+        });
+    }
+
     public function map()
     {
         return [
@@ -34,6 +48,18 @@ class Application extends Model
             'retailLocationName' => $this->retailLocation->name,
             'retailLocationId' => $this->retailLocation->id,
             'status' => $this->getStatusText()
+        ];
+    }
+
+    public function mapDetail()
+    {
+        return [
+            'id' => $this->id,
+            'year' => $this->year,
+            'retailLocationName' => $this->retailLocation->name,
+            'retailLocationId' => $this->retailLocation->id,
+            'status' => $this->getStatusText(),
+            'sales' => $this->mapSales()
         ];
     }
 

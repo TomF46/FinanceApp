@@ -11,6 +11,6 @@ class ApplicationsController extends Controller
 {
     public function show(Request $request, Application $application)
     {
-        return response()->json($application->map());
+        return response()->json($application->mapDetail());
     }
 }
