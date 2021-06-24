@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Year;
 use App\Models\RetailLocation;
 use App\Models\Sale;
+use App\Models\IncomeRecord;
 use App\Enums\ApplicationStatus;
 
 class Application extends Model
@@ -30,6 +31,11 @@ class Application extends Model
     public function sales()
     {
         return $this->hasMany(Sale::class);
+    }
+
+    public function incomeRecord()
+    {
+        return $this->hasOne(IncomeRecord::class);
     }
 
 
@@ -59,7 +65,8 @@ class Application extends Model
             'retailLocationName' => $this->retailLocation->name,
             'retailLocationId' => $this->retailLocation->id,
             'status' => $this->getStatusText(),
-            'sales' => $this->mapSales()
+            'sales' => $this->mapSales(),
+            'incomeRecord' => $this->incomeRecord ? $this->incomeRecord->map() : null
         ];
     }
 
