@@ -11,7 +11,6 @@ export function AddProduct(product) {
         });
 }
 
-
 export function getAllProducts() {
     return axiosClient
         .get('/api/products')
@@ -22,6 +21,29 @@ export function getAllProducts() {
             throw error;
         });
 }
+
+export function getProductById(id) {
+    return axiosClient
+        .get(`/api/products/${id}`)
+        .then(response => {
+            return response.data
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+export function editProduct(productId, product) {
+    return axiosClient
+        .put(`/api/products/${productId}`, product)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
 
 export function deactivateProductById(id) {
     return axiosClient

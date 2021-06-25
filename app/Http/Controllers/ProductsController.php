@@ -30,6 +30,22 @@ class ProductsController extends Controller
         return response()->json($product, 201);
     }
 
+    public function update(Request $request, Product $product)
+    {
+        $attributes = $this->validateProduct($request);
+        $product->name = $attributes['name'];
+        $product->productCode = $attributes['productCode'];
+        $product->price = $attributes['price'];
+        $product->update($attributes);
+        $product = $product->fresh();
+        return response()->json($product);
+    }
+
+    public function show(Product $product)
+    {
+        return response()->json($product->map());
+    }
+
     public function deactivate(Product $product)
     {
         $product->deactivate();

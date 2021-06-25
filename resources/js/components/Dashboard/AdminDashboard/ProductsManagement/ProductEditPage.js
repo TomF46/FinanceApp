@@ -1,26 +1,29 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { toast } from "react-toastify";
-import { AddProduct } from "../../../../api/productsApi";
-import history from "../../../../history"
 import ProductManageForm from "./ProductManageForm";
+import { editProduct, getProductById } from "../../../../api/productsApi";
+import history from "../../../../history";
+import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
+const ProductEditPage = ({ productId }) => {
 
-const AddProductPage = () => {
-
-    const [product, setProduct] = useState({
-        name: "",
-        productCode: "",
-        price: 0
-    });
+    const [product, setProduct] = useState(null);
     const [errors, setErrors] = useState({});
     const [saving, setSaving] = useState(false);
 
+    useEffect(() => {
+        getProductById(productId).then(productData => {
+            setProduct(productData);
+        }).catch(error => {
+            toast.error("Error getting product " + error.message, {
+                autoClose: false,
+            });
+        });
+    }, [productId]);
+
     function handleChange(event) {
         const { name, value } = event.target;
-
-        if (name == "price") {
-            if (!isValidMoney(value)) return;
-        }
-
         setProduct(prevProduct => ({
             ...prevProduct,
             [name]: value
@@ -28,11 +31,9 @@ const AddProductPage = () => {
     }
 
     function formIsValid() {
-        const { name, productCode, price } = product;
+        const { name } = product;
         const errors = {};
         if (!name) errors.name = "Name is required";
-        if (!productCode) errors.productCode = "Product code is required";
-        if (!price) errors.price = "Price is required";
 
         setErrors(errors);
         return Object.keys(errors).length === 0;
@@ -43,8 +44,8 @@ const AddProductPage = () => {
         if (!formIsValid()) return;
         setSaving(true);
 
-        AddProduct(product).then(response => {
-            toast.success("Product added");
+        editProduct(product.id, product).then(response => {
+            toast.success("Product updated");
             history.push(`/admin/products`);
         })
             .catch(err => {
@@ -68,20 +69,28 @@ const AddProductPage = () => {
         return errorText;
     }
 
-    function isValidMoney(value) {
-        let $decimals = 0;
-        if ((value % 1) != 0)
-            $decimals = value.toString().split(".")[1].length;
-
-        return $decimals <= 2
-    }
-
     return (
-        <div className="product-create-form">
-            <ProductManageForm product={product} errors={errors} onChange={handleChange} onSave={handleSave} saving={saving} />
+        <div className="product-edit-form">
+            {!product ? (
+                <LoadingMessage message={"Loading Product"} />
+            ) : (
+                <ProductManageForm product={product} errors={errors} onChange={handleChange} onSave={handleSave} saving={saving} />
+            )}
         </div>
     );
 };
 
 
-export default AddProductPage;
+ProductEditPage.propTypes = {
+    productId: PropTypes.any.isRequired,
+};
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        productId: ownProps.match.params.productId,
+    };
+};
+
+
+export default connect(mapStateToProps)(ProductEditPage);
+

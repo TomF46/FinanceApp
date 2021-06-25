@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const ProductsList = ({ products, onProductDeactivate }) => {
@@ -11,7 +12,7 @@ const ProductsList = ({ products, onProductDeactivate }) => {
                             <p className="text-sm text-gray-600">Name:</p>
                             <p className="font-medium text-lg items-center">{product.name}</p>
                         </div>
-                        <div className="lg:block col-span-4">
+                        <div className="lg:block col-span-2">
                             <p className="text-sm text-gray-600">Code:</p>
                             <p>{product.productCode}</p>
                         </div>
@@ -27,6 +28,16 @@ const ProductsList = ({ products, onProductDeactivate }) => {
                                 >
                                     <p className="ml-1">Remove</p>
                                 </button>
+                            </div>
+                        </div>
+                        <div className="lg:block col-span-2">
+                            <div className="table vertical-centered">
+                                <Link
+                                    to={`/admin/products/${product.id}/edit`}
+                                    className="bg-blue-800 text-white rounded py-2 px-4 hover:bg-blue-600 shadow inline-flex items-center ml-2"
+                                >
+                                    <p className="ml-1">Edit</p>
+                                </Link>
                             </div>
                         </div>
                     </div>

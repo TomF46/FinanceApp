@@ -28,6 +28,7 @@ import AreaDetailPage from "./Dashboard/AreaManagerDashboard/AreaDetailPage";
 import UserDetailPage from "./Dashboard/AdminDashboard/UsersManagement/UserDetailPage";
 import AreaEditPage from "./Dashboard/AdminDashboard/LocationsManagement/AreasManagement/AreaEditPage";
 import RetailLocationEditPage from "./Dashboard/AdminDashboard/LocationsManagement/RetailLocationManagement/RetailLocationEditPage";
+import ProductEditPage from "./Dashboard/AdminDashboard/ProductsManagement/ProductEditPage";
 
 const Main = ({ location }) => (
     <>
@@ -99,6 +100,11 @@ const Main = ({ location }) => (
                     <AdminRoute
                         path="/admin/products/add"
                         component={AddProductPage
+                        }
+                    />
+                    <AdminRoute
+                        path="/admin/products/:productId/edit"
+                        component={ProductEditPage
                         }
                     />
                     <AdminRoute

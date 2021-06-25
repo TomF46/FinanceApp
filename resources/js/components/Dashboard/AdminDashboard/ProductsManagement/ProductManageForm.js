@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import TextInput from "../../../FormComponents/TextInput";
 import MoneyInput from "../../../FormComponents/MoneyInput";
 
-const ProductCreateForm = ({
+const ProductManageForm = ({
     product,
     onSave,
     onChange,
@@ -63,7 +63,7 @@ const ProductCreateForm = ({
     );
 };
 
-ProductCreateForm.propTypes = {
+ProductManageForm.propTypes = {
     product: PropTypes.object.isRequired,
     errors: PropTypes.object,
     onSave: PropTypes.func.isRequired,
@@ -71,4 +71,4 @@ ProductCreateForm.propTypes = {
     saving: PropTypes.bool
 };
 
-export default ProductCreateForm;
+export default ProductManageForm;
