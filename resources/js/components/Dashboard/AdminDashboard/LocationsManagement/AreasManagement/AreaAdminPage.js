@@ -109,6 +109,12 @@ const AreaAdminPage = ({ areaId }) => {
                     >
                         Deactivate
                     </button>
+                    <Link
+                        to={`/admin/locations/areas/${area.id}/edit`}
+                        className="bg-blue-800 text-white rounded py-2 px-4 hover:bg-blue-600 shadow ml-2"
+                    >
+                        Edit
+                    </Link>
                     <div className="my-4">
                         <h2 className="text-center font-bold text-xl">
                             Locations

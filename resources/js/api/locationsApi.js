@@ -161,3 +161,25 @@ export function deactivateAreaById(id) {
             throw error;
         });
 }
+
+export function editArea(areaId, area) {
+    return axiosClient
+        .put(`/api/areas/${areaId}`, area)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+export function editRetailLocation(locationId, location) {
+    return axiosClient
+        .put(`/api/retailLocations/${locationId}`, location)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}

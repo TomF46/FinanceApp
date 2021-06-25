@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import history from "../../../../../history";
-import AreaCreateForm from "./AreaCreateForm";
+import AreaManageForm from "./AreaManageForm";
 import { CreateArea } from "../../../../../api/locationsApi"
 
 const AreaCreatePage = () => {
@@ -61,7 +61,7 @@ const AreaCreatePage = () => {
 
     return (
         <div className="area-create-form">
-            <AreaCreateForm area={area} errors={errors} onChange={handleChange} onSave={handleSave} saving={saving} />
+            <AreaManageForm area={area} errors={errors} onChange={handleChange} onSave={handleSave} saving={saving} />
         </div>
     );
 };
