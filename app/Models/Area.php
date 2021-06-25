@@ -34,7 +34,7 @@ class Area extends Model
 
     protected function mapManagers()
     {
-        return $this->managers->map(function ($manager) {
+        return $this->managers->where('active', true)->map(function ($manager) {
             return $manager->map();
         });
     }

@@ -107,3 +107,14 @@ export function getRetailManagerById(id) {
         });
 }
 
+export function deactivateUserById(id) {
+    return axiosClient
+        .post(`/api/users/${id}/deactivate`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+

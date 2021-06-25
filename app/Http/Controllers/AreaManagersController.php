@@ -13,7 +13,7 @@ class AreaManagersController extends Controller
 {
     public function index(Request $request)
     {
-        $areaManagers = User::where('role', '=', Roles::AreaManager)->get();
+        $areaManagers = User::where('role', '=', Roles::AreaManager)->where('active', true)->get();
         $areaManagers = $areaManagers->map(function ($user) {
             return $user->map();
         });

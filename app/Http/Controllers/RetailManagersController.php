@@ -13,7 +13,7 @@ class RetailManagersController extends Controller
 {
     public function index(Request $request)
     {
-        $retailManagers = User::where('role', '=', Roles::RetailManager)->get();
+        $retailManagers = User::where('role', '=', Roles::RetailManager)->where('active', true)->get();
         $retailManagers = $retailManagers->map(function ($user) {
             return $user->map();
         });

@@ -25,6 +25,7 @@ import ProductsManagementPage from "./Dashboard/AdminDashboard/ProductsManagemen
 import AddProductPage from "./Dashboard/AdminDashboard/ProductsManagement/AddProductPage";
 import RetailLocationDetailPage from "./Dashboard/RetailManagerDashboard/RetailLocation/RetailLocationDetailPage";
 import AreaDetailPage from "./Dashboard/AreaManagerDashboard/AreaDetailPage";
+import UserDetailPage from "./Dashboard/AdminDashboard/UsersManagement/UserDetailPage";
 
 const Main = ({ location }) => (
     <>
@@ -49,6 +50,10 @@ const Main = ({ location }) => (
                     <AdminRoute
                         path="/admin/users/retailManager/register"
                         component={RetailManagerRegisterPage}
+                    />
+                    <AdminRoute
+                        path="/admin/users/:userId"
+                        component={UserDetailPage}
                     />
                     <AdminRoute
                         path="/admin/users"

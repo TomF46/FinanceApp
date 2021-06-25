@@ -13,7 +13,7 @@ class UsersController extends Controller
 {
     public function index(Request $request)
     {
-        $users = User::orderBy('role', 'asc')->paginate(20);
+        $users = User::orderBy('role', 'asc')->where('active', true)->paginate(20);
         $users->getCollection()->transform(function ($user) use ($request) {
             return $user->map();
         });
@@ -38,5 +38,12 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         return response()->json(['message' => 'Not Implemented!'], 501);
+    }
+
+    public function deactivate(User $user)
+    {
+        $user->active = false;
+        $user->save();
+        return response()->noContent();
     }
 }
