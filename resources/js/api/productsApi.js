@@ -22,3 +22,14 @@ export function getAllProducts() {
             throw error;
         });
 }
+
+export function deactivateProductById(id) {
+    return axiosClient
+        .post(`/api/products/${id}/deactivate`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}

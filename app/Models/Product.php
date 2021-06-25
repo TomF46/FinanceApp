@@ -31,4 +31,10 @@ class Product extends Model
             'price' => $this->price
         ];
     }
+
+    public function deactivate()
+    {
+        $this->active = false;
+        $this->save();
+    }
 }

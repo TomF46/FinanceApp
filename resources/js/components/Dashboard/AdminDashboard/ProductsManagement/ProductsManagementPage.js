@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { confirmAlert } from "react-confirm-alert";
 import { Link } from "react-router-dom";
-import { getAllProducts } from "../../../../api/productsApi";
+import { toast } from "react-toastify";
+import { deactivateProductById, getAllProducts } from "../../../../api/productsApi";
+import history from "../../../../history";
 import ProductsList from "../../../DisplayComponents/ProductList";
 
 
@@ -23,6 +26,36 @@ const ProductsManagementPage = () => {
         });
     }
 
+    function handleDeactivate(id) {
+        confirmAlert({
+            title: "Confirm deactivation",
+            message: `Are you sure you want to deactivate this product?`,
+            buttons: [
+                {
+                    label: "Yes",
+                    onClick: () => {
+                        deactivate(id)
+                    },
+                },
+                {
+                    label: "No",
+                    onClick: () => { },
+                },
+            ],
+        });
+    }
+
+    function deactivate(id) {
+        deactivateProductById(id).then(response => {
+            toast.success("Product deactivated");
+            getProducts();
+        }).catch(error => {
+            toast.error("Error deactivating product" + error.message, {
+                autoClose: false,
+            });
+        });
+    }
+
     return (
         <div className="products-management">
             <p className="text-center">Products Management</p>
@@ -31,7 +64,7 @@ const ProductsManagementPage = () => {
             </div>
             {products && (
                 <div className="mb-4">
-                    <ProductsList products={products} />
+                    <ProductsList products={products} onProductDeactivate={handleDeactivate} />
                 </div>
             )}
         </div>

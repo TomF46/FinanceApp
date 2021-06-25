@@ -78,6 +78,7 @@ Route::middleware(['auth:api', 'admin'])->group(function () {
     Route::get('/retailManagers', [App\Http\Controllers\RetailManagersController::class, 'index']);
 
     Route::post('/products', [App\Http\Controllers\ProductsController::class, 'store']);
+    Route::post('/products/{product}/deactivate', [App\Http\Controllers\ProductsController::class, 'deactivate']);
 
 });
 

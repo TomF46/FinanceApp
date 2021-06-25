@@ -11,7 +11,7 @@ class ProductsController extends Controller
 {
     public function index(Request $request)
     {
-        $products = Product::all()->map(function ($product) {
+        $products = Product::where('active', true)->get()->map(function ($product) {
             return $product->map();
         });
         return response()->json($products);
@@ -28,6 +28,12 @@ class ProductsController extends Controller
         ]);
 
         return response()->json($product, 201);
+    }
+
+    public function deactivate(Product $product)
+    {
+        $product->deactivate();
+        return response()->noContent();
     }
 
     protected function validateProduct(Request $request)
