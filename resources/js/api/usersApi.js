@@ -118,3 +118,14 @@ export function deactivateUserById(id) {
         });
 }
 
+export function editUser(userId, user) {
+    return axiosClient
+        .put(`/api/users/${userId}`, user)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+

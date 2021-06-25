@@ -37,7 +37,10 @@ class UsersController extends Controller
 
     public function update(Request $request, User $user)
     {
-        return response()->json(['message' => 'Not Implemented!'], 501);
+        $attributes = $this->validateUpdate($request);
+        $user->update($attributes);
+        $user = $user->fresh();
+        return response()->json($user);
     }
 
     public function deactivate(User $user)
@@ -46,4 +49,13 @@ class UsersController extends Controller
         $user->save();
         return response()->noContent();
     }
+
+    protected function validateUpdate(Request $request)
+    {
+        return $request->validate([
+            'firstName' => 'required|string|max:255',
+            'lastName' => 'required|string|max:255'
+        ]);
+    }
+
 }

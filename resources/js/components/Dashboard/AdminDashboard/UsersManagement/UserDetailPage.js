@@ -7,6 +7,7 @@ import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
 import { deactivateUserById, getUserById } from "../../../../api/usersApi";
 import { confirmAlert } from "react-confirm-alert";
 import history from "../../../../history";
+import UserEditForm from "./UserEditForm";
 
 const UserDetailPage = ({ userId }) => {
     const [user, setUser] = useState(null);
@@ -74,6 +75,10 @@ const UserDetailPage = ({ userId }) => {
                             Deactivate
                         </button>
                     )}
+
+                    <div className="my-4">
+                        <UserEditForm user={user} onUserUpdated={getUser} />
+                    </div>
                 </>
             )}
         </>
