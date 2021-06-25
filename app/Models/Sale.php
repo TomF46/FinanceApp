@@ -15,6 +15,7 @@ class Sale extends Model
         'application_id',
         'product_id',
         'quantity'
+        'income'
     ];
 
     public function application()
@@ -27,11 +28,6 @@ class Sale extends Model
         return $this->belongsTo(Product::class);
     }
 
-    protected function getTotalIncome()
-    {
-        return $this->product->price*$this->quantity;
-    }
-
     public function map()
     {
         return [
@@ -39,7 +35,7 @@ class Sale extends Model
             'productName' => $this->product->name,
             'productPrice' => $this->product->price,
             'quantity' => $this->quantity,
-            'totalIncome' => $this->getTotalIncome()
+            'income' => $this->income
         ];
     }
 }
