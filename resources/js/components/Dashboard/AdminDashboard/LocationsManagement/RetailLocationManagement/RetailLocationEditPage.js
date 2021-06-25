@@ -1,19 +1,29 @@
 import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import history from "../../../../../history";
 import RetailLocationManageForm from "./RetailLocationManageForm";
-import { CreateRetailLocation, getAreas } from "../../../../../api/locationsApi"
+import { editRetailLocation, getAreas, getRetailLocationById } from "../../../../../api/locationsApi"
+import LoadingMessage from "../../../../DisplayComponents/LoadingMessage";
 
-const RetailLocationCreatePage = () => {
+const RetailLocationEditPage = ({ retailLocationId }) => {
 
-    const [retailLocation, setRetailLocation] = useState({
-        name: "",
-        location: "",
-        area_id: null
-    });
+    const [retailLocation, setRetailLocation] = useState(null);
     const [areas, setAreas] = useState(null);
     const [errors, setErrors] = useState({});
     const [saving, setSaving] = useState(false);
+
+    useEffect(() => {
+        getRetailLocationById(retailLocationId).then(retailLocationData => {
+            console.log(retailLocationData);
+            setRetailLocation(retailLocationData);
+        }).catch(error => {
+            toast.error("Error getting retail location " + error.message, {
+                autoClose: false,
+            });
+        });
+    }, [retailLocationId]);
 
     useEffect(() => {
         if (!areas) {
@@ -24,7 +34,7 @@ const RetailLocationCreatePage = () => {
     }, [areas]);
 
     function handleChange(event) {
-        const { name, location, area_id, value } = event.target;
+        const { name, value } = event.target;
         setRetailLocation(prevRetailLocation => ({
             ...prevRetailLocation,
             [name]: value
@@ -32,11 +42,10 @@ const RetailLocationCreatePage = () => {
     }
 
     function formIsValid() {
-        const { name, location, area_id } = retailLocation;
+        const { name } = retailLocation;
         const errors = {};
         if (!name) errors.name = "Name is required";
-        if (!location) errors.location = "Location is required";
-        if (!area_id) errors.area_id = "Area is required";
+
         setErrors(errors);
         return Object.keys(errors).length === 0;
     }
@@ -46,9 +55,9 @@ const RetailLocationCreatePage = () => {
         if (!formIsValid()) return;
         setSaving(true);
 
-        CreateRetailLocation(retailLocation).then(response => {
-            toast.success("Retail location created");
-            history.push(`/admin/locations`);
+        editRetailLocation(retailLocation.id, retailLocation).then(response => {
+            toast.success("Retail Location updated");
+            history.push(`/admin/locations/retail/${retailLocation.id}`);
         })
             .catch(err => {
                 setSaving(false);
@@ -72,13 +81,28 @@ const RetailLocationCreatePage = () => {
     }
 
     return (
-        <div className="retailLocation-create-form">
-            {areas && (
+        <div className="retailLocation-edit-form">
+            {!retailLocation && !areas ? (
+                <LoadingMessage message={"Loading RetailLocation"} />
+            ) : (
                 <RetailLocationManageForm retailLocation={retailLocation} errors={errors} onChange={handleChange} onSave={handleSave} saving={saving} areas={areas} />
+
             )}
         </div>
     );
 };
 
 
-export default RetailLocationCreatePage;
+RetailLocationEditPage.propTypes = {
+    retailLocationId: PropTypes.any.isRequired,
+};
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        retailLocationId: ownProps.match.params.retailLocationId,
+    };
+};
+
+
+export default connect(mapStateToProps)(RetailLocationEditPage);
+

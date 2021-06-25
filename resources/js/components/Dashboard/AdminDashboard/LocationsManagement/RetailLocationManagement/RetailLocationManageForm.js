@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import TextInput from "../../../../FormComponents/TextInput";
 import SelectInput from "../../../../FormComponents/SelectInput";
 
-const RetailLocationCreateForm = ({
+const RetailLocationManageForm = ({
     retailLocation,
     areas,
     onSave,
@@ -13,7 +13,7 @@ const RetailLocationCreateForm = ({
 }) => {
     return (
         <form className="" onSubmit={onSave}>
-            <h2 className="font-bold text-lg mb-4 text-center">Creat Retail Location</h2>
+            <h2 className="font-bold text-lg mb-4 text-center">{retailLocation.id ? "Edit" : "Add"} Retail Location</h2>
             {errors.onSave && (
                 <div className="text-red-500 text-xs p-1" role="alert">
                     {errors.onSave}
@@ -57,14 +57,14 @@ const RetailLocationCreateForm = ({
                     disabled={saving}
                     className="bg-gray-800 text-white rounded py-2 px-4 hover:bg-gray-600"
                 >
-                    {saving ? "Creating..." : "Create"}
+                    {saving ? "Saving..." : "Save"}
                 </button>
             </div>
         </form>
     );
 };
 
-RetailLocationCreateForm.propTypes = {
+RetailLocationManageForm.propTypes = {
     retailLocation: PropTypes.object.isRequired,
     areas: PropTypes.array.isRequired,
     errors: PropTypes.object,
@@ -73,4 +73,4 @@ RetailLocationCreateForm.propTypes = {
     saving: PropTypes.bool
 };
 
-export default RetailLocationCreateForm;
+export default RetailLocationManageForm;

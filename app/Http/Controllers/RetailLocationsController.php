@@ -59,9 +59,9 @@ class RetailLocationsController extends Controller
 
         $area = Area::find($attributes['area_id']);
         if (!$area) return response()->json(['error' => 'Area must exist.'], 400);
-        $retailLocation->area = $area;
+        $retailLocation->area_id = $area->id;
 
-        $retailLocation->update($attributes);
+        $retailLocation->save();
         $retailLocation = $retailLocation->fresh();
         return response()->json($retailLocation);
     }
