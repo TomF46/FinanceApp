@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Enums\Roles;
 
 class CreateUsersTable extends Migration
 {
@@ -22,6 +23,8 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->string('role')->default(Roles::Unassigned);
+            $table->boolean('active')->default(true);
         });
     }
 

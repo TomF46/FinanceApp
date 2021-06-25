@@ -18,6 +18,7 @@ class CreateRetailLocationTable extends Migration
             $table->foreignId('area_id');
             $table->string('name');
             $table->string('location');
+            $table->boolean('active')->default(true);
         });
     }
 
