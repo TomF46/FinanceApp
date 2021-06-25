@@ -139,3 +139,25 @@ export function RemoveRetailManager(retailLocation, id) {
             throw error.response;
         });
 }
+
+export function deactivateRetailLocationById(id) {
+    return axiosClient
+        .post(`/api/retailLocations/${id}/deactivate`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+export function deactivateAreaById(id) {
+    return axiosClient
+        .post(`/api/areas/${id}/deactivate`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}

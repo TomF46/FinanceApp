@@ -18,7 +18,6 @@ const RetailLocationDetailPage = ({ retailLocationId }) => {
 
     function getRetailLocation() {
         getRetailLocationById(retailLocationId).then(retailLocationData => {
-            console.log(retailLocationData);
             setRetailLocation(retailLocationData);
         }).catch(error => {
             toast.error("Error getting retail location " + error.message, {

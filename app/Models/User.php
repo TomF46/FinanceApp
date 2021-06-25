@@ -11,6 +11,8 @@ use App\Enums\Roles;
 use App\Models\RetailLocation;
 use App\Models\Area;
 use App\Models\Application;
+use App\Enums\ApplicationStatus;
+
 
 class User extends Authenticatable
 {
@@ -65,22 +67,22 @@ class User extends Authenticatable
 
     protected function mapLocations()
     {
-        return $this->retailLocations->map(function ($location) {
+        return $this->retailLocations->where('active', true)->map(function ($location) {
             return $location->map();
-        });
+        })->values();
     }
 
     protected function mapAreas()
     {
-        return $this->areas->map(function ($area) {
+        return $this->areas->where('active', true)->map(function ($area) {
             return $area->map();
-        });
+        })->values();
     }
 
     protected function mapApplications()
     {
         $ids = $this->retailLocations->pluck('id');
-        $applications = Application::whereIn('retail_location_id', $ids)->get()->map(function ($application) {
+        $applications = Application::whereIn('retail_location_id', $ids)->where('status', "!=", ApplicationStatus::Inactive)->get()->map(function ($application) {
             return $application->map();
         });
 
@@ -93,7 +95,7 @@ class User extends Authenticatable
         $locations = RetailLocation::whereIn('area_id', $ids)->get();
 
         $locationIds = $locations->pluck('id');
-        $applications = Application::whereIn('retail_location_id', $locationIds)->get()->map(function ($application) {
+        $applications = Application::whereIn('retail_location_id', $locationIds)->where('status', "!=", ApplicationStatus::Inactive)->get()->map(function ($application) {
             return $application->map();
         });
 

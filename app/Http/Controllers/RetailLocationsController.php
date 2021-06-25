@@ -17,12 +17,12 @@ class RetailLocationsController extends Controller
         $retailLocations = null;
 
         if ($request->input('paginated', false) == true) {
-            $retailLocations = RetailLocation::paginate(20);
+            $retailLocations = RetailLocation::where('active', true)->paginate(20);
             $retailLocations->getCollection()->transform(function ($retailLocation) {
                 return $retailLocation->map();
             });
         } else {
-            $retailLocations = RetailLocation::all()->map(function ($retailLocation) {
+            $retailLocations = RetailLocation::where('active', true)->map(function ($retailLocation) {
                 return $retailLocation->map();
             });
         }
@@ -66,9 +66,9 @@ class RetailLocationsController extends Controller
         return response()->json($retailLocation);
     }
 
-    public function destroy(RetailLocation $retailLocation)
+    public function deactivate(RetailLocation $retailLocation)
     {
-        $retailLocation->delete();
+        $retailLocation->deactivate();
         return response()->noContent();
     }
 

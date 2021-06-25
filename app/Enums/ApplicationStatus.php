@@ -10,4 +10,5 @@ final class ApplicationStatus extends Enum
     const Submitted = 1;
     const Returned = 2;
     const Accepted = 3;
+    const Inactive = 4;
 }

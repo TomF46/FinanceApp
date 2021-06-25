@@ -94,4 +94,9 @@ class Application extends Model
                 break;
         }
     }
+
+    public function deactivate(){
+        $this->status = ApplicationStatus::Inactive;
+        $this->save();
+    }
 }

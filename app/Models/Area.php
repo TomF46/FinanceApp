@@ -27,7 +27,7 @@ class Area extends Model
 
     protected function mapLocations()
     {
-        return $this->retailLocations->map(function ($location) {
+        return $this->retailLocations->where('active', true)->map(function ($location) {
             return $location->map();
         });
     }
@@ -66,5 +66,19 @@ class Area extends Model
             'managers' => $this->mapManagers(),
             'applications' => $this->mapApplications()
         ];
+    }
+
+    public function deactivate(){
+        $this->active = false;
+        $this->save();
+        $this->deactivateLocations();
+    }
+
+    protected function deactivateLocations()
+    {
+
+        foreach ($this->retailLocations as $location) {
+            $location->deactivate();
+        }
     }
 }

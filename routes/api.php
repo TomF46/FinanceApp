@@ -64,12 +64,15 @@ Route::middleware(['auth:api', 'admin'])->group(function () {
     Route::put('/areas/{area}', [App\Http\Controllers\AreasController::class, 'update']);
     Route::post('/areas/{area}/managers', [App\Http\Controllers\AreasController::class, 'addManager']);
     Route::post('/areas/{area}/managers/{user}/remove', [App\Http\Controllers\AreasController::class, 'removeManager']);
+    Route::post('/areas/{area}/deactivate', [App\Http\Controllers\AreasController::class, 'deactivate']);
+
 
     Route::post('/retailLocations', [App\Http\Controllers\RetailLocationsController::class, 'store']);
     Route::delete('/retailLocations/{retailLocation}', [App\Http\Controllers\RetailLocationsController::class, 'destroy']);
     Route::put('/retailLocations/{retailLocation}', [App\Http\Controllers\RetailLocationsController::class, 'update']);
     Route::post('/retailLocations/{retailLocation}/managers', [App\Http\Controllers\RetailLocationsController::class, 'addManager']);
     Route::post('/retailLocations/{retailLocation}/managers/{user}/remove', [App\Http\Controllers\RetailLocationsController::class, 'removeManager']);
+    Route::post('/retailLocations/{retailLocation}/deactivate', [App\Http\Controllers\RetailLocationsController::class, 'deactivate']);
 
     Route::get('/areaManagers', [App\Http\Controllers\AreaManagersController::class, 'index']);
     Route::get('/retailManagers', [App\Http\Controllers\RetailManagersController::class, 'index']);

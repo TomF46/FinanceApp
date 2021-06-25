@@ -18,7 +18,6 @@ const UserDetailPage = ({ userId }) => {
 
     function getUser() {
         getUserById(userId).then(userData => {
-            console.log(userData);
             setUser(userData);
         }).catch(error => {
             toast.error("Error getting user " + error.message, {
@@ -30,7 +29,7 @@ const UserDetailPage = ({ userId }) => {
     function handleDeactivate() {
         confirmAlert({
             title: "Confirm deactivation",
-            message: `Are you sure you want to deactivate?`,
+            message: `Are you sure you want to deactivate this user?`,
             buttons: [
                 {
                     label: "Yes",

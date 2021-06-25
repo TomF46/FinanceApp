@@ -16,13 +16,13 @@ class AreasController extends Controller
         $areas = null;
 
         if ($request->input('paginated', false) == true) {
-            $areas = Area::paginate(20);
+            $areas = Area::where('active', true)->paginate(20);
             $areas->getCollection()->transform(function ($area) {
                 return $area->map();
             });
             return response()->json($areas);
         } else {
-            $areas = Area::all()->map(function ($area) {
+            $areas = Area::where('active', true)->get()->map(function ($area) {
                 return $area->map();
             });
         }
@@ -54,9 +54,9 @@ class AreasController extends Controller
         return response()->json($area);
     }
 
-    public function destroy(Area $area)
+    public function deactivate(Area $area)
     {
-        $area->delete();
+        $area->deactivate();
         return response()->noContent();
     }
 

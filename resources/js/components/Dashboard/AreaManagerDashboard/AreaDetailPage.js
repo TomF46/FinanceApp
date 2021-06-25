@@ -19,7 +19,6 @@ const AreaDetailPage = ({ areaId }) => {
 
     function getArea() {
         getAreaById(areaId).then(areaData => {
-            console.log(areaData);
             setArea(areaData);
         }).catch(error => {
             toast.error("Error getting area " + error.message, {

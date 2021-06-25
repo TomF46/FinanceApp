@@ -70,4 +70,16 @@ class RetailLocation extends Model
             "applications" => $this->mapApplications()
         ];
     }
+
+    public function deactivate(){
+        $this->active = false;
+        $this->save();
+        $this->deactivateApplications();
+    }
+
+    protected function deactivateApplications(){
+        foreach ($this->applications as $application) {
+            $application->deactivate();
+        }
+    }
 }
