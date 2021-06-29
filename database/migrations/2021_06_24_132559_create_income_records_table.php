@@ -15,7 +15,7 @@ class CreateIncomeRecordsTable extends Migration
     {
         Schema::create('income_records', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('application_id')->constrained()->onDelete('cascade');
+            $table->foreignId('application_revision_id')->constrained()->onDelete('cascade');
             $table->decimal('dividends', $precision = 8, $scale = 2);
             $table->decimal('assetSales', $precision = 8, $scale = 2);
             $table->decimal('maintenanceGrant', $precision = 8, $scale = 2);

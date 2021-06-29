@@ -10,3 +10,14 @@ export function getApplicationById(id) {
             throw error;
         });
 }
+
+export function submitApplication(application) {
+    return axiosClient
+        .post(`/api/applications/${application.applicationId}`, application)
+        .then(response => {
+            return response;
+        })
+        .catch(error => {
+            throw error.response;
+        });
+}

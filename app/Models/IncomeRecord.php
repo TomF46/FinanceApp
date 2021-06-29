@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Application;
+use App\Models\ApplicationRevision;
 
 class IncomeRecord extends Model
 {
     use HasFactory;
     public $timestamps = false;
     protected $fillable = [
-        'application_id',
+        'application_revision_id',
         'dividends',
         'assetSales',
         'maintenanceGrant',
@@ -19,9 +19,9 @@ class IncomeRecord extends Model
         'rewards'
     ];
 
-    public function application()
+    public function applicationRevision()
     {
-        return $this->belongsTo(Application::class);
+        return $this->belongsTo(ApplicationRevision::class);
     }
 
     protected function getTotalIncome()
@@ -33,7 +33,7 @@ class IncomeRecord extends Model
     {
         return [
             'id' => $this->id,
-            'dividens' => $this->dividens,
+            'dividends' => $this->dividends,
             'assetSales' => $this->assetSales,
             'maintenanceGrant' => $this->maintenanceGrant,
             'sponsorship' => $this->sponsorship,

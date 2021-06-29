@@ -21,6 +21,7 @@ const MoneyInput = ({ name, label, onChange, placeholder, value, error }) => {
                     value={value}
                     onChange={onChange}
                     pattern="^\d*(\.\d{0,2})?$"
+                    min="0"
                     required
                 />
                 {error && (

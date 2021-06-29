@@ -15,7 +15,7 @@ class CreateExpensesRecordsTable extends Migration
     {
         Schema::create('expenses_records', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('application_id')->constrained()->onDelete('cascade');
+            $table->foreignId('application_revision_id')->constrained()->onDelete('cascade');
             $table->decimal('rent', $precision = 8, $scale = 2);
             $table->decimal('payroll', $precision = 8, $scale = 2);
             $table->decimal('utilities', $precision = 8, $scale = 2);

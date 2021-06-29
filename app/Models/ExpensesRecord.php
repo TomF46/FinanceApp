@@ -4,14 +4,14 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Application;
+use App\Models\ApplicationRevision;
 
 class ExpensesRecord extends Model
 {
     use HasFactory;
     public $timestamps = false;
     protected $fillable = [
-        'application_id',
+        'application_revision_id',
         'rent',
         'payroll',
         'utilities',
@@ -23,9 +23,9 @@ class ExpensesRecord extends Model
         'employeeExpenses'
     ];
 
-    public function application()
+    public function applicationRevision()
     {
-        return $this->belongsTo(Application::class);
+        return $this->belongsTo(ApplicationRevision::class);
     }
 
     protected function getTotalExpenses()

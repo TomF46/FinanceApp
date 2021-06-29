@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Application;
+use App\Models\ApplicationRevision;
 use App\Models\Product;
 
 class Sale extends Model
@@ -12,15 +12,15 @@ class Sale extends Model
     use HasFactory;
     public $timestamps = false;
     protected $fillable = [
-        'application_id',
+        'application_revision_id',
         'product_id',
-        'quantity'
+        'quantity',
         'income'
     ];
 
-    public function application()
+    public function applicationRevision()
     {
-        return $this->belongsTo(Application::class);
+        return $this->belongsTo(ApplicationRevision::class);
     }
 
     public function product()
@@ -32,6 +32,7 @@ class Sale extends Model
     {
         return [
             'id' => $this->id,
+            'productId' => $this->product->id,
             'productName' => $this->product->name,
             'productPrice' => $this->product->price,
             'quantity' => $this->quantity,

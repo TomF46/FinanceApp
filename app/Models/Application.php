@@ -6,9 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Year;
 use App\Models\RetailLocation;
-use App\Models\Sale;
-use App\Models\IncomeRecord;
-use App\Models\ExpensesRecord;
+use App\Models\ApplicationRevision;
 use App\Enums\ApplicationStatus;
 
 class Application extends Model
@@ -29,27 +27,10 @@ class Application extends Model
         return $this->belongsTo(RetailLocation::class);
     }
 
-    public function sales()
-    {
-        return $this->hasMany(Sale::class);
-    }
 
-    public function incomeRecord()
+    public function applicationRevisions()
     {
-        return $this->hasOne(IncomeRecord::class);
-    }
-
-    public function expensesRecord()
-    {
-        return $this->hasOne(ExpensesRecord::class);
-    }
-
-
-    protected function mapSales()
-    {
-        return $this->sales->map(function ($sale) {
-            return $sale->map();
-        });
+        return $this->hasMany(ApplicationRevision::class);
     }
 
     public function map()
@@ -59,7 +40,8 @@ class Application extends Model
             'year' => $this->year,
             'retailLocationName' => $this->retailLocation->name,
             'retailLocationId' => $this->retailLocation->id,
-            'status' => $this->getStatusText()
+            'status' => $this->status,
+            'statusText' => $this->getStatusText()
         ];
     }
 
@@ -70,10 +52,11 @@ class Application extends Model
             'year' => $this->year,
             'retailLocationName' => $this->retailLocation->name,
             'retailLocationId' => $this->retailLocation->id,
-            'status' => $this->getStatusText(),
-            'sales' => $this->mapSales(),
-            'incomeRecord' => $this->incomeRecord ? $this->incomeRecord->map() : null,
-            'expensesRecord' => $this->expensesRecord ? $this->expensesRecord->map() : null,
+            'status' => $this->status,
+            'statusText' => $this->getStatusText(),
+            'sales' => $this->applicationRevisions->last() ? $this->applicationRevisions->last()->mapSales() : [],
+            'incomeRecord' => $this->applicationRevisions->last() ? $this->applicationRevisions->last()->mapIncomeRecord(): null,
+            'expensesRecord' => $this->applicationRevisions->last() ? $this->applicationRevisions->last()->mapExpensesRecord() : null,
         ];
     }
 
@@ -93,6 +76,27 @@ class Application extends Model
                 return "Accepted";
                 break;
         }
+    }
+
+    public function isManagedBy(User $user)
+    {
+        return $this->retailLocation->managers->contains($user);
+    }
+
+    public function submit($attributes)
+    {
+        $this->createRevision($attributes);
+        $this->status = ApplicationStatus::Submitted;
+        $this->save();
+    }
+
+    public function createRevision($attributes)
+    {
+        $revision = ApplicationRevision::create([
+            'application_id' => $this->id
+        ]);
+
+        $revision->addRecords($attributes);
     }
 
     public function deactivate(){
