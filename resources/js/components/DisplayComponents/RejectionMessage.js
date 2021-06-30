@@ -19,10 +19,6 @@ const RejectionMessage = ({
     function getMessage() {
         getRejectionMessage(application).then(message => {
             setRejectionMessage(message);
-        }).catch(error => {
-            toast.error("Error getting rejection message" + error.message, {
-                autoClose: false,
-            });
         });
     }
 

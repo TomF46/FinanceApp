@@ -1,4 +1,4 @@
-export const income = {
+export const blankIncome = {
     'dividends': null,
     'assetSales': null,
     'maintenanceGrant': null,
@@ -6,7 +6,7 @@ export const income = {
     'rewards': null
 }
 
-export const expenses = {
+export const blankExpenses = {
     'rent': null,
     'payroll': null,
     'utilities': null,

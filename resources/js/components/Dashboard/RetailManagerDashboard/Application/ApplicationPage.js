@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { getApplicationById, submitApplication } from "../../../../api/applicationsApi";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
 import ApplicationForm from "./Form/ApplicationForm";
-import { income, expenses } from "../../../../applicationShape";
+import { blankIncome, blankExpenses } from "../../../../applicationShape";
 import { getAllProducts } from "../../../../api/productsApi";
 import ApplicationReadOnly from "../../../DisplayComponents/ApplicationReadOnly";
 import RejectionMessage from "../../../DisplayComponents/RejectionMessage";
@@ -14,6 +14,7 @@ import RejectionMessage from "../../../DisplayComponents/RejectionMessage";
 
 const ApplicationPage = ({ applicationId }) => {
     const [application, setApplication] = useState(null);
+    const [applicationRestarted, setApplicationRestarted] = useState(false);
     const [income, setIncome] = useState(null);
     const [incomeErrors, setIncomeErrors] = useState({});
     const [expenses, setExpenses] = useState(null);
@@ -33,8 +34,8 @@ const ApplicationPage = ({ applicationId }) => {
         getApplicationById(applicationId).then(applicationData => {
             setApplication(applicationData);
             if (applicationData.status == 0) {
-                setIncome({ ...income });
-                setExpenses({ ...expenses });
+                setIncome({ ...blankIncome });
+                setExpenses({ ...blankExpenses });
                 getSalesProducts();
             } else {
                 setIncome(applicationData.incomeRecord);
@@ -48,6 +49,16 @@ const ApplicationPage = ({ applicationId }) => {
         });
     }
 
+    function restartApplication() {
+        let incomeWithoutId = { ...income };
+        delete incomeWithoutId.id;
+        let expensesWithoutId = { ...expenses };
+        delete expensesWithoutId.id;
+        setIncome(incomeWithoutId);
+        setExpenses(expensesWithoutId);
+        getSalesProducts();
+        setApplicationRestarted(true);
+    }
     function getSalesProducts() {
         let productSales = [];
         getAllProducts().then(productData => {
@@ -151,6 +162,7 @@ const ApplicationPage = ({ applicationId }) => {
         };
         submitApplication(payload).then(res => {
             toast.success("Application submitted");
+            setApplicationRestarted(false);
             getApplication();
         }).catch(err => {
             setSaving(false);
@@ -169,7 +181,7 @@ const ApplicationPage = ({ applicationId }) => {
         <>
             {application && income && expenses && sales ? (
                 <>
-                    {application.status == "0" &&
+                    {(application.status == "0" || applicationRestarted) &&
                         <ApplicationForm
                             application={application}
                             income={income}
@@ -187,13 +199,14 @@ const ApplicationPage = ({ applicationId }) => {
                     {application.status == "1" &&
                         <>
                             <ApplicationReadOnly application={application} />
-                            <p>Awaiting area maanager sign off</p>
+                            <p>Awaiting area manager sign off</p>
                         </>
                     }
-                    {application.status == "2" &&
+                    {(application.status == "2" && !applicationRestarted) &&
                         <>
                             <ApplicationReadOnly application={application} />
                             <RejectionMessage application={application} />
+                            <button onClick={() => { restartApplication() }} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded pointer mr-2">Restart application</button>
                         </>
                     }
                     {application.status == "3" &&
