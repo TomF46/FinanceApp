@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { getAreaManagerById } from "../../../api/usersApi";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import { toast } from "react-toastify";
-import ApplicationsList from "../../DisplayComponents/ApplicationList";
+import AreaApplicationsList from "../../DisplayComponents/AreaApplicationList";
 import AreasList from "../../DisplayComponents/AreasList";
 
 const AreaManagerDashboard = ({ user }) => {
@@ -38,7 +38,7 @@ const AreaManagerDashboard = ({ user }) => {
 
                     <div className="my-4">
                         <p>My Open Applications</p>
-                        <ApplicationsList applications={areaManager.applications} />
+                        <AreaApplicationsList applications={areaManager.applications} />
                     </div>
                 </>
             )}

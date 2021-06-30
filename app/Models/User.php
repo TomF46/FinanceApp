@@ -96,10 +96,15 @@ class User extends Authenticatable
 
         $locationIds = $locations->pluck('id');
         $applications = Application::whereIn('retail_location_id', $locationIds)->where('status', "!=", ApplicationStatus::Inactive)->get()->map(function ($application) {
-            return $application->map();
+            return $application->mapForAreaManager();
         });
 
         return $applications;
+    }
+
+    public function getFullName()
+    {
+        return "{$this->firstName} {$this->lastName}";
     }
 
     public function map()
@@ -108,7 +113,7 @@ class User extends Authenticatable
             'id' => $this->id,
             'firstName' => $this->firstName,
             'lastName' => $this->lastName,
-            'fullName' => "{$this->firstName} {$this->lastName}",
+            'fullName' => $this->getFullName(),
             'email' => $this->email,
             'role' => $this->role,
             "roleTitle" => $this->getRoleTitle()
@@ -121,7 +126,7 @@ class User extends Authenticatable
             'id' => $this->id,
             'firstName' => $this->firstName,
             'lastName' => $this->lastName,
-            'fullName' => "{$this->firstName} {$this->lastName}",
+            'fullName' => $this->getFullName(),
             'email' => $this->email,
             'role' => $this->role,
             "roleTitle" => $this->getRoleTitle(),
@@ -136,7 +141,7 @@ class User extends Authenticatable
             'id' => $this->id,
             'firstName' => $this->firstName,
             'lastName' => $this->lastName,
-            'fullName' => "{$this->firstName} {$this->lastName}",
+            'fullName' => $this->getFullName(),
             'email' => $this->email,
             'role' => $this->role,
             "roleTitle" => $this->getRoleTitle(),

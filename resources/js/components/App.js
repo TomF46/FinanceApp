@@ -29,6 +29,7 @@ import UserDetailPage from "./Dashboard/AdminDashboard/UsersManagement/UserDetai
 import AreaEditPage from "./Dashboard/AdminDashboard/LocationsManagement/AreasManagement/AreaEditPage";
 import RetailLocationEditPage from "./Dashboard/AdminDashboard/LocationsManagement/RetailLocationManagement/RetailLocationEditPage";
 import ProductEditPage from "./Dashboard/AdminDashboard/ProductsManagement/ProductEditPage";
+import AreaManagerApplicationViewPage from "./Dashboard/AreaManagerDashboard/Application/AreaManagerApplicationViewPage";
 
 const Main = ({ location }) => (
     <>
@@ -116,9 +117,8 @@ const Main = ({ location }) => (
                     <Route path="/headOffice/years" component={YearsPage} />
                     <Route path="/retail/:retailLocationId/applications/:applicationId" component={ApplicationPage} />
                     <Route path="/retail/:retailLocationId" component={RetailLocationDetailPage} />
+                    <Route path="/areas/:areaId/retail/:retailLocationId/applications/:applicationId" component={AreaManagerApplicationViewPage} />
                     <Route path="/areas/:areaId" component={AreaDetailPage} />
-
-
                 </Switch>
             </div>
         </div>

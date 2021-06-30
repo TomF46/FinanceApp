@@ -31,6 +31,52 @@ class ApplicationsController extends Controller
         ], 200);
     }
 
+    public function accept(Request $request, Application $application)
+    {
+        $user = $request->user();
+
+        if(!$application->isAreaManagedBy($user)) return response()->json([
+            'message' => 'Unauthorized'
+        ], 401);
+
+        $application->accept();
+        
+        return response()->json([
+            'message' => 'Accepted'
+        ], 200);
+    }
+
+    public function reject(Request $request, Application $application)
+    {
+        $user = $request->user();
+
+        if(!$application->isAreaManagedBy($user)) return response()->json([
+            'message' => 'Unauthorized'
+        ], 401);
+
+        $attributes = $this->validateRejectionMessage($request);
+
+        $application->reject($user, $attributes['message']);
+        
+        return response()->json([
+            'message' => 'Rejected'
+        ], 200);
+    }
+
+    public function showRejectMessage(Request $request, Application $application)
+    {
+        $message = $application->getRejectionMessage();
+
+        return response()->json($message);
+    }
+
+    protected function validateRejectionMessage(Request $request)
+    {
+        return $request->validate([
+            'message' => 'required|string|max:1024'
+        ]);
+    }
+
     protected function validateApplication(Request $request)
     {
         return $request->validate([

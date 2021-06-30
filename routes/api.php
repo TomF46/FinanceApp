@@ -43,6 +43,9 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/years', [App\Http\Controllers\YearsController::class, 'index']);
     Route::get('/applications/{application}', [App\Http\Controllers\ApplicationsController::class, 'show']);
     Route::post('/applications/{application}', [App\Http\Controllers\ApplicationsController::class, 'submit']);
+    Route::post('/applications/{application}/accept', [App\Http\Controllers\ApplicationsController::class, 'accept']);
+    Route::post('/applications/{application}/reject', [App\Http\Controllers\ApplicationsController::class, 'reject']);
+    Route::get('/applications/{application}/showRejectMessage', [App\Http\Controllers\ApplicationsController::class, 'showRejectMessage']);
 
     Route::get('/products', [App\Http\Controllers\ProductsController::class, 'index']);
 

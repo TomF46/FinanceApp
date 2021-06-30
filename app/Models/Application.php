@@ -45,6 +45,20 @@ class Application extends Model
         ];
     }
 
+    public function mapForAreaManager()
+    {
+        return [
+            'id' => $this->id,
+            'year' => $this->year,
+            'areaName' => $this->retailLocation->area->name,
+            'areaId' => $this->retailLocation->area->id,
+            'retailLocationName' => $this->retailLocation->name,
+            'retailLocationId' => $this->retailLocation->id,
+            'status' => $this->status,
+            'statusText' => $this->getStatusText()
+        ];
+    }
+
     public function mapDetail()
     {
         return [
@@ -83,6 +97,11 @@ class Application extends Model
         return $this->retailLocation->managers->contains($user);
     }
 
+    public function isAreaManagedBy(User $user)
+    {
+        return $this->retailLocation->area->managers->contains($user);
+    }
+
     public function submit($attributes)
     {
         $this->createRevision($attributes);
@@ -97,6 +116,24 @@ class Application extends Model
         ]);
 
         $revision->addRecords($attributes);
+    }
+
+    public function accept()
+    {
+        $this->status = ApplicationStatus::Accepted;
+        $this->save();
+    }
+
+    public function reject($user, $message)
+    {
+        $this->status = ApplicationStatus::Returned;
+        $this->applicationRevisions->last()->rejectRevision($user, $message);
+        $this->save();
+    }
+
+    public function getRejectionMessage()
+    {
+        return $this->applicationRevisions->last()->getRejectionMessage();
     }
 
     public function deactivate(){

@@ -9,6 +9,7 @@ import ApplicationForm from "./Form/ApplicationForm";
 import { income, expenses } from "../../../../applicationShape";
 import { getAllProducts } from "../../../../api/productsApi";
 import ApplicationReadOnly from "../../../DisplayComponents/ApplicationReadOnly";
+import RejectionMessage from "../../../DisplayComponents/RejectionMessage";
 
 
 const ApplicationPage = ({ applicationId }) => {
@@ -149,7 +150,8 @@ const ApplicationPage = ({ applicationId }) => {
             sales: sales
         };
         submitApplication(payload).then(res => {
-            console.log(res);
+            toast.success("Application submitted");
+            getApplication();
         }).catch(err => {
             setSaving(false);
             console.log(err);
@@ -182,7 +184,24 @@ const ApplicationPage = ({ applicationId }) => {
                             expensesErrors={expensesErrors}
                             salesErrors={salesErrors}
                             saving={saving} />}
-                    {application.status == "1" && <ApplicationReadOnly application={application} />}
+                    {application.status == "1" &&
+                        <>
+                            <ApplicationReadOnly application={application} />
+                            <p>Awaiting area maanager sign off</p>
+                        </>
+                    }
+                    {application.status == "2" &&
+                        <>
+                            <ApplicationReadOnly application={application} />
+                            <RejectionMessage application={application} />
+                        </>
+                    }
+                    {application.status == "3" &&
+                        <>
+                            <ApplicationReadOnly application={application} />
+                            <p>Application Accepted</p>
+                        </>
+                    }
                 </>
             ) : (
                 <LoadingMessage message={"Loading Application"} />

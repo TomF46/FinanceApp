@@ -9,6 +9,7 @@ use App\Models\Sale;
 use App\Models\Product;
 use App\Models\IncomeRecord;
 use App\Models\ExpensesRecord;
+use App\Models\RejectionMessage;
 
 class ApplicationRevision extends Model
 {
@@ -19,9 +20,9 @@ class ApplicationRevision extends Model
         'application_id'
     ];
 
-    public function applicationRevision()
+    public function application()
     {
-        return $this->belongsTo(ApplicationRevision::class);
+        return $this->belongsTo(Application::class);
     }
 
     public function sales()
@@ -32,6 +33,11 @@ class ApplicationRevision extends Model
     public function incomeRecord()
     {
         return $this->hasOne(IncomeRecord::class);
+    }
+
+    public function rejectionMessage()
+    {
+        return $this->hasOne(RejectionMessage::class);
     }
 
     public function expensesRecord()
@@ -113,6 +119,20 @@ class ApplicationRevision extends Model
             ]);
         }
 
+    }
+
+    public function rejectRevision($user, $message)
+    {
+        RejectionMessage::create([
+            'application_revision_id' => $this->id,
+            'user_id' => $user->id,
+            'message' => $message
+        ]);
+    }
+
+    public function getRejectionMessage()
+    {
+        return $this->rejectionMessage->map();
     }
 
 }
