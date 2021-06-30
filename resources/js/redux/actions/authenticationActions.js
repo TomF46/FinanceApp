@@ -3,7 +3,7 @@ import { beginApiCall, apiCallError } from "./apiStatusActions";
 import { saveTokens, removeTokens } from "../../tools/localStorage";
 import * as authenticationApi from "../../api/authenticationApi";
 import { attatchBearerToken } from "../../tools/axiosClient";
-
+import history from "../../history";
 export function userLoginSuccess(tokens) {
     return { type: types.USER_LOGIN_SUCCESS, tokens };
 }
@@ -32,6 +32,7 @@ export function login(userLoginDetails) {
 export function logout() {
     return function (dispatch) {
         removeTokens();
+        history.push("/login");
         dispatch(userLogoutSuccess());
     };
 }
