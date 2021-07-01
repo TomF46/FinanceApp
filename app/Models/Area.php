@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\RetailLocation;
 use App\Models\User;
+use App\Models\Application;
+use App\Enums\ApplicationStatus;
 
 class Area extends Model
 {
@@ -47,12 +49,33 @@ class Area extends Model
         });
     }
 
+    protected function getAreaManagerRequiredActionCount()
+    {
+        $locationIds = $this->retailLocations->pluck('id');
+        $applications = Application::whereIn('retail_location_id', $locationIds)->get();
+        $count = Count($applications->where('status', ApplicationStatus::Submitted));
+        return $count;
+    }
+
+    protected function getRetailManagerRequiredActionCount()
+    {
+        $locationIds = $this->retailLocations->pluck('id');
+        $applications = Application::whereIn('retail_location_id', $locationIds)
+            ->where('status', ApplicationStatus::NotSubmitted)
+            ->orWhere('status', ApplicationStatus::Returned)->get();
+        $count = Count($applications);
+        return $count;
+    }
+
     public function map()
     {
         return [
             'id' => $this->id,
             'name' => $this->name,
             'locationCount' => Count($this->retailLocations),
+            'areaManagerActionsRequired' => $this->getAreaManagerRequiredActionCount(),
+            'retailManagerActionsRequired' => $this->getRetailManagerRequiredActionCount()
+
         ];
     }
 
@@ -64,7 +87,9 @@ class Area extends Model
             'locationCount' => Count($this->retailLocations),
             'locations' => $this->mapLocations(),
             'managers' => $this->mapManagers(),
-            'applications' => $this->mapApplications()
+            'applications' => $this->mapApplications(),
+            'areaManagerActionsRequired' => $this->getAreaManagerRequiredActionCount(),
+            'retailManagerActionsRequired' => $this->getRetailManagerRequiredActionCount()
         ];
     }
 

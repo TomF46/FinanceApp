@@ -16,13 +16,9 @@ const ApplicationsList = ({ applications }) => {
                             <p className="text-sm text-gray-600">Location:</p>
                             <p>{application.retailLocationName}</p>
                         </div>
-                        <div className="lg:block col-span-2">
+                        <div className="lg:block col-span-4">
                             <p className="text-sm text-gray-600">Status:</p>
                             <p>{application.statusText}</p>
-                        </div>
-                        <div className="lg:block col-span-2">
-                            <p className="text-sm text-gray-600">TBC:</p>
-                            <p>TBC</p>
                         </div>
                     </div>
                 )

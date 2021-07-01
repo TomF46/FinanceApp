@@ -17,12 +17,12 @@ const AreaApplicationsList = ({ applications }) => {
                             <p>{application.retailLocationName}</p>
                         </div>
                         <div className="lg:block col-span-2">
-                            <p className="text-sm text-gray-600">Status:</p>
-                            <p>{application.statusText}</p>
+                            <p className="text-sm text-gray-600">Area:</p>
+                            <p>{application.areaName}</p>
                         </div>
                         <div className="lg:block col-span-2">
-                            <p className="text-sm text-gray-600">TBC:</p>
-                            <p>TBC</p>
+                            <p className="text-sm text-gray-600">Status:</p>
+                            <p>{application.statusText}</p>
                         </div>
                     </div>
                 )

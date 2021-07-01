@@ -17,12 +17,12 @@ const AreasList = ({ areas, isAdmin }) => {
                             <p>{area.locationCount}</p>
                         </div>
                         <div className="lg:block col-span-2">
-                            <p className="text-sm text-gray-600">TBC:</p>
-                            <p>TBC</p>
+                            <p className="text-sm text-gray-600">Require action:</p>
+                            <p>{area.areaManagerActionsRequired}</p>
                         </div>
                         <div className="lg:block col-span-2">
-                            <p className="text-sm text-gray-600">TBC:</p>
-                            <p>TBC</p>
+                            <p className="text-sm text-gray-600">Waiting for retailer:</p>
+                            <p>{area.retailManagerActionsRequired}</p>
                         </div>
                     </div>
                 )
