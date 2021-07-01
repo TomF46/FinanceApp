@@ -89,7 +89,7 @@ const Header = ({ userIsAuthenticated, isAdmin, checkUserIsAdmin, logout }) => {
                         <>
                             <Link
                                 to="/"
-                                className="text-sm md:px-4 md:py-2 md:leading-none md:border rounded text-grey-800 md:border-grey-800  md:hover:bg-grey-800 mt-4 md:mt-0 inline-flex items-center"
+                                className="off-white text-sm md:px-4 md:py-2 md:leading-none md:border rounded text-grey-800 md:border-grey-800  md:hover:bg-grey-800 mt-4 md:mt-0 inline-flex items-center"
                             >
                                 <svg className="text-grey-800 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />

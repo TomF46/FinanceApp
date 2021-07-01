@@ -2376,6 +2376,12 @@ video {
   background-color: rgba(112, 36, 89, var(--bg-opacity));
 }
 
+.bg-primary{
+  --bg-opacity: 1;
+  background-color: #0096b4;
+  background-color: rgba(0, 150, 180, var(--bg-opacity));
+}
+
 .hover\:bg-transparent:hover{
   background-color: transparent;
 }
@@ -2936,6 +2942,12 @@ video {
   background-color: rgba(112, 36, 89, var(--bg-opacity));
 }
 
+.hover\:bg-primary:hover{
+  --bg-opacity: 1;
+  background-color: #0096b4;
+  background-color: rgba(0, 150, 180, var(--bg-opacity));
+}
+
 .focus\:bg-transparent:focus{
   background-color: transparent;
 }
@@ -3494,6 +3506,12 @@ video {
   --bg-opacity: 1;
   background-color: #702459;
   background-color: rgba(112, 36, 89, var(--bg-opacity));
+}
+
+.focus\:bg-primary:focus{
+  --bg-opacity: 1;
+  background-color: #0096b4;
+  background-color: rgba(0, 150, 180, var(--bg-opacity));
 }
 
 .bg-none{
@@ -21650,6 +21668,7 @@ body {
 }
 
 nav {
+  background-color: #fefefe;
   z-index: 999;
 }
 
@@ -21663,7 +21682,7 @@ nav {
 
 .card,
 .page {
-  background-color: #fff;
+  background-color: #fefefe;
 }
 
 .page {
@@ -21684,7 +21703,7 @@ nav {
 
 #react-confirm-alert .react-confirm-alert-overlay .react-confirm-alert-button-group button {
   background-color: #2d3748;
-  color: #fff;
+  color: #fefefe;
 }
 
 .centered {
@@ -23514,6 +23533,12 @@ section.route-section {
     background-color: rgba(112, 36, 89, var(--bg-opacity));
   }
 
+  .sm\:bg-primary{
+    --bg-opacity: 1;
+    background-color: #0096b4;
+    background-color: rgba(0, 150, 180, var(--bg-opacity));
+  }
+
   .sm\:hover\:bg-transparent:hover{
     background-color: transparent;
   }
@@ -24074,6 +24099,12 @@ section.route-section {
     background-color: rgba(112, 36, 89, var(--bg-opacity));
   }
 
+  .sm\:hover\:bg-primary:hover{
+    --bg-opacity: 1;
+    background-color: #0096b4;
+    background-color: rgba(0, 150, 180, var(--bg-opacity));
+  }
+
   .sm\:focus\:bg-transparent:focus{
     background-color: transparent;
   }
@@ -24632,6 +24663,12 @@ section.route-section {
     --bg-opacity: 1;
     background-color: #702459;
     background-color: rgba(112, 36, 89, var(--bg-opacity));
+  }
+
+  .sm\:focus\:bg-primary:focus{
+    --bg-opacity: 1;
+    background-color: #0096b4;
+    background-color: rgba(0, 150, 180, var(--bg-opacity));
   }
 
   .sm\:bg-none{
@@ -44500,6 +44537,12 @@ section.route-section {
     background-color: rgba(112, 36, 89, var(--bg-opacity));
   }
 
+  .md\:bg-primary{
+    --bg-opacity: 1;
+    background-color: #0096b4;
+    background-color: rgba(0, 150, 180, var(--bg-opacity));
+  }
+
   .md\:hover\:bg-transparent:hover{
     background-color: transparent;
   }
@@ -45060,6 +45103,12 @@ section.route-section {
     background-color: rgba(112, 36, 89, var(--bg-opacity));
   }
 
+  .md\:hover\:bg-primary:hover{
+    --bg-opacity: 1;
+    background-color: #0096b4;
+    background-color: rgba(0, 150, 180, var(--bg-opacity));
+  }
+
   .md\:focus\:bg-transparent:focus{
     background-color: transparent;
   }
@@ -45618,6 +45667,12 @@ section.route-section {
     --bg-opacity: 1;
     background-color: #702459;
     background-color: rgba(112, 36, 89, var(--bg-opacity));
+  }
+
+  .md\:focus\:bg-primary:focus{
+    --bg-opacity: 1;
+    background-color: #0096b4;
+    background-color: rgba(0, 150, 180, var(--bg-opacity));
   }
 
   .md\:bg-none{
@@ -65486,6 +65541,12 @@ section.route-section {
     background-color: rgba(112, 36, 89, var(--bg-opacity));
   }
 
+  .lg\:bg-primary{
+    --bg-opacity: 1;
+    background-color: #0096b4;
+    background-color: rgba(0, 150, 180, var(--bg-opacity));
+  }
+
   .lg\:hover\:bg-transparent:hover{
     background-color: transparent;
   }
@@ -66046,6 +66107,12 @@ section.route-section {
     background-color: rgba(112, 36, 89, var(--bg-opacity));
   }
 
+  .lg\:hover\:bg-primary:hover{
+    --bg-opacity: 1;
+    background-color: #0096b4;
+    background-color: rgba(0, 150, 180, var(--bg-opacity));
+  }
+
   .lg\:focus\:bg-transparent:focus{
     background-color: transparent;
   }
@@ -66604,6 +66671,12 @@ section.route-section {
     --bg-opacity: 1;
     background-color: #702459;
     background-color: rgba(112, 36, 89, var(--bg-opacity));
+  }
+
+  .lg\:focus\:bg-primary:focus{
+    --bg-opacity: 1;
+    background-color: #0096b4;
+    background-color: rgba(0, 150, 180, var(--bg-opacity));
   }
 
   .lg\:bg-none{
@@ -86472,6 +86545,12 @@ section.route-section {
     background-color: rgba(112, 36, 89, var(--bg-opacity));
   }
 
+  .xl\:bg-primary{
+    --bg-opacity: 1;
+    background-color: #0096b4;
+    background-color: rgba(0, 150, 180, var(--bg-opacity));
+  }
+
   .xl\:hover\:bg-transparent:hover{
     background-color: transparent;
   }
@@ -87032,6 +87111,12 @@ section.route-section {
     background-color: rgba(112, 36, 89, var(--bg-opacity));
   }
 
+  .xl\:hover\:bg-primary:hover{
+    --bg-opacity: 1;
+    background-color: #0096b4;
+    background-color: rgba(0, 150, 180, var(--bg-opacity));
+  }
+
   .xl\:focus\:bg-transparent:focus{
     background-color: transparent;
   }
@@ -87590,6 +87675,12 @@ section.route-section {
     --bg-opacity: 1;
     background-color: #702459;
     background-color: rgba(112, 36, 89, var(--bg-opacity));
+  }
+
+  .xl\:focus\:bg-primary:focus{
+    --bg-opacity: 1;
+    background-color: #0096b4;
+    background-color: rgba(0, 150, 180, var(--bg-opacity));
   }
 
   .xl\:bg-none{

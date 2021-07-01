@@ -2,7 +2,11 @@ module.exports = {
     future: {},
     purge: [],
     theme: {
-        extend: {}
+        extend: {},
+        backgroundColor: theme => ({
+            ...theme('colors'),
+            'primary': '#0096b4'
+        })
     },
     variants: {},
     plugins: []

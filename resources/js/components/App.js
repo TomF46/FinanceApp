@@ -35,7 +35,7 @@ const Main = ({ location }) => (
     <>
         <Header />
         <div className="relative mt-4">
-            <div className="sm:px-4 md:px-8">
+            <div className="container mx-auto">
                 <Switch location={location}>
                     <AuthenticatedRoute
                         exact

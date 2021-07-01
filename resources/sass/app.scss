@@ -22,6 +22,7 @@ body {
     border-bottom: 1px solid #dedede;
 }
 nav {
+    background-color: #fefefe;
     z-index: 999;
 }
 
@@ -34,7 +35,7 @@ nav {
 
 .card,
 .page {
-    background-color: #fff;
+    background-color: #fefefe;
 }
 
 .page {
@@ -53,7 +54,7 @@ nav {
             justify-content: center;
             button {
                 background-color: #2d3748;
-                color: #fff;
+                color: #fefefe;
             }
         }
     }
@@ -95,3 +96,5 @@ section.route-section {
     top: 0;
     left: 0;
 }
+
+
