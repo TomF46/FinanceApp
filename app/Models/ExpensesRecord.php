@@ -28,7 +28,7 @@ class ExpensesRecord extends Model
         return $this->belongsTo(ApplicationRevision::class);
     }
 
-    protected function getTotalExpenses()
+    public function getTotalExpenses()
     {
         return $this->rent + $this->payroll + $this->utilities + $this->equipment + $this->travel + $this->training + $this->maintenance + $this->employeeBonus + $this->employeeExpenses;
     }

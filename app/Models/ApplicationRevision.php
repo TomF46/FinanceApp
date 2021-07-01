@@ -45,6 +45,25 @@ class ApplicationRevision extends Model
         return $this->hasOne(ExpensesRecord::class);
     }
 
+    public function getTotalNonOperatingIncome()
+    {
+        return $this->incomeRecord->getTotalIncome();
+    }
+
+    public function getTotalExpenses()
+    {
+        return $this->expensesRecord->getTotalExpenses();
+    }
+
+    public function getTotalSalesIncome()
+    {
+        $total = 0;
+        foreach ($this->sales as $sale) {
+            $total = $total + $sale->income;
+        };
+        return $total;
+    }
+
     public function mapSales()
     {
         return $this->sales->map(function ($sale) {

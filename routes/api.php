@@ -90,4 +90,5 @@ Route::middleware(['auth:api', 'admin'])->group(function () {
 
 Route::middleware(['auth:api', 'headOffice'])->group(function () {
     Route::post('/years', [App\Http\Controllers\YearsController::class, 'store']);
+    Route::get('/years/{year}', [App\Http\Controllers\YearsController::class, 'show']);
 });

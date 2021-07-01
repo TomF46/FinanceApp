@@ -33,6 +33,21 @@ class Application extends Model
         return $this->hasMany(ApplicationRevision::class);
     }
 
+    public function getTotalNonOperatingIncome()
+    {
+        return $this->applicationRevisions->last()->getTotalNonOperatingIncome();
+    }
+
+    public function getTotalExpenses()
+    {
+        return $this->applicationRevisions->last()->getTotalExpenses();
+    }
+
+    public function getTotalSalesIncome()
+    {
+        return $this->applicationRevisions->last()->getTotalSalesIncome();
+    }
+
     public function map()
     {
         return [

@@ -29,7 +29,7 @@ const AreaDetailPage = ({ areaId }) => {
     return (
         <>
             {!area ? (
-                <LoadingMessage message={"Loading Retail Location"} />
+                <LoadingMessage message={"Loading Area Overview"} />
             ) : (
                 <>
                     <h1 className="text-center font-bold text-6xl">

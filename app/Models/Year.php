@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Application;
 use App\Models\RetailLocation;
+use App\Enums\ApplicationStatus;
 
 class Year extends Model
 {
@@ -31,12 +32,92 @@ class Year extends Model
         }
     }
 
+    protected function getTotalActiveApplications()
+    {
+        return $this->applications()->where('status', "!=" , ApplicationStatus::Inactive)->count();
+    }
+
+    protected function getTotalNotStartedApplications()
+    {
+        return $this->applications()->where('status', ApplicationStatus::NotSubmitted)->count();
+    }
+
+    protected function getTotalAwaitingSignOffApplications()
+    {
+        return $this->applications()->where('status', ApplicationStatus::Submitted)->count();
+    }
+
+    protected function getTotalReturnedApplications()
+    {
+        return $this->applications()->where('status', ApplicationStatus::Returned)->count();
+    }
+
+    protected function getTotalAcceptedApplications()
+    {
+        return $this->applications()->where('status', ApplicationStatus::Accepted)->count();
+    }
+
+    protected function getAcceptedApplications()
+    {
+        return $this->applications()->where('status', ApplicationStatus::Accepted)->get();
+    }
+
+    protected function getTotalNonOperatingIncome()
+    {
+        $applications = $this->getAcceptedApplications();
+        $total = 0;
+        foreach ($applications as $application) {
+            $total = $total + $application->getTotalNonOperatingIncome();
+        };
+        return $total;
+    }
+
+    protected function getTotalExpenses()
+    {
+        $applications = $this->getAcceptedApplications();
+        $total = 0;
+        foreach ($applications as $application) {
+            $total = $total + $application->getTotalExpenses();
+        };
+        return $total;
+    }
+
+    protected function getTotalSalesIncome()
+    {
+        $applications = $this->getAcceptedApplications();
+        $total = 0;
+        foreach ($applications as $application) {
+            $total = $total + $application->getTotalSalesIncome();
+        };
+        return $total;   
+    }
+
     public function map()
     {
         return [
             'id' => $this->id,
             'year' => $this->year,
-            'totalApplications' => Count($this->applications)
+            'totalApplications' => $this->getTotalActiveApplications(),
+            'totalNotStarted' => $this->getTotalNotStartedApplications(),
+            'totalAwaitingSignOff' => $this->getTotalAwaitingSignOffApplications(),
+            'totalReturned' => $this->getTotalReturnedApplications(),
+            'totalAccepted' => $this->getTotalAcceptedApplications()
+        ];
+    }
+
+    public function mapDetail()
+    {
+        return [
+            'id' => $this->id,
+            'year' => $this->year,
+            'totalApplications' => $this->getTotalActiveApplications(),
+            'totalNotStarted' => $this->getTotalNotStartedApplications(),
+            'totalAwaitingSignOff' => $this->getTotalAwaitingSignOffApplications(),
+            'totalReturned' => $this->getTotalReturnedApplications(),
+            'totalAccepted' => $this->getTotalAcceptedApplications(),
+            'totalNOIncome' => $this->getTotalNonOperatingIncome(),
+            'totalExpenses' => $this->getTotalExpenses(),
+            'totalSalesIncome' => $this->getTotalSalesIncome()
         ];
     }
 }

@@ -24,7 +24,7 @@ class IncomeRecord extends Model
         return $this->belongsTo(ApplicationRevision::class);
     }
 
-    protected function getTotalIncome()
+    public function getTotalIncome()
     {
         return $this->dividens + $this->assetSales + $this->maintenanceGrant + $this->sponsorship + $this->rewards;
     }

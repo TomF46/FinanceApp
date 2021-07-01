@@ -17,6 +17,11 @@ class YearsController extends Controller
         return response()->json($years);
     }
 
+    public function show(Year $year)
+    {
+        return response()->json($year->mapDetail());
+    }
+
     public function store(Request $request)
     {
         $attributes = $this->validateYear($request);

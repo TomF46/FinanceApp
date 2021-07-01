@@ -18,8 +18,7 @@ import AreaCreatePage from "./Dashboard/AdminDashboard/LocationsManagement/Areas
 import RetailLocationCreatePage from "./Dashboard/AdminDashboard/LocationsManagement/RetailLocationManagement/RetailLocationCreatePage";
 import AreaAdminPage from "./Dashboard/AdminDashboard/LocationsManagement/AreasManagement/AreaAdminPage";
 import RetailLocationAdminPage from "./Dashboard/AdminDashboard/LocationsManagement/RetailLocationManagement/RetailLocationAdminPage";
-import YearsPage from "./Dashboard/HeadOfficeDashboard/YearsAdmin/YearsPage";
-import AddYearPage from "./Dashboard/HeadOfficeDashboard/YearsAdmin/AddYearPage";
+import AddYearPage from "./Dashboard/HeadOfficeDashboard/Years/Admin/AddYearPage";
 import ApplicationPage from "./Dashboard/RetailManagerDashboard/Application/ApplicationPage";
 import ProductsManagementPage from "./Dashboard/AdminDashboard/ProductsManagement/ProductsManagementPage";
 import AddProductPage from "./Dashboard/AdminDashboard/ProductsManagement/AddProductPage";
@@ -30,6 +29,7 @@ import AreaEditPage from "./Dashboard/AdminDashboard/LocationsManagement/AreasMa
 import RetailLocationEditPage from "./Dashboard/AdminDashboard/LocationsManagement/RetailLocationManagement/RetailLocationEditPage";
 import ProductEditPage from "./Dashboard/AdminDashboard/ProductsManagement/ProductEditPage";
 import AreaManagerApplicationViewPage from "./Dashboard/AreaManagerDashboard/Application/AreaManagerApplicationViewPage";
+import YearOverviewPage from "./Dashboard/HeadOfficeDashboard/Years/YearOverviewPage";
 
 const Main = ({ location }) => (
     <>
@@ -114,7 +114,7 @@ const Main = ({ location }) => (
                         }
                     />
                     <Route path="/headOffice/years/add" component={AddYearPage} />
-                    <Route path="/headOffice/years" component={YearsPage} />
+                    <Route path="/headOffice/years/:yearId" component={YearOverviewPage} />
                     <Route path="/retail/:retailLocationId/applications/:applicationId" component={ApplicationPage} />
                     <Route path="/retail/:retailLocationId" component={RetailLocationDetailPage} />
                     <Route path="/areas/:areaId/retail/:retailLocationId/applications/:applicationId" component={AreaManagerApplicationViewPage} />
