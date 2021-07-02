@@ -32,16 +32,15 @@ const ApplicationForm = ({
 
             <IncomeSection income={income} onIncomeChange={onIncomeChange} incomeErrors={incomeErrors} />
 
-            <ExpensesSection expenses={expenses} onExpensesChange={onExpensesChange} expensesErrors={expensesErrors} />
-
             <SalesSection sales={sales} onChange={onSalesChange} errors={salesErrors} />
 
+            <ExpensesSection expenses={expenses} onExpensesChange={onExpensesChange} expensesErrors={expensesErrors} />
 
-            <div className="flex justify-center">
+            <div className="flex justify-center mb-4">
                 <button
                     type="submit"
                     disabled={saving}
-                    className="bg-gray-800 text-white rounded py-2 px-4 hover:bg-gray-600"
+                    className="bg-primary text-white rounded py-2 px-4 hover:opacity-75"
                 >
                     {saving ? "Submitting..." : "Submit"}
                 </button>

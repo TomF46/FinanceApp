@@ -26,6 +26,13 @@ nav {
     z-index: 999;
 }
 
+.vertical-centered{
+    display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+}
+
 .centerFormCardContainer {
     width: 100%;
     .centerFormCard {

@@ -57,9 +57,25 @@ const ApplicationPage = ({ applicationId }) => {
         delete expensesWithoutId.id;
         setIncome(incomeWithoutId);
         setExpenses(expensesWithoutId);
-        getSalesProducts();
+        mapSalesForForm()
         setApplicationRestarted(true);
     }
+
+    function mapSalesForForm() {
+        let productSales = [];
+        sales.forEach(sale => {
+            let product = {
+                id: sale.productId,
+                name: sale.productName,
+                price: sale.productPrice,
+                quantity: sale.quantity
+            }
+            productSales.push(product);
+        });
+        console.log(productSales);
+        setSales(productSales);
+    }
+
     function getSalesProducts() {
         let productSales = [];
         getAllProducts().then(productData => {
@@ -161,6 +177,7 @@ const ApplicationPage = ({ applicationId }) => {
             expenses: expenses,
             sales: sales
         };
+
         submitApplication(payload).then(res => {
             toast.success("Application submitted");
             setApplicationRestarted(false);
