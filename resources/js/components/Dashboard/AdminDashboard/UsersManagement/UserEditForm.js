@@ -65,43 +65,51 @@ const UserEditForm = ({
 
     return (
         <form className="" onSubmit={handleSave}>
-            <h2 className="font-bold text-lg mb-4 text-center">Edit user</h2>
-            {errors.onSave && (
-                <div className="text-red-500 text-xs p-1" role="alert">
-                    {errors.onSave}
+            <div className="my-8">
+                <div className="my-2 card shadow-sm rounded-md">
+                    <div className="bg-primary rounded-t-md">
+                        <p className="text-white font-bold text-lg px-2 py-1">Edit user</p>
+                    </div>
+                    <div className="p-2">
+                        {errors.onSave && (
+                            <div className="text-red-500 text-xs p-1" role="alert">
+                                {errors.onSave}
+                            </div>
+                        )}
+
+                        <div className="mb-6">
+                            <TextInput
+                                name="firstName"
+                                label="First Name"
+                                value={editedUser.firstName}
+                                onChange={handleChange}
+                                error={errors.firstName}
+                            />
+                        </div>
+                        <div className="mb-6">
+                            <TextInput
+                                name="lastName"
+                                label="Last Name"
+                                value={editedUser.lastName}
+                                onChange={handleChange}
+                                error={errors.lastName}
+                            />
+                        </div>
+
+                        <div className="flex justify-center">
+                            <button
+                                type="submit"
+                                disabled={saving}
+                                className="bg-primary text-white rounded py-2 px-4 hover:opacity-75 inline-flex items-center"
+                            >
+                                <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                                <span>{saving ? "Updating..." : "Update"}</span>
+                            </button>
+                        </div>
+                    </div>
                 </div>
-            )}
-
-            <div className="mb-6">
-                <TextInput
-                    name="firstName"
-                    label="First Name"
-                    value={editedUser.firstName}
-                    onChange={handleChange}
-                    error={errors.firstName}
-                />
-            </div>
-            <div className="mb-6">
-                <TextInput
-                    name="lastName"
-                    label="Last Name"
-                    value={editedUser.lastName}
-                    onChange={handleChange}
-                    error={errors.lastName}
-                />
-            </div>
-
-            <div className="flex justify-center">
-                <button
-                    type="submit"
-                    disabled={saving}
-                    className="bg-gray-800 text-white rounded py-2 px-4 hover:bg-gray-600 inline-flex items-center"
-                >
-                    <svg className="text-white h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                    <span>{saving ? "Updating..." : "Update"}</span>
-                </button>
             </div>
         </form>
     );

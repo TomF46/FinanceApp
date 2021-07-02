@@ -67,7 +67,7 @@ const Header = ({ userIsAuthenticated, isAdmin, checkUserIsAdmin, logout }) => {
                         <>
                             <Link
                                 to="/login"
-                                className="text-sm md:px-4 md:py-2 md:leading-none md:border rounded text-grey-800 md:border-grey-800  md:hover:bg-grey-800 mt-4 md:mt-0 inline-flex items-center md:mr-2"
+                                className="bg-primary text-sm md:px-4 md:py-2 md:leading-none md:border rounded text-white mt-4 md:mt-0 inline-flex items-center md:mr-2"
                             >
                                 <svg className="text-grey-800 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
@@ -76,7 +76,7 @@ const Header = ({ userIsAuthenticated, isAdmin, checkUserIsAdmin, logout }) => {
                             </Link>
                             <Link
                                 to="/register"
-                                className="text-sm md:px-4 md:py-2 md:leading-none md:border rounded text-gey-800 md:border-grey-800  md:hover:bg-grey-800 mt-4 md:mt-0 inline-flex items-center"
+                                className="bg-primary text-sm md:px-4 md:py-2 md:leading-none md:border rounded text-white mt-4 md:mt-0 inline-flex items-center"
                             >
                                 <svg className="text-grey-800 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -89,7 +89,7 @@ const Header = ({ userIsAuthenticated, isAdmin, checkUserIsAdmin, logout }) => {
                         <>
                             <Link
                                 to="/"
-                                className="bg-primary text-sm md:px-4 md:py-2 md:leading-none md:border rounded text-white md:border-grey-800  md:hover:bg-grey-800 mt-4 md:mt-0 inline-flex items-center"
+                                className="bg-primary text-sm md:px-4 md:py-2 md:leading-none md:border rounded text-white mt-4 md:mt-0 inline-flex items-center"
                             >
                                 <svg className="text-grey-800 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
@@ -98,7 +98,7 @@ const Header = ({ userIsAuthenticated, isAdmin, checkUserIsAdmin, logout }) => {
                             </Link>
                             <button
                                 onClick={handleLogout}
-                                className="bg-primary text-sm md:px-4 md:py-2 md:leading-none md:border rounded text-white md:border-grey-800  md:hover:bg-grey-800 mt-4 md:mt-0 md:ml-2 inline-flex items-center"
+                                className="bg-primary text-sm md:px-4 md:py-2 md:leading-none md:border rounded text-white  mt-4 md:mt-0 md:ml-2 inline-flex items-center"
                             >
                                 <svg className="text-grey-800 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />

@@ -71,19 +71,13 @@ const RetailManagerRegisterForm = () => {
 
     return (
         <div className="retail-manager-register-form">
-            <CenterFormCard
-                content={
-                    <>
-                        <RegisterForm
-                            user={user}
-                            headerText={'Register Retail Manager'}
-                            errors={errors}
-                            onChange={handleChange}
-                            onSave={handleSave}
-                            saving={saving}
-                        />
-                    </>
-                }
+            <RegisterForm
+                user={user}
+                headerText={'Register Retail Manager'}
+                errors={errors}
+                onChange={handleChange}
+                onSave={handleSave}
+                saving={saving}
             />
         </div>
     );

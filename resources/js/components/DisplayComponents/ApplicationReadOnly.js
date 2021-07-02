@@ -28,7 +28,7 @@ const ApplicationReadOnly = ({
                 <div className="bg-primary rounded-t-md">
                     <p className="text-white font-bold text-lg px-2 py-1">Non-operating Income</p>
                 </div>
-                <table class="table-fixed w-full">
+                <table className="table-fixed w-full">
                     <thead>
                         <tr>
                             <th className="w-1/2 text-left pl-2">Source</th>
@@ -68,7 +68,7 @@ const ApplicationReadOnly = ({
                 <div className="bg-primary rounded-t-md">
                     <p className="text-white font-bold text-lg px-2 py-1">Sales</p>
                 </div>
-                <table class="table-fixed w-full">
+                <table className="table-fixed w-full">
                     <thead>
                         <tr>
                             <th className="w-1/2 text-left pl-2">Item (quantity)</th>
@@ -153,7 +153,7 @@ const ApplicationReadOnly = ({
                     <div className="bg-primary rounded-t-md">
                         <p className="text-white font-bold text-lg px-2 py-1">Summary</p>
                     </div>
-                    <table class="table-fixed w-full">
+                    <table className="table-fixed w-full">
                         <thead>
                             <tr>
                                 <th className="w-1/2 text-left pl-2">Type</th>

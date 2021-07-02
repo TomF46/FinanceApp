@@ -71,19 +71,13 @@ const AreaManagerRegisterForm = () => {
 
     return (
         <div className="area-manager-register-form">
-            <CenterFormCard
-                content={
-                    <>
-                        <RegisterForm
-                            user={user}
-                            headerText={'Register Area Manager'}
-                            errors={errors}
-                            onChange={handleChange}
-                            onSave={handleSave}
-                            saving={saving}
-                        />
-                    </>
-                }
+            <RegisterForm
+                user={user}
+                headerText={'Register Area Manager'}
+                errors={errors}
+                onChange={handleChange}
+                onSave={handleSave}
+                saving={saving}
             />
         </div>
     );

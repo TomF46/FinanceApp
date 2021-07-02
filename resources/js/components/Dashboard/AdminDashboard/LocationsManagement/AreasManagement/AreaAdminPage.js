@@ -111,27 +111,39 @@ const AreaAdminPage = ({ areaId }) => {
                     </button>
                     <Link
                         to={`/admin/locations/areas/${area.id}/edit`}
-                        className="bg-blue-800 text-white rounded py-2 px-4 hover:bg-blue-600 shadow ml-2"
+                        className="bg-primary text-white rounded py-2 px-4 hover:opacity-75 shadow ml-2"
                     >
                         Edit
                     </Link>
-                    <div className="my-4">
-                        <h2 className="text-center font-bold text-xl">
-                            Locations
-                        </h2>
-                        <RetailLocationsList retailLocations={area.locations} isAdmin={true} />
+                    <div className="my-8">
+                        <div className="my-2 card shadow-sm rounded-md">
+                            <div className="bg-primary rounded-t-md">
+                                <p className="text-white font-bold text-lg px-2 py-1">Locations</p>
+                            </div>
+                            <div>
+                                <RetailLocationsList retailLocations={area.locations} isAdmin={true} />
+                            </div>
+                        </div>
                     </div>
-                    <div className="my-4">
-                        <h2 className="text-center font-bold text-xl">
-                            Managers
-                        </h2>
-                        <ManagersList managers={area.managers} onManagerRemove={handleManagerRemove} />
+                    <div className="my-8">
+                        <div className="my-2 card shadow-sm rounded-md">
+                            <div className="bg-primary rounded-t-md">
+                                <p className="text-white font-bold text-lg px-2 py-1">Managers</p>
+                            </div>
+                            <div>
+                                <ManagersList managers={area.managers} onManagerRemove={handleManagerRemove} />
+                            </div>
+                        </div>
                     </div>
-                    <div className="my-4">
-                        <h2 className="text-center font-bold text-xl">
-                            Add Manager
-                        </h2>
-                        <AddAreaManagerForm area={area} onManagerAdded={handleManagerAdded} />
+                    <div className="my-8">
+                        <div className="my-2 card shadow-sm rounded-md">
+                            <div className="bg-primary rounded-t-md">
+                                <p className="text-white font-bold text-lg px-2 py-1">Add Manager</p>
+                            </div>
+                            <div className="p-2">
+                                <AddAreaManagerForm area={area} onManagerAdded={handleManagerAdded} />
+                            </div>
+                        </div>
                     </div>
                 </>
             )}

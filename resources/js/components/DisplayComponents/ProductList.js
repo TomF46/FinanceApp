@@ -22,22 +22,22 @@ const ProductsList = ({ products, onProductDeactivate }) => {
                         </div>
                         <div className="lg:block col-span-2">
                             <div className="table vertical-centered">
-                                <button
-                                    onClick={() => (onProductDeactivate(product.id))}
-                                    className="bg-red-800 text-white rounded py-2 px-4 hover:bg-red-600 shadow inline-flex items-center ml-2"
+                                <Link
+                                    to={`/admin/products/${product.id}/edit`}
+                                    className="bg-primary text-center text-white rounded py-2 px-4 hover:opacity-75 shadow inline-flex items-center ml-2"
                                 >
-                                    <p className="ml-1">Remove</p>
-                                </button>
+                                    <p className="m-auto">Edit</p>
+                                </Link>
                             </div>
                         </div>
                         <div className="lg:block col-span-2">
                             <div className="table vertical-centered">
-                                <Link
-                                    to={`/admin/products/${product.id}/edit`}
-                                    className="bg-blue-800 text-white rounded py-2 px-4 hover:bg-blue-600 shadow inline-flex items-center ml-2"
+                                <button
+                                    onClick={() => (onProductDeactivate(product.id))}
+                                    className="bg-red-800 text-center text-white rounded py-2 px-4 hover:bg-red-600 shadow inline-flex items-center ml-2"
                                 >
-                                    <p className="ml-1">Edit</p>
-                                </Link>
+                                    <p className="m-auto">Remove</p>
+                                </button>
                             </div>
                         </div>
                     </div>

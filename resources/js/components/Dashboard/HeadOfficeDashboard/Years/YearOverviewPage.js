@@ -69,7 +69,7 @@ const YearOverviewPage = ({ yearId }) => {
                             <div className="bg-primary rounded-t-md">
                                 <p className="text-white font-bold text-lg px-2 py-1">Summary of signed off applications</p>
                             </div>
-                            <table class="table-fixed w-full">
+                            <table className="table-fixed w-full">
                                 <tbody>
                                     <tr className="bg-gray-200">
                                         <td className="pl-2">Total Non-operating income</td>

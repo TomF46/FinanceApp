@@ -53,18 +53,12 @@ const LoginPage = ({ login, userIsAuthenticated, history }) => {
     return (
         <>
             {userIsAuthenticated && <Redirect to="/" />}
-            <CenterFormCard
-                content={
-                    <>
-                        <LoginForm
-                            user={user}
-                            errors={errors}
-                            onChange={handleChange}
-                            onSave={handleSave}
-                            saving={saving}
-                        />
-                    </>
-                }
+            <LoginForm
+                user={user}
+                errors={errors}
+                onChange={handleChange}
+                onSave={handleSave}
+                saving={saving}
             />
         </>
     );

@@ -72,19 +72,13 @@ const HeadOfficeRegisterForm = () => {
 
     return (
         <div className="head-office-register-form">
-            <CenterFormCard
-                content={
-                    <>
-                        <RegisterForm
-                            user={user}
-                            headerText={'Register Head Office User'}
-                            errors={errors}
-                            onChange={handleChange}
-                            onSave={handleSave}
-                            saving={saving}
-                        />
-                    </>
-                }
+            <RegisterForm
+                user={user}
+                headerText={'Register Head Office User'}
+                errors={errors}
+                onChange={handleChange}
+                onSave={handleSave}
+                saving={saving}
             />
         </div>
     );

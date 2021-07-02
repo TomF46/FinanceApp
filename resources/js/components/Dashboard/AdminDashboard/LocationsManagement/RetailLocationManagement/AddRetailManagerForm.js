@@ -91,7 +91,7 @@ const AddRetailManagerForm = ({ retailLocation, onManagerAdded }) => {
                     <button
                         type="submit"
                         disabled={saving}
-                        className="bg-gray-800 text-white rounded py-2 px-4 hover:bg-gray-600"
+                        className="bg-primary text-white rounded py-2 px-4 hover:opacity-75"
                     >
                         {saving ? "Adding..." : "Add"}
                     </button>
