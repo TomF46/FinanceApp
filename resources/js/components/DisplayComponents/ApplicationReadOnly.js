@@ -26,7 +26,7 @@ const ApplicationReadOnly = ({
 
             <div className="my-4 card shadow-sm rounded-md">
                 <div className="bg-primary rounded-t-md">
-                    <p className="text-white font-bold text-lg p-2">Non-operating Income</p>
+                    <p className="text-white font-bold text-lg px-2 py-1">Non-operating Income</p>
                 </div>
                 <table class="table-fixed w-full">
                     <thead>
@@ -66,7 +66,7 @@ const ApplicationReadOnly = ({
 
             <div className="my-4 card shadow-sm rounded-md">
                 <div className="bg-primary rounded-t-md">
-                    <p className="text-white font-bold text-lg p-2">Sales</p>
+                    <p className="text-white font-bold text-lg px-2 py-1">Sales</p>
                 </div>
                 <table class="table-fixed w-full">
                     <thead>
@@ -94,7 +94,7 @@ const ApplicationReadOnly = ({
 
             <div className="my-4 card shadow-sm rounded-md">
                 <div className="bg-primary rounded-t-md">
-                    <p className="text-white font-bold text-lg p-2">Expenses</p>
+                    <p className="text-white font-bold text-lg px-2 py-1">Expenses</p>
                 </div>
                 <table className="table-fixed w-full">
                     <thead>
@@ -151,7 +151,7 @@ const ApplicationReadOnly = ({
             <div className="my-4">
                 <div className="my-2 card shadow-sm rounded-md">
                     <div className="bg-primary rounded-t-md">
-                        <p className="text-white font-bold text-lg p-2">Summary</p>
+                        <p className="text-white font-bold text-lg px-2 py-1">Summary</p>
                     </div>
                     <table class="table-fixed w-full">
                         <thead>

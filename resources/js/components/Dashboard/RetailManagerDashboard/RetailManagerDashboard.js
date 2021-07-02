@@ -31,14 +31,26 @@ const RetailManagerDashboard = ({ user }) => {
                 <LoadingMessage message={"Loading dashboard"} />
             ) : (
                 <>
-                    <div className="my-4">
-                        <p>My Locations Managed</p>
-                        <RetailLocationsList retailLocations={retailManager.retailLocationsManaged} isAdmin={false} />
+                    <div className="my-8">
+                        <div className="my-2 card shadow-sm rounded-md">
+                            <div className="bg-primary rounded-t-md">
+                                <p className="text-white font-bold text-lg px-2 py-1">My Locations Managed</p>
+                            </div>
+                            <div>
+                                <RetailLocationsList retailLocations={retailManager.retailLocationsManaged} isAdmin={false} />
+                            </div>
+                        </div>
                     </div>
 
-                    <div className="my-4">
-                        <p>My Open Applications</p>
-                        <ApplicationsList applications={retailManager.applications} />
+                    <div className="my-8">
+                        <div className="my-2 card shadow-sm rounded-md">
+                            <div className="bg-primary rounded-t-md">
+                                <p className="text-white font-bold text-lg px-2 py-1">My Open Applications</p>
+                            </div>
+                            <div>
+                                <ApplicationsList applications={retailManager.applications} />
+                            </div>
+                        </div>
                     </div>
                 </>
             )}

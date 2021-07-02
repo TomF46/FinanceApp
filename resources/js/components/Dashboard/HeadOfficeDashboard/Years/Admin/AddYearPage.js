@@ -37,7 +37,7 @@ const AddYearPage = () => {
         AddYear(year)
             .then(response => {
                 toast.success("Successfully added reporting year");
-                history.push("/headOffice/years")
+                history.push("/")
             })
             .catch(err => {
                 setSaving(false);

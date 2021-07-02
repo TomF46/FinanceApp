@@ -31,14 +31,26 @@ const AreaManagerDashboard = ({ user }) => {
                 <LoadingMessage message={"Loading dashboard"} />
             ) : (
                 <>
-                    <div className="my-4">
-                        <p>My Areas Managed</p>
-                        <AreasList areas={areaManager.areasManaged} isAdmin={false} />
+                    <div className="my-8">
+                        <div className="my-2 card shadow-sm rounded-md">
+                            <div className="bg-primary rounded-t-md">
+                                <p className="text-white font-bold text-lg px-2 py-1">My Areas Managed</p>
+                            </div>
+                            <div>
+                                <AreasList areas={areaManager.areasManaged} isAdmin={false} />
+                            </div>
+                        </div>
                     </div>
 
-                    <div className="my-4">
-                        <p>My Open Applications</p>
-                        <AreaApplicationsList applications={areaManager.applications} />
+                    <div className="my-8">
+                        <div className="my-2 card shadow-sm rounded-md">
+                            <div className="bg-primary rounded-t-md">
+                                <p className="text-white font-bold text-lg px-2 py-1">My Open Applications</p>
+                            </div>
+                            <div>
+                                <AreaApplicationsList applications={areaManager.applications} />
+                            </div>
+                        </div>
                     </div>
                 </>
             )}

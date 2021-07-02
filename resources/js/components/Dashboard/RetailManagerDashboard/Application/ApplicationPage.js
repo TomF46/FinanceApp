@@ -10,6 +10,7 @@ import { blankIncome, blankExpenses } from "../../../../applicationShape";
 import { getAllProducts } from "../../../../api/productsApi";
 import ApplicationReadOnly from "../../../DisplayComponents/ApplicationReadOnly";
 import RejectionMessage from "../../../DisplayComponents/RejectionMessage";
+import ApplicationStatusSummary from "../../../DisplayComponents/ApplicationStatusSummary";
 
 
 const ApplicationPage = ({ applicationId }) => {
@@ -195,24 +196,19 @@ const ApplicationPage = ({ applicationId }) => {
                             incomeErrors={incomeErrors}
                             expensesErrors={expensesErrors}
                             salesErrors={salesErrors}
-                            saving={saving} />}
-                    {application.status == "1" &&
-                        <>
-                            <ApplicationReadOnly application={application} />
-                            <p>Awaiting area manager sign off</p>
-                        </>
+                            saving={saving} />
                     }
                     {(application.status == "2" && !applicationRestarted) &&
                         <>
                             <ApplicationReadOnly application={application} />
-                            <RejectionMessage application={application} />
-                            <button onClick={() => { restartApplication() }} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded pointer mr-2">Restart application</button>
+                            <ApplicationStatusSummary application={application} />
+                            <button onClick={() => { restartApplication() }} className="bg-primary hover:opacity-75 text-white font-bold py-2 px-4 rounded pointer float-right">Restart application</button>
                         </>
                     }
-                    {application.status == "3" &&
+                    {(application.status == "1" || application.status == "3") &&
                         <>
                             <ApplicationReadOnly application={application} />
-                            <p>Application Accepted</p>
+                            <ApplicationStatusSummary application={application} />
                         </>
                     }
                 </>

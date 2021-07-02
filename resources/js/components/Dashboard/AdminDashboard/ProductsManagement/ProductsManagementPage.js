@@ -60,11 +60,20 @@ const ProductsManagementPage = () => {
         <div className="products-management">
             <p className="text-center">Products Management</p>
             <div className="my-4">
-                <Link to={`/admin/products/add`} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded pointer mr-2">Add Product</Link>
+                <Link to={`/admin/products/add`} className="bg-primary hover:opacity-75 text-white font-bold py-2 px-4 rounded pointer mr-2">Add Product</Link>
             </div>
             {products && (
                 <div className="mb-4">
-                    <ProductsList products={products} onProductDeactivate={handleDeactivate} />
+                    <div className="my-8">
+                        <div className="my-2 card shadow-sm rounded-md">
+                            <div className="bg-primary rounded-t-md">
+                                <p className="text-white font-bold text-lg px-2 py-1">Products</p>
+                            </div>
+                            <div>
+                                <ProductsList products={products} onProductDeactivate={handleDeactivate} />
+                            </div>
+                        </div>
+                    </div>
                 </div>
             )}
         </div>

@@ -8,6 +8,7 @@ import ApplicationReadOnly from "../../../DisplayComponents/ApplicationReadOnly"
 import AreaManagerApplicationControls from "./AreaManagerApplicationControls";
 import { confirmAlert } from "react-confirm-alert";
 import RejectionMessage from "../../../DisplayComponents/RejectionMessage";
+import ApplicationStatusSummary from "../../../DisplayComponents/ApplicationStatusSummary";
 
 
 const AreaManagerApplicationViewPage = ({ applicationId }) => {
@@ -110,11 +111,11 @@ const AreaManagerApplicationViewPage = ({ applicationId }) => {
     }
 
     return (
-        <>
+        <div className="pb-8">
             {application ? (
                 <>
                     {application.status == "0" &&
-                        <p>The retail manager has not yet submitted their application</p>
+                        <ApplicationStatusSummary application={application} />
                     }
                     {application.status == "1" &&
                         <>
@@ -122,23 +123,18 @@ const AreaManagerApplicationViewPage = ({ applicationId }) => {
                             <AreaManagerApplicationControls application={application} onAccept={handleAccept} onReject={handleReject} rejectionMessage={rejectionMessage} onChange={handleRejectionMessageChange} errors={errors} saving={saving} />
                         </>
                     }
-                    {application.status == "2" &&
+                    {(application.status == "2" || application.status == "3") &&
                         <>
                             <ApplicationReadOnly application={application} />
-                            <RejectionMessage application={application} />
-                        </>
-                    }
-                    {application.status == "3" &&
-                        <>
-                            <ApplicationReadOnly application={application} />
-                            <p>Application Accepted</p>
+                            <ApplicationStatusSummary application={application} />
+
                         </>
                     }
                 </>
             ) : (
                 <LoadingMessage message={"Loading Application"} />
             )}
-        </>
+        </div>
     )
 };
 

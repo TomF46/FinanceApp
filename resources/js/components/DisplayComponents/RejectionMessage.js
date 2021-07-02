@@ -26,7 +26,6 @@ const RejectionMessage = ({
         <>
             {rejectionMessage ? (
                 <div>
-                    <h4 className="font-bold text-lg">Rejected</h4>
                     <p>By: {rejectionMessage.by}</p>
                     <p>Message: {rejectionMessage.message}</p>
                 </div>

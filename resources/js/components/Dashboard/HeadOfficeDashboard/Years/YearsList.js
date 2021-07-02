@@ -22,48 +22,56 @@ const YearsList = () => {
 
     return (
         <div className="years-list">
-            <div className="col-span-12 overflow-hidden shadow page">
+            <div className="col-span-12">
                 {!years ? (
                     <LoadingMessage message={'Loading reporting years'} />
                 ) : (
                     <>
-                        <h1 className="font-bold text-4xl my-4 text-center">Reporting years</h1>
-                        {years.length > 0 ? (
-                            <div>
-                                {years.map((year) => {
-                                    return (
-                                        <div key={year.id} className="grid grid-cols-12 px-2 py-1 border-b border-gray-200 overflow-hidden">
-                                            <div className="col-span-6 lg:col-span-2">
-                                                <p className="text-sm text-gray-600">Year:</p>
-                                                <Link to={`/headOffice/years/${year.id}`} className="font-medium text-lg items-center pointer">{year.year}</Link>
-                                            </div>
-                                            <div className="lg:block col-span-2">
-                                                <p className="text-sm text-gray-600">Total Applications:</p>
-                                                <p>{year.totalApplications}</p>
-                                            </div>
-                                            <div className="lg:block col-span-2">
-                                                <p className="text-sm text-gray-600">Not Started:</p>
-                                                <p>{year.totalNotStarted}</p>
-                                            </div>
-                                            <div className="lg:block col-span-2">
-                                                <p className="text-sm text-gray-600">Awaiting sign off:</p>
-                                                <p>{year.totalAwaitingSignOff}</p>
-                                            </div>
-                                            <div className="lg:block col-span-2">
-                                                <p className="text-sm text-gray-600">Returned:</p>
-                                                <p>{year.totalReturned}</p>
-                                            </div>
-                                            <div className="lg:block col-span-2">
-                                                <p className="text-sm text-gray-600">Accepted:</p>
-                                                <p>{year.totalAccepted}</p>
-                                            </div>
+                        <div className="my-8">
+                            <div className="my-2 card shadow-sm rounded-md">
+                                <div className="bg-primary rounded-t-md">
+                                    <p className="text-white font-bold text-lg px-2 py-1">Reporting years</p>
+                                </div>
+                                <div>
+                                    {years.length > 0 ? (
+                                        <div>
+                                            {years.map((year) => {
+                                                return (
+                                                    <div key={year.id} className="grid grid-cols-12 px-2 py-1 border-b border-gray-200 overflow-hidden">
+                                                        <div className="col-span-6 lg:col-span-2">
+                                                            <p className="text-sm text-gray-600">Year:</p>
+                                                            <Link to={`/headOffice/years/${year.id}`} className="font-medium text-lg items-center pointer">{year.year}</Link>
+                                                        </div>
+                                                        <div className="lg:block col-span-2">
+                                                            <p className="text-sm text-gray-600">Total Applications:</p>
+                                                            <p>{year.totalApplications}</p>
+                                                        </div>
+                                                        <div className="lg:block col-span-2">
+                                                            <p className="text-sm text-gray-600">Not Started:</p>
+                                                            <p>{year.totalNotStarted}</p>
+                                                        </div>
+                                                        <div className="lg:block col-span-2">
+                                                            <p className="text-sm text-gray-600">Awaiting sign off:</p>
+                                                            <p>{year.totalAwaitingSignOff}</p>
+                                                        </div>
+                                                        <div className="lg:block col-span-2">
+                                                            <p className="text-sm text-gray-600">Returned:</p>
+                                                            <p>{year.totalReturned}</p>
+                                                        </div>
+                                                        <div className="lg:block col-span-2">
+                                                            <p className="text-sm text-gray-600">Accepted:</p>
+                                                            <p>{year.totalAccepted}</p>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            })}
                                         </div>
-                                    )
-                                })}
+                                    ) : (
+                                        <p className="text-center">There are currently no years added.</p>
+                                    )}
+                                </div>
                             </div>
-                        ) : (
-                            <p className="text-center">There are currently no years added.</p>
-                        )}
+                        </div>
                     </>
                 )}
             </div>

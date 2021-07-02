@@ -15,8 +15,8 @@ const AreaManagerApplicationControls = ({
     return (
         <div className="application-admin-controls">
             <div className="my-4">
-                <button onClick={onAccept} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded pointer mr-2">Accept</button>
-                <button onClick={() => { setRejectControls(true) }} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded pointer mr-2">Reject</button>
+                <button onClick={onAccept} className="bg-primary hover:opacity-75 text-white font-bold py-2 px-4 rounded pointer mr-2">Accept</button>
+                <button onClick={() => { setRejectControls(true) }} className="bg-primary hover:opacity-75 text-white font-bold py-2 px-4 rounded pointer mr-2">Reject</button>
             </div>
 
             {showRejectControls && (

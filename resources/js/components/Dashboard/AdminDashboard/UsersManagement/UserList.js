@@ -32,17 +32,25 @@ const UserList = () => {
 
     return (
         <div className="users-admin-page">
-            <div className="col-span-12 overflow-hidden shadow page">
+            <div className="col-span-12">
                 {!usersPaginator ? (
                     <LoadingMessage message={'Loading users'} />
                 ) : (
                     <>
-                        <h1 className="font-bold text-4xl my-4 text-center">Users</h1>
-                        {usersPaginator.total > 0 ? (
-                            <UsersListWithPagination paginationData={usersPaginator} onPageChange={getUsersPage} />
-                        ) : (
-                            <p className="text-center">There are currently no users added.</p>
-                        )}
+                        <div className="my-8">
+                            <div className="my-2 card shadow-sm rounded-md">
+                                <div className="bg-primary rounded-t-md">
+                                    <p className="text-white font-bold text-lg px-2 py-1">Users</p>
+                                </div>
+                                <div>
+                                    {usersPaginator.total > 0 ? (
+                                        <UsersListWithPagination paginationData={usersPaginator} onPageChange={getUsersPage} />
+                                    ) : (
+                                        <p className="text-center">There are currently no users added.</p>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
                     </>
                 )}
             </div>

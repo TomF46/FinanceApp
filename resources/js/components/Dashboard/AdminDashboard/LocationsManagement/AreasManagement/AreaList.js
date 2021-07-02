@@ -32,17 +32,25 @@ const AreaList = () => {
 
     return (
         <div className="areas-list">
-            <div className="col-span-12 overflow-hidden shadow page">
+            <div className="col-span-12">
                 {!areasPaginator ? (
                     <LoadingMessage message={'Loading areas'} />
                 ) : (
                     <>
-                        <h1 className="font-bold text-4xl my-4 text-center">Areas</h1>
-                        {areasPaginator.total > 0 ? (
-                            <AreasListWithPagination paginationData={areasPaginator} isAdmin={true} onPageChange={getAreasPage} />
-                        ) : (
-                            <p className="text-center">There are currently no areas added.</p>
-                        )}
+                        <div className="my-8">
+                            <div className="my-2 card shadow-sm rounded-md">
+                                <div className="bg-primary rounded-t-md">
+                                    <p className="text-white font-bold text-lg px-2 py-1">Areas</p>
+                                </div>
+                                <div>
+                                    {areasPaginator.total > 0 ? (
+                                        <AreasListWithPagination paginationData={areasPaginator} isAdmin={true} onPageChange={getAreasPage} />
+                                    ) : (
+                                        <p className="text-center">There are currently no areas added.</p>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
                     </>
                 )}
             </div>

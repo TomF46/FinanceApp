@@ -36,14 +36,26 @@ const AreaDetailPage = ({ areaId }) => {
                         {area.name}
                     </h1>
 
-                    <div className="my-4">
-                        <p>{area.name} Retail Locations</p>
-                        <RetailLocationsList retailLocations={area.locations} isAdmin={false} />
+                    <div className="my-8">
+                        <div className="my-2 card shadow-sm rounded-md">
+                            <div className="bg-primary rounded-t-md">
+                                <p className="text-white font-bold text-lg px-2 py-1">{area.name} Retail Locations</p>
+                            </div>
+                            <div>
+                                <RetailLocationsList retailLocations={area.locations} isAdmin={false} />
+                            </div>
+                        </div>
                     </div>
 
-                    <div className="my-4">
-                        <p>{area.name} Applications</p>
-                        <ApplicationsList applications={area.applications} />
+                    <div className="my-8">
+                        <div className="my-2 card shadow-sm rounded-md">
+                            <div className="bg-primary rounded-t-md">
+                                <p className="text-white font-bold text-lg px-2 py-1">{area.name} Applications</p>
+                            </div>
+                            <div>
+                                <ApplicationsList applications={area.applications} />
+                            </div>
+                        </div>
                     </div>
                 </>
             )}

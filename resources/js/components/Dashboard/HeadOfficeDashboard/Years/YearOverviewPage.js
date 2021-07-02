@@ -65,11 +65,35 @@ const YearOverviewPage = ({ yearId }) => {
                     </div>
 
                     <div className="my-4">
-                        <p>Totals for signed off applications</p>
-                        <p>Total non-operating income: £{year.totalNOIncome}</p>
-                        <p>Total expenses: £{year.totalExpenses}</p>
-                        <p>Total sales income: £{year.totalSalesIncome}</p>
-                        <p>Total Profit/Loss: £{getTotalProfitLoss()}</p>
+                        <div className="my-2 card shadow-sm rounded-md">
+                            <div className="bg-primary rounded-t-md">
+                                <p className="text-white font-bold text-lg px-2 py-1">Summary of signed off applications</p>
+                            </div>
+                            <table class="table-fixed w-full">
+                                <tbody>
+                                    <tr className="bg-gray-200">
+                                        <td className="pl-2">Total Non-operating income</td>
+                                        <td>£{year.totalNOIncome}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="pl-2">Total sales income</td>
+                                        <td>£{year.totalSalesIncome}</td>
+                                    </tr>
+                                    <tr className="bg-gray-200">
+                                        <td className="pl-2">Total Income</td>
+                                        <td>£{year.totalNOIncome + year.totalSalesIncome}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="pl-2">Total Expenses</td>
+                                        <td>£{year.totalSalesIncome}</td>
+                                    </tr>
+                                    <tr className="bg-gray-200">
+                                        <td className="pl-2">Total profit/loss</td>
+                                        <td>£{getTotalProfitLoss()}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </>
             )}

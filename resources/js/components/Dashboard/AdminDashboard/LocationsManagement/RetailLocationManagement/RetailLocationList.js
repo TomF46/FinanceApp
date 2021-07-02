@@ -32,17 +32,25 @@ const RetailLocationList = () => {
 
     return (
         <div className="retailLocations-list">
-            <div className="col-span-12 overflow-hidden shadow page">
+            <div className="col-span-12">
                 {!retailLocationsPaginator ? (
                     <LoadingMessage message={'Loading retail locations'} />
                 ) : (
                     <>
-                        <h1 className="font-bold text-4xl my-4 text-center">Retail Locations</h1>
-                        {retailLocationsPaginator.total > 0 ? (
-                            <RetailLocationsListWithPagination paginationData={retailLocationsPaginator} onPageChange={getRetailLocationsPage} isAdmin={true} />
-                        ) : (
-                            <p className="text-center">There are currently no retail locations added.</p>
-                        )}
+                        <div className="my-8">
+                            <div className="my-2 card shadow-sm rounded-md">
+                                <div className="bg-primary rounded-t-md">
+                                    <p className="text-white font-bold text-lg px-2 py-1">Retail Locations</p>
+                                </div>
+                                <div>
+                                    {retailLocationsPaginator.total > 0 ? (
+                                        <RetailLocationsListWithPagination paginationData={retailLocationsPaginator} onPageChange={getRetailLocationsPage} isAdmin={true} />
+                                    ) : (
+                                        <p className="text-center">There are currently no retail locations added.</p>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
                     </>
                 )}
             </div>

@@ -35,9 +35,15 @@ const RetailLocationDetailPage = ({ retailLocationId }) => {
                         {retailLocation.name}
                     </h1>
 
-                    <div className="my-4">
-                        <p>{retailLocation.name} Applications</p>
-                        <ApplicationsList applications={retailLocation.applications} />
+                    <div className="my-8">
+                        <div className="my-2 card shadow-sm rounded-md">
+                            <div className="bg-primary rounded-t-md">
+                                <p className="text-white font-bold text-lg px-2 py-1">{retailLocation.name} Applications</p>
+                            </div>
+                            <div>
+                                <ApplicationsList applications={retailLocation.applications} />
+                            </div>
+                        </div>
                     </div>
                 </>
             )}

@@ -8,9 +8,9 @@ const AdminDashboard = () => {
             <p className="text-center"> Admin Dashboard</p>
 
             <div className="my-4">
-                <Link to={`/admin/users`} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded pointer mr-2">User Admin</Link>
-                <Link to={`/admin/locations`} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded pointer mr-2">Locations Admin</Link>
-                <Link to={`/admin/products`} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded pointer mr-2">Products Admin</Link>
+                <Link to={`/admin/users`} className="bg-primary hover:opacity-75 text-white font-bold py-2 px-4 rounded pointer mr-2">User Admin</Link>
+                <Link to={`/admin/locations`} className="bg-primary hover:opacity-75 text-white font-bold py-2 px-4 rounded pointer mr-2">Locations Admin</Link>
+                <Link to={`/admin/products`} className="bg-primary hover:opacity-75 text-white font-bold py-2 px-4 rounded pointer mr-2">Products Admin</Link>
             </div>
         </div>
     );
