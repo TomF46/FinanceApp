@@ -166,7 +166,7 @@ class Year extends Model
                 'totalFromNOI' => $this->getTotalInvestmentFromNOI(),
                 'totalFromSales' => $this->getTotalInvestmentFromSales(),
                 'totalFromNetProfit' => $this->getTotalInvestmentFromNetProfit(),
-                'total' => $this->getTotalInvestment()
+                'total' => number_format($this->getTotalInvestment(), 2, '.', '')
             ]
         ];
     }

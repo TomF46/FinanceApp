@@ -34,6 +34,7 @@ class Sale extends Model
             'id' => $this->id,
             'productId' => $this->product->id,
             'productName' => $this->product->name,
+            'productCost' => $this->product->cost,
             'productPrice' => $this->product->price,
             'quantity' => $this->quantity,
             'income' => $this->income

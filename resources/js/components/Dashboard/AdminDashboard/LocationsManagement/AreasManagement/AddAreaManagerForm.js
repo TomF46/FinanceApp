@@ -70,7 +70,6 @@ const AddAreaManagerForm = ({ area, onManagerAdded }) => {
     return (
         <div className="add-area-manager-form">
             <form className="" onSubmit={handleSave}>
-                <h2 className="font-bold text-lg mb-4 text-center">Add Manager</h2>
                 {errors.onSave && (
                     <div className="text-red-500 text-xs p-1" role="alert">
                         {errors.onSave}

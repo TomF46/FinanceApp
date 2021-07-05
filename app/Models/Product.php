@@ -13,6 +13,7 @@ class Product extends Model
     protected $fillable = [
         'name',
         'productCode',
+        'cost',
         'price'
     ];
 
@@ -21,6 +22,10 @@ class Product extends Model
         return $this->hasMany(Sale::class);
     }
 
+    public function getTotalProfit()
+    {
+        return $this->price - $this->cost;
+    }
 
     public function map()
     {
@@ -28,6 +33,7 @@ class Product extends Model
             'id' => $this->id,
             'name' => $this->name,
             'productCode' => $this->productCode,
+            'cost' => $this->cost,
             'price' => $this->price
         ];
     }

@@ -49,7 +49,7 @@ const AreaManagerRegisterForm = () => {
         RegisterAreaManager(user)
             .then(response => {
                 toast.success("Successfully registered area manager");
-                history.push("/");
+                history.push("/admin/users");
             })
             .catch(err => {
                 setSaving(false);

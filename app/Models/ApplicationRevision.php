@@ -134,7 +134,7 @@ class ApplicationRevision extends Model
                 'application_revision_id' => $this->id,
                 'product_id' => $sale['id'],
                 'quantity' =>  $sale['quantity'],
-                'income' =>  $sale['quantity'] * $product->price
+                'income' =>  $sale['quantity'] * $product->getTotalProfit()
             ]);
         }
 

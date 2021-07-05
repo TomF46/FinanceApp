@@ -67,12 +67,12 @@ const ApplicationPage = ({ applicationId }) => {
             let product = {
                 id: sale.productId,
                 name: sale.productName,
+                cost: sale.productCost,
                 price: sale.productPrice,
                 quantity: sale.quantity
             }
             productSales.push(product);
         });
-        console.log(productSales);
         setSales(productSales);
     }
 
@@ -86,7 +86,7 @@ const ApplicationPage = ({ applicationId }) => {
             });
             setSales(productSales);
         }).catch(error => {
-            toast.error("Error getting products" + error.message, {
+            toast.error("Error submitting application " + error.message, {
                 autoClose: false,
             });
         });
@@ -219,7 +219,7 @@ const ApplicationPage = ({ applicationId }) => {
                         <>
                             <ApplicationReadOnly application={application} />
                             <ApplicationStatusSummary application={application} />
-                            <button onClick={() => { restartApplication() }} className="bg-primary hover:opacity-75 text-white font-bold py-2 px-4 rounded pointer float-right">Restart application</button>
+                            <button onClick={() => { restartApplication() }} className="bg-primary hover:opacity-75 text-white font-bold py-2 px-4 mb-4 rounded pointer float-right">Restart application</button>
                         </>
                     }
                     {(application.status == "1") &&

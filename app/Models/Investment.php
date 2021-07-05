@@ -33,7 +33,7 @@ class Investment extends Model
             'fromNOI' => $this->fromNOI,
             'fromSales' => $this->fromSales,
             'fromNetProfit' => $this->fromNetProfit,
-            'total' => $this->getTotalInvestment()
+            'total' => number_format($this->getTotalInvestment(), 2, '.', '')
         ];
     }
 

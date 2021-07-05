@@ -24,7 +24,7 @@ const ProductManageForm = ({
                             </div>
                         )}
 
-                        <div className="mb-6">
+                        <div className="mb-2">
                             <TextInput
                                 name="name"
                                 label="Name"
@@ -34,7 +34,7 @@ const ProductManageForm = ({
                             />
                         </div>
 
-                        <div className="mb-6">
+                        <div className="mb-2">
                             <TextInput
                                 name="productCode"
                                 label="Product Code"
@@ -44,11 +44,20 @@ const ProductManageForm = ({
                             />
                         </div>
 
+                        <div className="mb-2">
+                            <MoneyInput
+                                name="cost"
+                                label="Unit cost (£)"
+                                value={product.cost}
+                                onChange={onChange}
+                                error={errors.cost}
+                            />
+                        </div>
 
-                        <div className="mb-6">
+                        <div className="mb-2">
                             <MoneyInput
                                 name="price"
-                                label="Price"
+                                label="Sale price (£)"
                                 value={product.price}
                                 onChange={onChange}
                                 error={errors.price}

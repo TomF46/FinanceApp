@@ -24,7 +24,8 @@ class ProductsController extends Controller
         $product = Product::create([
             'name' => $attributes['name'],
             'productCode' => $attributes['productCode'],
-            'price' => $attributes['price']
+            'price' => $attributes['price'],
+            'cost' => $attributes['cost']
         ]);
 
         return response()->json($product, 201);
@@ -36,6 +37,7 @@ class ProductsController extends Controller
         $product->name = $attributes['name'];
         $product->productCode = $attributes['productCode'];
         $product->price = $attributes['price'];
+        $product->cost = $attributes['cost'];
         $product->update($attributes);
         $product = $product->fresh();
         return response()->json($product);
@@ -57,7 +59,8 @@ class ProductsController extends Controller
         return $request->validate([
             'name' => 'required|max:40',
             'productCode' => 'required|unique:products|max:10',
-            'price' => 'required'
+            'price' => 'required',
+            'cost' => 'required',
         ]);
     }
 

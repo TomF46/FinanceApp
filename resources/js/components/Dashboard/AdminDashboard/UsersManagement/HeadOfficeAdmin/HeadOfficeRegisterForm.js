@@ -50,7 +50,7 @@ const HeadOfficeRegisterForm = () => {
         RegisterHeadOffice(user)
             .then(response => {
                 toast.success("Successfully registered head office user");
-                history.push("/");
+                history.push("/admin/users");
             })
             .catch(err => {
                 setSaving(false);

@@ -49,7 +49,7 @@ const RetailManagerRegisterForm = () => {
         RegisterRetailer(user)
             .then(response => {
                 toast.success("Successfully registered retail manager");
-                history.push("/");
+                history.push("/admin/users");
             })
             .catch(err => {
                 setSaving(false);
