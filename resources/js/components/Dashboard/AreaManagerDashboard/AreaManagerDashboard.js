@@ -26,13 +26,13 @@ const AreaManagerDashboard = ({ user }) => {
 
     return (
         <div className="area-manager-dashboard">
-            <p className="text-center">Area Manager Dashboard</p>
+            <p className="text-center">This is your dashboard, where you can manage your areas and their retail locations applications.</p>
             {!areaManager ? (
                 <LoadingMessage message={"Loading dashboard"} />
             ) : (
                 <>
                     <div className="my-8">
-                        <div className="my-2 card shadow-sm rounded-md">
+                        <div className="my-2 card shadow-md rounded-md">
                             <div className="bg-primary rounded-t-md">
                                 <p className="text-white font-bold text-lg px-2 py-1">My Areas Managed</p>
                             </div>
@@ -43,7 +43,7 @@ const AreaManagerDashboard = ({ user }) => {
                     </div>
 
                     <div className="my-8">
-                        <div className="my-2 card shadow-sm rounded-md">
+                        <div className="my-2 card shadow-md rounded-md">
                             <div className="bg-primary rounded-t-md">
                                 <p className="text-white font-bold text-lg px-2 py-1">My Open Applications</p>
                             </div>

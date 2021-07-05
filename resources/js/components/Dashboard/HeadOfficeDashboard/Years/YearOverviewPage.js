@@ -35,7 +35,7 @@ const YearOverviewPage = ({ yearId }) => {
                 <LoadingMessage message={"Loading Year Overview"} />
             ) : (
                 <>
-                    <h1 className="text-center font-bold text-6xl">
+                    <h1 className="text-center font-bold text-4xl">
                         {year.year}
                     </h1>
 
@@ -65,7 +65,7 @@ const YearOverviewPage = ({ yearId }) => {
                     </div>
 
                     <div className="my-4">
-                        <div className="my-2 card shadow-sm rounded-md">
+                        <div className="my-2 card shadow-md rounded-md">
                             <div className="bg-primary rounded-t-md">
                                 <p className="text-white font-bold text-lg px-2 py-1">Summary of signed off applications</p>
                             </div>

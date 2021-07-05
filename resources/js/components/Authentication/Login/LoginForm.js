@@ -7,10 +7,10 @@ import CheckboxInput from "../../FormComponents/CheckboxInput";
 const LoginForm = ({ user, onSave, onChange, saving = false, errors = {} }) => {
     return (
         <div className="centerFormCardContainer mt-24">
-            <div className="centerFormCard max-w-md rounded overflow-hidden card">
+            <div className="centerFormCard max-w-md rounded shadow-md overflow-hidden card">
                 <form className="" onSubmit={onSave}>
                     <div>
-                        <div className="card shadow-sm rounded-md">
+                        <div className="card shadow-md rounded-md">
                             <div className="bg-primary rounded-t-md">
                                 <p className="text-white font-bold text-lg px-2 py-1">Login</p>
                             </div>

@@ -7,8 +7,7 @@ import YearsDashboard from "./Years/YearsDashboard";
 const HeadOfficeDashboard = ({ user }) => {
     return (
         <div className="headoffice-dashboard">
-            <p className="text-center">Head Office Dashboard</p>
-
+            <p className="text-center">This is your dashboard, manage and create reporting years and look into individual years to find in depth information about retail location reporting figures</p>
             <YearsDashboard />
         </div>
     );

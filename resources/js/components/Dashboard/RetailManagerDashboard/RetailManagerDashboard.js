@@ -26,13 +26,13 @@ const RetailManagerDashboard = ({ user }) => {
 
     return (
         <div className="Retail-manager-dashboard">
-            <p className="text-center">Retail Manager Dashboard</p>
+            <p className="text-center">This is your dashboard, you can manage your retail locations and any current open applications</p>
             {!retailManager ? (
                 <LoadingMessage message={"Loading dashboard"} />
             ) : (
                 <>
                     <div className="my-8">
-                        <div className="my-2 card shadow-sm rounded-md">
+                        <div className="my-2 card shadow-md rounded-md">
                             <div className="bg-primary rounded-t-md">
                                 <p className="text-white font-bold text-lg px-2 py-1">My Locations Managed</p>
                             </div>
@@ -43,7 +43,7 @@ const RetailManagerDashboard = ({ user }) => {
                     </div>
 
                     <div className="my-8">
-                        <div className="my-2 card shadow-sm rounded-md">
+                        <div className="my-2 card shadow-md rounded-md">
                             <div className="bg-primary rounded-t-md">
                                 <p className="text-white font-bold text-lg px-2 py-1">My Open Applications</p>
                             </div>

@@ -100,7 +100,7 @@ const AreaAdminPage = ({ areaId }) => {
                 <LoadingMessage message={"Loading Area"} />
             ) : (
                 <>
-                    <h1 className="text-center font-bold text-6xl">
+                    <h1 className="text-center font-bold text-4xl">
                         {area.name}
                     </h1>
                     <button
@@ -116,7 +116,7 @@ const AreaAdminPage = ({ areaId }) => {
                         Edit
                     </Link>
                     <div className="my-8">
-                        <div className="my-2 card shadow-sm rounded-md">
+                        <div className="my-2 card shadow-md rounded-md">
                             <div className="bg-primary rounded-t-md">
                                 <p className="text-white font-bold text-lg px-2 py-1">Locations</p>
                             </div>
@@ -126,7 +126,7 @@ const AreaAdminPage = ({ areaId }) => {
                         </div>
                     </div>
                     <div className="my-8">
-                        <div className="my-2 card shadow-sm rounded-md">
+                        <div className="my-2 card shadow-md rounded-md">
                             <div className="bg-primary rounded-t-md">
                                 <p className="text-white font-bold text-lg px-2 py-1">Managers</p>
                             </div>
@@ -136,7 +136,7 @@ const AreaAdminPage = ({ areaId }) => {
                         </div>
                     </div>
                     <div className="my-8">
-                        <div className="my-2 card shadow-sm rounded-md">
+                        <div className="my-2 card shadow-md rounded-md">
                             <div className="bg-primary rounded-t-md">
                                 <p className="text-white font-bold text-lg px-2 py-1">Add Manager</p>
                             </div>

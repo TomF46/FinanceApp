@@ -24,7 +24,7 @@ const ApplicationReadOnly = ({
                 {application.year.year} Application for {application.retailLocationName} Read only
             </h1>
 
-            <div className="my-4 card shadow-sm rounded-md">
+            <div className="my-4 card shadow-md rounded-md">
                 <div className="bg-primary rounded-t-md">
                     <p className="text-white font-bold text-lg px-2 py-1">Non-operating Income</p>
                 </div>
@@ -64,7 +64,7 @@ const ApplicationReadOnly = ({
                 </table>
             </div>
 
-            <div className="my-4 card shadow-sm rounded-md">
+            <div className="my-4 card shadow-md rounded-md">
                 <div className="bg-primary rounded-t-md">
                     <p className="text-white font-bold text-lg px-2 py-1">Sales</p>
                 </div>
@@ -92,7 +92,7 @@ const ApplicationReadOnly = ({
                 </table>
             </div>
 
-            <div className="my-4 card shadow-sm rounded-md">
+            <div className="my-4 card shadow-md rounded-md">
                 <div className="bg-primary rounded-t-md">
                     <p className="text-white font-bold text-lg px-2 py-1">Expenses</p>
                 </div>
@@ -149,7 +149,7 @@ const ApplicationReadOnly = ({
             </div>
 
             <div className="my-4">
-                <div className="my-2 card shadow-sm rounded-md">
+                <div className="my-2 card shadow-md rounded-md">
                     <div className="bg-primary rounded-t-md">
                         <p className="text-white font-bold text-lg px-2 py-1">Summary</p>
                     </div>

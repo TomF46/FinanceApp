@@ -31,12 +31,12 @@ const RetailLocationDetailPage = ({ retailLocationId }) => {
                 <LoadingMessage message={"Loading Retail Location"} />
             ) : (
                 <>
-                    <h1 className="text-center font-bold text-6xl">
+                    <h1 className="text-center font-bold text-4xl">
                         {retailLocation.name}
                     </h1>
 
                     <div className="my-8">
-                        <div className="my-2 card shadow-sm rounded-md">
+                        <div className="my-2 card shadow-md rounded-md">
                             <div className="bg-primary rounded-t-md">
                                 <p className="text-white font-bold text-lg px-2 py-1">{retailLocation.name} Applications</p>
                             </div>

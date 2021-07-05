@@ -15,7 +15,7 @@ const ApplicationStatusSummary = ({
     return (
         <div className="application-status summary mb-8">
             <div className="my-4">
-                <div className="my-2 card shadow-sm rounded-md">
+                <div className="my-2 card shadow-md rounded-md">
                     <div className="bg-primary rounded-t-md">
                         <p className="text-white font-bold text-lg px-2 py-1">Application Status Summary</p>
                     </div>

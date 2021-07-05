@@ -25,12 +25,9 @@ const DashboardPage = ({ history }) => {
 
     return (
         <div className="dashboard-page">
-            <h1 className="text-center font-bold text-6xl">
-                Dashboard
-            </h1>
             {user && (
                 <>
-                    <p className="text-center mb-4"> Welcome {user.firstName}</p>
+                    <h1 className="text-center font-bold mb-4 text-4xl"> Welcome {user.firstName}</h1>
                     {user.role == "0" && <AdminDashboard user={user} />}
                     {user.role == "1" && <HeadOfficeDashboard user={user} />}
                     {user.role == "2" && <AreaManagerDashboard user={user} />}

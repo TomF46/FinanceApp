@@ -63,7 +63,7 @@ const UserDetailPage = ({ userId }) => {
                 <LoadingMessage message={"Loading User"} />
             ) : (
                 <>
-                    <h1 className="text-center font-bold text-6xl">
+                    <h1 className="text-center font-bold text-4xl">
                         {user.fullName}
                     </h1>
 

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const UsersManagementPage = () => {
     return (
         <div className="user-management">
-            <p className="text-center">User Management</p>
+            <h1 className="text-center font-bold text-4xl">User Management</h1>
 
             <div className="my-4">
                 <UserList />

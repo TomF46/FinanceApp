@@ -12,7 +12,7 @@ const AreaManageForm = ({
     return (
         <form className="" onSubmit={onSave}>
             <div className="my-8">
-                <div className="my-2 card shadow-sm rounded-md">
+                <div className="my-2 card shadow-md rounded-md">
                     <div className="bg-primary rounded-t-md">
                         <p className="text-white font-bold text-lg px-2 py-1">{area.id ? 'Edit' : 'Add'} Area</p>
                     </div>

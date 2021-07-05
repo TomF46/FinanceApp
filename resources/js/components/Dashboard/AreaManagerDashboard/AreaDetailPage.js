@@ -32,12 +32,12 @@ const AreaDetailPage = ({ areaId }) => {
                 <LoadingMessage message={"Loading Area Overview"} />
             ) : (
                 <>
-                    <h1 className="text-center font-bold text-6xl">
+                    <h1 className="text-center font-bold text-4xl">
                         {area.name}
                     </h1>
 
                     <div className="my-8">
-                        <div className="my-2 card shadow-sm rounded-md">
+                        <div className="my-2 card shadow-md rounded-md">
                             <div className="bg-primary rounded-t-md">
                                 <p className="text-white font-bold text-lg px-2 py-1">{area.name} Retail Locations</p>
                             </div>
@@ -48,7 +48,7 @@ const AreaDetailPage = ({ areaId }) => {
                     </div>
 
                     <div className="my-8">
-                        <div className="my-2 card shadow-sm rounded-md">
+                        <div className="my-2 card shadow-md rounded-md">
                             <div className="bg-primary rounded-t-md">
                                 <p className="text-white font-bold text-lg px-2 py-1">{area.name} Applications</p>
                             </div>
