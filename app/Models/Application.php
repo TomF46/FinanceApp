@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Year;
 use App\Models\RetailLocation;
 use App\Models\ApplicationRevision;
+use App\Models\Investment;
 use App\Enums\ApplicationStatus;
 
 class Application extends Model
@@ -27,25 +28,39 @@ class Application extends Model
         return $this->belongsTo(RetailLocation::class);
     }
 
-
     public function applicationRevisions()
     {
         return $this->hasMany(ApplicationRevision::class);
     }
 
+    public function investment()
+    {
+        return $this->hasOne(Investment::class);
+    }
+
+    public function latestRevision()
+    {
+        return $this->applicationRevisions->last();
+    }
+
     public function getTotalNonOperatingIncome()
     {
-        return $this->applicationRevisions->last()->getTotalNonOperatingIncome();
+        return $this->latestRevision()->getTotalNonOperatingIncome();
     }
 
     public function getTotalExpenses()
     {
-        return $this->applicationRevisions->last()->getTotalExpenses();
+        return $this->latestRevision()->getTotalExpenses();
     }
 
     public function getTotalSalesIncome()
     {
-        return $this->applicationRevisions->last()->getTotalSalesIncome();
+        return $this->latestRevision()->getTotalSalesIncome();
+    }
+
+    public function getTotalNetProfit()
+    {
+        return ($this->getTotalNonOperatingIncome() + $this->getTotalSalesIncome()) - $this->getTotalExpenses();
     }
 
     public function map()
@@ -83,9 +98,9 @@ class Application extends Model
             'retailLocationId' => $this->retailLocation->id,
             'status' => $this->status,
             'statusText' => $this->getStatusText(),
-            'sales' => $this->applicationRevisions->last() ? $this->applicationRevisions->last()->mapSales() : [],
-            'incomeRecord' => $this->applicationRevisions->last() ? $this->applicationRevisions->last()->mapIncomeRecord(): null,
-            'expensesRecord' => $this->applicationRevisions->last() ? $this->applicationRevisions->last()->mapExpensesRecord() : null,
+            'sales' => $this->latestRevision() ? $this->latestRevision()->mapSales() : [],
+            'incomeRecord' => $this->latestRevision() ? $this->latestRevision()->mapIncomeRecord(): null,
+            'expensesRecord' => $this->latestRevision() ? $this->latestRevision()->mapExpensesRecord() : null,
         ];
     }
 
@@ -136,23 +151,32 @@ class Application extends Model
     public function accept()
     {
         $this->status = ApplicationStatus::Accepted;
+        $this->createInvestment();
         $this->save();
     }
 
     public function reject($user, $message)
     {
         $this->status = ApplicationStatus::Returned;
-        $this->applicationRevisions->last()->rejectRevision($user, $message);
+        $this->latestRevision()->rejectRevision($user, $message);
         $this->save();
     }
 
     public function getRejectionMessage()
     {
-        return $this->applicationRevisions->last()->getRejectionMessage();
+        return $this->latestRevision()->getRejectionMessage();
     }
 
     public function deactivate(){
         $this->status = ApplicationStatus::Inactive;
         $this->save();
+    }
+
+    protected function createInvestment()
+    {
+        $investment = Investment::make([
+            'application_id' => $this->id
+        ]);
+        $investment->calculateInvestment();
     }
 }

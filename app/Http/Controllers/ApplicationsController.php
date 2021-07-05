@@ -70,6 +70,12 @@ class ApplicationsController extends Controller
         return response()->json($message);
     }
 
+    public function showInvestment(Request $request, Application $application)
+    {
+        $investment = $application->investment->map();
+        return response()->json($investment);
+    }
+
     protected function validateRejectionMessage(Request $request)
     {
         return $request->validate([

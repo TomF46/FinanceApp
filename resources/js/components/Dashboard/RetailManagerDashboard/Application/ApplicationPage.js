@@ -9,8 +9,8 @@ import ApplicationForm from "./Form/ApplicationForm";
 import { blankIncome, blankExpenses } from "../../../../applicationShape";
 import { getAllProducts } from "../../../../api/productsApi";
 import ApplicationReadOnly from "../../../DisplayComponents/ApplicationReadOnly";
-import RejectionMessage from "../../../DisplayComponents/RejectionMessage";
 import ApplicationStatusSummary from "../../../DisplayComponents/ApplicationStatusSummary";
+import InvestmentSummary from "../../../DisplayComponents/InvestmentSummary";
 
 
 const ApplicationPage = ({ applicationId }) => {
@@ -222,10 +222,17 @@ const ApplicationPage = ({ applicationId }) => {
                             <button onClick={() => { restartApplication() }} className="bg-primary hover:opacity-75 text-white font-bold py-2 px-4 rounded pointer float-right">Restart application</button>
                         </>
                     }
-                    {(application.status == "1" || application.status == "3") &&
+                    {(application.status == "1") &&
                         <>
                             <ApplicationReadOnly application={application} />
                             <ApplicationStatusSummary application={application} />
+                        </>
+                    }
+                    {(application.status == "3") &&
+                        <>
+                            <ApplicationReadOnly application={application} />
+                            <ApplicationStatusSummary application={application} />
+                            <InvestmentSummary application={application} />
                         </>
                     }
                 </>

@@ -55,5 +55,13 @@ export function getRejectionMessage(application) {
         });
 }
 
-
-/* WHat retailer see's when accepted, area manager rejection */
+export function getInvestment(application) {
+    return axiosClient
+        .get(`/api/applications/${application.id}/investment`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error.response;
+        });
+}

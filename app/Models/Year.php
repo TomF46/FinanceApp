@@ -92,6 +92,46 @@ class Year extends Model
         return $total;   
     }
 
+    protected function getTotalInvestmentFromNOI()
+    {
+        $applications = $this->getAcceptedApplications();
+        $total = 0;
+        foreach ($applications as $application) {
+            $total = $total + $application->investment->fromNOI;
+        };
+        return $total;
+    }
+
+    protected function getTotalInvestmentFromSales()
+    {
+        $applications = $this->getAcceptedApplications();
+        $total = 0;
+        foreach ($applications as $application) {
+            $total = $total + $application->investment->fromSales;
+        };
+        return $total;
+    }
+
+    protected function getTotalInvestmentFromNetProfit()
+    {
+        $applications = $this->getAcceptedApplications();
+        $total = 0;
+        foreach ($applications as $application) {
+            $total = $total + $application->investment->fromNetProfit;
+        };
+        return $total;
+    }
+
+    protected function getTotalInvestment()
+    {
+        $applications = $this->getAcceptedApplications();
+        $total = 0;
+        foreach ($applications as $application) {
+            $total = $total + $application->investment->getTotalInvestment();
+        };
+        return $total;
+    }
+
     public function map()
     {
         return [
@@ -111,13 +151,23 @@ class Year extends Model
             'id' => $this->id,
             'year' => $this->year,
             'totalApplications' => $this->getTotalActiveApplications(),
-            'totalNotStarted' => $this->getTotalNotStartedApplications(),
-            'totalAwaitingSignOff' => $this->getTotalAwaitingSignOffApplications(),
-            'totalReturned' => $this->getTotalReturnedApplications(),
-            'totalAccepted' => $this->getTotalAcceptedApplications(),
-            'totalNOIncome' => $this->getTotalNonOperatingIncome(),
-            'totalExpenses' => $this->getTotalExpenses(),
-            'totalSalesIncome' => $this->getTotalSalesIncome()
+            'applicationStatusSummary' => [
+                'totalNotStarted' => $this->getTotalNotStartedApplications(),
+                'totalAwaitingSignOff' => $this->getTotalAwaitingSignOffApplications(),
+                'totalReturned' => $this->getTotalReturnedApplications(),
+                'totalAccepted' => $this->getTotalAcceptedApplications(),
+            ],
+            'retailDataSummary' => [
+                'totalNOIncome' => $this->getTotalNonOperatingIncome(),
+                'totalExpenses' => $this->getTotalExpenses(),
+                'totalSalesIncome' => $this->getTotalSalesIncome()
+            ],
+            'investmentSummary' => [
+                'totalFromNOI' => $this->getTotalInvestmentFromNOI(),
+                'totalFromSales' => $this->getTotalInvestmentFromSales(),
+                'totalFromNetProfit' => $this->getTotalInvestmentFromNetProfit(),
+                'total' => $this->getTotalInvestment()
+            ]
         ];
     }
 }

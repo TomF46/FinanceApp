@@ -7,8 +7,8 @@ import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
 import ApplicationReadOnly from "../../../DisplayComponents/ApplicationReadOnly";
 import AreaManagerApplicationControls from "./AreaManagerApplicationControls";
 import { confirmAlert } from "react-confirm-alert";
-import RejectionMessage from "../../../DisplayComponents/RejectionMessage";
 import ApplicationStatusSummary from "../../../DisplayComponents/ApplicationStatusSummary";
+import InvestmentSummary from "../../../DisplayComponents/InvestmentSummary";
 
 
 const AreaManagerApplicationViewPage = ({ applicationId }) => {
@@ -123,11 +123,18 @@ const AreaManagerApplicationViewPage = ({ applicationId }) => {
                             <AreaManagerApplicationControls application={application} onAccept={handleAccept} onReject={handleReject} rejectionMessage={rejectionMessage} onChange={handleRejectionMessageChange} errors={errors} saving={saving} />
                         </>
                     }
-                    {(application.status == "2" || application.status == "3") &&
+                    {application.status == "2" &&
                         <>
                             <ApplicationReadOnly application={application} />
                             <ApplicationStatusSummary application={application} />
 
+                        </>
+                    }
+                    {(application.status == "3") &&
+                        <>
+                            <ApplicationReadOnly application={application} />
+                            <ApplicationStatusSummary application={application} />
+                            <InvestmentSummary application={application} />
                         </>
                     }
                 </>

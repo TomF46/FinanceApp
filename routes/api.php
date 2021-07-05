@@ -46,6 +46,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/applications/{application}/accept', [App\Http\Controllers\ApplicationsController::class, 'accept']);
     Route::post('/applications/{application}/reject', [App\Http\Controllers\ApplicationsController::class, 'reject']);
     Route::get('/applications/{application}/showRejectMessage', [App\Http\Controllers\ApplicationsController::class, 'showRejectMessage']);
+    Route::get('/applications/{application}/investment', [App\Http\Controllers\ApplicationsController::class, 'showInvestment']);
 
     Route::get('/products', [App\Http\Controllers\ProductsController::class, 'index']);
 

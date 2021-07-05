@@ -27,7 +27,7 @@ const YearOverviewPage = ({ yearId }) => {
     }
 
     function getTotalProfitLoss() {
-        return (year.totalNOIncome + year.totalSalesIncome) - year.totalExpenses;
+        return (year.retailDataSummary.totalNOIncome + year.retailDataSummary.totalSalesIncome) - year.retailDataSummary.totalExpenses;
     }
     return (
         <>
@@ -47,19 +47,19 @@ const YearOverviewPage = ({ yearId }) => {
                             </div>
                             <div className="lg:block col-span-2">
                                 <p className="text-sm text-gray-600">Not Started:</p>
-                                <p>{year.totalNotStarted}</p>
+                                <p>{year.applicationStatusSummary.totalNotStarted}</p>
                             </div>
                             <div className="lg:block col-span-2">
                                 <p className="text-sm text-gray-600">Awaiting sign off:</p>
-                                <p>{year.totalAwaitingSignOff}</p>
+                                <p>{year.applicationStatusSummary.totalAwaitingSignOff}</p>
                             </div>
                             <div className="lg:block col-span-2">
                                 <p className="text-sm text-gray-600">Returned:</p>
-                                <p>{year.totalReturned}</p>
+                                <p>{year.applicationStatusSummary.totalReturned}</p>
                             </div>
                             <div className="lg:block col-span-2">
                                 <p className="text-sm text-gray-600">Accepted:</p>
-                                <p>{year.totalAccepted}</p>
+                                <p>{year.applicationStatusSummary.totalAccepted}</p>
                             </div>
                         </div>
                     </div>
@@ -73,23 +73,51 @@ const YearOverviewPage = ({ yearId }) => {
                                 <tbody>
                                     <tr className="bg-gray-200">
                                         <td className="pl-2">Total Non-operating income</td>
-                                        <td>£{year.totalNOIncome}</td>
+                                        <td>£{year.retailDataSummary.totalNOIncome}</td>
                                     </tr>
                                     <tr>
                                         <td className="pl-2">Total sales income</td>
-                                        <td>£{year.totalSalesIncome}</td>
+                                        <td>£{year.retailDataSummary.totalSalesIncome}</td>
                                     </tr>
                                     <tr className="bg-gray-200">
                                         <td className="pl-2">Total Income</td>
-                                        <td>£{year.totalNOIncome + year.totalSalesIncome}</td>
+                                        <td>£{year.retailDataSummary.totalNOIncome + year.retailDataSummary.totalSalesIncome}</td>
                                     </tr>
                                     <tr>
                                         <td className="pl-2">Total Expenses</td>
-                                        <td>£{year.totalSalesIncome}</td>
+                                        <td>£{year.retailDataSummary.totalSalesIncome}</td>
                                     </tr>
                                     <tr className="bg-gray-200">
                                         <td className="pl-2">Total profit/loss</td>
                                         <td>£{getTotalProfitLoss()}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div className="my-4">
+                        <div className="my-2 card shadow-md rounded-md">
+                            <div className="bg-primary rounded-t-md">
+                                <p className="text-white font-bold text-lg px-2 py-1">Summary of investments</p>
+                            </div>
+                            <table className="table-fixed w-full">
+                                <tbody>
+                                    <tr className="bg-gray-200">
+                                        <td className="pl-2">Total investment from Non-operating income data</td>
+                                        <td>£{year.investmentSummary.totalFromNOI}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="pl-2">Total investment from sales data</td>
+                                        <td>£{year.investmentSummary.totalFromSales}</td>
+                                    </tr>
+                                    <tr className="bg-gray-200">
+                                        <td className="pl-2">Total investment from net profit data</td>
+                                        <td>£{year.investmentSummary.totalFromNetProfit}</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="pl-2">Total investment</td>
+                                        <td>£{year.investmentSummary.total}</td>
                                     </tr>
                                 </tbody>
                             </table>
