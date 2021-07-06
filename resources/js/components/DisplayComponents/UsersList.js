@@ -16,13 +16,9 @@ const UsersList = ({ users }) => {
                             <p className="text-sm text-gray-600">Role:</p>
                             <p>{user.roleTitle}</p>
                         </div>
-                        <div className="lg:block col-span-2">
-                            <p className="text-sm text-gray-600">TBC:</p>
-                            <p>TBC</p>
-                        </div>
-                        <div className="lg:block col-span-2">
-                            <p className="text-sm text-gray-600">TBC:</p>
-                            <p>TBC</p>
+                        <div className="lg:block col-span-4">
+                            <p className="text-sm text-gray-600">Email:</p>
+                            <p>{user.email}</p>
                         </div>
                     </div>
                 )

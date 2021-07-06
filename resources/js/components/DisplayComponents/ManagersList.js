@@ -18,8 +18,8 @@ const ManagersList = ({ managers, onManagerRemove }) => {
                                 <p>{manager.roleTitle}</p>
                             </div>
                             <div className="lg:block col-span-2">
-                                <p className="text-sm text-gray-600">TBC:</p>
-                                <p>TBC</p>
+                                <p className="text-sm text-gray-600">Email:</p>
+                                <p>{manager.email}</p>
                             </div>
                             <div className="lg:block col-span-2">
                                 <div className="table vertical-centered">
