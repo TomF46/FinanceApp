@@ -46,7 +46,7 @@ class ExpensesRecord extends Model
             'maintenance' => $this->maintenance,
             'employeeBonus' => $this->employeeBonus,
             'employeeExpenses' => $this->employeeExpenses,
-            'totalExpenses' => $this->getTotalExpenses()
+            'totalExpenses' => number_format($this->getTotalExpenses(), 2, '.', '')
         ];
     }
 }

@@ -38,7 +38,7 @@ class IncomeRecord extends Model
             'maintenanceGrant' => $this->maintenanceGrant,
             'sponsorship' => $this->sponsorship,
             'rewards' => $this->rewards,
-            'totalIncome' => $this->getTotalIncome()
+            'totalIncome' => number_format($this->getTotalIncome(), 2, '.', '')
         ];
     }
 }

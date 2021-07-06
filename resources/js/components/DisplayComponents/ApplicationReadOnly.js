@@ -11,7 +11,7 @@ const ApplicationReadOnly = ({
     }
 
     function getTotalIncome() {
-        return getTotalSalesIncome() + application.incomeRecord.totalIncome;
+        return getTotalSalesIncome() + Number(application.incomeRecord.totalIncome);
     }
 
     function getTotalProfitLoss() {

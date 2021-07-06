@@ -19,11 +19,11 @@ const ProductsList = ({ products, onProductDeactivate }) => {
                             </div>
                             <div className="lg:block col-span-2">
                                 <p className="text-sm text-gray-600">Unit cost:</p>
-                                <p>{product.cost}</p>
+                                <p>£{product.cost}</p>
                             </div>
                             <div className="lg:block col-span-2">
                                 <p className="text-sm text-gray-600">Sale price:</p>
-                                <p>{product.price}</p>
+                                <p>£{product.price}</p>
                             </div>
                             <div className="lg:block col-span-2">
                                 <div className="table vertical-centered">

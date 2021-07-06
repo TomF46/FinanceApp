@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { toast } from "react-toastify";
-import TextInput from "../../../../FormComponents/TextInput";
 import { AddYear } from "../../../../../api/yearsApi";
 import history from "../../../../../history";
+import YearInput from "../../../../FormComponents/YearInput";
 
 const AddYearPage = () => {
 
@@ -41,21 +41,12 @@ const AddYearPage = () => {
             })
             .catch(err => {
                 setSaving(false);
-                toast.error(formatErrorText(err), {
+                toast.error(err, {
                     autoClose: false,
                 });
             });
     }
 
-    function formatErrorText(error) {
-        let errorText = '';
-
-        for (const [key, value] of Object.entries(error.data.errors)) {
-            errorText = `${errorText} ${value}`;
-        }
-
-        return errorText;
-    }
 
     return (
         <div className="add-area-year-form">
@@ -72,7 +63,7 @@ const AddYearPage = () => {
                                 </div>
                             )}
                             <div className="mb-6">
-                                <TextInput
+                                <YearInput
                                     name="year"
                                     label="Year"
                                     value={year.year}

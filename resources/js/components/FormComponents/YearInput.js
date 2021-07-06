@@ -20,8 +20,10 @@ const MoneyInput = ({ name, label, onChange, placeholder, value, error }) => {
                     placeholder={placeholder}
                     value={value}
                     onChange={onChange}
-                    min="0"
-                    step="0.01"
+                    min="2000"
+                    max="9999"
+                    step="1"
+                    pattern="\d+"
                     required
                 />
                 {error && (

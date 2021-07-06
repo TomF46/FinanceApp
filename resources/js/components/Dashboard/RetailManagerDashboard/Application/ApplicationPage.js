@@ -86,7 +86,7 @@ const ApplicationPage = ({ applicationId }) => {
             });
             setSales(productSales);
         }).catch(error => {
-            toast.error("Error submitting application " + error.message, {
+            toast.error("Error getting products " + error.message, {
                 autoClose: false,
             });
         });
@@ -185,7 +185,7 @@ const ApplicationPage = ({ applicationId }) => {
         }).catch(err => {
             setSaving(false);
             console.log(err);
-            toast.error("Error creating product", {
+            toast.error("Error submitting application", {
                 autoClose: false
             });
             let tempErrors = { ...errors };
