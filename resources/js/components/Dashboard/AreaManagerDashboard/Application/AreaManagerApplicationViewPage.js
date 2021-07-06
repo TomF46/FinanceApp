@@ -7,7 +7,7 @@ import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
 import ApplicationReadOnly from "../../../DisplayComponents/ApplicationReadOnly";
 import AreaManagerApplicationControls from "./AreaManagerApplicationControls";
 import { confirmAlert } from "react-confirm-alert";
-import ApplicationStatusSummary from "../../../DisplayComponents/ApplicationStatusSummary";
+import ApplicationSummary from "../../../DisplayComponents/ApplicationSummary";
 import InvestmentSummary from "../../../DisplayComponents/InvestmentSummary";
 
 
@@ -115,7 +115,7 @@ const AreaManagerApplicationViewPage = ({ applicationId }) => {
             {application ? (
                 <>
                     {application.status == "0" &&
-                        <ApplicationStatusSummary application={application} />
+                        <ApplicationSummary application={application} />
                     }
                     {application.status == "1" &&
                         <>
@@ -123,18 +123,10 @@ const AreaManagerApplicationViewPage = ({ applicationId }) => {
                             <AreaManagerApplicationControls application={application} onAccept={handleAccept} onReject={handleReject} rejectionMessage={rejectionMessage} onChange={handleRejectionMessageChange} errors={errors} saving={saving} />
                         </>
                     }
-                    {application.status == "2" &&
+                    {(application.status == "2" || application.status == "3") &&
                         <>
                             <ApplicationReadOnly application={application} />
-                            <ApplicationStatusSummary application={application} />
-
-                        </>
-                    }
-                    {(application.status == "3") &&
-                        <>
-                            <ApplicationReadOnly application={application} />
-                            <ApplicationStatusSummary application={application} />
-                            <InvestmentSummary application={application} />
+                            <ApplicationSummary application={application} />
                         </>
                     }
                 </>

@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import RejectionMessage from "./RejectionMessage";
+import InvestmentSummary from "./InvestmentSummary";
 
 
-const ApplicationStatusSummary = ({
+const ApplicationSummary = ({
     application,
 }) => {
 
@@ -29,12 +30,15 @@ const ApplicationStatusSummary = ({
                     </div>
                 </div>
             </div>
+            {(application.status == "3") &&
+                <InvestmentSummary application={application} />
+            }
         </div >
     );
 };
 
-ApplicationStatusSummary.propTypes = {
+ApplicationSummary.propTypes = {
     application: PropTypes.object.isRequired
 };
 
-export default ApplicationStatusSummary;
+export default ApplicationSummary;

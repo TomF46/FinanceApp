@@ -8,7 +8,7 @@ import ApplicationForm from "./Form/ApplicationForm";
 import { blankIncome, blankExpenses } from "../../../../applicationShape";
 import { getAllProducts } from "../../../../api/productsApi";
 import ApplicationReadOnly from "../../../DisplayComponents/ApplicationReadOnly";
-import ApplicationStatusSummary from "../../../DisplayComponents/ApplicationStatusSummary";
+import ApplicationSummary from "../../../DisplayComponents/ApplicationSummary";
 import InvestmentSummary from "../../../DisplayComponents/InvestmentSummary";
 import * as ApplicationService from "../../../../tools/ApplicationService";
 
@@ -173,21 +173,14 @@ const ApplicationPage = ({ applicationId }) => {
                     {(application.status == "2" && !applicationRestarted) &&
                         <>
                             <ApplicationReadOnly application={application} />
-                            <ApplicationStatusSummary application={application} />
+                            <ApplicationSummary application={application} />
                             <button onClick={() => { restartApplication() }} className="bg-primary hover:opacity-75 text-white font-bold py-2 px-4 mb-4 rounded pointer float-right">Restart application</button>
                         </>
                     }
-                    {(application.status == "1") &&
+                    {(application.status == "1" || application.status == "3") &&
                         <>
                             <ApplicationReadOnly application={application} />
-                            <ApplicationStatusSummary application={application} />
-                        </>
-                    }
-                    {(application.status == "3") &&
-                        <>
-                            <ApplicationReadOnly application={application} />
-                            <ApplicationStatusSummary application={application} />
-                            <InvestmentSummary application={application} />
+                            <ApplicationSummary application={application} />
                         </>
                     }
                 </>
