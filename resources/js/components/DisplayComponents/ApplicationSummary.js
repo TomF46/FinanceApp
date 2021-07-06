@@ -6,6 +6,8 @@ import InvestmentSummary from "./InvestmentSummary";
 
 const ApplicationSummary = ({
     application,
+    isRetailer,
+    onRestartApplication
 }) => {
 
     function getSummaryText() {
@@ -30,6 +32,9 @@ const ApplicationSummary = ({
                     </div>
                 </div>
             </div>
+            {(application.status == "2" && isRetailer) &&
+                <button onClick={() => { onRestartApplication() }} className="bg-primary hover:opacity-75 text-white font-bold py-2 px-4 mb-4 rounded pointer float-right">Restart application</button>
+            }
             {(application.status == "3") &&
                 <InvestmentSummary application={application} />
             }
@@ -38,7 +43,9 @@ const ApplicationSummary = ({
 };
 
 ApplicationSummary.propTypes = {
-    application: PropTypes.object.isRequired
+    application: PropTypes.object.isRequired,
+    isRetailer: PropTypes.bool.isRequired,
+    onRestartApplication: PropTypes.func
 };
 
 export default ApplicationSummary;

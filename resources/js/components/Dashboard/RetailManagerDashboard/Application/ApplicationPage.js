@@ -9,7 +9,6 @@ import { blankIncome, blankExpenses } from "../../../../applicationShape";
 import { getAllProducts } from "../../../../api/productsApi";
 import ApplicationReadOnly from "../../../DisplayComponents/ApplicationReadOnly";
 import ApplicationSummary from "../../../DisplayComponents/ApplicationSummary";
-import InvestmentSummary from "../../../DisplayComponents/InvestmentSummary";
 import * as ApplicationService from "../../../../tools/ApplicationService";
 
 
@@ -35,28 +34,33 @@ const ApplicationPage = ({ applicationId }) => {
         getApplicationById(applicationId).then(applicationData => {
             setApplication(applicationData);
             if (applicationData.status == 0) {
-                setIncome({ ...blankIncome });
-                setExpenses({ ...blankExpenses });
-                getSalesProducts();
+                createBlankApplication();
             } else {
-                setIncome(applicationData.incomeRecord);
-                setExpenses(applicationData.expensesRecord);
-                setSales(applicationData.sales);
+                createPrePopulatedApplication(applicationData);
             }
         }).catch(error => {
-            toast.error("Error getting retail location " + error.message, {
+            toast.error("Error getting application " + error.message, {
                 autoClose: false,
             });
         });
     }
 
+    function createBlankApplication() {
+        setIncome({ ...blankIncome });
+        setExpenses({ ...blankExpenses });
+        getSalesProducts();
+    }
+
+    function createPrePopulatedApplication(application) {
+        setIncome(application.incomeRecord);
+        setExpenses(application.expensesRecord);
+        setSales(application.sales);
+    }
+
     function restartApplication() {
-        let incomeWithoutId = { ...income };
-        delete incomeWithoutId.id;
-        let expensesWithoutId = { ...expenses };
-        delete expensesWithoutId.id;
-        setIncome(incomeWithoutId);
-        setExpenses(expensesWithoutId);
+        let recordsWithoutIds = ApplicationService.stripRecordsIdsForRestart({ ...income }, { ...expenses })
+        setIncome(recordsWithoutIds.income);
+        setExpenses(recordsWithoutIds.expenses);
         mapSalesForForm()
         setApplicationRestarted(true);
     }
@@ -66,14 +70,8 @@ const ApplicationPage = ({ applicationId }) => {
     }
 
     function getSalesProducts() {
-        let productSales = [];
         getAllProducts().then(productData => {
-            productData.forEach(product => {
-                product.quantity = null;
-                productSales.push(product);
-                return sales;
-            });
-            setSales(productSales);
+            setSales(ApplicationService.mapProductsForApplication(productData));
         }).catch(error => {
             toast.error("Error getting products " + error.message, {
                 autoClose: false,
@@ -83,7 +81,6 @@ const ApplicationPage = ({ applicationId }) => {
 
     function handleIncomeChange(event) {
         const { name, value } = event.target;
-
         if (!ApplicationService.isValidMoney(value)) return;
 
         setIncome(prevIncome => ({
@@ -94,7 +91,6 @@ const ApplicationPage = ({ applicationId }) => {
 
     function handleExpensesChange(event) {
         const { name, value } = event.target;
-
         if (!ApplicationService.isValidMoney(value)) return;
 
         setExpenses(prevExpenses => ({
@@ -105,7 +101,6 @@ const ApplicationPage = ({ applicationId }) => {
 
     function handleSalesChange(event) {
         const { name, value } = event.target;
-
         if (!ApplicationService.isValidMoney(value)) return;
 
         let copy = [...sales];
@@ -126,20 +121,13 @@ const ApplicationPage = ({ applicationId }) => {
         event.preventDefault();
         if (!formIsValid()) return;
         setSaving(true);
-        let payload = {
-            applicationId: application.id,
-            income: income,
-            expenses: expenses,
-            sales: sales
-        };
 
-        submitApplication(payload).then(res => {
+        submitApplication(ApplicationService.mapCreatePayload(application, income, expenses, sales)).then(res => {
             toast.success("Application submitted");
             setApplicationRestarted(false);
             getApplication();
         }).catch(err => {
             setSaving(false);
-            console.log(err);
             toast.error("Error submitting application", {
                 autoClose: false
             });
@@ -170,17 +158,10 @@ const ApplicationPage = ({ applicationId }) => {
                             salesErrors={salesErrors}
                             saving={saving} />
                     }
-                    {(application.status == "2" && !applicationRestarted) &&
+                    {(application.status != "0" && !applicationRestarted) &&
                         <>
                             <ApplicationReadOnly application={application} />
-                            <ApplicationSummary application={application} />
-                            <button onClick={() => { restartApplication() }} className="bg-primary hover:opacity-75 text-white font-bold py-2 px-4 mb-4 rounded pointer float-right">Restart application</button>
-                        </>
-                    }
-                    {(application.status == "1" || application.status == "3") &&
-                        <>
-                            <ApplicationReadOnly application={application} />
-                            <ApplicationSummary application={application} />
+                            <ApplicationSummary application={application} isRetailer={true} onRestartApplication={restartApplication} />
                         </>
                     }
                 </>
@@ -200,6 +181,5 @@ const mapStateToProps = (state, ownProps) => {
         applicationId: ownProps.match.params.applicationId,
     };
 };
-
 
 export default connect(mapStateToProps)(ApplicationPage);

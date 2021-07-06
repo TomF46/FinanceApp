@@ -47,3 +47,33 @@ export function mapSales(sales) {
     });
     return productSales;
 }
+
+export function stripRecordsIdsForRestart(income, expenses) {
+    delete income.id;
+    delete expenses.id;
+
+    return {
+        income: income,
+        expenses: expenses
+    };
+}
+
+export function mapProductsForApplication(products) {
+    let productsForSale = [];
+
+    products.forEach(product => {
+        product.quantity = null;
+        productsForSale.push(product);
+    });
+
+    return productsForSale;
+}
+
+export function mapCreatePayload(application, income, expenses, sales) {
+    return {
+        applicationId: application.id,
+        income: income,
+        expenses: expenses,
+        sales: sales
+    }
+}

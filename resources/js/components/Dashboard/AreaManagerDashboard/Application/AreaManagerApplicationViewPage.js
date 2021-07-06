@@ -126,7 +126,7 @@ const AreaManagerApplicationViewPage = ({ applicationId }) => {
                     {(application.status == "2" || application.status == "3") &&
                         <>
                             <ApplicationReadOnly application={application} />
-                            <ApplicationSummary application={application} />
+                            <ApplicationSummary application={application} isRetailer={false} />
                         </>
                     }
                 </>
