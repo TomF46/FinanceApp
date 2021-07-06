@@ -40,7 +40,7 @@ const YearOverviewPage = ({ yearId }) => {
                     </h1>
 
                     <div className="my-4">
-                        <div className="grid grid-cols-10 px-2 py-1 border-b border-gray-200 overflow-hidden text-center">
+                        <div className="grid grid-cols-10 px-2 py-1 card shadow-md rounded-md border-b border-gray-200 overflow-hidden text-center">
                             <div className="lg:block col-span-2">
                                 <p className="text-sm text-gray-600">Total Applications:</p>
                                 <p>{year.totalApplications}</p>

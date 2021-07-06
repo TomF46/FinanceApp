@@ -26,35 +26,44 @@ const AreaManagerDashboard = ({ user }) => {
 
     return (
         <div className="area-manager-dashboard">
-            <p className="text-center">This is your dashboard, where you can manage your areas and their retail locations applications.</p>
-            {!areaManager ? (
-                <LoadingMessage message={"Loading dashboard"} />
-            ) : (
-                <>
-                    <div className="my-8">
-                        <div className="my-2 card shadow-md rounded-md">
-                            <div className="bg-primary rounded-t-md">
-                                <p className="text-white font-bold text-lg px-2 py-1">My Areas Managed</p>
+            <div className="grid grid-cols-12 pb-4">
+                <div className="col-span-12 lg:col-span-3 lg:mr-4 mb-4 lg:mb-0 px-4 overflow-hidden shadow-md rounded-md page">
+                    <h2 className="font-bold text-xl py-4 border-b lg:border-none text-center">
+                        Dashboard
+                    </h2>
+                    <p className="my-2">This is your dashboard, where you can manage your areas and their retail locations applications.</p>
+                </div>
+                <div className="col-span-12 lg:col-span-9">
+                    {!areaManager ? (
+                        <LoadingMessage message={"Loading dashboard"} />
+                    ) : (
+                        <>
+                            <div className="mb-8">
+                                <div className="card shadow-md rounded-md">
+                                    <div className="bg-primary rounded-t-md">
+                                        <p className="text-white font-bold text-lg px-2 py-1">My Areas Managed</p>
+                                    </div>
+                                    <div>
+                                        <AreasList areas={areaManager.areasManaged} isAdmin={false} />
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                                <AreasList areas={areaManager.areasManaged} isAdmin={false} />
-                            </div>
-                        </div>
-                    </div>
 
-                    <div className="my-8">
-                        <div className="my-2 card shadow-md rounded-md">
-                            <div className="bg-primary rounded-t-md">
-                                <p className="text-white font-bold text-lg px-2 py-1">My Open Applications</p>
-                            </div>
                             <div>
-                                <AreaApplicationsList applications={areaManager.applications} />
+                                <div className="card shadow-md rounded-md">
+                                    <div className="bg-primary rounded-t-md">
+                                        <p className="text-white font-bold text-lg px-2 py-1">My Open Applications</p>
+                                    </div>
+                                    <div>
+                                        <AreaApplicationsList applications={areaManager.applications} />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </>
-            )}
-        </div>
+                        </>
+                    )}
+                </div>
+            </div>
+        </div >
     );
 };
 

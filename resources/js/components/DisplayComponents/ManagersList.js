@@ -25,7 +25,7 @@ const ManagersList = ({ managers, onManagerRemove }) => {
                                 <div className="table vertical-centered">
                                     <button
                                         onClick={() => (onManagerRemove(manager.id))}
-                                        className="bg-red-800 text-white rounded py-2 px-4 hover:bg-red-600 shadow inline-flex items-center"
+                                        className="bg-danger text-white rounded py-2 px-4 hover:opacity-75 shadow inline-flex items-center"
                                     >
                                         <p className="m-auto">Remove</p>
                                     </button>

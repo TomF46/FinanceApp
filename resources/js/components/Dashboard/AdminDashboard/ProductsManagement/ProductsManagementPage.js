@@ -59,8 +59,13 @@ const ProductsManagementPage = () => {
     return (
         <div className="products-management">
             <h1 className="text-center font-bold text-4xl">Products Management</h1>
-            <div className="my-4">
-                <Link to={`/admin/products/add`} className="bg-primary hover:opacity-75 text-white font-bold py-2 px-4 rounded pointer mr-2">Add Product</Link>
+            <div className="my-4 card shadow-md rounded-md">
+                <div className="bg-secondary rounded-t-md">
+                    <p className="text-white font-bold text-lg px-2 py-1">Actions</p>
+                </div>
+                <div className="px-2 py-4">
+                    <Link to={`/admin/products/add`} className="bg-secondary hover:opacity-75 text-white font-bold py-2 px-4 rounded pointer mr-2">Add Product</Link>
+                </div>
             </div>
             {products && (
                 <div className="mb-4">

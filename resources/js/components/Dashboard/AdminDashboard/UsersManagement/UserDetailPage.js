@@ -70,7 +70,7 @@ const UserDetailPage = ({ userId }) => {
                     {user.role != "0" && (
                         <button
                             onClick={() => (handleDeactivate())}
-                            className="bg-red-800 text-white rounded py-2 px-4 hover:bg-red-600 shadow"
+                            className="bg-danger text-white rounded py-2 px-4 hover:opacity-75 shadow"
                         >
                             Deactivate
                         </button>

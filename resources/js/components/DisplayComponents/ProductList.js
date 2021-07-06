@@ -39,7 +39,7 @@ const ProductsList = ({ products, onProductDeactivate }) => {
                                 <div className="table vertical-centered">
                                     <button
                                         onClick={() => (onProductDeactivate(product.id))}
-                                        className="bg-red-800 text-center text-white rounded py-2 px-4 hover:bg-red-600 shadow inline-flex items-center ml-2"
+                                        className="bg-danger text-center text-white rounded py-2 px-4 hover:opacity-75 shadow inline-flex items-center ml-2"
                                     >
                                         <p className="m-auto">Remove</p>
                                     </button>

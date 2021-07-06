@@ -15,7 +15,7 @@ const AreaManagerApplicationControls = ({
     return (
         <div className="application-admin-controls">
             <div className="my-4">
-                <button onClick={() => { setRejectControls(true) }} className="bg-red-800 hover:opacity-75 text-white font-bold py-2 px-4 rounded pointer">Reject</button>
+                <button onClick={() => { setRejectControls(true) }} className="bg-danger hover:opacity-75 text-white font-bold py-2 px-4 rounded pointer">Reject</button>
                 <button onClick={onAccept} className="bg-primary hover:opacity-75 text-white font-bold py-2 px-4 rounded pointer float-right">Accept</button>
             </div>
 

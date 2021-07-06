@@ -44,7 +44,7 @@ const Header = ({ userIsAuthenticated, isAdmin, checkUserIsAdmin, logout }) => {
         <nav className="flex items-center justify-between flex-wrap p-4 shadow-md">
             <div className="flex items-center flex-shrink-0  mr-6">
                 <Link to="/">
-                    <h1 className="text-grey-800 text-xl">Mentior Corp Finance Tool</h1>
+                    <h1 className="logo-text font-bold text-2xl">Mentior Corp Finance Tool</h1>
                 </Link>
             </div>
             <div className="block md:hidden">

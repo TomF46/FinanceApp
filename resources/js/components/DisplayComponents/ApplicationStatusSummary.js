@@ -13,7 +13,7 @@ const ApplicationStatusSummary = ({
     }
 
     return (
-        <div className="application-status summary mb-8">
+        <div className="application-status summary mb-4 border-t-2 border-primary">
             <div className="my-4">
                 <div className="my-2 card shadow-md rounded-md">
                     <div className="bg-primary rounded-t-md">

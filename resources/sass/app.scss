@@ -11,7 +11,7 @@
 @import "tailwindcss/utilities";
 
 body {
-    background-color: #f9f9f9;
+    background-color: #efefef;
 }
 
 .pointer {
@@ -38,6 +38,10 @@ nav {
     .centerFormCard {
         margin: 0 auto;
     }
+}
+
+.logo-text{
+    color: #0096b4;
 }
 
 .card,

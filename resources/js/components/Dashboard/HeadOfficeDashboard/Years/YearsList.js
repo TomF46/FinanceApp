@@ -27,8 +27,8 @@ const YearsList = () => {
                     <LoadingMessage message={'Loading reporting years'} />
                 ) : (
                     <>
-                        <div className="my-8">
-                            <div className="my-2 card shadow-md rounded-md">
+                        <div>
+                            <div className="card shadow-md rounded-md">
                                 <div className="bg-primary rounded-t-md">
                                     <p className="text-white font-bold text-lg px-2 py-1">Reporting years</p>
                                 </div>
