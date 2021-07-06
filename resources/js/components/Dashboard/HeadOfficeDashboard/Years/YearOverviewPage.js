@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
 import { getYearById } from "../../../../api/yearsApi";
-
+import MoneyFormat from "../../../DisplayComponents/MoneyFormat";
 
 const YearOverviewPage = ({ yearId }) => {
     const [year, setYear] = useState(null);
@@ -73,23 +73,23 @@ const YearOverviewPage = ({ yearId }) => {
                                 <tbody>
                                     <tr className="bg-gray-200">
                                         <td className="pl-2">Total Non-operating income</td>
-                                        <td>£{year.retailDataSummary.totalNOIncome}</td>
+                                        <td><MoneyFormat value={year.retailDataSummary.totalNOIncome} /></td>
                                     </tr>
                                     <tr>
                                         <td className="pl-2">Total sales income</td>
-                                        <td>£{year.retailDataSummary.totalSalesIncome}</td>
+                                        <td><MoneyFormat value={year.retailDataSummary.totalSalesIncome} /></td>
                                     </tr>
                                     <tr className="bg-gray-200">
                                         <td className="pl-2">Total Income</td>
-                                        <td>£{year.retailDataSummary.totalNOIncome + year.retailDataSummary.totalSalesIncome}</td>
+                                        <td><MoneyFormat value={year.retailDataSummary.totalNOIncome + year.retailDataSummary.totalSalesIncome} /></td>
                                     </tr>
                                     <tr>
                                         <td className="pl-2">Total Expenses</td>
-                                        <td>£{year.retailDataSummary.totalSalesIncome}</td>
+                                        <td><MoneyFormat value={year.retailDataSummary.totalExpenses} /></td>
                                     </tr>
                                     <tr className="bg-gray-200">
-                                        <td className="pl-2">Total profit/loss</td>
-                                        <td>£{getTotalProfitLoss()}</td>
+                                        <td className="pl-2 font-bold">Total profit/loss</td>
+                                        <td className="font-bold"><MoneyFormat value={getTotalProfitLoss()} /></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -105,19 +105,20 @@ const YearOverviewPage = ({ yearId }) => {
                                 <tbody>
                                     <tr className="bg-gray-200">
                                         <td className="pl-2">Total investment from Non-operating income data</td>
-                                        <td>£{year.investmentSummary.totalFromNOI}</td>
+                                        <td><MoneyFormat value={year.investmentSummary.totalFromNOI} /></td>
                                     </tr>
                                     <tr>
                                         <td className="pl-2">Total investment from sales data</td>
-                                        <td>£{year.investmentSummary.totalFromSales}</td>
+                                        <td><MoneyFormat value={year.investmentSummary.totalFromSales} /></td>
                                     </tr>
                                     <tr className="bg-gray-200">
                                         <td className="pl-2">Total investment from net profit data</td>
-                                        <td>£{year.investmentSummary.totalFromNetProfit}</td>
+                                        <td><MoneyFormat value={year.investmentSummary.totalFromNetProfit} /></td>
                                     </tr>
                                     <tr>
-                                        <td className="pl-2">Total investment</td>
-                                        <td>£{year.investmentSummary.total}</td>
+                                        <td className="pl-2 font-bold">Total investment</td>
+                                        <td className="font-bold"><MoneyFormat value={year.investmentSummary.total} /></td>
+
                                     </tr>
                                 </tbody>
                             </table>

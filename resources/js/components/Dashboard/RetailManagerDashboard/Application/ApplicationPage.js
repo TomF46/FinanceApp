@@ -132,21 +132,21 @@ const ApplicationPage = ({ applicationId }) => {
             expenses: expenses,
             sales: sales
         };
-        alert("good");
-        // submitApplication(payload).then(res => {
-        //     toast.success("Application submitted");
-        //     setApplicationRestarted(false);
-        //     getApplication();
-        // }).catch(err => {
-        //     setSaving(false);
-        //     console.log(err);
-        //     toast.error("Error submitting application", {
-        //         autoClose: false
-        //     });
-        //     let tempErrors = { ...errors };
-        //     tempErrors.onSave = err.message;
-        //     setErrors({ ...tempErrors });
-        // });
+
+        submitApplication(payload).then(res => {
+            toast.success("Application submitted");
+            setApplicationRestarted(false);
+            getApplication();
+        }).catch(err => {
+            setSaving(false);
+            console.log(err);
+            toast.error("Error submitting application", {
+                autoClose: false
+            });
+            let tempErrors = { ...errors };
+            tempErrors.onSave = err.message;
+            setErrors({ ...tempErrors });
+        });
     }
 
 

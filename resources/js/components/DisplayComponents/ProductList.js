@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import MoneyFormat from "./MoneyFormat";
 
 const ProductsList = ({ products, onProductDeactivate }) => {
     return (
@@ -19,11 +20,11 @@ const ProductsList = ({ products, onProductDeactivate }) => {
                             </div>
                             <div className="lg:block col-span-2">
                                 <p className="text-sm text-gray-600">Unit cost:</p>
-                                <p>£{product.cost}</p>
+                                <p><MoneyFormat value={product.cost} /></p>
                             </div>
                             <div className="lg:block col-span-2">
                                 <p className="text-sm text-gray-600">Sale price:</p>
-                                <p>£{product.price}</p>
+                                <p><MoneyFormat value={product.price} /></p>
                             </div>
                             <div className="lg:block col-span-2">
                                 <div className="table vertical-centered">

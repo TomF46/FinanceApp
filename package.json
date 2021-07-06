@@ -35,6 +35,7 @@
         "tailwindcss": "^1.8.10"
     },
     "dependencies": {
-        "history": "^4.10.1"
+        "history": "^4.10.1",
+        "react-number-format": "^4.6.4"
     }
 }

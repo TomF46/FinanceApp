@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import MoneyInput from "../../../../FormComponents/MoneyInput";
+import MoneyFormat from "../../../../DisplayComponents/MoneyFormat";
 
 const SalesSection = ({
     sales,
@@ -25,7 +26,7 @@ const SalesSection = ({
                                     </div>
                                     <div className="lg:block col-span-4 vertical-centered">
                                         <p className="text-sm text-gray-600">Profile per sale:</p>
-                                        <p>£{sale.price - sale.cost}</p>
+                                        <p><MoneyFormat value={sale.price - sale.cost} /></p>
                                     </div>
                                     <div className="lg:block col-span-4">
                                         <div>

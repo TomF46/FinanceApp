@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import MoneyFormat from "./MoneyFormat";
 
 
 const ApplicationReadOnly = ({
@@ -38,27 +39,27 @@ const ApplicationReadOnly = ({
                     <tbody>
                         <tr className="bg-gray-200">
                             <td className="pl-2">Dividends</td>
-                            <td>£{application.incomeRecord.dividends}</td>
+                            <td><MoneyFormat value={application.incomeRecord.dividends} /></td>
                         </tr>
                         <tr>
                             <td className="pl-2">Asset sales</td>
-                            <td>£{application.incomeRecord.assetSales}</td>
+                            <td><MoneyFormat value={application.incomeRecord.assetSales} /></td>
                         </tr>
                         <tr className="bg-gray-200">
                             <td className="pl-2">Maintenance grant</td>
-                            <td>£{application.incomeRecord.maintenanceGrant}</td>
+                            <td><MoneyFormat value={application.incomeRecord.maintenanceGrant} /></td>
                         </tr>
                         <tr className="border-b">
                             <td className="pl-2">Sponsorship</td>
-                            <td>£{application.incomeRecord.sponsorship}</td>
+                            <td><MoneyFormat value={application.incomeRecord.sponsorship} /></td>
                         </tr>
                         <tr className="bg-gray-200">
                             <td className="pl-2">Rewards</td>
-                            <td>£{application.incomeRecord.rewards}</td>
+                            <td><MoneyFormat value={application.incomeRecord.rewards} /></td>
                         </tr>
                         <tr className="border-b border-t">
                             <td className="font-bold pl-2">Total</td>
-                            <td className="font-bold">£{application.incomeRecord.totalIncome}</td>
+                            <td className="font-bold"><MoneyFormat value={application.incomeRecord.totalIncome} /></td>
                         </tr>
                     </tbody>
                 </table>
@@ -80,13 +81,13 @@ const ApplicationReadOnly = ({
                             return (
                                 <tr key={sale.id} className={index % 2 == 0 ? "bg-gray-200" : ""}>
                                     <td className="pl-2">{sale.productName} ({sale.quantity})</td>
-                                    <td>£{sale.income}</td>
+                                    <td><MoneyFormat value={sale.income} /></td>
                                 </tr>
                             )
                         })}
                         <tr className="border-b border-t">
                             <td className="font-bold pl-2">Total</td>
-                            <td className="font-bold">£{getTotalSalesIncome()} </td>
+                            <td className="font-bold"><MoneyFormat value={getTotalSalesIncome()} /></td>
                         </tr>
                     </tbody>
                 </table>
@@ -106,43 +107,43 @@ const ApplicationReadOnly = ({
                     <tbody>
                         <tr className="bg-gray-200">
                             <td className="pl-2">Rent</td>
-                            <td>£{application.expensesRecord.rent}</td>
+                            <td><MoneyFormat value={application.expensesRecord.rent} /></td>
                         </tr>
                         <tr>
                             <td className="pl-2">Payroll</td>
-                            <td>£{application.expensesRecord.payroll}</td>
+                            <td><MoneyFormat value={application.expensesRecord.payroll} /></td>
                         </tr>
                         <tr className="bg-gray-200">
                             <td className="pl-2">Utilities</td>
-                            <td>£{application.expensesRecord.utilities}</td>
+                            <td><MoneyFormat value={application.expensesRecord.utilities} /></td>
                         </tr>
                         <tr className="border-b">
                             <td className="pl-2">Equipment</td>
-                            <td>£{application.expensesRecord.equipment}</td>
+                            <td><MoneyFormat value={application.expensesRecord.equipment} /></td>
                         </tr>
                         <tr className="bg-gray-200">
                             <td className="pl-2">Travel</td>
-                            <td>£{application.expensesRecord.travel}</td>
+                            <td><MoneyFormat value={application.expensesRecord.travel} /></td>
                         </tr>
                         <tr className="border-b">
                             <td className="pl-2">Training</td>
-                            <td>£{application.expensesRecord.training}</td>
+                            <td><MoneyFormat value={application.expensesRecord.training} /></td>
                         </tr>
                         <tr className="bg-gray-200">
                             <td className="pl-2">Maintenance</td>
-                            <td>£{application.expensesRecord.maintenance}</td>
+                            <td><MoneyFormat value={application.expensesRecord.maintenance} /></td>
                         </tr>
                         <tr className="border-b">
                             <td className="pl-2">Employee bonus</td>
-                            <td>£{application.expensesRecord.employeeBonus}</td>
+                            <td><MoneyFormat value={application.expensesRecord.employeeBonus} /></td>
                         </tr>
                         <tr className="bg-gray-200">
                             <td className="pl-2">Employee expenses</td>
-                            <td>£{application.expensesRecord.employeeExpenses}</td>
+                            <td><MoneyFormat value={application.expensesRecord.employeeExpenses} /></td>
                         </tr>
                         <tr className="border-b border-t">
                             <td className="font-bold pl-2">Total</td>
-                            <td className="font-bold">£{application.incomeRecord.totalIncome}</td>
+                            <td className="font-bold"><MoneyFormat value={application.expensesRecord.totalExpenses} /></td>
                         </tr>
                     </tbody>
                 </table>
@@ -163,23 +164,23 @@ const ApplicationReadOnly = ({
                         <tbody>
                             <tr className="bg-gray-200">
                                 <td className="pl-2">Total Non-operating income</td>
-                                <td>£{application.incomeRecord.totalIncome}</td>
+                                <td><MoneyFormat value={application.incomeRecord.totalIncome} /></td>
                             </tr>
                             <tr>
                                 <td className="pl-2">Total sales income</td>
-                                <td>£{getTotalSalesIncome()}</td>
+                                <td><MoneyFormat value={getTotalSalesIncome()} /></td>
                             </tr>
                             <tr className="bg-gray-200">
                                 <td className="pl-2">Overall Total income</td>
-                                <td>£{getTotalIncome()}</td>
+                                <td><MoneyFormat value={getTotalIncome()} /></td>
                             </tr>
                             <tr>
                                 <td className="pl-2">Total Expenses</td>
-                                <td>£{application.expensesRecord.totalExpenses}</td>
+                                <td><MoneyFormat value={application.expensesRecord.totalExpenses} /></td>
                             </tr>
-                            <tr className="bg-gray-200">
-                                <td className="pl-2">Total profit/loss</td>
-                                <td>£{getTotalProfitLoss()}</td>
+                            <tr className="border-b border-t">
+                                <td className="pl-2 font-bold">Total profit/loss</td>
+                                <td className="font-bold"><MoneyFormat value={getTotalProfitLoss()} /></td>
                             </tr>
                         </tbody>
                     </table>
