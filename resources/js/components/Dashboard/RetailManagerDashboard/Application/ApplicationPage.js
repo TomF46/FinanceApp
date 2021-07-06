@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getApplicationById, submitApplication } from "../../../../api/applicationsApi";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
@@ -11,6 +10,7 @@ import { getAllProducts } from "../../../../api/productsApi";
 import ApplicationReadOnly from "../../../DisplayComponents/ApplicationReadOnly";
 import ApplicationStatusSummary from "../../../DisplayComponents/ApplicationStatusSummary";
 import InvestmentSummary from "../../../DisplayComponents/InvestmentSummary";
+import * as ApplicationService from "../../../../tools/ApplicationService";
 
 
 const ApplicationPage = ({ applicationId }) => {
@@ -62,18 +62,7 @@ const ApplicationPage = ({ applicationId }) => {
     }
 
     function mapSalesForForm() {
-        let productSales = [];
-        sales.forEach(sale => {
-            let product = {
-                id: sale.productId,
-                name: sale.productName,
-                cost: sale.productCost,
-                price: sale.productPrice,
-                quantity: sale.quantity
-            }
-            productSales.push(product);
-        });
-        setSales(productSales);
+        setSales(ApplicationService.mapSales(sales));
     }
 
     function getSalesProducts() {
@@ -95,7 +84,7 @@ const ApplicationPage = ({ applicationId }) => {
     function handleIncomeChange(event) {
         const { name, value } = event.target;
 
-        if (!isValidMoney(value)) return;
+        if (!ApplicationService.isValidMoney(value)) return;
 
         setIncome(prevIncome => ({
             ...prevIncome,
@@ -106,7 +95,7 @@ const ApplicationPage = ({ applicationId }) => {
     function handleExpensesChange(event) {
         const { name, value } = event.target;
 
-        if (!isValidMoney(value)) return;
+        if (!ApplicationService.isValidMoney(value)) return;
 
         setExpenses(prevExpenses => ({
             ...prevExpenses,
@@ -117,7 +106,7 @@ const ApplicationPage = ({ applicationId }) => {
     function handleSalesChange(event) {
         const { name, value } = event.target;
 
-        if (!isValidMoney(value)) return;
+        if (!ApplicationService.isValidMoney(value)) return;
 
         let copy = [...sales];
         copy[name].quantity = Math.trunc(value);
@@ -125,46 +114,12 @@ const ApplicationPage = ({ applicationId }) => {
     }
 
     function formIsValid() {
-        const incomeErrors = checkIncomeIsValid();
-        const expensesErrors = checkExpensesIsValid();
+        const incomeErrors = ApplicationService.checkIncomeIsValid(income);
+        setIncomeErrors(incomeErrors);
+        const expensesErrors = ApplicationService.checkExpensesIsValid(expenses);
+        setExpensesErrors(expensesErrors);
         let totalErrors = Object.keys(incomeErrors).length + Object.keys(expensesErrors).length + Object.keys(salesErrors).length;
         return totalErrors === 0;
-    }
-
-    function checkIncomeIsValid() {
-        const { dividends, assetSales, maintenanceGrant, sponsorship, rewards } = income;
-        const errors = {};
-        if (!dividends || dividends < 0) errors.dividends = "Dividends entry is invalid";
-        if (!assetSales || assetSales < 0) errors.assetSales = "Asset sales entry is invalid";
-        if (!maintenanceGrant || maintenanceGrant < 0) errors.maintenanceGrant = "Maintenance grant entry is invalid";
-        if (!sponsorship || sponsorship < 0) errors.sponsorship = "Sponsorship entry is invalid";
-        if (!rewards || rewards < 0) errors.rewards = "Rewards entry is invalid";
-        setIncomeErrors(errors);
-        return errors;
-    }
-
-    function checkExpensesIsValid() {
-        const { rent, payroll, utilities, equipment, travel, training, maintenance, employeeBonus, employeeExpenses } = expenses;
-        const errors = {};
-        if (!rent || rent < 0) errors.rent = "Rent entry is invalid";
-        if (!payroll || payroll < 0) errors.payroll = "Payroll entry is invalid";
-        if (!utilities || utilities < 0) errors.utilities = "Utilities entry is invalid";
-        if (!equipment || equipment < 0) errors.equipment = "Equipment entry is invalid";
-        if (!travel || travel < 0) errors.travel = "Travel entry is invalid";
-        if (!training || training < 0) errors.training = "Training entry is invalid";
-        if (!maintenance || maintenance < 0) errors.maintenance = "Maintenance entry is invalid";
-        if (!employeeBonus || employeeBonus < 0) errors.employeeBonus = "Employee bonus entry is invalid";
-        if (!employeeExpenses || employeeExpenses < 0) errors.employeeExpenses = "Employee expenses entry is invalid";
-        setExpensesErrors(errors);
-        return errors;
-    }
-
-    function isValidMoney(value) {
-        let $decimals = 0;
-        if ((value % 1) != 0)
-            $decimals = value.toString().split(".")[1].length;
-
-        return $decimals <= 2
     }
 
     function handleSave(event) {
@@ -177,21 +132,21 @@ const ApplicationPage = ({ applicationId }) => {
             expenses: expenses,
             sales: sales
         };
-
-        submitApplication(payload).then(res => {
-            toast.success("Application submitted");
-            setApplicationRestarted(false);
-            getApplication();
-        }).catch(err => {
-            setSaving(false);
-            console.log(err);
-            toast.error("Error submitting application", {
-                autoClose: false
-            });
-            let tempErrors = { ...errors };
-            tempErrors.onSave = err.message;
-            setErrors({ ...tempErrors });
-        });
+        alert("good");
+        // submitApplication(payload).then(res => {
+        //     toast.success("Application submitted");
+        //     setApplicationRestarted(false);
+        //     getApplication();
+        // }).catch(err => {
+        //     setSaving(false);
+        //     console.log(err);
+        //     toast.error("Error submitting application", {
+        //         autoClose: false
+        //     });
+        //     let tempErrors = { ...errors };
+        //     tempErrors.onSave = err.message;
+        //     setErrors({ ...tempErrors });
+        // });
     }
 
 
