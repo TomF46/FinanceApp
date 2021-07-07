@@ -1,0 +1,91 @@
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import { getRetailLocationsPaginated, getRetailLocationsWithPaginator, searchRetailLocations, searchRetailLocationsWithPage } from "../../../../../api/locationsApi"
+import { toast } from "react-toastify";
+import LoadingMessage from "../../../../DisplayComponents/LoadingMessage"
+import RetailLocationsListWithPagination from "../../../../DisplayComponents/RetailLocationsListWithPagination";
+import _, { debounce } from 'lodash';
+import RetailLocationSearchForm from "../../../../DisplayComponents/RetailLocationSearchForm";
+
+
+const RetailLocationsAdmin = () => {
+    const [retailLocationsPaginator, setRetailLocationsPaginator] = useState(null);
+    const [searchTerms, setSearchTerms] = useState({ name: "", location: "" });
+
+    useEffect(() => {
+        if (!retailLocationsPaginator) {
+            search();
+        }
+    }, [retailLocationsPaginator]);
+
+    useEffect(() => {
+        let debounced = debounce(
+            () => { search(); }, 50
+        );
+
+        debounced();
+    }, [searchTerms]);
+
+
+    function search() {
+        searchRetailLocations(searchTerms).then(retailLocationsData => {
+            setRetailLocationsPaginator(retailLocationsData);
+        }).catch(error => {
+            toast.error("Error getting retail locations " + error.message, {
+                autoClose: false,
+            });
+        });
+    }
+
+    function getRetailLocationsPage(url) {
+        searchRetailLocationsWithPage(url, searchTerms).then(retailLocationsData => {
+            setRetailLocationsPaginator(retailLocationsData);
+        }).catch(error => {
+            toast.error("Error getting retail locations " + error.message, {
+                autoClose: false,
+            });
+        });
+    }
+
+    function handleSearchTermsChange(event) {
+        const { name, value } = event.target;
+
+        setSearchTerms(prevSearchTerms => ({
+            ...prevSearchTerms,
+            [name]: value
+        }));
+    }
+
+    return (
+        <div className="retailLocations-list">
+            <div className="col-span-12">
+                {!retailLocationsPaginator ? (
+                    <LoadingMessage message={'Loading retail locations'} />
+                ) : (
+                    <>
+                        <RetailLocationSearchForm searchTerms={searchTerms} onSearchTermsChange={handleSearchTermsChange} />
+                        <div className="my-8">
+                            <div className="my-2 card shadow-md rounded-md">
+                                <div className="bg-primary rounded-t-md">
+                                    <p className="text-white font-bold text-lg px-2 py-1">Retail Locations</p>
+                                </div>
+                                <div>
+                                    {retailLocationsPaginator.total > 0 ? (
+                                        <RetailLocationsListWithPagination paginationData={retailLocationsPaginator} onPageChange={getRetailLocationsPage} isAdmin={true} />
+                                    ) : (
+                                        <p className="text-center">There are currently no retail locations added.</p>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    </>
+                )}
+            </div>
+        </div>
+    );
+};
+
+RetailLocationsAdmin.propTypes = {
+};
+
+export default RetailLocationsAdmin;

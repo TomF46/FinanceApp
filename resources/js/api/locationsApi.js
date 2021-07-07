@@ -183,3 +183,47 @@ export function editRetailLocation(locationId, location) {
             throw error;
         });
 }
+
+export function searchAreas(searchBody) {
+    return axiosClient
+        .post(`/api/areas/search`, searchBody)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+export function searchAreasWithPage(url, searchBody) {
+    return axiosClient
+        .post(url, searchBody)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+export function searchRetailLocations(searchBody) {
+    return axiosClient
+        .post(`/api/retailLocations/search`, searchBody)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+export function searchRetailLocationsWithPage(url, searchBody) {
+    return axiosClient
+        .post(url, searchBody)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}

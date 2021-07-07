@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Area;
 use App\Models\User;
 use App\Enums\Roles;
+use App\Filters\AreaSearch;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -27,6 +28,16 @@ class AreasController extends Controller
             });
         }
     return response()->json($areas);
+    }
+
+    public function filter(Request $request)
+    {
+        $paginator = AreaSearch::apply($request)->paginate(20);
+        $paginator->getCollection()->transform(function ($area){
+            return $area->map();
+        });
+
+        return response()->json($paginator);
     }
 
     public function show(Area $area)

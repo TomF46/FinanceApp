@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import AreaList from "./AreasManagement/AreaList";
-import RetailLocationList from "./RetailLocationManagement/RetailLocationList";
+import AreasAdmin from "./AreasManagement/AreasAdmin";
+import RetailLocationsAdmin from "./RetailLocationManagement/RetailLocationsAdmin";
 
 
 const LocationsManagementPage = () => {
@@ -18,10 +18,10 @@ const LocationsManagementPage = () => {
                 </div>
             </div>
             <div className="mb-4">
-                <AreaList />
+                <AreasAdmin />
             </div>
             <div className="mb-4">
-                <RetailLocationList />
+                <RetailLocationsAdmin />
             </div>
         </div>
     );

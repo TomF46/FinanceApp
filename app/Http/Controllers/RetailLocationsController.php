@@ -6,6 +6,7 @@ use App\Models\RetailLocation;
 use App\Models\Area;
 use App\Models\User;
 use App\Enums\Roles;
+use App\Filters\RetailLocationSearch;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -27,6 +28,16 @@ class RetailLocationsController extends Controller
             });
         }
         return response()->json($retailLocations);
+    }
+
+    public function filter(Request $request)
+    {
+        $paginator = RetailLocationSearch::apply($request)->paginate(20);
+        $paginator->getCollection()->transform(function ($retailLocation){
+            return $retailLocation->map();
+        });
+
+        return response()->json($paginator);
     }
 
     public function show(RetailLocation $retailLocation)
