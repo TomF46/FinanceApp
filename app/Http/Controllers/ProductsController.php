@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Filters\ProductSearch;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -15,6 +16,16 @@ class ProductsController extends Controller
             return $product->map();
         });
         return response()->json($products);
+    }
+
+    public function filter(Request $request)
+    {
+        $paginator = ProductSearch::apply($request)->paginate(20);
+        $paginator->getCollection()->transform(function ($product){
+            return $product->map();
+        });
+
+        return response()->json($paginator);
     }
 
     public function store(Request $request)

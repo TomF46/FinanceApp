@@ -87,6 +87,7 @@ Route::middleware(['auth:api', 'admin'])->group(function () {
     Route::get('/products/{product}', [App\Http\Controllers\ProductsController::class, 'show']);
     Route::put('/products/{product}', [App\Http\Controllers\ProductsController::class, 'update']);
     Route::post('/products/{product}/deactivate', [App\Http\Controllers\ProductsController::class, 'deactivate']);
+    Route::post('/products/search', [App\Http\Controllers\ProductsController::class, 'filter']);
 
 });
 

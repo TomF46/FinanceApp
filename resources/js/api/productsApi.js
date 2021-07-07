@@ -22,6 +22,39 @@ export function getAllProducts() {
         });
 }
 
+export function searchProducts(searchBody) {
+    return axiosClient
+        .post(`/api/products/search`, searchBody)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+export function searchProductsWithPage(url, searchBody) {
+    return axiosClient
+        .post(url, searchBody)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+export function getProductssWithPage(url) {
+    return axiosClient
+        .get(url)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
 export function getProductById(id) {
     return axiosClient
         .get(`/api/products/${id}`)

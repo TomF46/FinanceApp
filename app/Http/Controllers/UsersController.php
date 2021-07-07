@@ -14,7 +14,7 @@ class UsersController extends Controller
     public function index(Request $request)
     {
         $users = User::orderBy('role', 'asc')->where('active', true)->paginate(20);
-        $users->getCollection()->transform(function ($user) use ($request) {
+        $users->getCollection()->transform(function ($user){
             return $user->map();
         });
         return response()->json($users);
@@ -23,7 +23,7 @@ class UsersController extends Controller
     public function filter(Request $request)
     {
         $paginator = UserSearch::apply($request)->paginate(20);
-        $paginator->getCollection()->transform(function ($user) use ($request) {
+        $paginator->getCollection()->transform(function ($user){
             return $user->map();
         });
 
