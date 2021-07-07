@@ -5,7 +5,7 @@ import TextInput from "../FormComponents/TextInput";
 const AreaSearchForm = ({ searchTerms, onSearchTermsChange }) => {
 
     return (
-        <div className="my-8">
+        <div className="mt-8 mb-4">
             <div className="my-2 card shadow-md rounded-md">
                 <div className="bg-gray-500 rounded-t-md">
                     <p className="text-white font-bold text-lg px-2 py-1">Search</p>
