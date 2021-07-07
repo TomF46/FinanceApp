@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { deactivateAreaById, getAreaById, RemoveAreaManager } from "../../../../../api/locationsApi"
+import { deactivateAreaById, getAreaById, removeAreaManager } from "../../../../../api/areasApi"
 import { toast } from "react-toastify";
 import LoadingMessage from "../../../../DisplayComponents/LoadingMessage";
 import RetailLocationsList from "../../../../DisplayComponents/RetailLocationsList";
@@ -54,7 +54,7 @@ const AreaAdminPage = ({ areaId }) => {
     }
 
     function removeManager(id) {
-        RemoveAreaManager(area, id).then(response => {
+        removeAreaManager(area, id).then(response => {
             toast.success("Manager removed.")
             getArea();
         }).catch(error => {

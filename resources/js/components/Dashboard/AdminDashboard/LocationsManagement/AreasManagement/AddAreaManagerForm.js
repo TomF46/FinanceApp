@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { toast } from "react-toastify";
-import { AddAreaManager } from "../../../../../api/locationsApi"
+import { addAreaManager } from "../../../../../api/areasApi"
 import { getAreaManagers } from "../../../../../api/usersApi";
 import history from "../../../../../history";
 import SelectInput from "../../../../FormComponents/SelectInput";
@@ -44,7 +44,7 @@ const AddAreaManagerForm = ({ area, onManagerAdded }) => {
         event.preventDefault();
         if (!formIsValid()) return;
         setSaving(true);
-        AddAreaManager(area, manager)
+        addAreaManager(area, manager)
             .then(response => {
                 toast.success("Successfully added area manager");
                 onManagerAdded();

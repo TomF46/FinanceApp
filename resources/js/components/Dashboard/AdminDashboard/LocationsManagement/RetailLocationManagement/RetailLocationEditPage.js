@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import history from "../../../../../history";
 import RetailLocationManageForm from "./RetailLocationManageForm";
-import { editRetailLocation, getAreas, getRetailLocationById } from "../../../../../api/locationsApi"
+import { editRetailLocation, getRetailLocationById } from "../../../../../api/retailLocationsApi"
+import { getAreas } from "../../../../../api/areasApi";
 import LoadingMessage from "../../../../DisplayComponents/LoadingMessage";
 
 const RetailLocationEditPage = ({ retailLocationId }) => {

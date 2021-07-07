@@ -11,17 +11,6 @@ export function Login(userLoginDetails) {
         });
 }
 
-export function Register(userRegistrationDetails) {
-    return axiosClient
-        .post("/api/auth/register", userRegistrationDetails)
-        .then(response => {
-            return response;
-        })
-        .catch(error => {
-            throw error.response;
-        });
-}
-
 export function RegisterRetailer(userRegistrationDetails) {
     return axiosClient
         .post("/api/retailer/register", userRegistrationDetails)

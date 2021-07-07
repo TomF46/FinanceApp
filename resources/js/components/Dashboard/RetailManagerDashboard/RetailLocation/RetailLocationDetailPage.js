@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { getRetailLocationById } from "../../../../api/locationsApi"
+import { getRetailLocationById } from "../../../../api/retailLocationsApi"
 import { toast } from "react-toastify";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
 import ApplicationsList from "../../../DisplayComponents/ApplicationList";

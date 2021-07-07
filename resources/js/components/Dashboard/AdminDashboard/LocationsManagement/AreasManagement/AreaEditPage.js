@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import history from "../../../../../history";
 import AreaManageForm from "./AreaManageForm";
-import { editArea, getAreaById } from "../../../../../api/locationsApi"
+import { editArea, getAreaById } from "../../../../../api/areasApi"
 import LoadingMessage from "../../../../DisplayComponents/LoadingMessage";
 
 const AreaEditPage = ({ areaId }) => {

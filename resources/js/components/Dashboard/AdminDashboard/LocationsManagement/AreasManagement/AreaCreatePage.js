@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import history from "../../../../../history";
 import AreaManageForm from "./AreaManageForm";
-import { CreateArea } from "../../../../../api/locationsApi"
+import { createArea } from "../../../../../api/areasApi"
 
 const AreaCreatePage = () => {
 
@@ -34,7 +34,7 @@ const AreaCreatePage = () => {
         if (!formIsValid()) return;
         setSaving(true);
 
-        CreateArea(area).then(response => {
+        createArea(area).then(response => {
             toast.success("Area created");
             history.push(`/admin/locations`);
         })

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { toast } from "react-toastify";
-import { AddRetailManager } from "../../../../../api/locationsApi"
+import { addRetailManager } from "../../../../../api/retailLocationsApi"
 import { getRetailManagers } from "../../../../../api/usersApi";
-import history from "../../../../../history";
 import SelectInput from "../../../../FormComponents/SelectInput";
 
 const AddRetailManagerForm = ({ retailLocation, onManagerAdded }) => {
@@ -44,9 +43,10 @@ const AddRetailManagerForm = ({ retailLocation, onManagerAdded }) => {
         event.preventDefault();
         if (!formIsValid()) return;
         setSaving(true);
-        AddRetailManager(retailLocation, manager)
+        addRetailManager(retailLocation, manager)
             .then(response => {
                 toast.success("Successfully added retail manager");
+                setSaving(false);
                 onManagerAdded();
             })
             .catch(err => {

@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import history from "../../../../../history";
 import RetailLocationManageForm from "./RetailLocationManageForm";
-import { CreateRetailLocation, getAreas } from "../../../../../api/locationsApi"
+import { createRetailLocation } from "../../../../../api/retailLocationsApi"
+import { getAreas } from "../../../../../api/areasApi";
 
 const RetailLocationCreatePage = () => {
 
@@ -46,7 +47,7 @@ const RetailLocationCreatePage = () => {
         if (!formIsValid()) return;
         setSaving(true);
 
-        CreateRetailLocation(retailLocation).then(response => {
+        createRetailLocation(retailLocation).then(response => {
             toast.success("Retail location created");
             history.push(`/admin/locations`);
         })

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { searchAreas, searchAreasWithPage } from "../../../../../api/locationsApi"
+import { searchAreas, searchAreasWithPage } from "../../../../../api/areasApi"
 import { toast } from "react-toastify";
 import LoadingMessage from "../../../../DisplayComponents/LoadingMessage"
 import AreasListWithPagination from "../../../../DisplayComponents/AreasListWithPagination";

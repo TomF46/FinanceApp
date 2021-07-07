@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { deactivateRetailLocationById, getRetailLocationById, RemoveRetailManager } from "../../../../../api/locationsApi"
+import { deactivateRetailLocationById, getRetailLocationById, removeRetailManager } from "../../../../../api/retailLocationsApi"
 import { toast } from "react-toastify";
 import LoadingMessage from "../../../../DisplayComponents/LoadingMessage";
 import ManagersList from "../../../../DisplayComponents/ManagersList";
@@ -53,7 +53,7 @@ const RetailLocationAdminPage = ({ retailLocationId }) => {
     }
 
     function removeManager(id) {
-        RemoveRetailManager(retailLocation, id).then(response => {
+        removeRetailManager(retailLocation, id).then(response => {
             toast.success("Manager removed.")
             getRetailLocation();
         }).catch(error => {

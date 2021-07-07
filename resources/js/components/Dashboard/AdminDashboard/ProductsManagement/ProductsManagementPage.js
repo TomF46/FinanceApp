@@ -3,7 +3,6 @@ import { confirmAlert } from "react-confirm-alert";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { deactivateProductById, searchProducts, searchProductsWithPage } from "../../../../api/productsApi";
-import history from "../../../../history";
 import ProductsListWithPagination from "../../../DisplayComponents/ProductsListWithPagination";
 import _, { debounce } from 'lodash';
 import ProductsSearchForm from "../../../DisplayComponents/ProductsSearchForm";
