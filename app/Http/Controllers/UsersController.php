@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-// use App\Filters\UserSearch;
+use App\Filters\UserSearch;
 use App\Models\User;
 use App\Models\Role;
 use App\Enums\Roles;
@@ -20,15 +20,15 @@ class UsersController extends Controller
         return response()->json($users);
     }
 
-    // public function filter(Request $request)
-    // {
-    //     $paginator = UserSearch::apply($request)->paginate(20);
-    //     $paginator->getCollection()->transform(function ($user) use ($request) {
-    //         return $user->map($request->User());
-    //     });
+    public function filter(Request $request)
+    {
+        $paginator = UserSearch::apply($request)->paginate(20);
+        $paginator->getCollection()->transform(function ($user) use ($request) {
+            return $user->map();
+        });
 
-    //     return response()->json($paginator);
-    // }
+        return response()->json($paginator);
+    }
 
     public function show(Request $request, User $user)
     {

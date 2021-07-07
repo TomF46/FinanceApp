@@ -11,9 +11,31 @@ export function getUsers() {
         });
 }
 
+export function searchUsers(searchBody) {
+    return axiosClient
+        .post(`/api/users/search`, searchBody)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
 export function getUsersPage(url) {
     return axiosClient
         .get(url)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+export function searchUsersWithPage(url, searchBody) {
+    return axiosClient
+        .post(url, searchBody)
         .then(response => {
             return response.data;
         })

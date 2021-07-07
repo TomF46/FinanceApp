@@ -63,6 +63,7 @@ Route::middleware(['auth:api', 'admin'])->group(function () {
     Route::get('/users/{user}', [App\Http\Controllers\UsersController::class, 'show']);
     Route::put('/users/{user}', [App\Http\Controllers\UsersController::class, 'update']);
     Route::post('/users/{user}/deactivate', [App\Http\Controllers\UsersController::class, 'deactivate']);
+    Route::post('/users/search', [App\Http\Controllers\UsersController::class, 'filter']);
 
     Route::post('/areas', [App\Http\Controllers\AreasController::class, 'store']);
     Route::delete('/area/{area}', [App\Http\Controllers\AreasController::class, 'destroy']);

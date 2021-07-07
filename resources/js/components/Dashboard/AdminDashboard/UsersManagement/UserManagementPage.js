@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import UserList from "./UserList";
+import UsersPage from "./UsersPage";
 import { Link } from "react-router-dom";
 
 const UsersManagementPage = () => {
@@ -17,7 +17,7 @@ const UsersManagementPage = () => {
                 </div>
             </div>
             <div className="my-4">
-                <UserList />
+                <UsersPage />
             </div>
         </div>
     );
