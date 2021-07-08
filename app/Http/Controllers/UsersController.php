@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Filters\UserSearch;
 use App\Models\User;
-use App\Models\Role;
 use App\Enums\Roles;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;

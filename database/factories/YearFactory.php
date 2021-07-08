@@ -1,19 +1,18 @@
 <?php
 
 namespace Database\Factories;
-use App\Models\Area;
 
-
+use App\Models\Year;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class AreaFactory extends Factory
+class YearFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Area::class;
+    protected $model = Year::class;
 
     /**
      * Define the model's default state.
@@ -23,7 +22,7 @@ class AreaFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->unique()->state()
+            'year' => $this->faker->unique()->year()
         ];
     }
 }
