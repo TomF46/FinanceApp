@@ -44,4 +44,31 @@ class RetailManagerTest extends TestCase
 
         $response->assertStatus(201);
     }
+
+    public function testCanGetRetailManagers()
+    {
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . $this->token
+        ])->get('/api/retailManagers');
+
+        $response->assertOk();
+    }
+
+    public function testCanGetRetailManager()
+    {
+        $manager = User::factory()->create([
+            'role' => Roles::RetailManager
+        ]);
+
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . $this->token
+        ])->get('/api/retailManagers/' . $manager->id);
+
+        $response->assertOk();
+        $response->assertJson([
+            'id' => $manager->id
+        ]);
+    }
 }

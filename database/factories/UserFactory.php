@@ -30,7 +30,8 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => bcrypt(env('ADMIN_PASSWORD')),
             'remember_token' => Str::random(10),
-            'role' => $this->faker->randomElement([Roles::Administrator, Roles::HeadOffice, Roles::AreaManager, Roles::RetailManager])
+            'role' => $this->faker->randomElement([Roles::Administrator, Roles::HeadOffice, Roles::AreaManager, Roles::RetailManager]),
+            'active' => true
         ];
     }
 

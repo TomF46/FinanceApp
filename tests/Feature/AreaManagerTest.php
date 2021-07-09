@@ -42,6 +42,33 @@ class AreaManagerTest extends TestCase
             ]
         );
 
-        $response->assertStatus(201);
+        $response->assertCreated();
+    }
+
+    public function testCanGetAreaManagers()
+    {
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . $this->token
+        ])->get('/api/areaManagers');
+
+        $response->assertOk();
+    }
+
+    public function testCanGetAreaManager()
+    {
+        $manager = User::factory()->create([
+            'role' => Roles::AreaManager
+        ]);
+
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . $this->token
+        ])->get('/api/areaManagers/' . $manager->id);
+
+        $response->assertOk();
+        $response->assertJson([
+            'id' => $manager->id
+        ]);
     }
 }
