@@ -25,7 +25,8 @@ class ProductFactory extends Factory
             'name' => $this->faker->word(),
             'productCode' => $this->faker->unique()->isbn10(),
             'cost' => $this->faker->numberBetween(1,100),
-            'price' => $this->faker->numberBetween(101,1000)
+            'price' => $this->faker->numberBetween(101,1000),
+            'active' => true
         ];
     }
 }
