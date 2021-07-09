@@ -19,9 +19,9 @@ class ProductsTest extends TestCase
     {
         parent::setUp();
         Artisan::call('passport:install');
-        $this->user = User::factory()->create();
-        $this->user->role = Roles::Administrator;
-        $this->user->save();
+        $this->user = User::factory()->create([
+            'role' => Roles::Administrator
+        ]);
         $pat = $this->user->createToken('Personal Access Token');
         $this->token = $pat->accessToken;
     }
@@ -36,6 +36,7 @@ class ProductsTest extends TestCase
             [
                 'name' => 'Phone',
                 'productCode' => 'XLM203',
+                'cost' => 299.99,
                 'price' => 499.99
             ]
         );
