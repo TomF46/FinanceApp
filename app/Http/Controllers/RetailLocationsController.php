@@ -23,7 +23,7 @@ class RetailLocationsController extends Controller
                 return $retailLocation->map();
             });
         } else {
-            $retailLocations = RetailLocation::where('active', true)->map(function ($retailLocation) {
+            $retailLocations = RetailLocation::where('active', true)->get()->map(function ($retailLocation) {
                 return $retailLocation->map();
             });
         }

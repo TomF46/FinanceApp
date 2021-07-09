@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 use App\Enums\Roles;
 use App\Models\User;
+use App\Models\Area;
 
 class AreasTest extends TestCase
 {
@@ -37,7 +38,91 @@ class AreasTest extends TestCase
                 'name' => 'countyshire'
             ]
         );
+        $response->assertCreated();
+    }
 
-        $response->assertStatus(201);
+    public function testCanGetAreas()
+    {
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . $this->token
+        ])->get('/api/areas');
+
+        $response->assertOk();
+    }
+
+    public function testCanGetArea()
+    {
+        $area = Area::factory()->create();
+
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . $this->token
+        ])->get('/api/areas/' . $area->id);
+
+        $response->assertOk();
+        $response->assertJson([
+            'id' => $area->id
+        ]);
+    }
+
+    public function testCanFilterAreas()
+    {
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . $this->token
+        ])->postJson(
+            '/api/areas/search',
+            [
+                'name' => 'Countyshire',
+            ]
+        );
+
+        $response->assertOk();
+    }
+
+    public function testCanUpdateArea()
+    {
+        $area = Area::factory()->create();
+
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . $this->token
+        ])->putJson(
+            '/api/areas/' . $area->id,
+            [
+                'name' => 'Countryshire',
+            ]
+        );
+        $response->assertOk();
+        $response->assertJson([
+            'name' => 'Countryshire',
+        ]);
+    }
+
+    public function testCanDeactivateArea()
+    {
+        $area = Area::factory()->create();
+
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . $this->token
+        ])->post('/api/areas/' . $area->id . '/deactivate');
+
+        $response->assertNoContent();
+    }
+
+    public function testCantAddInvalidArea()
+    {
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . $this->token
+        ])->postJson(
+            '/api/areas',
+            [
+                'name' => null
+            ]
+        );
+        $response->assertStatus(422);
     }
 }
