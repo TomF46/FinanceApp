@@ -125,4 +125,53 @@ class AreasTest extends TestCase
         );
         $response->assertStatus(422);
     }
+
+    public function testCanAddManagerForArea()
+    {
+        $area = Area::factory()->create();
+        $areaManager = User::factory()->create([
+            'role' => Roles::AreaManager
+        ]);
+
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . $this->token
+        ])->postJson('/api/areas/' . $area->id . '/managers', 
+        [
+            'user_id' => $areaManager->id
+        ]);
+
+        $response->assertOk();
+        $area = $area->fresh();
+        $this->assertEquals(1, Count($area->managers));
+    }
+
+    public function testCanRemoveManagerForArea()
+    {
+        $area = Area::factory()->create();
+        $areaManager = User::factory()->create([
+            'role' => Roles::AreaManager
+        ]);
+
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . $this->token
+        ])->postJson('/api/areas/' . $area->id . '/managers', 
+        [
+            'user_id' => $areaManager->id
+        ]);
+
+        $response->assertOk();
+        $area = $area->fresh();
+        $this->assertEquals(1, Count($area->managers));
+
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . $this->token
+        ])->post('/api/areas/' . $area->id . '/managers/' . $areaManager->id . '/remove');
+
+        $response->assertOk();
+        $area = $area->fresh();
+        $this->assertEquals(0, Count($area->managers));
+    }
 }
