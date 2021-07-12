@@ -19,8 +19,8 @@ class ApplicationsController extends Controller
         $user = $request->user();
 
         if(!$application->isManagedBy($user)) return response()->json([
-            'message' => 'Unauthorized'
-        ], 401);
+            'message' => 'User is forbidden from performing this action'
+        ], 403);
 
         $attributes = $this->validateApplication($request);
 
@@ -36,8 +36,8 @@ class ApplicationsController extends Controller
         $user = $request->user();
 
         if(!$application->isAreaManagedBy($user)) return response()->json([
-            'message' => 'Unauthorized'
-        ], 401);
+            'message' => 'User is forbidden from performing this action'
+        ], 403);
 
         $application->accept();
         
@@ -51,8 +51,8 @@ class ApplicationsController extends Controller
         $user = $request->user();
 
         if(!$application->isAreaManagedBy($user)) return response()->json([
-            'message' => 'Unauthorized'
-        ], 401);
+            'message' => 'User is forbidden from performing this action'
+        ], 403);
 
         $attributes = $this->validateRejectionMessage($request);
 
