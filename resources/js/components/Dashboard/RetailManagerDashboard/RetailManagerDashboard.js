@@ -52,10 +52,14 @@ const RetailManagerDashboard = ({ user }) => {
                             <div>
                                 <div className="card shadow-md rounded-md">
                                     <div className="bg-primary rounded-t-md">
-                                        <p className="text-white font-bold text-lg px-2 py-1">My Open Applications</p>
+                                        <p className="text-white font-bold text-lg px-2 py-1">My Applications</p>
                                     </div>
                                     <div>
-                                        <ApplicationsList applications={retailManager.applications} />
+                                        {retailManager.applications.length > 0 ? (
+                                            <ApplicationsList applications={retailManager.applications} />
+                                        ) : (
+                                            <p className="text-center p-4">You do not currently have any applications.</p>
+                                        )}
                                     </div>
                                 </div>
                             </div>

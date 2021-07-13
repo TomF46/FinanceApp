@@ -71,7 +71,7 @@ const AreasAdmin = () => {
                                     {areasPaginator.total > 0 ? (
                                         <AreasListWithPagination paginationData={areasPaginator} isAdmin={true} onPageChange={getAreasPage} />
                                     ) : (
-                                        <p className="text-center">There are currently no areas added.</p>
+                                        <p className="text-center p-4">There are currently no areas added.</p>
                                     )}
                                 </div>
                             </div>

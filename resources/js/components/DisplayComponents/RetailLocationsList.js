@@ -29,7 +29,7 @@ const RetailLocationsList = ({ retailLocations, isAdmin }) => {
                     )
                 })
             ) : (
-                <p className="p-1 text-center">No retail locations have been added</p>
+                <p className="p-4 text-center">No retail locations have been added</p>
             )}
         </div>
     );

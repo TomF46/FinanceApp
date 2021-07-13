@@ -41,7 +41,11 @@ const RetailLocationDetailPage = ({ retailLocationId }) => {
                                 <p className="text-white font-bold text-lg px-2 py-1">{retailLocation.name} Applications</p>
                             </div>
                             <div>
-                                <ApplicationsList applications={retailLocation.applications} />
+                                {retailLocation.applications.length > 0 ? (
+                                    <ApplicationsList applications={retailLocation.applications} />
+                                ) : (
+                                    <p className="text-center p-4">This location doesn't currently have any applications.</p>
+                                )}
                             </div>
                         </div>
                     </div>

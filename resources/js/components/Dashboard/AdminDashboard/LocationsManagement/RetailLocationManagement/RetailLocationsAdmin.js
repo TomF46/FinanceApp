@@ -73,7 +73,7 @@ const RetailLocationsAdmin = () => {
                                     {retailLocationsPaginator.total > 0 ? (
                                         <RetailLocationsListWithPagination paginationData={retailLocationsPaginator} onPageChange={getRetailLocationsPage} isAdmin={true} />
                                     ) : (
-                                        <p className="text-center">There are currently no retail locations added.</p>
+                                        <p className="text-center p-4">There are currently no retail locations added.</p>
                                     )}
                                 </div>
                             </div>

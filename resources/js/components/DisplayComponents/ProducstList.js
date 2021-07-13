@@ -50,7 +50,7 @@ const ProductsList = ({ products, onProductDeactivate }) => {
                     )
                 })
             ) : (
-                <p className="p-1 text-center">No products have been added</p>
+                <p className="p-4 text-center">No products have been added</p>
             )}
         </div >
     );

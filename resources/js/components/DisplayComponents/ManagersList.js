@@ -35,7 +35,7 @@ const ManagersList = ({ managers, onManagerRemove }) => {
                     )
                 })
             ) : (
-                <p className="p-1 text-center">No managers have been added</p>
+                <p className="p-4 text-center">No managers have been added</p>
             )}
         </div>
     );

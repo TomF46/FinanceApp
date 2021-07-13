@@ -67,7 +67,7 @@ const YearsList = () => {
                                             })}
                                         </div>
                                     ) : (
-                                        <p className="text-center">There are currently no years added.</p>
+                                        <p className="text-center p-4">There are currently no years added.</p>
                                     )}
                                 </div>
                             </div>

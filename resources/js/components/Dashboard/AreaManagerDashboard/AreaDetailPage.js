@@ -53,7 +53,11 @@ const AreaDetailPage = ({ areaId }) => {
                                 <p className="text-white font-bold text-lg px-2 py-1">{area.name} Applications</p>
                             </div>
                             <div>
-                                <ApplicationsList applications={area.applications} />
+                                {area.applications.length > 0 ? (
+                                    <ApplicationsList applications={area.applications} />
+                                ) : (
+                                    <p className="text-center p-4">You do not currently have any applications.</p>
+                                )}
                             </div>
                         </div>
                     </div>

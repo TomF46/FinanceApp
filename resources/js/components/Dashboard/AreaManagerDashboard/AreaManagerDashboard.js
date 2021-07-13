@@ -44,7 +44,11 @@ const AreaManagerDashboard = ({ user }) => {
                                         <p className="text-white font-bold text-lg px-2 py-1">My Areas Managed</p>
                                     </div>
                                     <div>
-                                        <AreasList areas={areaManager.areasManaged} isAdmin={false} />
+                                        {areaManager.areasManaged.length > 0 ? (
+                                            <RetailLocationsList retailLocations={area.locations} isAdmin={false} />
+                                        ) : (
+                                            <p className="text-center p-4">You do not currently manage any areas.</p>
+                                        )}
                                     </div>
                                 </div>
                             </div>
@@ -52,10 +56,14 @@ const AreaManagerDashboard = ({ user }) => {
                             <div>
                                 <div className="card shadow-md rounded-md">
                                     <div className="bg-primary rounded-t-md">
-                                        <p className="text-white font-bold text-lg px-2 py-1">My Open Applications</p>
+                                        <p className="text-white font-bold text-lg px-2 py-1">My Applications</p>
                                     </div>
                                     <div>
-                                        <AreaApplicationsList applications={areaManager.applications} />
+                                        {areaManager.applications.length > 0 ? (
+                                            <AreaApplicationsList applications={areaManager.applications} />
+                                        ) : (
+                                            <p className="text-center p-4">You do not currently have any applications.</p>
+                                        )}
                                     </div>
                                 </div>
                             </div>
