@@ -16,9 +16,9 @@ class CreateInvestmentsTable extends Migration
         Schema::create('investments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('application_id')->constrained()->onDelete('cascade');
-            $table->decimal('fromNOI', $precision = 8, $scale = 2);
-            $table->decimal('fromSales', $precision = 8, $scale = 2);
-            $table->decimal('fromNetProfit', $precision = 8, $scale = 2);
+            $table->decimal('fromNOI', $precision = 19, $scale = 4);
+            $table->decimal('fromSales', $precision = 19, $scale = 4);
+            $table->decimal('fromNetProfit', $precision = 19, $scale = 4);
             $table->timestamps();
         });
     }

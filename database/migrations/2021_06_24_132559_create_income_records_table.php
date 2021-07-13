@@ -16,11 +16,11 @@ class CreateIncomeRecordsTable extends Migration
         Schema::create('income_records', function (Blueprint $table) {
             $table->id();
             $table->foreignId('application_revision_id')->constrained()->onDelete('cascade');
-            $table->decimal('dividends', $precision = 8, $scale = 2);
-            $table->decimal('assetSales', $precision = 8, $scale = 2);
-            $table->decimal('maintenanceGrant', $precision = 8, $scale = 2);
-            $table->decimal('sponsorship', $precision = 8, $scale = 2);
-            $table->decimal('rewards', $precision = 8, $scale = 2);
+            $table->decimal('dividends', $precision = 19, $scale = 4);
+            $table->decimal('assetSales', $precision = 19, $scale = 4);
+            $table->decimal('maintenanceGrant', $precision = 19, $scale = 4);
+            $table->decimal('sponsorship', $precision = 19, $scale = 4);
+            $table->decimal('rewards', $precision = 19, $scale = 4);
         });
     }
 
