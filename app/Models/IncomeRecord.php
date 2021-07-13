@@ -26,7 +26,7 @@ class IncomeRecord extends Model
 
     public function getTotalIncome()
     {
-        return $this->dividens + $this->assetSales + $this->maintenanceGrant + $this->sponsorship + $this->rewards;
+        return $this->dividends + $this->assetSales + $this->maintenanceGrant + $this->sponsorship + $this->rewards;
     }
 
     public function map()

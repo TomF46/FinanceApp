@@ -3,11 +3,12 @@
 namespace Tests\Unit;
 
 use App\Models\Product;
+use App\Models\Sale;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 
-class ProducTest extends TestCase
+class ProductTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -29,5 +30,15 @@ class ProducTest extends TestCase
         ]);
 
         $this->assertEquals(200, $product->getTotalProfit());
+    }
+
+    public function testCanGetSalesDataForProduct(){
+        $product = Product::factory()->create();
+
+        Sale::factory()->create(['product_id' => $product->id]);
+        Sale::factory()->create(['product_id' => $product->id]);
+
+        $this->assertEquals(2, Count($product->sales));
+        
     }
 }
