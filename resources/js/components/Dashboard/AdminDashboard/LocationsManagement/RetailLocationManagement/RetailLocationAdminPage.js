@@ -102,18 +102,6 @@ const RetailLocationAdminPage = ({ retailLocationId }) => {
                     <h1 className="text-center font-bold text-4xl">
                         {retailLocation.name}
                     </h1>
-                    <button
-                        onClick={() => (handleDeactivate())}
-                        className="bg-danger text-white rounded py-2 px-4 hover:opacity-75 shadow"
-                    >
-                        Deactivate
-                    </button>
-                    <Link
-                        to={`/admin/locations/retail/${retailLocation.id}/edit`}
-                        className="bg-primary text-white rounded py-2 px-4 hover:opacity-75 shadow ml-2"
-                    >
-                        Edit
-                    </Link>
                     <div className="my-8">
                         <div className="my-2 card shadow-md rounded-md">
                             <div className="bg-primary rounded-t-md">
@@ -132,6 +120,25 @@ const RetailLocationAdminPage = ({ retailLocationId }) => {
                             <div className="p-2">
                                 <AddRetailManagerForm retailLocation={retailLocation} onManagerAdded={handleManagerAdded} />
                             </div>
+                        </div>
+                    </div>
+                    <div className="my-4 card shadow-md rounded-md">
+                        <div className="bg-secondary rounded-t-md">
+                            <p className="text-white font-bold text-lg px-2 py-1">Actions</p>
+                        </div>
+                        <div className="px-2 py-2 flex justify-between">
+                            <Link
+                                to={`/admin/locations/retail/${retailLocation.id}/edit`}
+                                className="bg-secondary text-white rounded py-2 px-4 hover:opacity-75 shadow"
+                            >
+                                Edit Location
+                            </Link>
+                            <button
+                                onClick={() => (handleDeactivate())}
+                                className="bg-danger text-white rounded py-2 px-4 hover:opacity-75 shadow"
+                            >
+                                Deactivate
+                            </button>
                         </div>
                     </div>
                 </>

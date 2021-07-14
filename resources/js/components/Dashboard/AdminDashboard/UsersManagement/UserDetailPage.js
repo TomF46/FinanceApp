@@ -68,15 +68,6 @@ const UserDetailPage = ({ userId }) => {
                         {user.fullName}
                     </h1>
 
-                    {user.role != "0" && (
-                        <button
-                            onClick={() => (handleDeactivate())}
-                            className="bg-danger text-white rounded py-2 px-4 hover:opacity-75 shadow"
-                        >
-                            Deactivate
-                        </button>
-                    )}
-
                     <div className="my-4">
                         <UserEditForm user={user} onUserUpdated={getUser} />
                     </div>
@@ -84,6 +75,22 @@ const UserDetailPage = ({ userId }) => {
                     <div className="my-4">
                         <UserPasswordChangeForm user={user} onUserUpdated={getUser} />
                     </div>
+
+                    {user.role != "0" && (
+                        <div className="my-4 card shadow-md rounded-md">
+                            <div className="bg-secondary rounded-t-md">
+                                <p className="text-white font-bold text-lg px-2 py-1">Actions</p>
+                            </div>
+                            <div className="px-2 py-2 flex justify-end">
+                                <button
+                                    onClick={() => (handleDeactivate())}
+                                    className="bg-danger text-white rounded py-2 px-4 hover:opacity-75 shadow"
+                                >
+                                    Deactivate
+                                </button>
+                            </div>
+                        </div>
+                    )}
                 </>
             )}
         </>

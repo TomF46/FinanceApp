@@ -40,26 +40,31 @@ const YearOverviewPage = ({ yearId }) => {
                     </h1>
 
                     <div className="my-4">
-                        <div className="grid grid-cols-10 px-2 py-1 card shadow-md rounded-md border-b border-gray-200 overflow-hidden text-center">
-                            <div className="lg:block col-span-2">
-                                <p className="text-sm text-gray-600">Total Applications:</p>
-                                <p>{year.totalApplications}</p>
+                        <div className="my-2 card shadow-md rounded-md">
+                            <div className="bg-primary rounded-t-md">
+                                <p className="text-white font-bold text-lg px-2 py-1">Applications status summary</p>
                             </div>
-                            <div className="lg:block col-span-2">
-                                <p className="text-sm text-gray-600">Not Started:</p>
-                                <p>{year.applicationStatusSummary.totalNotStarted}</p>
-                            </div>
-                            <div className="lg:block col-span-2">
-                                <p className="text-sm text-gray-600">Awaiting sign off:</p>
-                                <p>{year.applicationStatusSummary.totalAwaitingSignOff}</p>
-                            </div>
-                            <div className="lg:block col-span-2">
-                                <p className="text-sm text-gray-600">Returned:</p>
-                                <p>{year.applicationStatusSummary.totalReturned}</p>
-                            </div>
-                            <div className="lg:block col-span-2">
-                                <p className="text-sm text-gray-600">Accepted:</p>
-                                <p>{year.applicationStatusSummary.totalAccepted}</p>
+                            <div className="grid grid-cols-10 px-2 py-1 card shadow-md rounded-md border-b border-gray-200 overflow-hidden text-center">
+                                <div className="lg:block col-span-2">
+                                    <p className="text-sm text-gray-600">Total Applications:</p>
+                                    <p>{year.totalApplications}</p>
+                                </div>
+                                <div className="lg:block col-span-2">
+                                    <p className="text-sm text-gray-600">Not Started:</p>
+                                    <p>{year.applicationStatusSummary.totalNotStarted}</p>
+                                </div>
+                                <div className="lg:block col-span-2">
+                                    <p className="text-sm text-gray-600">Awaiting sign off:</p>
+                                    <p>{year.applicationStatusSummary.totalAwaitingSignOff}</p>
+                                </div>
+                                <div className="lg:block col-span-2">
+                                    <p className="text-sm text-gray-600">Returned:</p>
+                                    <p>{year.applicationStatusSummary.totalReturned}</p>
+                                </div>
+                                <div className="lg:block col-span-2">
+                                    <p className="text-sm text-gray-600">Accepted:</p>
+                                    <p>{year.applicationStatusSummary.totalAccepted}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
