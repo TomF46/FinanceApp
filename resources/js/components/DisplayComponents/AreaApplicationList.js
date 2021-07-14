@@ -8,19 +8,19 @@ const AreaApplicationsList = ({ applications }) => {
             {applications.map((application) => {
                 return (
                     <div key={application.id} className="grid grid-cols-12 px-2 py-1 border-b border-gray-200 overflow-hidden">
-                        <div className="col-span-6 lg:col-span-4">
+                        <div className="col-span-3">
                             <p className="text-sm text-gray-600">Year:</p>
                             <Link to={`/areas/${application.areaId}/retail/${application.retailLocationId}/applications/${application.id}`} className="font-medium text-lg items-center pointer">{application.year.year}</Link>
                         </div>
-                        <div className="lg:block col-span-4">
+                        <div className="col-span-3">
                             <p className="text-sm text-gray-600">Location:</p>
                             <p>{application.retailLocationName}</p>
                         </div>
-                        <div className="lg:block col-span-2">
+                        <div className="col-span-3">
                             <p className="text-sm text-gray-600">Area:</p>
                             <p>{application.areaName}</p>
                         </div>
-                        <div className="lg:block col-span-2">
+                        <div className="col-span-3">
                             <p className="text-sm text-gray-600">Status:</p>
                             <p>{application.statusText}</p>
                         </div>

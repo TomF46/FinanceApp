@@ -35,8 +35,8 @@ import ChangePasswordPage from "./Authentication/ChangePassword/ChangePasswordPa
 const Main = ({ location }) => (
     <>
         <Header />
-        <div className="relative mt-4">
-            <div className="container mx-auto">
+        <div className="relative mt-4 ">
+            <div className="container mx-auto p-4 lg:p-0">
                 <Switch location={location}>
                     <AuthenticatedRoute
                         exact
