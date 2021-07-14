@@ -45,7 +45,7 @@ const AreaManagerDashboard = ({ user }) => {
                                     </div>
                                     <div>
                                         {areaManager.areasManaged.length > 0 ? (
-                                            <RetailLocationsList retailLocations={area.locations} isAdmin={false} />
+                                            <AreasList areas={areaManager.areasManaged} isAdmin={false} />
                                         ) : (
                                             <p className="text-center p-4">You do not currently manage any areas.</p>
                                         )}

@@ -49,11 +49,29 @@ class UsersController extends Controller
         return response()->noContent();
     }
 
+    public function changePassword(Request $request, User $user)
+    {
+        $attributes = $this->validatePasswordChange($request);
+        
+        $user->password = bcrypt($attributes['password']);
+        $user->save();
+        return response()->json([
+            'message' => 'Password changed'
+        ], 200);
+    }
+
     protected function validateUpdate(Request $request)
     {
         return $request->validate([
             'firstName' => 'required|string|max:255',
             'lastName' => 'required|string|max:255'
+        ]);
+    }
+
+    protected function validatePasswordChange(Request $request)
+    {
+        return $request->validate([
+            'password' => 'required|string|confirmed'
         ]);
     }
 

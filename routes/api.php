@@ -63,6 +63,7 @@ Route::middleware(['auth:api', 'admin'])->group(function () {
     Route::get('/users', [App\Http\Controllers\UsersController::class, 'index']);
     Route::get('/users/{user}', [App\Http\Controllers\UsersController::class, 'show']);
     Route::put('/users/{user}', [App\Http\Controllers\UsersController::class, 'update']);
+    Route::post('/users/{user}/changePassword', [App\Http\Controllers\UsersController::class, 'changePassword']);
     Route::post('/users/{user}/deactivate', [App\Http\Controllers\UsersController::class, 'deactivate']);
     Route::post('/users/search', [App\Http\Controllers\UsersController::class, 'filter']);
 

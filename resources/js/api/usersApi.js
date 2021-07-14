@@ -151,3 +151,14 @@ export function editUser(userId, user) {
         });
 }
 
+export function changeUserPassword(id, passwordData) {
+    return axiosClient
+        .post(`/api/users/${id}/changePassword`, passwordData)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+

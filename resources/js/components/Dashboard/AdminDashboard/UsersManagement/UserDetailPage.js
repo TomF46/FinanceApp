@@ -8,6 +8,7 @@ import { deactivateUserById, getUserById } from "../../../../api/usersApi";
 import { confirmAlert } from "react-confirm-alert";
 import history from "../../../../history";
 import UserEditForm from "./UserEditForm";
+import UserPasswordChangeForm from "./UserPasswordChangeForm";
 
 const UserDetailPage = ({ userId }) => {
     const [user, setUser] = useState(null);
@@ -78,6 +79,10 @@ const UserDetailPage = ({ userId }) => {
 
                     <div className="my-4">
                         <UserEditForm user={user} onUserUpdated={getUser} />
+                    </div>
+
+                    <div className="my-4">
+                        <UserPasswordChangeForm user={user} onUserUpdated={getUser} />
                     </div>
                 </>
             )}

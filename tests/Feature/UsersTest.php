@@ -75,7 +75,7 @@ class UsersTest extends TestCase
         ]);
     }
 
-    public function testCanDeactivateArea()
+    public function testCanDeactivateUser()
     {
         $user = User::factory()->create();
 
@@ -85,5 +85,44 @@ class UsersTest extends TestCase
         ])->post('/api/users/' . $user->id . '/deactivate');
 
         $response->assertNoContent();
+    }
+
+    public function testAdminCanChangeAnotherUsersPassword()
+    {
+        $user = User::factory()->create();
+
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . $this->token
+        ])->postJSON('/api/users/' . $user->id . '/changePassword', [
+            'password' => 'xjyM237',
+            'password_confirmation' => 'xjyM237'
+        ]);
+
+        $response->assertOk();
+    }
+
+    public function testNonAdminCantChangeAnotherUsersPassword()
+    {
+        $user = User::factory()->create();
+        $user2 = User::factory()->create([
+            'role' => Roles::RetailManager
+        ]);
+
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . $this->getBearerTokenForUser($user2)
+        ])->postJSON('/api/users/' . $user->id . '/changePassword', [
+            'password' => 'xjyM237',
+            'password_confirmation' => 'xjyM237'
+        ]);
+
+        $response->assertUnauthorized();
+    }
+
+    protected function getBearerTokenForUser($user)
+    {
+        $pat = $user->createToken('Personal Access Token');
+        return $pat->accessToken;
     }
 }
