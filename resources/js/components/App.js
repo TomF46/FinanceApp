@@ -30,6 +30,7 @@ import RetailLocationEditPage from "./Dashboard/AdminDashboard/LocationsManageme
 import ProductEditPage from "./Dashboard/AdminDashboard/ProductsManagement/ProductEditPage";
 import AreaManagerApplicationViewPage from "./Dashboard/AreaManagerDashboard/Application/AreaManagerApplicationViewPage";
 import YearOverviewPage from "./Dashboard/HeadOfficeDashboard/Years/YearOverviewPage";
+import ChangePasswordPage from "./Authentication/ChangePassword/ChangePasswordPage";
 
 const Main = ({ location }) => (
     <>
@@ -43,6 +44,11 @@ const Main = ({ location }) => (
                         component={DashboardPage}
                     />
                     <Route path="/login" component={LoginPage} />
+                    <AuthenticatedRoute
+                        exact
+                        path="/auth/changePassword"
+                        component={ChangePasswordPage}
+                    />
                     <AdminRoute
                         path="/admin/users/headOffice/register"
                         component={HeadOfficeRegisterPage}
@@ -113,12 +119,12 @@ const Main = ({ location }) => (
                         component={ProductsManagementPage
                         }
                     />
-                    <Route path="/headOffice/years/add" component={AddYearPage} />
-                    <Route path="/headOffice/years/:yearId" component={YearOverviewPage} />
-                    <Route path="/retail/:retailLocationId/applications/:applicationId" component={ApplicationPage} />
-                    <Route path="/retail/:retailLocationId" component={RetailLocationDetailPage} />
-                    <Route path="/areas/:areaId/retail/:retailLocationId/applications/:applicationId" component={AreaManagerApplicationViewPage} />
-                    <Route path="/areas/:areaId" component={AreaDetailPage} />
+                    <AuthenticatedRoute path="/headOffice/years/add" component={AddYearPage} />
+                    <AuthenticatedRoute path="/headOffice/years/:yearId" component={YearOverviewPage} />
+                    <AuthenticatedRoute path="/retail/:retailLocationId/applications/:applicationId" component={ApplicationPage} />
+                    <AuthenticatedRoute path="/retail/:retailLocationId" component={RetailLocationDetailPage} />
+                    <AuthenticatedRoute path="/areas/:areaId/retail/:retailLocationId/applications/:applicationId" component={AreaManagerApplicationViewPage} />
+                    <AuthenticatedRoute path="/areas/:areaId" component={AreaDetailPage} />
                 </Switch>
             </div>
         </div>

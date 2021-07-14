@@ -25,6 +25,7 @@ Route::group([
     ], function () {
         Route::get('logout', [App\Http\Controllers\AuthController::class, 'logout']);
         Route::get('user', [App\Http\Controllers\AuthController::class, 'user']);
+        Route::post('changePassword', [App\Http\Controllers\AuthController::class, 'changePassword']);
     });
 });
 

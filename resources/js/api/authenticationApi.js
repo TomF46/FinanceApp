@@ -66,4 +66,14 @@ export function getUserIsAdmin() {
         });
 }
 
+export function ChangePassword(passwordChangeDetails) {
+    return axiosClient
+        .post("/api/auth/changePassword", passwordChangeDetails)
+        .then(response => {
+            return response;
+        })
+        .catch(error => {
+            throw error.response;
+        });
+}
 

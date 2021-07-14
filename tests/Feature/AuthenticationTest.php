@@ -6,6 +6,9 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
+use App\Enums\Roles;
+use App\Models\User;
+
 
 class AuthenticationTest extends TestCase
 {
@@ -100,5 +103,38 @@ class AuthenticationTest extends TestCase
         );
 
         $response->assertStatus(401);
+    }
+
+    public function testCanChangePassword()
+    {
+        $user = User::factory()->create();
+
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . $this->getBearerTokenForUser($user)
+        ])->postJson('/api/auth/changePassword',[
+            'currentPassword' => env('TESTING_PASSWORD'),
+            'password' => 'xjyM237',
+            'password_confirmation' => 'xjyM237',
+        ]);
+
+        $response->assertOk();
+
+        $response2 = $this->postJson(
+            '/api/auth/login',
+            [
+                'email' => $user->email,
+                'password' => 'xjyM237',
+                'remember_me' => true
+            ]
+        );
+        
+        $response2->assertOk();
+    }
+
+    protected function getBearerTokenForUser($user)
+    {
+        $pat = $user->createToken('Personal Access Token');
+        return $pat->accessToken;
     }
 }

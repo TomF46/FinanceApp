@@ -60,7 +60,7 @@ class AuthController extends Controller
         $attributes = $this->validateLogin($request);
         $credentials = request(['email', 'password']);
 
-        if (!Auth::attempt($credentials))
+        if (!Auth::guard('web')->attempt($credentials))
             return response()->json([
                 'message' => 'Unauthorized'
             ], 401);
@@ -101,6 +101,25 @@ class AuthController extends Controller
         return response()->json($request->user()->map());
     }
 
+    public function changePassword(Request $request)
+    {
+        $user = $request->user();
+        $attributes = $this->validatePasswordChange($request);
+
+        if (!Auth::guard('web')->attempt(['email' => $user->email, 'password' => $attributes['currentPassword']]))
+            return response()->json([
+                'message' => 'Unauthorized'
+            ], 401);
+
+        $user->password = bcrypt($attributes['password']);
+        $user->save();
+        return response()->json([
+            'message' => 'Password changed'
+        ], 200);
+
+    }
+
+
     protected function registerWithRole($attributes, $role)
     {
         $user = new User([
@@ -129,6 +148,14 @@ class AuthController extends Controller
             'email' => 'required|string|email',
             'password' => 'required|string',
             'remember_me' => 'boolean'
+        ]);
+    }
+
+    protected function validatePasswordChange(Request $request)
+    {
+        return $request->validate([
+            'currentPassword' => 'required|string',
+            'password' => 'required|string|confirmed'
         ]);
     }
 }
