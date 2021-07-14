@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import { toast } from "react-toastify";
 import { addAreaManager } from "../../../../../api/areasApi"
 import { getAreaManagers } from "../../../../../api/usersApi";
-import history from "../../../../../history";
 import SelectInput from "../../../../FormComponents/SelectInput";
+import LoadingMessage from "../../../../DisplayComponents/LoadingMessage";
 
 const AddAreaManagerForm = ({ area, onManagerAdded }) => {
 
@@ -47,6 +47,10 @@ const AddAreaManagerForm = ({ area, onManagerAdded }) => {
         addAreaManager(area, manager)
             .then(response => {
                 toast.success("Successfully added area manager");
+                setSaving(false);
+                setManager({
+                    user_id: null
+                });
                 onManagerAdded();
             })
             .catch(err => {
@@ -69,33 +73,43 @@ const AddAreaManagerForm = ({ area, onManagerAdded }) => {
 
     return (
         <div className="add-area-manager-form">
-            <form className="" onSubmit={handleSave}>
-                {errors.onSave && (
-                    <div className="text-red-500 text-xs p-1" role="alert">
-                        {errors.onSave}
-                    </div>
-                )}
-                <div className="mb-6">
-                    <SelectInput
-                        name="user_id"
-                        label="Manager"
-                        value={manager.user_id}
-                        options={managers}
-                        onChange={handleChange}
-                        error={errors.user_id}
-                    />
-                </div>
+            {managers ? (
+                <>
+                    {managers.length > 0 ? (
+                        <form className="" onSubmit={handleSave}>
+                            {errors.onSave && (
+                                <div className="text-red-500 text-xs p-1" role="alert">
+                                    {errors.onSave}
+                                </div>
+                            )}
+                            <div className="mb-6">
+                                <SelectInput
+                                    name="user_id"
+                                    label="Manager"
+                                    value={manager.user_id}
+                                    options={managers}
+                                    onChange={handleChange}
+                                    error={errors.user_id}
+                                />
+                            </div>
 
-                <div className="flex justify-center">
-                    <button
-                        type="submit"
-                        disabled={saving}
-                        className="bg-primary text-white rounded py-2 px-4 hover:opacity-75"
-                    >
-                        {saving ? "Adding..." : "Add"}
-                    </button>
-                </div>
-            </form>
+                            <div className="flex justify-center">
+                                <button
+                                    type="submit"
+                                    disabled={saving}
+                                    className="bg-primary text-white rounded py-2 px-4 hover:opacity-75"
+                                >
+                                    {saving ? "Adding..." : "Add"}
+                                </button>
+                            </div>
+                        </form>
+                    ) : (
+                        <p className="text-center p-4">There are currently no area managers registered, please add one to be able to assign a manager.</p>
+                    )}
+                </>
+            ) : (
+                <LoadingMessage message={'Loading area managers'} />
+            )}
         </div>
     );
 };

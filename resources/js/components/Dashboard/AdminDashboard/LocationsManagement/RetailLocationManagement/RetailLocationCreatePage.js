@@ -49,7 +49,8 @@ const RetailLocationCreatePage = () => {
 
         createRetailLocation(retailLocation).then(response => {
             toast.success("Retail location created");
-            history.push(`/admin/locations`);
+            history.push(`/admin/locations/retail/${response.data.id}`);
+
         })
             .catch(err => {
                 setSaving(false);

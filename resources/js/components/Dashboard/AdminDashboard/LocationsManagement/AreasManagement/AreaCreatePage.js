@@ -36,7 +36,7 @@ const AreaCreatePage = () => {
 
         createArea(area).then(response => {
             toast.success("Area created");
-            history.push(`/admin/locations`);
+            history.push(`/admin/locations/areas/${response.data.id}`);
         })
             .catch(err => {
                 setSaving(false);
