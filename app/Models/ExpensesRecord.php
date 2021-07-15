@@ -37,16 +37,21 @@ class ExpensesRecord extends Model
     {
         return [
             'id' => $this->id,
-            'rent' => $this->rent,
-            'payroll' => $this->payroll,
-            'utilities' => $this->utilities,
-            'equipment' => $this->equipment,
-            'travel' => $this->travel,
-            'training' => $this->training,
-            'maintenance' => $this->maintenance,
-            'employeeBonus' => $this->employeeBonus,
-            'employeeExpenses' => $this->employeeExpenses,
-            'totalExpenses' => number_format($this->getTotalExpenses(), 2, '.', '')
+            'rent' => $this->asMoney($this->rent),
+            'payroll' => $this->asMoney($this->payroll),
+            'utilities' => $this->asMoney($this->utilities),
+            'equipment' => $this->asMoney($this->equipment),
+            'travel' => $this->asMoney($this->travel),
+            'training' => $this->asMoney($this->training),
+            'maintenance' => $this->asMoney($this->maintenance),
+            'employeeBonus' => $this->asMoney($this->employeeBonus),
+            'employeeExpenses' => $this->asMoney($this->employeeExpenses),
+            'totalExpenses' => $this->asMoney($this->getTotalExpenses())
         ];
+    }
+
+    public function asMoney($value)
+    {
+        return number_format($value, 2, '.', '');
     }
 }

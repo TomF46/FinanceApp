@@ -33,12 +33,17 @@ class IncomeRecord extends Model
     {
         return [
             'id' => $this->id,
-            'dividends' => $this->dividends,
-            'assetSales' => $this->assetSales,
-            'maintenanceGrant' => $this->maintenanceGrant,
-            'sponsorship' => $this->sponsorship,
-            'rewards' => $this->rewards,
-            'totalIncome' => number_format($this->getTotalIncome(), 2, '.', '')
+            'dividends' => $this->asMoney($this->dividends),
+            'assetSales' => $this->asMoney($this->assetSales),
+            'maintenanceGrant' => $this->asMoney($this->maintenanceGrant),
+            'sponsorship' => $this->asMoney($this->sponsorship),
+            'rewards' => $this->asMoney($this->rewards),
+            'totalIncome' => $this->asMoney($this->getTotalIncome())
         ];
+    }
+
+    public function asMoney($value)
+    {
+        return number_format($value, 2, '.', '');
     }
 }
