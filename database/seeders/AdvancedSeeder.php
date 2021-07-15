@@ -7,6 +7,8 @@ use App\Enums\Roles;
 use App\Models\User;
 use App\Models\Area;
 use App\Models\RetailLocation;
+use App\Models\Product;
+use App\Models\Year;
 
 
 class AdvancedSeeder extends Seeder
@@ -51,5 +53,18 @@ class AdvancedSeeder extends Seeder
             'area_id' => $area->id
         ]);
         $location->managers()->save($retailManager);
+
+        $product1 = Product::factory()->create([
+            'name' => 'Boss Katana 50'
+        ]);
+
+        $product2 = Product::factory()->create([
+            'name' => 'Fender Rumble Studio 40'
+        ]);
+
+        $year = Year::factory()->create([
+            'year' => 2021
+        ]);
+        $year->generateApplications();
     }
 }
