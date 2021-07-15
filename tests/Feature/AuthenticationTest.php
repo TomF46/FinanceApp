@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 use App\Enums\Roles;
 use App\Models\User;
+use Tests\Helpers\TestHelper;
 
 
 class AuthenticationTest extends TestCase
@@ -111,7 +112,7 @@ class AuthenticationTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->getBearerTokenForUser($user)
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($user)
         ])->postJson('/api/auth/changePassword',[
             'currentPassword' => env('TESTING_PASSWORD'),
             'password' => 'xjyM237',
@@ -130,11 +131,5 @@ class AuthenticationTest extends TestCase
         );
         
         $response2->assertOk();
-    }
-
-    protected function getBearerTokenForUser($user)
-    {
-        $pat = $user->createToken('Personal Access Token');
-        return $pat->accessToken;
     }
 }

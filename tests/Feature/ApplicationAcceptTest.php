@@ -16,6 +16,7 @@ use App\Models\AcceptionMessage;
 use App\Models\IncomeRecord;
 use App\Models\ExpensesRecord;
 use App\Models\Sale;
+use Tests\Helpers\TestHelper;
 
 use App\Enums\ApplicationStatus;
 
@@ -58,7 +59,7 @@ class ApplicationsAcceptTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->getBearerTokenForUser($manager)
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($manager)
         ])->post('/api/applications/' . $application->id . '/accept');
 
         $response->assertOk();
@@ -96,7 +97,7 @@ class ApplicationsAcceptTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->getBearerTokenForUser($manager2)
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($manager2)
         ])->post('/api/applications/' . $application->id . '/accept');
 
         $response->assertForbidden();
@@ -133,7 +134,7 @@ class ApplicationsAcceptTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->getBearerTokenForUser($manager2)
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($manager2)
         ])->post('/api/applications/' . $application->id . '/accept');
 
         $response->assertForbidden();
@@ -173,15 +174,9 @@ class ApplicationsAcceptTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->getBearerTokenForUser($manager)
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($manager)
         ])->get('/api/applications/' . $application->id . '/investment');
 
         $response->assertOk();
-    }
-
-    protected function getBearerTokenForUser($user)
-    {
-        $pat = $user->createToken('Personal Access Token');
-        return $pat->accessToken;
     }
 }

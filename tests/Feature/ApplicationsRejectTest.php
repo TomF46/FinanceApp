@@ -13,6 +13,7 @@ use App\Models\Area;
 use App\Models\Application;
 use App\Models\ApplicationRevision;
 use App\Models\RejectionMessage;
+use Tests\Helpers\TestHelper;
 
 
 class ApplicationsRejectTest extends TestCase
@@ -49,7 +50,7 @@ class ApplicationsRejectTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->getBearerTokenForUser($manager)
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($manager)
         ])->postJson('/api/applications/' . $application->id . '/reject', [
             'message' => "A test rejection message"
         ]);
@@ -85,7 +86,7 @@ class ApplicationsRejectTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->getBearerTokenForUser($manager2)
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($manager2)
         ])->postJson('/api/applications/' . $application->id . '/reject', [
             'message' => "A test rejection message"
         ]);
@@ -120,7 +121,7 @@ class ApplicationsRejectTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->getBearerTokenForUser($manager2)
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($manager2)
         ])->postJson('/api/applications/' . $application->id . '/reject', [
             'message' => "A test rejection message"
         ]);
@@ -164,18 +165,12 @@ class ApplicationsRejectTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->getBearerTokenForUser($manager)
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($manager)
         ])->get('/api/applications/' . $application->id . '/showRejectMessage');
 
         $response->assertOk();
         $response->assertJson([
             'message' => $testMessage,
         ]);
-    }
-
-    protected function getBearerTokenForUser($user)
-    {
-        $pat = $user->createToken('Personal Access Token');
-        return $pat->accessToken;
     }
 }

@@ -9,12 +9,12 @@ use Tests\TestCase;
 use App\Enums\Roles;
 use App\Models\User;
 use App\Models\Year;
+use Tests\Helpers\TestHelper;
 
 class YearsTest extends TestCase
 {
     use RefreshDatabase;
     public $user;
-    public $token;
 
     public function setUp(): void
     {
@@ -23,15 +23,13 @@ class YearsTest extends TestCase
         $this->user = User::factory()->create([
             'role' => Roles::Administrator
         ]);
-        $pat = $this->user->createToken('Personal Access Token');
-        $this->token = $pat->accessToken;
     }
 
     public function testCanAddYear()
     {
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->postJson(
             '/api/years',
             [
@@ -46,7 +44,7 @@ class YearsTest extends TestCase
     {
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->get('/api/years');
 
         $response->assertOk();
@@ -62,7 +60,7 @@ class YearsTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->get('/api/years/' . $year->id);
 
         $response->assertOk();
@@ -77,7 +75,7 @@ class YearsTest extends TestCase
     {
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->postJson(
             '/api/years',
             [

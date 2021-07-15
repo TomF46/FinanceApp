@@ -12,6 +12,7 @@ use App\Models\Product;
 use App\Models\RetailLocation;
 use App\Models\Area;
 use App\Models\Application;
+use Tests\Helpers\TestHelper;
 
 class ApplicationsSubmitTest extends TestCase
 {
@@ -42,7 +43,7 @@ class ApplicationsSubmitTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->getBearerTokenForUser($manager)
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($manager)
         ])->postJson('/api/applications/' . $application->id, $this->getValidApplicationBody());
 
         $response->assertOk();
@@ -63,7 +64,7 @@ class ApplicationsSubmitTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->getBearerTokenForUser($manager)
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($manager)
         ])->postJson('/api/applications/' . $application->id, 
             [
                 'income' => [
@@ -113,7 +114,7 @@ class ApplicationsSubmitTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->getBearerTokenForUser($manager2)
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($manager2)
         ])->postJson('/api/applications/' . $application->id, $this->getValidApplicationBody());
 
         $response->assertForbidden();
@@ -143,16 +144,10 @@ class ApplicationsSubmitTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->getBearerTokenForUser($manager2)
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($manager2)
         ])->postJson('/api/applications/' . $application->id, $this->getValidApplicationBody());
 
         $response->assertForbidden();
-    }
-
-    protected function getBearerTokenForUser($user)
-    {
-        $pat = $user->createToken('Personal Access Token');
-        return $pat->accessToken;
     }
 
     protected function getValidApplicationBody()

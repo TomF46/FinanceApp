@@ -9,12 +9,12 @@ use Tests\TestCase;
 use App\Enums\Roles;
 use App\Models\User;
 use App\Models\Area;
+use Tests\Helpers\TestHelper;
 
 class AreasTest extends TestCase
 {
     use RefreshDatabase;
     public $user;
-    public $token;
 
     public function setUp(): void
     {
@@ -23,15 +23,13 @@ class AreasTest extends TestCase
         $this->user = User::factory()->create([
             'role' => Roles::Administrator
         ]);
-        $pat = $this->user->createToken('Personal Access Token');
-        $this->token = $pat->accessToken;
     }
 
     public function testCanAddArea()
     {
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->postJson(
             '/api/areas',
             [
@@ -45,7 +43,7 @@ class AreasTest extends TestCase
     {
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->get('/api/areas');
 
         $response->assertOk();
@@ -57,7 +55,7 @@ class AreasTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->get('/api/areas/' . $area->id);
 
         $response->assertOk();
@@ -70,7 +68,7 @@ class AreasTest extends TestCase
     {
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->postJson(
             '/api/areas/search',
             [
@@ -87,7 +85,7 @@ class AreasTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->putJson(
             '/api/areas/' . $area->id,
             [
@@ -106,7 +104,7 @@ class AreasTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->post('/api/areas/' . $area->id . '/deactivate');
 
         $response->assertNoContent();
@@ -116,7 +114,7 @@ class AreasTest extends TestCase
     {
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->postJson(
             '/api/areas',
             [
@@ -135,7 +133,7 @@ class AreasTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->postJson('/api/areas/' . $area->id . '/managers', 
         [
             'user_id' => $areaManager->id
@@ -155,7 +153,7 @@ class AreasTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->postJson('/api/areas/' . $area->id . '/managers', 
         [
             'user_id' => $areaManager->id
@@ -167,7 +165,7 @@ class AreasTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->post('/api/areas/' . $area->id . '/managers/' . $areaManager->id . '/remove');
 
         $response->assertOk();

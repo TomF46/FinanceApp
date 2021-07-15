@@ -9,12 +9,12 @@ use Tests\TestCase;
 use App\Enums\Roles;
 use App\Models\User;
 use App\Models\Product;
+use Tests\Helpers\TestHelper;
 
 class ProductsTest extends TestCase
 {
     use RefreshDatabase;
     public $user;
-    public $token;
 
     public function setUp(): void
     {
@@ -23,15 +23,13 @@ class ProductsTest extends TestCase
         $this->user = User::factory()->create([
             'role' => Roles::Administrator
         ]);
-        $pat = $this->user->createToken('Personal Access Token');
-        $this->token = $pat->accessToken;
     }
 
     public function testCanAddProduct()
     {
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->postJson(
             '/api/products',
             [
@@ -49,7 +47,7 @@ class ProductsTest extends TestCase
     {
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->get('/api/products');
 
         $response->assertOk();
@@ -59,7 +57,7 @@ class ProductsTest extends TestCase
     {
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->postJson(
             '/api/products/search',
             [
@@ -77,7 +75,7 @@ class ProductsTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->putJson(
             '/api/products/' . $product->id,
             [
@@ -104,7 +102,7 @@ class ProductsTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->get('/api/products/' . $product->id);
 
         $response->assertOk();
@@ -121,7 +119,7 @@ class ProductsTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->post('/api/products/' . $product->id . '/deactivate');
 
         $response->assertNoContent();
@@ -131,7 +129,7 @@ class ProductsTest extends TestCase
     {
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->postJson(
             '/api/products',
             [

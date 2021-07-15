@@ -7,16 +7,20 @@ const ApplicationReadOnly = ({
     application,
 }) => {
 
+
     function getTotalSalesIncome() {
         return application.sales.map(sale => sale.income).reduce((prev, next) => prev + next);
     }
+    function getTotalSalesIncomeDisplay() {
+        return Number(getTotalSalesIncome()).toFixed(2);
+    }
 
     function getTotalIncome() {
-        return getTotalSalesIncome() + Number(application.incomeRecord.totalIncome);
+        return Number(getTotalSalesIncome() + Number(application.incomeRecord.totalIncome)).toFixed(2);;
     }
 
     function getTotalProfitLoss() {
-        return getTotalIncome() - application.expensesRecord.totalExpenses;
+        return Number(getTotalIncome() - application.expensesRecord.totalExpenses).toFixed(2);
     }
 
     return (
@@ -87,7 +91,7 @@ const ApplicationReadOnly = ({
                         })}
                         <tr className="border-b border-t">
                             <td className="font-bold pl-2">Total</td>
-                            <td className="font-bold"><MoneyFormat value={getTotalSalesIncome()} /></td>
+                            <td className="font-bold"><MoneyFormat value={getTotalSalesIncomeDisplay()} /></td>
                         </tr>
                     </tbody>
                 </table>
@@ -168,7 +172,7 @@ const ApplicationReadOnly = ({
                             </tr>
                             <tr>
                                 <td className="pl-2">Total sales income</td>
-                                <td><MoneyFormat value={getTotalSalesIncome()} /></td>
+                                <td><MoneyFormat value={getTotalSalesIncomeDisplay()} /></td>
                             </tr>
                             <tr className="bg-gray-200">
                                 <td className="pl-2">Overall Total income</td>

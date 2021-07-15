@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ApplicationRevision;
+use App\Helpers\NumberHelper;
 
 class ExpensesRecord extends Model
 {
@@ -37,21 +38,16 @@ class ExpensesRecord extends Model
     {
         return [
             'id' => $this->id,
-            'rent' => $this->asMoney($this->rent),
-            'payroll' => $this->asMoney($this->payroll),
-            'utilities' => $this->asMoney($this->utilities),
-            'equipment' => $this->asMoney($this->equipment),
-            'travel' => $this->asMoney($this->travel),
-            'training' => $this->asMoney($this->training),
-            'maintenance' => $this->asMoney($this->maintenance),
-            'employeeBonus' => $this->asMoney($this->employeeBonus),
-            'employeeExpenses' => $this->asMoney($this->employeeExpenses),
-            'totalExpenses' => $this->asMoney($this->getTotalExpenses())
+            'rent' => NumberHelper::asMoney($this->rent),
+            'payroll' => NumberHelper::asMoney($this->payroll),
+            'utilities' => NumberHelper::asMoney($this->utilities),
+            'equipment' => NumberHelper::asMoney($this->equipment),
+            'travel' => NumberHelper::asMoney($this->travel),
+            'training' => NumberHelper::asMoney($this->training),
+            'maintenance' => NumberHelper::asMoney($this->maintenance),
+            'employeeBonus' => NumberHelper::asMoney($this->employeeBonus),
+            'employeeExpenses' => NumberHelper::asMoney($this->employeeExpenses),
+            'totalExpenses' => NumberHelper::asMoney($this->getTotalExpenses())
         ];
-    }
-
-    public function asMoney($value)
-    {
-        return number_format($value, 2, '.', '');
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Application;
 use App\Models\RetailLocation;
 use App\Enums\ApplicationStatus;
+use App\Helpers\NumberHelper;
 
 class Year extends Model
 {
@@ -92,6 +93,16 @@ class Year extends Model
         return $total;   
     }
 
+    protected function getTotalIncome()
+    {
+        return $this->getTotalNonOperatingIncome() + $this->getTotalSalesIncome();
+    }
+
+    protected function getTotalProfitLoss()
+    {
+        return $this->getTotalIncome() - $this->getTotalExpenses();
+    }
+
     protected function getTotalInvestmentFromNOI()
     {
         $applications = $this->getAcceptedApplications();
@@ -158,15 +169,17 @@ class Year extends Model
                 'totalAccepted' => $this->getTotalAcceptedApplications(),
             ],
             'retailDataSummary' => [
-                'totalNOIncome' => $this->getTotalNonOperatingIncome(),
-                'totalExpenses' => $this->getTotalExpenses(),
-                'totalSalesIncome' => $this->getTotalSalesIncome()
+                'totalNOIncome' => NumberHelper::asMoney($this->getTotalNonOperatingIncome()),
+                'totalSalesIncome' => NumberHelper::asMoney($this->getTotalSalesIncome()),
+                'totalIncome' => NumberHelper::asMoney($this->getTotalIncome()),
+                'totalExpenses' => NumberHelper::asMoney($this->getTotalExpenses()),
+                'totalProfitLoss' =>  NumberHelper::asMoney($this->getTotalProfitLoss()),
             ],
             'investmentSummary' => [
-                'totalFromNOI' => $this->getTotalInvestmentFromNOI(),
-                'totalFromSales' => $this->getTotalInvestmentFromSales(),
-                'totalFromNetProfit' => $this->getTotalInvestmentFromNetProfit(),
-                'total' => number_format($this->getTotalInvestment(), 2, '.', '')
+                'totalFromNOI' => NumberHelper::asMoney($this->getTotalInvestmentFromNOI()),
+                'totalFromSales' => NumberHelper::asMoney($this->getTotalInvestmentFromSales()),
+                'totalFromNetProfit' => NumberHelper::asMoney($this->getTotalInvestmentFromNetProfit()),
+                'total' => NumberHelper::asMoney($this->getTotalInvestment())
             ]
         ];
     }

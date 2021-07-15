@@ -10,12 +10,12 @@ use App\Enums\Roles;
 use App\Models\User;
 use App\Models\RetailLocation;
 use App\Models\Area;
+use Tests\Helpers\TestHelper;
 
 class RetailLocationsTest extends TestCase
 {
     use RefreshDatabase;
     public $user;
-    public $token;
 
     public function setUp(): void
     {
@@ -24,8 +24,6 @@ class RetailLocationsTest extends TestCase
         $this->user = User::factory()->create([
             'role' => Roles::Administrator
         ]);
-        $pat = $this->user->createToken('Personal Access Token');
-        $this->token = $pat->accessToken;
     }
 
     public function testCanAddRetailLocation()
@@ -33,7 +31,7 @@ class RetailLocationsTest extends TestCase
         $area = Area::factory()->create();
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->postJson(
             '/api/retailLocations',
             [
@@ -50,7 +48,7 @@ class RetailLocationsTest extends TestCase
     {
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->get('/api/retailLocations');
         $response->assertOk();
     }
@@ -61,7 +59,7 @@ class RetailLocationsTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->get('/api/retailLocations/' . $retailLocation->id);
 
         $response->assertOk();
@@ -74,7 +72,7 @@ class RetailLocationsTest extends TestCase
     {
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->postJson(
             '/api/retailLocations/search',
             [
@@ -92,7 +90,7 @@ class RetailLocationsTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->putJson(
             '/api/retailLocations/' . $retailLocation->id,
             [
@@ -115,7 +113,7 @@ class RetailLocationsTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->post('/api/retailLocations/' . $retailLocation->id . '/deactivate');
 
         $response->assertNoContent();
@@ -125,7 +123,7 @@ class RetailLocationsTest extends TestCase
     {
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->postJson(
             '/api/retailLocations',
             [
@@ -146,7 +144,7 @@ class RetailLocationsTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->postJson('/api/areas/' . $area->id . '/managers', 
         [
             'user_id' => $areaManager->id
@@ -166,7 +164,7 @@ class RetailLocationsTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->postJson('/api/retailLocations/' . $retailLocation->id . '/managers', 
         [
             'user_id' => $retailManager->id
@@ -178,7 +176,7 @@ class RetailLocationsTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->post('/api/retailLocations/' . $retailLocation->id . '/managers/' . $retailManager->id . '/remove');
 
         $response->assertOk();

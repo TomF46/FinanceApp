@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 use App\Enums\Roles;
 use App\Models\User;
+use Tests\Helpers\TestHelper;
 
 class HeadOfficeTest extends TestCase
 {
     use RefreshDatabase;
     public $user;
-    public $token;
 
     public function setUp(): void
     {
@@ -22,15 +22,13 @@ class HeadOfficeTest extends TestCase
         $this->user = User::factory()->create([
             'role' => Roles::Administrator
         ]);
-        $pat = $this->user->createToken('Personal Access Token');
-        $this->token = $pat->accessToken;
     }
 
     public function testCanRegisterHeadOffice()
     {
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->postJson(
             '/api/headoffice/register',
             [

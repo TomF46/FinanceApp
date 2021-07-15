@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 use App\Enums\Roles;
 use App\Models\User;
+use Tests\Helpers\TestHelper;
 
 class UsersTest extends TestCase
 {
     use RefreshDatabase;
     public $user;
-    public $token;
 
     public function setUp(): void
     {
@@ -22,15 +22,13 @@ class UsersTest extends TestCase
         $this->user = User::factory()->create([
             'role' => Roles::Administrator
         ]);
-        $pat = $this->user->createToken('Personal Access Token');
-        $this->token = $pat->accessToken;
     }
 
     public function testCanGetUsers()
     {
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->get('/api/users');
 
         $response->assertOk();
@@ -42,7 +40,7 @@ class UsersTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->get('/api/users/' . $user->id);
 
         $response->assertOk();
@@ -60,7 +58,7 @@ class UsersTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->putJson(
             '/api/users/' . $user->id,
             [
@@ -81,7 +79,7 @@ class UsersTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->post('/api/users/' . $user->id . '/deactivate');
 
         $response->assertNoContent();
@@ -93,7 +91,7 @@ class UsersTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->postJSON('/api/users/' . $user->id . '/changePassword', [
             'password' => 'xjyM237',
             'password_confirmation' => 'xjyM237'
@@ -111,18 +109,12 @@ class UsersTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->getBearerTokenForUser($user2)
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($user2)
         ])->postJSON('/api/users/' . $user->id . '/changePassword', [
             'password' => 'xjyM237',
             'password_confirmation' => 'xjyM237'
         ]);
 
         $response->assertUnauthorized();
-    }
-
-    protected function getBearerTokenForUser($user)
-    {
-        $pat = $user->createToken('Personal Access Token');
-        return $pat->accessToken;
     }
 }

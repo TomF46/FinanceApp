@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\ApplicationRevision;
+use App\Helpers\NumberHelper;
+
 
 class IncomeRecord extends Model
 {
@@ -33,17 +35,12 @@ class IncomeRecord extends Model
     {
         return [
             'id' => $this->id,
-            'dividends' => $this->asMoney($this->dividends),
-            'assetSales' => $this->asMoney($this->assetSales),
-            'maintenanceGrant' => $this->asMoney($this->maintenanceGrant),
-            'sponsorship' => $this->asMoney($this->sponsorship),
-            'rewards' => $this->asMoney($this->rewards),
-            'totalIncome' => $this->asMoney($this->getTotalIncome())
+            'dividends' => NumberHelper::asMoney($this->dividends),
+            'assetSales' => NumberHelper::asMoney($this->assetSales),
+            'maintenanceGrant' => NumberHelper::asMoney($this->maintenanceGrant),
+            'sponsorship' => NumberHelper::asMoney($this->sponsorship),
+            'rewards' => NumberHelper::asMoney($this->rewards),
+            'totalIncome' => NumberHelper::asMoney($this->getTotalIncome())
         ];
-    }
-
-    public function asMoney($value)
-    {
-        return number_format($value, 2, '.', '');
     }
 }

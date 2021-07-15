@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 use App\Enums\Roles;
 use App\Models\User;
+use Tests\Helpers\TestHelper;
 
 class AreaManagerTest extends TestCase
 {
     use RefreshDatabase;
     public $user;
-    public $token;
 
     public function setUp(): void
     {
@@ -22,15 +22,13 @@ class AreaManagerTest extends TestCase
         $this->user = User::factory()->create([
             'role' => Roles::Administrator
         ]);
-        $pat = $this->user->createToken('Personal Access Token');
-        $this->token = $pat->accessToken;
     }
 
     public function testCanRegisterAreaManager()
     {
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->postJson(
             '/api/area/register',
             [
@@ -49,7 +47,7 @@ class AreaManagerTest extends TestCase
     {
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->get('/api/areaManagers');
 
         $response->assertOk();
@@ -63,7 +61,7 @@ class AreaManagerTest extends TestCase
 
         $response = $this->withHeaders([
             'Accept' => 'application/json',
-            'Authorization' => 'Bearer ' . $this->token
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($this->user)
         ])->get('/api/areaManagers/' . $manager->id);
 
         $response->assertOk();

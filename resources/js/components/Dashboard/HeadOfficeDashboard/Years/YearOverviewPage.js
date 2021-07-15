@@ -26,9 +26,6 @@ const YearOverviewPage = ({ yearId }) => {
         });
     }
 
-    function getTotalProfitLoss() {
-        return (year.retailDataSummary.totalNOIncome + year.retailDataSummary.totalSalesIncome) - year.retailDataSummary.totalExpenses;
-    }
     return (
         <>
             {!year ? (
@@ -86,7 +83,7 @@ const YearOverviewPage = ({ yearId }) => {
                                     </tr>
                                     <tr className="bg-gray-200">
                                         <td className="pl-2">Total Income</td>
-                                        <td><MoneyFormat value={year.retailDataSummary.totalNOIncome + year.retailDataSummary.totalSalesIncome} /></td>
+                                        <td><MoneyFormat value={year.retailDataSummary.totalIncome} /></td>
                                     </tr>
                                     <tr>
                                         <td className="pl-2">Total Expenses</td>
@@ -94,7 +91,7 @@ const YearOverviewPage = ({ yearId }) => {
                                     </tr>
                                     <tr className="bg-gray-200">
                                         <td className="pl-2 font-bold">Total profit/loss</td>
-                                        <td className="font-bold"><MoneyFormat value={getTotalProfitLoss()} /></td>
+                                        <td className="font-bold"><MoneyFormat value={year.retailDataSummary.totalProfitLoss} /></td>
                                     </tr>
                                 </tbody>
                             </table>

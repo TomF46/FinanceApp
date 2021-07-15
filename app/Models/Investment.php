@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Application;
+use App\Helpers\NumberHelper;
 
 class Investment extends Model
 {
@@ -33,7 +34,7 @@ class Investment extends Model
             'fromNOI' => $this->fromNOI,
             'fromSales' => $this->fromSales,
             'fromNetProfit' => $this->fromNetProfit,
-            'total' => number_format($this->getTotalInvestment(), 2, '.', '')
+            'total' => NumberHelper::asMoney($this->getTotalInvestment())
         ];
     }
 
