@@ -7,7 +7,7 @@ Mentior Corp Finance Tool is an end of year funding application app for a fictit
 This application was created using Laravel Sail which uses docker to create the environment required to build and run a Laravel application. For ease of use I would recommend using the docker file held within my project to create the environment but if you have a Laravel environment set up already the application will work fine with that.
 
 Pre requisite 
-- Set up docker for your operating system information can be found in the [Laravel installation documentation](https://laravel.com/docs/8.x/installation)
+- Set up docker for your operating system, information can be found in the [Laravel installation documentation](https://laravel.com/docs/8.x/installation)
 
 Steps:
 1. Using the terminal type specified in the documentation above (e.g. A Linux terminal using WSL2 for Windows) pull the project from Github. [Ensure this folder destination is in WSL](https://stackoverflow.com/questions/65227492/laravel-8-laravel-sail-for-dev-on-windows-10-is-slow-how-to-speed-up) or you may experience performance issues.
@@ -16,4 +16,5 @@ Steps:
 4. Run migrations using `sail artisan migrate` to create the database tables.
 5. **Option 1:** Run `sail artisan db:seed` to add a admin user to the project, this default admin users username and password can be set in the `.env` file by editing the values for `ADMIN_EMAIL` & `ADMIN_PASSWORD`.
 **Option 2:** Alternatively you can run `sail artisan db:seed --class=AdvancedSeeder` to seed the database with the same Admin as the above open as well as a user from each role, an area, a retail location, and products, all the data needed to get straight in to completing applications. Usernames can be found in `database/seeders/AdvancedSeeder.php` and all non admin passwords are set to the environment variable `TESTING_PASSWORD` by default.
-6. By default the Application will be running on localhost.
+6. Run `sail artisan passport:install` without this you wont be able to login
+7. By default the Application will be running on localhost.
