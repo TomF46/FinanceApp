@@ -23,7 +23,7 @@ const ApplicationForm = ({
 }) => {
     return (
         <form className="" onSubmit={onSave}>
-            <h2 className="font-bold text-lg mb-4 text-center">{application.retailLocationName} Application</h2>
+            <h2 className="font-bold text-2xl mb-4 text-center">{application.retailLocationName} Application</h2>
             {errors.onSave && (
                 <div className="text-red-500 text-xs p-1" role="alert">
                     {errors.onSave}
