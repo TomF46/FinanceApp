@@ -34,24 +34,19 @@ Route::middleware(['auth:api'])->group(function () {
 
     Route::get('/areas', [App\Http\Controllers\AreasController::class, 'index']);
     Route::get('/areas/{area}', [App\Http\Controllers\AreasController::class, 'show']);
+    Route::get('/areaManagers/{user}', [App\Http\Controllers\AreaManagersController::class, 'show']);
 
     Route::get('/retailLocations', [App\Http\Controllers\RetailLocationsController::class, 'index']);
     Route::get('/retailLocations/{retailLocation}', [App\Http\Controllers\RetailLocationsController::class, 'show']);
-
     Route::get('/retailManagers/{user}', [App\Http\Controllers\RetailManagersController::class, 'show']);
-    Route::get('/areaManagers/{user}', [App\Http\Controllers\AreaManagersController::class, 'show']);
 
     Route::get('/years', [App\Http\Controllers\YearsController::class, 'index']);
+
     Route::get('/applications/{application}', [App\Http\Controllers\ApplicationsController::class, 'show']);
-    Route::post('/applications/{application}', [App\Http\Controllers\ApplicationsController::class, 'submit']);
-    Route::post('/applications/{application}/accept', [App\Http\Controllers\ApplicationsController::class, 'accept']);
-    Route::post('/applications/{application}/reject', [App\Http\Controllers\ApplicationsController::class, 'reject']);
     Route::get('/applications/{application}/showRejectMessage', [App\Http\Controllers\ApplicationsController::class, 'showRejectMessage']);
     Route::get('/applications/{application}/investment', [App\Http\Controllers\ApplicationsController::class, 'showInvestment']);
 
     Route::get('/products', [App\Http\Controllers\ProductsController::class, 'index']);
-
-
 });
 
 
@@ -99,3 +94,13 @@ Route::middleware(['auth:api', 'headOffice'])->group(function () {
     Route::post('/years', [App\Http\Controllers\YearsController::class, 'store']);
     Route::get('/years/{year}', [App\Http\Controllers\YearsController::class, 'show']);
 });
+
+Route::middleware(['auth:api', 'areaManager'])->group(function () {
+    Route::post('/applications/{application}/accept', [App\Http\Controllers\ApplicationsController::class, 'accept']);
+    Route::post('/applications/{application}/reject', [App\Http\Controllers\ApplicationsController::class, 'reject']);
+});
+
+Route::middleware(['auth:api', 'retailManager'])->group(function () {
+    Route::post('/applications/{application}', [App\Http\Controllers\ApplicationsController::class, 'submit']);
+});
+

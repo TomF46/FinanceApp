@@ -102,8 +102,6 @@ class ApplicationsController extends Controller
             'expenses.employeeExpenses' => 'required|numeric|min:0',
             'sales.*.id' => 'required',
             'sales.*.quantity' => 'required|numeric|min:0',
-            
-
         ]);
     }
 }
