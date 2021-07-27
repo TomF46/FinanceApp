@@ -44,7 +44,7 @@ const LoginPage = ({ login, userIsAuthenticated, history }) => {
             })
             .catch(err => {
                 setSaving(false);
-                toast.error(`${err.statusText} please try again.`, {
+                toast.error(`${err.data.message}, please try again.`, {
                     autoClose: false,
                 });
             });
