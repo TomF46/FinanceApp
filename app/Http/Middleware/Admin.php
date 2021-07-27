@@ -21,6 +21,6 @@ class Admin
             return $next($request);
         }
 
-        return response()->json(['error' => 'Unauthorized.'], 401);
+        return response()->json(['error' => 'User is forbidden from performing this action'], 403);
     }
 }

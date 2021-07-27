@@ -115,6 +115,6 @@ class UsersTest extends TestCase
             'password_confirmation' => 'xjyM237'
         ]);
 
-        $response->assertUnauthorized();
+        $response->assertForbidden();
     }
 }
