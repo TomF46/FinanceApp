@@ -25,7 +25,7 @@ const SalesSection = ({
                                         <p>{sale.name}</p>
                                     </div>
                                     <div className="col-span-4 vertical-centered">
-                                        <p className="text-sm text-gray-600">Profile per sale:</p>
+                                        <p className="text-sm text-gray-600">Profit per sale:</p>
                                         <p><MoneyFormat value={sale.price - sale.cost} /></p>
                                     </div>
                                     <div className="col-span-4">

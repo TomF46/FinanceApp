@@ -11,7 +11,10 @@ const MoneyFormat = ({
 };
 
 MoneyFormat.propTypes = {
-    value: PropTypes.object.isRequired
+    value: PropTypes.oneOfType([
+        PropTypes.string.isRequired,
+        PropTypes.number.isRequired
+    ]),
 };
 
 export default MoneyFormat;

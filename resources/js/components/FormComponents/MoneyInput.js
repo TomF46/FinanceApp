@@ -40,7 +40,10 @@ MoneyInput.propTypes = {
     label: PropTypes.string,
     onChange: PropTypes.func.isRequired,
     placeholder: PropTypes.string,
-    value: PropTypes.number,
+    value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+    ]),
     error: PropTypes.string,
     tooltipText: PropTypes.string
 };
