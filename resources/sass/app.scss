@@ -10,6 +10,17 @@
 
 @import "tailwindcss/utilities";
 
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
+
+html, p{
+    font-family: 'IBM Plex Sans' ,'Nunito', sans-serif;
+}
+
+h1,h2,h3,h4,h5 {
+    font-family: 'Oswald', sans-serif !important;
+}
+
 body {
     background-color: #efefef;
 }
