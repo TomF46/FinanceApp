@@ -21733,7 +21733,7 @@ nav {
   margin: 0 auto;
 }
 
-.logo-text {
+.logo-text, .text-primary {
   color: #0096b4;
 }
 

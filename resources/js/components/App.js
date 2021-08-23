@@ -31,6 +31,7 @@ import ProductEditPage from "./Dashboard/AdminDashboard/ProductsManagement/Produ
 import AreaManagerApplicationViewPage from "./Dashboard/AreaManagerDashboard/Application/AreaManagerApplicationViewPage";
 import YearOverviewPage from "./Dashboard/HeadOfficeDashboard/Years/YearOverviewPage";
 import ChangePasswordPage from "./Authentication/ChangePassword/ChangePasswordPage";
+import GuidePage from "./Dashboard/RetailManagerDashboard/Guide/GuidePage";
 
 const Main = ({ location }) => (
     <>
@@ -121,6 +122,7 @@ const Main = ({ location }) => (
                     />
                     <AuthenticatedRoute path="/headOffice/years/add" component={AddYearPage} />
                     <AuthenticatedRoute path="/headOffice/years/:yearId" component={YearOverviewPage} />
+                    <AuthenticatedRoute path="/retail/guide" component={GuidePage} />
                     <AuthenticatedRoute path="/retail/:retailLocationId/applications/:applicationId" component={ApplicationPage} />
                     <AuthenticatedRoute path="/retail/:retailLocationId" component={RetailLocationDetailPage} />
                     <AuthenticatedRoute path="/areas/:areaId/retail/:retailLocationId/applications/:applicationId" component={AreaManagerApplicationViewPage} />
