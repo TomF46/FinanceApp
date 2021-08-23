@@ -1,6 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import MoneyFormat from "./MoneyFormat";
+import ReactTooltip from 'react-tooltip';
+import tooltips from "../../tools/TooltipConstants";
+
 
 
 const ApplicationReadOnly = ({
@@ -42,23 +45,23 @@ const ApplicationReadOnly = ({
                     </thead>
                     <tbody>
                         <tr className="bg-gray-200">
-                            <td className="pl-2">Dividends</td>
+                            <td className="pl-2" data-tip={tooltips.income.dividends}>Dividends</td>
                             <td><MoneyFormat value={application.incomeRecord.dividends} /></td>
                         </tr>
                         <tr>
-                            <td className="pl-2">Asset sales</td>
+                            <td className="pl-2" data-tip={tooltips.income.assetSales}>Asset sales</td>
                             <td><MoneyFormat value={application.incomeRecord.assetSales} /></td>
                         </tr>
                         <tr className="bg-gray-200">
-                            <td className="pl-2">Maintenance grant</td>
+                            <td className="pl-2" data-tip={tooltips.income.maintenanceGrant}>Maintenance grant</td>
                             <td><MoneyFormat value={application.incomeRecord.maintenanceGrant} /></td>
                         </tr>
                         <tr className="border-b">
-                            <td className="pl-2">Sponsorship</td>
+                            <td className="pl-2" data-tip={tooltips.income.sponsorship}>Sponsorship</td>
                             <td><MoneyFormat value={application.incomeRecord.sponsorship} /></td>
                         </tr>
                         <tr className="bg-gray-200">
-                            <td className="pl-2">Rewards</td>
+                            <td className="pl-2" data-tip={tooltips.income.rewards}>Rewards</td>
                             <td><MoneyFormat value={application.incomeRecord.rewards} /></td>
                         </tr>
                         <tr className="border-b border-t">
@@ -110,39 +113,39 @@ const ApplicationReadOnly = ({
                     </thead>
                     <tbody>
                         <tr className="bg-gray-200">
-                            <td className="pl-2">Rent</td>
+                            <td className="pl-2" data-tip={tooltips.expenses.rent}>Rent</td>
                             <td><MoneyFormat value={application.expensesRecord.rent} /></td>
                         </tr>
                         <tr>
-                            <td className="pl-2">Payroll</td>
+                            <td className="pl-2" data-tip={tooltips.expenses.payroll}>Payroll</td>
                             <td><MoneyFormat value={application.expensesRecord.payroll} /></td>
                         </tr>
                         <tr className="bg-gray-200">
-                            <td className="pl-2">Utilities</td>
+                            <td className="pl-2" data-tip={tooltips.expenses.utilities}>Utilities</td>
                             <td><MoneyFormat value={application.expensesRecord.utilities} /></td>
                         </tr>
                         <tr className="border-b">
-                            <td className="pl-2">Equipment</td>
+                            <td className="pl-2" data-tip={tooltips.expenses.equipment}>Equipment</td>
                             <td><MoneyFormat value={application.expensesRecord.equipment} /></td>
                         </tr>
                         <tr className="bg-gray-200">
-                            <td className="pl-2">Travel</td>
+                            <td className="pl-2" data-tip={tooltips.expenses.travel}>Travel</td>
                             <td><MoneyFormat value={application.expensesRecord.travel} /></td>
                         </tr>
                         <tr className="border-b">
-                            <td className="pl-2">Training</td>
+                            <td className="pl-2" data-tip={tooltips.expenses.training}>Training</td>
                             <td><MoneyFormat value={application.expensesRecord.training} /></td>
                         </tr>
                         <tr className="bg-gray-200">
-                            <td className="pl-2">Maintenance</td>
+                            <td className="pl-2" data-tip={tooltips.expenses.maintenance}>Maintenance</td>
                             <td><MoneyFormat value={application.expensesRecord.maintenance} /></td>
                         </tr>
                         <tr className="border-b">
-                            <td className="pl-2">Employee bonus</td>
+                            <td className="pl-2" data-tip={tooltips.expenses.employeeBonus}>Employee bonus</td>
                             <td><MoneyFormat value={application.expensesRecord.employeeBonus} /></td>
                         </tr>
                         <tr className="bg-gray-200">
-                            <td className="pl-2">Employee expenses</td>
+                            <td className="pl-2" data-tip={tooltips.expenses.employeeExpenses}>Employee expenses</td>
                             <td><MoneyFormat value={application.expensesRecord.employeeExpenses} /></td>
                         </tr>
                         <tr className="border-b border-t">
@@ -190,6 +193,7 @@ const ApplicationReadOnly = ({
                     </table>
                 </div>
             </div>
+            <ReactTooltip backgroundColor="#0096b4" />
         </div >
     );
 };

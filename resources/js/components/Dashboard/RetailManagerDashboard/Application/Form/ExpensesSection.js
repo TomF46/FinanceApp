@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import MoneyInput from "../../../../FormComponents/MoneyInput";
+import tooltips from "../../../../../tools/TooltipConstants";
 
 const ExpensesSection = ({
     expenses,
@@ -23,6 +24,7 @@ const ExpensesSection = ({
                                 value={expenses.rent}
                                 onChange={onExpensesChange}
                                 error={expensesErrors.rent}
+                                tooltipText={tooltips.expenses.rent}
                             />
                         </div>
 
@@ -33,6 +35,8 @@ const ExpensesSection = ({
                                 value={expenses.payroll}
                                 onChange={onExpensesChange}
                                 error={expensesErrors.payroll}
+                                tooltipText={tooltips.expenses.payroll}
+
                             />
                         </div>
 
@@ -43,6 +47,8 @@ const ExpensesSection = ({
                                 value={expenses.utilities}
                                 onChange={onExpensesChange}
                                 error={expensesErrors.utilities}
+                                tooltipText={tooltips.expenses.utilities}
+
                             />
                         </div>
 
@@ -53,6 +59,8 @@ const ExpensesSection = ({
                                 value={expenses.equipment}
                                 onChange={onExpensesChange}
                                 error={expensesErrors.equipment}
+                                tooltipText={tooltips.expenses.equipment}
+
                             />
                         </div>
 
@@ -63,6 +71,8 @@ const ExpensesSection = ({
                                 value={expenses.travel}
                                 onChange={onExpensesChange}
                                 error={expensesErrors.travel}
+                                tooltipText={tooltips.expenses.travel}
+
                             />
                         </div>
 
@@ -73,6 +83,7 @@ const ExpensesSection = ({
                                 value={expenses.training}
                                 onChange={onExpensesChange}
                                 error={expensesErrors.training}
+                                tooltipText={tooltips.expenses.training}
                             />
                         </div>
 
@@ -83,6 +94,7 @@ const ExpensesSection = ({
                                 value={expenses.maintenance}
                                 onChange={onExpensesChange}
                                 error={expensesErrors.maintenance}
+                                tooltipText={tooltips.expenses.maintenance}
                             />
                         </div>
 
@@ -93,6 +105,8 @@ const ExpensesSection = ({
                                 value={expenses.employeeBonus}
                                 onChange={onExpensesChange}
                                 error={expensesErrors.employeeBonus}
+                                tooltipText={tooltips.expenses.employeeBonus}
+
                             />
                         </div>
 
@@ -103,6 +117,8 @@ const ExpensesSection = ({
                                 value={expenses.employeeExpenses}
                                 onChange={onExpensesChange}
                                 error={expensesErrors.employeeExpenses}
+                                tooltipText={tooltips.expenses.employeeExpenses}
+
                             />
                         </div>
                     </div>

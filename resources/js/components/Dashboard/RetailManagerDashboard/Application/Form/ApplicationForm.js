@@ -53,7 +53,7 @@ ApplicationForm.propTypes = {
     application: PropTypes.object.isRequired,
     income: PropTypes.object.isRequired,
     expenses: PropTypes.object.isRequired,
-    sales: PropTypes.object.isRequired,
+    sales: PropTypes.array.isRequired,
     errors: PropTypes.object,
     incomeErrors: PropTypes.object,
     expensesErrors: PropTypes.object,

@@ -1,13 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
+import ReactTooltip from 'react-tooltip';
 
-const MoneyInput = ({ name, label, onChange, placeholder, value, error }) => {
+const MoneyInput = ({ name, label, onChange, placeholder, value, error, tooltipText }) => {
     return (
         <div className="field">
             {label &&
                 <label
                     className="block mb-2 font-bold text-xs text-gray-700"
                     htmlFor={name}
+                    data-tip={tooltipText}
                 >
                     {label}
                 </label>
@@ -28,6 +30,7 @@ const MoneyInput = ({ name, label, onChange, placeholder, value, error }) => {
                     <div className="text-red-500 text-xs p-1 mt-2">{error}</div>
                 )}
             </div>
+            <ReactTooltip backgroundColor="#0096b4" />
         </div>
     );
 };
@@ -38,7 +41,8 @@ MoneyInput.propTypes = {
     onChange: PropTypes.func.isRequired,
     placeholder: PropTypes.string,
     value: PropTypes.number,
-    error: PropTypes.string
+    error: PropTypes.string,
+    tooltipText: PropTypes.string
 };
 
 export default MoneyInput;
