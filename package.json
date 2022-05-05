@@ -37,6 +37,7 @@
     },
     "dependencies": {
         "history": "^4.10.1",
-        "react-number-format": "^4.6.4"
+        "react-number-format": "^4.6.4",
+        "recharts": "^2.1.9"
     }
 }

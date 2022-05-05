@@ -143,6 +143,16 @@ class Year extends Model
         return $total;
     }
 
+    protected function getRetailBarChartDataPoints(){
+        $applications = $this->getAcceptedApplications();
+        return $applications->map(function ($application) {
+            return [
+                'title' => $application->retailLocation->name,
+                'Total Profit' => $application->getTotalNetProfit()
+            ];
+        });
+    }
+
     public function map()
     {
         return [
@@ -182,5 +192,15 @@ class Year extends Model
                 'total' => NumberHelper::asMoney($this->getTotalInvestment())
             ]
         ];
+    }
+
+    public function mapRetailBarChart()
+    {
+        return [
+            'dataPoints' => $this->getRetailBarChartDataPoints(),
+            'keys' => [
+                ['key' => "Total Profit", 'color' => "#0096b4"]
+            ]
+            ];
     }
 }

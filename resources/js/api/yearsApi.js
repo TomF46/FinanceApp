@@ -32,3 +32,14 @@ export function AddYear(year) {
             throw error.response;
         });
 }
+
+export function getYearRetailBarChart(id) {
+    return axiosClient
+        .get(`/api/years/${id}/graphs/retailBarChart`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
