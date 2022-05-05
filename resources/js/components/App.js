@@ -32,6 +32,7 @@ import AreaManagerApplicationViewPage from "./Dashboard/AreaManagerDashboard/App
 import YearOverviewPage from "./Dashboard/HeadOfficeDashboard/Years/YearOverviewPage";
 import ChangePasswordPage from "./Authentication/ChangePassword/ChangePasswordPage";
 import GuidePage from "./Dashboard/RetailManagerDashboard/Guide/GuidePage";
+import AllTimeOverviewPage from "./Dashboard/HeadOfficeDashboard/AllTime/AllTimeOverviewPage";
 
 const Main = ({ location }) => (
     <>
@@ -121,6 +122,7 @@ const Main = ({ location }) => (
                         }
                     />
                     <AuthenticatedRoute path="/headOffice/years/add" component={AddYearPage} />
+                    <AuthenticatedRoute path="/headOffice/overview" component={AllTimeOverviewPage} />
                     <AuthenticatedRoute path="/headOffice/years/:yearId" component={YearOverviewPage} />
                     <AuthenticatedRoute path="/retail/guide" component={GuidePage} />
                     <AuthenticatedRoute path="/retail/:retailLocationId/applications/:applicationId" component={ApplicationPage} />

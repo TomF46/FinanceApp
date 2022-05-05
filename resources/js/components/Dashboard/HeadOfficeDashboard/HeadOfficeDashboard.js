@@ -15,6 +15,9 @@ const HeadOfficeDashboard = ({ user }) => {
                     <div className="my-2">
                         <Link to={`/headOffice/years/add`} className="bg-primary block text-center hover:opacity-75 text-white font-bold py-2 px-4 rounded pointer">Add Reporting Year</Link>
                     </div>
+                    <div className="my-2">
+                        <Link to={`/headOffice/overview`} className="bg-primary block text-center hover:opacity-75 text-white font-bold py-2 px-4 rounded pointer">Overview</Link>
+                    </div>
                 </div>
                 <div className="col-span-12 lg:col-span-9">
                     <div className="card shadow-md rounded-md px-2 py-4 mb-4">

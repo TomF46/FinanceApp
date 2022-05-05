@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
 import { getYearById, getYearRetailBarChart } from "../../../../api/yearsApi";
 import MoneyFormat from "../../../DisplayComponents/MoneyFormat";
-import BarChart from "./Breakdown/BarChart";
+import BarChart from "../../../DisplayComponents/BarChart";
 
 const YearOverviewPage = ({ yearId }) => {
     const [year, setYear] = useState(null);
@@ -144,7 +144,7 @@ const YearOverviewPage = ({ yearId }) => {
                         <LoadingMessage message={"Loading graph"} />
                     ) : (
                         <div className="my-8">
-                            <h2 className="text-center text-xl">Net Profit Per Retailer</h2>
+                            <h2 className="text-center text-xl mb-4">Net Profit Per Retailer</h2>
                             <BarChart graphData={graphData} />
                         </div>
                     )}
