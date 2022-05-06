@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
-import { getYearById, getYearRetailBarChart } from "../../../../api/yearsApi";
+import { getYearById } from "../../../../api/yearsApi";
 import MoneyFormat from "../../../DisplayComponents/MoneyFormat";
-import BarChart from "../../../DisplayComponents/BarChart";
+import PieChart from "../../../DisplayComponents/Charts/PieChart";
+import RetailProfitBarChart from "./Breakdown/RetailProfitBarChart";
+import RetailProfitPieChart from "./Breakdown/RetailProfitPieChart";
 
 const YearOverviewPage = ({ yearId }) => {
     const [year, setYear] = useState(null);
-    const [graphData, setGraphData] = useState(null)
 
     useEffect(() => {
         if (!year) {
@@ -21,24 +21,12 @@ const YearOverviewPage = ({ yearId }) => {
     function getYear() {
         getYearById(yearId).then(yearData => {
             setYear(yearData);
-            getGraphData();
         }).catch(error => {
             toast.error("Error getting year " + error.message, {
                 autoClose: false,
             });
         });
     }
-
-    function getGraphData() {
-        getYearRetailBarChart(yearId).then(data => {
-            setGraphData(data);
-        }).catch(error => {
-            toast.error("Error getting graph data " + error.message, {
-                autoClose: false,
-            });
-        });
-    }
-
 
     return (
         <>
@@ -140,14 +128,8 @@ const YearOverviewPage = ({ yearId }) => {
                             </table>
                         </div>
                     </div>
-                    {!graphData ? (
-                        <LoadingMessage message={"Loading graph"} />
-                    ) : (
-                        <div className="my-8">
-                            <h2 className="text-center text-xl mb-4">Net Profit Per Retailer</h2>
-                            <BarChart graphData={graphData} />
-                        </div>
-                    )}
+                    <RetailProfitBarChart yearId={yearId} />
+                    <RetailProfitPieChart yearId={yearId} />
                 </>
             )}
         </>

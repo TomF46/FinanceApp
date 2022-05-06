@@ -13,4 +13,9 @@ class YearsGraphsController extends Controller
     {
         return response()->json($year->mapRetailBarChart());
     }
+
+    public function profitPieChart(Year $year)
+    {
+        return response()->json($year->mapProfitPieChart());
+    }
 }

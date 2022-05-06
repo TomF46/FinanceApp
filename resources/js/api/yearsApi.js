@@ -43,3 +43,14 @@ export function getYearRetailBarChart(id) {
             throw error;
         });
 }
+
+export function getProfitPieChart(id) {
+    return axiosClient
+        .get(`/api/years/${id}/graphs/profitPieChart`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
