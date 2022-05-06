@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Application;
+use App\Models\Year;
 use App\Models\RetailLocation;
 use App\Enums\ApplicationStatus;
 use App\Helpers\NumberHelper;
@@ -112,5 +113,26 @@ class Overview
             ]
         ];
     }
+
+    protected function getTotalProfitDataPoints(){
+        $years = Year::get();
+        return $years->map(function ($year) {
+            return [
+                'title' => $year->year,
+                'Total Profit' => NumberHelper::asMoney($year->getTotalProfitLoss())
+            ];
+        });
+    }
+
+    public function mapYearByYearProfitBarChart()
+    {
+        return [
+            'dataPoints' => $this->getTotalProfitDataPoints(),
+            'keys' => [
+                ['key' => "Total Profit", 'color' => "#0096b4"]
+            ]
+        ];
+    }
+
 
 }

@@ -97,6 +97,7 @@ Route::middleware(['auth:api', 'headOffice'])->group(function () {
     Route::get('/years/{year}/graphs/profitPieChart', [App\Http\Controllers\YearsGraphsController::class, 'profitPieChart']);
     
     Route::get('/overview', [App\Http\Controllers\OverviewController::class, 'index']);
+    Route::get('/overview/yearByYearProfitBarChart', [App\Http\Controllers\OverviewController::class, 'yearByYearProfitBarChart']);
 });
 
 Route::middleware(['auth:api', 'areaManager'])->group(function () {

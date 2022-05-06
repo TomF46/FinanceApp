@@ -5,6 +5,7 @@ import { getOverview } from "../../../../api/overviewApi";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
 import MoneyFormat from "../../../DisplayComponents/MoneyFormat";
+import YearByYearProfitBarChart from "./charts/YearByYearProfitBarChart";
 
 const AllTimeOverviewPage = () => {
     const [overview, setOverview] = useState(null);
@@ -95,6 +96,7 @@ const AllTimeOverviewPage = () => {
                             </table>
                         </div>
                     </div>
+                    <YearByYearProfitBarChart />
                 </>
             )
             }

@@ -14,4 +14,10 @@ class OverviewController extends Controller
         $overview = new Overview();
         return response()->json($overview->map());
     }
+
+    public function yearByYearProfitBarChart()
+    {
+        $overview = new Overview();
+        return response()->json($overview->mapYearByYearProfitBarChart());
+    }
 }

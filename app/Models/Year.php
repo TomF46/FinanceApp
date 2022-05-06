@@ -98,7 +98,7 @@ class Year extends Model
         return $this->getTotalNonOperatingIncome() + $this->getTotalSalesIncome();
     }
 
-    protected function getTotalProfitLoss()
+    public function getTotalProfitLoss()
     {
         return $this->getTotalIncome() - $this->getTotalExpenses();
     }
