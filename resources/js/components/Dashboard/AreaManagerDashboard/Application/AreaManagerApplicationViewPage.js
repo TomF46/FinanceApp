@@ -54,7 +54,7 @@ const AreaManagerApplicationViewPage = ({ applicationId }) => {
 
     function accept() {
         acceptApplication(application).then(res => {
-            toast.success("Appliation accepted");
+            toast.success("Application accepted");
             getApplication();
         }).catch(error => {
             toast.error("Error accepting application " + error.message, {

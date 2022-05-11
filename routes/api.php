@@ -94,10 +94,12 @@ Route::middleware(['auth:api', 'headOffice'])->group(function () {
     Route::post('/years', [App\Http\Controllers\YearsController::class, 'store']);
     Route::get('/years/{year}', [App\Http\Controllers\YearsController::class, 'show']);
     Route::get('/years/{year}/graphs/retailBarChart', [App\Http\Controllers\YearsGraphsController::class, 'retailBarChart']);
+    Route::get('/years/{year}/graphs/areasBarChart', [App\Http\Controllers\YearsGraphsController::class, 'areasBarChart']);
     Route::get('/years/{year}/graphs/profitPieChart', [App\Http\Controllers\YearsGraphsController::class, 'profitPieChart']);
     
     Route::get('/overview', [App\Http\Controllers\OverviewController::class, 'index']);
     Route::get('/overview/yearByYearProfitBarChart', [App\Http\Controllers\OverviewController::class, 'yearByYearProfitBarChart']);
+
 });
 
 Route::middleware(['auth:api', 'areaManager'])->group(function () {

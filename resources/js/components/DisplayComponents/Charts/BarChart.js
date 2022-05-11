@@ -23,9 +23,9 @@ const BarChartGraph = ({
                     <YAxis />
                     <Tooltip />
                     <Legend />
-                    {graphData.keys.map((key) => {
+                    {graphData.keys.map((key, i) => {
                         return (
-                            <Bar dataKey={key.key} fill={key.color} />
+                            <Bar dataKey={key.key} fill={key.color} key={i} />
                         )
                     }
                     )}

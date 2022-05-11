@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Application;
 use App\Models\RetailLocation;
+use App\Models\Area;
 use App\Enums\ApplicationStatus;
 use App\Helpers\NumberHelper;
 
@@ -143,12 +144,22 @@ class Year extends Model
         return $total;
     }
 
-    protected function getTotalProfitDataPoints(){
+    protected function getRetailTotalProfitDataPoints(){
         $applications = $this->getAcceptedApplications();
         return $applications->map(function ($application) {
             return [
                 'title' => $application->retailLocation->name,
                 'Total Profit' => $application->getTotalNetProfit()
+            ];
+        });
+    }
+
+    protected function getAreasTotalProfitDataPoints(){
+        $areas = Area::get();
+        return $areas->map(function ($area) {
+            return [
+                'title' => $area->name,
+                'Total Profit' => $area->getTotalProfitForYear($this)
             ];
         });
     }
@@ -197,18 +208,28 @@ class Year extends Model
     public function mapRetailBarChart()
     {
         return [
-            'dataPoints' => $this->getTotalProfitDataPoints(),
+            'dataPoints' => $this->getRetailTotalProfitDataPoints(),
             'keys' => [
                 ['key' => "Total Profit", 'color' => "#0096b4"]
             ]
             ];
     }
 
+    public function mapAreasBarChart()
+    {
+        return [
+            'dataPoints' => $this->getAreasTotalProfitDataPoints(),
+            'keys' => [
+                ['key' => "Total Profit", 'color' => "#0096b4"]
+            ]
+        ];
+    }
+
     public function mapProfitPieChart()
     {
         return [
             'total' => NumberHelper::asMoney($this->getTotalProfitLoss()),
-            'data' => $this->getTotalProfitDataPoints(),
+            'data' => $this->getRetailTotalProfitDataPoints(),
             'dataKey' => 'Total Profit',
             'nameKey' => 'title'
         ];

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\RetailLocation;
 use App\Models\User;
 use App\Models\Application;
+use App\Models\Year;
 use App\Enums\ApplicationStatus;
 
 class Area extends Model
@@ -67,6 +68,21 @@ class Area extends Model
         return $count;
     }
 
+    public function getTotalProfitForYear(Year $year)
+    {
+        $locationIds = $this->retailLocations->pluck('id');
+        $applications = Application::whereIn('retail_location_id', $locationIds)
+            ->where('year_id', $year->id)
+            ->where('status', ApplicationStatus::Accepted)
+            ->get();
+
+        $total = 0;
+        foreach ($applications as $application) {
+            $total = $total + $application->getTotalNetProfit();
+        };
+        return $total;
+    }
+
     public function map()
     {
         return [
@@ -75,7 +91,6 @@ class Area extends Model
             'locationCount' => Count($this->retailLocations),
             'areaManagerActionsRequired' => $this->getAreaManagerRequiredActionCount(),
             'retailManagerActionsRequired' => $this->getRetailManagerRequiredActionCount()
-
         ];
     }
 

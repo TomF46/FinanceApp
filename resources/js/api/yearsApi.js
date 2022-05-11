@@ -54,3 +54,14 @@ export function getProfitPieChart(id) {
             throw error;
         });
 }
+
+export function getYearAreasBarChart(id) {
+    return axiosClient
+        .get(`/api/years/${id}/graphs/areasBarChart`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}

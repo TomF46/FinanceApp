@@ -8,6 +8,7 @@ import MoneyFormat from "../../../DisplayComponents/MoneyFormat";
 import PieChart from "../../../DisplayComponents/Charts/PieChart";
 import RetailProfitBarChart from "./Breakdown/RetailProfitBarChart";
 import RetailProfitPieChart from "./Breakdown/RetailProfitPieChart";
+import AreasProfitBarChart from "./Breakdown/AreasProfitBarChart";
 
 const YearOverviewPage = ({ yearId }) => {
     const [year, setYear] = useState(null);
@@ -128,6 +129,7 @@ const YearOverviewPage = ({ yearId }) => {
                             </table>
                         </div>
                     </div>
+                    <AreasProfitBarChart yearId={yearId} />
                     <RetailProfitBarChart yearId={yearId} />
                     <RetailProfitPieChart yearId={yearId} />
                 </>
