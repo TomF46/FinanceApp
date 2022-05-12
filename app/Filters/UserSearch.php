@@ -11,6 +11,9 @@ class UserSearch
     {
         $user = (new User)->newQuery();
 
+        $user->where('active', true);
+
+
         if ($filters->has('firstName')) {
             $user->where('firstName', 'like', "{$filters->input('firstName')}%");
         }

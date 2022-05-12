@@ -31,7 +31,7 @@ class UsersController extends Controller
 
     public function show(Request $request, User $user)
     {
-        return response()->json($user->map());
+        return response()->json($user->mapDetailed());
     }
 
     public function update(Request $request, User $user)

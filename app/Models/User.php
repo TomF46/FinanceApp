@@ -116,9 +116,25 @@ class User extends Authenticatable
             'fullName' => $this->getFullName(),
             'email' => $this->email,
             'role' => $this->role,
-            "roleTitle" => $this->getRoleTitle()
+            'roleTitle' => $this->getRoleTitle()
         ];
     }
+
+    public function mapDetailed()
+    {
+        return [
+            'id' => $this->id,
+            'firstName' => $this->firstName,
+            'lastName' => $this->lastName,
+            'fullName' => $this->getFullName(),
+            'email' => $this->email,
+            'role' => $this->role,
+            'roleTitle' => $this->getRoleTitle(),
+            "retailLocationsManaged" => $this->mapLocations(),
+            "areasManaged" => $this->mapAreas()
+        ];
+    }
+
 
     public function mapAsRetailManager()
     {

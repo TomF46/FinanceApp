@@ -34,6 +34,7 @@ import ChangePasswordPage from "./Authentication/ChangePassword/ChangePasswordPa
 import GuidePage from "./Dashboard/RetailManagerDashboard/Guide/GuidePage";
 import AllTimeOverviewPage from "./Dashboard/HeadOfficeDashboard/AllTime/AllTimeOverviewPage";
 import ProductPage from "./Dashboard/AdminDashboard/ProductsManagement/ProductPage";
+import UserManagePage from "./Dashboard/AdminDashboard/UsersManagement/UserManagePage";
 
 const Main = ({ location }) => (
     <>
@@ -63,6 +64,10 @@ const Main = ({ location }) => (
                     <AdminRoute
                         path="/admin/users/retailManager/register"
                         component={RetailManagerRegisterPage}
+                    />
+                    <AdminRoute
+                        path="/admin/users/:userId/manage"
+                        component={UserManagePage}
                     />
                     <AdminRoute
                         path="/admin/users/:userId"
