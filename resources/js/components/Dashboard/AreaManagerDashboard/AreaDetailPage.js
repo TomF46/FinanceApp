@@ -39,6 +39,30 @@ const AreaDetailPage = ({ areaId }) => {
                     <div className="my-8">
                         <div className="my-2 card shadow-md rounded-md">
                             <div className="bg-primary rounded-t-md">
+                                <p className="text-white font-bold text-lg px-2 py-1">{area.name} Info</p>
+                            </div>
+                            <div className="px-2 py-1">
+                                <p><span className="font-bold">Name:</span> {area.name}</p>
+                                <p><span className="font-bold">Number of retailer:</span> {area.locationCount}</p>
+                                {area.managers.length > 0 ? (
+                                    <>
+                                        <p className="font-bold">{`Manager${area.managers.length > 1 ? 's' : ''}:`}</p>
+                                        {area.managers.map((manager) => {
+                                            return (
+                                                <p>{`${manager.fullName} (${manager.email})`} </p>
+                                            )
+                                        })}
+                                    </>
+                                ) : (
+                                    <p>No manager assigned</p>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="my-8">
+                        <div className="my-2 card shadow-md rounded-md">
+                            <div className="bg-primary rounded-t-md">
                                 <p className="text-white font-bold text-lg px-2 py-1">{area.name} Retail Locations</p>
                             </div>
                             <div>

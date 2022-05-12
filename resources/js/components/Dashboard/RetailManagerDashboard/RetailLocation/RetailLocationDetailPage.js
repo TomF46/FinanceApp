@@ -6,6 +6,7 @@ import { getRetailLocationById } from "../../../../api/retailLocationsApi"
 import { toast } from "react-toastify";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
 import ApplicationsList from "../../../DisplayComponents/ApplicationList";
+import ManagersList from "../../../DisplayComponents/ManagersList";
 
 
 const RetailLocationDetailPage = ({ retailLocationId }) => {
@@ -34,6 +35,31 @@ const RetailLocationDetailPage = ({ retailLocationId }) => {
                     <h1 className="text-center font-bold text-4xl">
                         {retailLocation.name}
                     </h1>
+
+                    <div className="my-8">
+                        <div className="my-2 card shadow-md rounded-md">
+                            <div className="bg-primary rounded-t-md">
+                                <p className="text-white font-bold text-lg px-2 py-1">{retailLocation.name} Info</p>
+                            </div>
+                            <div className="px-2 py-1">
+                                <p><span className="font-bold">Name:</span> {retailLocation.name}</p>
+                                <p><span className="font-bold">Area:</span> {retailLocation.area}</p>
+                                <p><span className="font-bold">Location:</span> {retailLocation.location}</p>
+                                {retailLocation.managers.length > 0 ? (
+                                    <>
+                                        <p className="font-bold">{`Manager${retailLocation.managers.length > 1 ? 's' : ''}:`}</p>
+                                        {retailLocation.managers.map((manager) => {
+                                            return (
+                                                <p>{`${manager.fullName} (${manager.email})`} </p>
+                                            )
+                                        })}
+                                    </>
+                                ) : (
+                                    <p>No manager assigned</p>
+                                )}
+                            </div>
+                        </div>
+                    </div>
 
                     <div className="my-8">
                         <div className="my-2 card shadow-md rounded-md">

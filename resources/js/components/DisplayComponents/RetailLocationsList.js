@@ -19,7 +19,7 @@ const RetailLocationsList = ({ retailLocations, isAdmin }) => {
                             </div>
                             <div className="col-span-3">
                                 <p className="text-sm text-gray-600">Area:</p>
-                                <Link to={isAdmin ? `/admin/locations/areas/${retailLocation.areaId}` : `/areas/${retailLocation.areaId}`} className="pointer hover:text-primary">{retailLocation.area}</Link>
+                                <p>{retailLocation.area}</p>
                             </div>
                             <div className="col-span-3">
                                 <p className="text-sm text-gray-600">Applications:</p>
