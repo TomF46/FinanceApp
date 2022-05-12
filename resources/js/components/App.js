@@ -33,6 +33,7 @@ import YearOverviewPage from "./Dashboard/HeadOfficeDashboard/Years/YearOverview
 import ChangePasswordPage from "./Authentication/ChangePassword/ChangePasswordPage";
 import GuidePage from "./Dashboard/RetailManagerDashboard/Guide/GuidePage";
 import AllTimeOverviewPage from "./Dashboard/HeadOfficeDashboard/AllTime/AllTimeOverviewPage";
+import ProductPage from "./Dashboard/AdminDashboard/ProductsManagement/ProductPage";
 
 const Main = ({ location }) => (
     <>
@@ -114,6 +115,11 @@ const Main = ({ location }) => (
                     <AdminRoute
                         path="/admin/products/:productId/edit"
                         component={ProductEditPage
+                        }
+                    />
+                    <AdminRoute
+                        path="/admin/products/:productId"
+                        component={ProductPage
                         }
                     />
                     <AdminRoute

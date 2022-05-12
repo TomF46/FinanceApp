@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import TextInput from "../../../FormComponents/TextInput";
 import MoneyInput from "../../../FormComponents/MoneyInput";
+import TextAreaInput from "../../../FormComponents/TextAreaInput";
 
 const ProductManageForm = ({
     product,
@@ -31,6 +32,18 @@ const ProductManageForm = ({
                                 value={product.name}
                                 onChange={onChange}
                                 error={errors.name}
+                                required={true}
+                            />
+                        </div>
+
+                        <div className="mb-2">
+                            <TextAreaInput
+                                name="description"
+                                label="Description"
+                                value={product.description}
+                                onChange={onChange}
+                                error={errors.description}
+                                required={true}
                             />
                         </div>
 
@@ -41,6 +54,7 @@ const ProductManageForm = ({
                                 value={product.productCode}
                                 onChange={onChange}
                                 error={errors.productCode}
+                                required={true}
                             />
                         </div>
 
@@ -51,6 +65,7 @@ const ProductManageForm = ({
                                 value={product.cost}
                                 onChange={onChange}
                                 error={errors.cost}
+                                required={true}
                             />
                         </div>
 
@@ -61,6 +76,7 @@ const ProductManageForm = ({
                                 value={product.price}
                                 onChange={onChange}
                                 error={errors.price}
+                                required={true}
                             />
                         </div>
 

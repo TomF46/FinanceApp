@@ -8,6 +8,7 @@ const AddProductPage = () => {
 
     const [product, setProduct] = useState({
         name: "",
+        description: "",
         productCode: "",
         cost: 0,
         price: 0
@@ -29,9 +30,10 @@ const AddProductPage = () => {
     }
 
     function formIsValid() {
-        const { name, productCode, cost, price } = product;
+        const { name, description, productCode, cost, price } = product;
         const errors = {};
         if (!name) errors.name = "Name is required";
+        if (!description) errors.name = "Description is required";
         if (!productCode) errors.productCode = "Product code is required";
         if (!cost) errors.cost = "Cost is required";
         if (!price) errors.price = "Price is required";

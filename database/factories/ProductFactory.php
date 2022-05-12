@@ -23,6 +23,7 @@ class ProductFactory extends Factory
     {
         return [
             'name' => $this->faker->word(),
+            'description' => $this->faker->text,
             'productCode' => $this->faker->unique()->isbn10(),
             'cost' => $this->faker->numberBetween(1,100),
             'price' => $this->faker->numberBetween(101,1000),

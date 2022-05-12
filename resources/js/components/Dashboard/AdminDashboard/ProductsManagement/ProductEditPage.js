@@ -6,8 +6,8 @@ import ProductManageForm from "./ProductManageForm";
 import { editProduct, getProductById } from "../../../../api/productsApi";
 import history from "../../../../history";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
-const ProductEditPage = ({ productId }) => {
 
+const ProductEditPage = ({ productId }) => {
     const [product, setProduct] = useState(null);
     const [errors, setErrors] = useState({});
     const [saving, setSaving] = useState(false);
@@ -31,9 +31,13 @@ const ProductEditPage = ({ productId }) => {
     }
 
     function formIsValid() {
-        const { name } = product;
+        const { name, description, productCode, cost, price } = product;
         const errors = {};
         if (!name) errors.name = "Name is required";
+        if (!description) errors.name = "Description is required";
+        if (!productCode) errors.productCode = "Product code is required";
+        if (!cost) errors.cost = "Cost is required";
+        if (!price) errors.price = "Price is required";
 
         setErrors(errors);
         return Object.keys(errors).length === 0;

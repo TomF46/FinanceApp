@@ -55,11 +55,13 @@ class AdvancedSeeder extends Seeder
         $location->managers()->save($retailManager);
 
         $product1 = Product::factory()->create([
-            'name' => 'Boss Katana 50'
+            'name' => 'Boss Katana 50',
+            'description' => 'A Boss 50 watt guitar amp'
         ]);
 
         $product2 = Product::factory()->create([
-            'name' => 'Fender Rumble Studio 40'
+            'name' => 'Fender Rumble Studio 40',
+            'description' => 'A Fender 40 watt bass amp with sound modeling'
         ]);
 
         $year = Year::factory()->create([

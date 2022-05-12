@@ -34,6 +34,7 @@ class ProductsController extends Controller
 
         $product = Product::create([
             'name' => $attributes['name'],
+            'description' => $attributes['description'],
             'productCode' => $attributes['productCode'],
             'price' => $attributes['price'],
             'cost' => $attributes['cost']
@@ -46,6 +47,7 @@ class ProductsController extends Controller
     {
         $attributes = $this->validateProduct($request);
         $product->name = $attributes['name'];
+        $product->description = $attributes['description'];
         $product->productCode = $attributes['productCode'];
         $product->price = $attributes['price'];
         $product->cost = $attributes['cost'];
@@ -69,6 +71,7 @@ class ProductsController extends Controller
     {
         return $request->validate([
             'name' => 'required|max:40',
+            'description' => 'required|max:255',
             'productCode' => 'required|unique:products|max:10',
             'price' => 'required',
             'cost' => 'required',

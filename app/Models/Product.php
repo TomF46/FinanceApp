@@ -14,7 +14,8 @@ class Product extends Model
         'name',
         'productCode',
         'cost',
-        'price'
+        'price',
+        'description'
     ];
 
     public function sales()
@@ -32,6 +33,7 @@ class Product extends Model
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'description' => $this->description,
             'productCode' => $this->productCode,
             'cost' => $this->cost,
             'price' => $this->price
