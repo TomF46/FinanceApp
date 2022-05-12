@@ -54,6 +54,7 @@ class RetailLocation extends Model
             'name' => $this->name,
             'location' => $this->location,
             'area' => $this->area->name,
+            'areaId' => $this->area->id,
             "totalApplications" => Count($this->applications)
         ];
     }
@@ -65,6 +66,7 @@ class RetailLocation extends Model
             'name' => $this->name,
             'location' => $this->location,
             'area' => $this->area->name,
+            'areaId' => $this->area->id,
             "managers" => $this->mapManagers(),
             "totalApplications" => Count($this->applications),
             "applications" => $this->mapApplications()

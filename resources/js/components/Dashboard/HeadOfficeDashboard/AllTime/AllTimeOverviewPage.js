@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
 import MoneyFormat from "../../../DisplayComponents/MoneyFormat";
 import YearByYearProfitBarChart from "./charts/YearByYearProfitBarChart";
+import { getMoneyTextColorClass } from "../../../../tools/HelperFunctions";
 
 const AllTimeOverviewPage = () => {
     const [overview, setOverview] = useState(null);
@@ -61,7 +62,7 @@ const AllTimeOverviewPage = () => {
                                     </tr>
                                     <tr className="bg-gray-200">
                                         <td className="pl-2 font-bold">Total profit/loss</td>
-                                        <td className="font-bold"><MoneyFormat value={overview.retailDataSummary.totalProfitLoss} /></td>
+                                        <td className={`font-bold ${getMoneyTextColorClass(overview.retailDataSummary.totalProfitLoss)}`} ><MoneyFormat value={overview.retailDataSummary.totalProfitLoss} /></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -89,7 +90,7 @@ const AllTimeOverviewPage = () => {
                                     </tr>
                                     <tr>
                                         <td className="pl-2 font-bold">Total investment</td>
-                                        <td className="font-bold"><MoneyFormat value={overview.investmentSummary.total} /></td>
+                                        <td className={`font-bold ${getMoneyTextColorClass(overview.investmentSummary.total)}`}><MoneyFormat value={overview.investmentSummary.total} /></td>
 
                                     </tr>
                                 </tbody>

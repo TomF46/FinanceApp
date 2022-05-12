@@ -11,7 +11,7 @@ const RetailLocationsList = ({ retailLocations, isAdmin }) => {
                         <div key={retailLocation.id} className="grid grid-cols-12 px-2 py-1 border-b border-gray-200 overflow-hidden">
                             <div className="col-span-3">
                                 <p className="text-sm text-gray-600">Name:</p>
-                                <Link to={isAdmin ? `/admin/locations/retail/${retailLocation.id}` : `/retail/${retailLocation.id}`} className="font-medium text-lg items-center pointer">{retailLocation.name}</Link>
+                                <Link to={isAdmin ? `/admin/locations/retail/${retailLocation.id}` : `/retail/${retailLocation.id}`} className="font-bold text-primary hover:text-secondary text-lg items-center pointer">{retailLocation.name}</Link>
                             </div>
                             <div className="col-span-3">
                                 <p className="text-sm text-gray-600">Location:</p>
@@ -19,7 +19,7 @@ const RetailLocationsList = ({ retailLocations, isAdmin }) => {
                             </div>
                             <div className="col-span-3">
                                 <p className="text-sm text-gray-600">Area:</p>
-                                <p>{retailLocation.area}</p>
+                                <Link to={isAdmin ? `/admin/locations/areas/${retailLocation.areaId}` : `/areas/${retailLocation.areaId}`} className="pointer hover:text-primary">{retailLocation.area}</Link>
                             </div>
                             <div className="col-span-3">
                                 <p className="text-sm text-gray-600">Applications:</p>

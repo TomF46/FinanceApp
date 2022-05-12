@@ -3,8 +3,7 @@ import PropTypes from "prop-types";
 import MoneyFormat from "./MoneyFormat";
 import ReactTooltip from 'react-tooltip';
 import tooltips from "../../tools/TooltipConstants";
-
-
+import { getMoneyTextColorClass } from "../../tools/HelperFunctions";
 
 const ApplicationReadOnly = ({
     application,
@@ -66,7 +65,7 @@ const ApplicationReadOnly = ({
                         </tr>
                         <tr className="border-b border-t">
                             <td className="font-bold pl-2">Total</td>
-                            <td className="font-bold"><MoneyFormat value={application.incomeRecord.totalIncome} /></td>
+                            <td className={`font-bold ${getMoneyTextColorClass(application.incomeRecord.totalIncome)}`}><MoneyFormat value={application.incomeRecord.totalIncome} /></td>
                         </tr>
                     </tbody>
                 </table>
@@ -94,7 +93,7 @@ const ApplicationReadOnly = ({
                         })}
                         <tr className="border-b border-t">
                             <td className="font-bold pl-2">Total</td>
-                            <td className="font-bold"><MoneyFormat value={getTotalSalesIncomeDisplay()} /></td>
+                            <td className={`font-bold ${getMoneyTextColorClass(getTotalSalesIncomeDisplay())}`}><MoneyFormat value={getTotalSalesIncomeDisplay()} /></td>
                         </tr>
                     </tbody>
                 </table>
@@ -150,7 +149,7 @@ const ApplicationReadOnly = ({
                         </tr>
                         <tr className="border-b border-t">
                             <td className="font-bold pl-2">Total</td>
-                            <td className="font-bold"><MoneyFormat value={application.expensesRecord.totalExpenses} /></td>
+                            <td className="font-bold text-money-negative"><MoneyFormat value={application.expensesRecord.totalExpenses} /></td>
                         </tr>
                     </tbody>
                 </table>
@@ -187,7 +186,7 @@ const ApplicationReadOnly = ({
                             </tr>
                             <tr className="border-b border-t">
                                 <td className="pl-2 font-bold">Total profit/loss</td>
-                                <td className="font-bold"><MoneyFormat value={getTotalProfitLoss()} /></td>
+                                <td className={`font-bold ${getMoneyTextColorClass(getTotalProfitLoss())}`}><MoneyFormat value={getTotalProfitLoss()} /></td>
                             </tr>
                         </tbody>
                     </table>

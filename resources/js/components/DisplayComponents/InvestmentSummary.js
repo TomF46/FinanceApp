@@ -4,6 +4,7 @@ import LoadingMessage from "./LoadingMessage";
 import { getInvestment } from "../../api/applicationsApi";
 import { toast } from "react-toastify";
 import MoneyFormat from "./MoneyFormat";
+import { getMoneyTextColorClass } from "../../tools/HelperFunctions";
 
 
 const InvestmentSummary = ({
@@ -56,7 +57,7 @@ const InvestmentSummary = ({
                             </tr>
                             <tr className="border-b border-t">
                                 <td className="font-bold pl-2">Total</td>
-                                <td className="font-bold"><MoneyFormat value={investment.total} /></td>
+                                <td className={`font-bold ${getMoneyTextColorClass(investment.total)}`}><MoneyFormat value={investment.total} /></td>
                             </tr>
                         </tbody>
                     </table>

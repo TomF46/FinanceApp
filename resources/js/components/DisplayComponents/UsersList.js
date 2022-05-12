@@ -10,7 +10,7 @@ const UsersList = ({ users }) => {
                     <div key={user.id} className="grid grid-cols-12 px-2 py-1 border-b border-gray-200 overflow-hidden">
                         <div className="col-span-4">
                             <p className="text-sm text-gray-600">Name:</p>
-                            <Link to={`/admin/users/${user.id}`} className="font-medium text-lg items-center pointer">{user.fullName}</Link>
+                            <Link to={`/admin/users/${user.id}`} className="font-bold text-primary hover:text-secondary text-lg items-center pointer">{user.fullName}</Link>
                         </div>
                         <div className="col-span-4">
                             <p className="text-sm text-gray-600">Role:</p>

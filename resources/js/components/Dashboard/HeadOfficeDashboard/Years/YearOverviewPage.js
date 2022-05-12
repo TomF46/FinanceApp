@@ -5,10 +5,10 @@ import { toast } from "react-toastify";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
 import { getYearById } from "../../../../api/yearsApi";
 import MoneyFormat from "../../../DisplayComponents/MoneyFormat";
-import PieChart from "../../../DisplayComponents/Charts/PieChart";
 import RetailProfitBarChart from "./Breakdown/RetailProfitBarChart";
 import RetailProfitPieChart from "./Breakdown/RetailProfitPieChart";
 import AreasProfitBarChart from "./Breakdown/AreasProfitBarChart";
+import { getMoneyTextColorClass } from "../../../../tools/HelperFunctions";
 
 const YearOverviewPage = ({ yearId }) => {
     const [year, setYear] = useState(null);
@@ -94,7 +94,7 @@ const YearOverviewPage = ({ yearId }) => {
                                     </tr>
                                     <tr className="bg-gray-200">
                                         <td className="pl-2 font-bold">Total profit/loss</td>
-                                        <td className="font-bold"><MoneyFormat value={year.retailDataSummary.totalProfitLoss} /></td>
+                                        <td className={`font-bold ${getMoneyTextColorClass(year.retailDataSummary.totalProfitLoss)}`}><MoneyFormat value={year.retailDataSummary.totalProfitLoss} /></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -122,7 +122,7 @@ const YearOverviewPage = ({ yearId }) => {
                                     </tr>
                                     <tr>
                                         <td className="pl-2 font-bold">Total investment</td>
-                                        <td className="font-bold"><MoneyFormat value={year.investmentSummary.total} /></td>
+                                        <td className={`font-bold ${getMoneyTextColorClass(year.investmentSummary.total)}`}><MoneyFormat value={year.investmentSummary.total} /></td>
 
                                     </tr>
                                 </tbody>

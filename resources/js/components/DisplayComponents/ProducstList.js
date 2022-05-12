@@ -12,7 +12,7 @@ const ProductsList = ({ products, onProductDeactivate }) => {
                         <div key={product.id} className="grid grid-cols-12 px-2 py-1 border-b border-gray-200 overflow-hidden">
                             <div className="col-span-2 lg:col-span-4">
                                 <p className="text-sm text-gray-600">Name:</p>
-                                <p className="font-medium text-lg items-center">{product.name}</p>
+                                <p className="font-bold text-primary text-lg items-center">{product.name}</p>
                             </div>
                             <div className="col-span-2">
                                 <p className="text-sm text-gray-600">Code:</p>
