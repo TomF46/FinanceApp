@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
 import { getOverview } from "../../../../api/overviewApi";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
@@ -97,7 +95,11 @@ const AllTimeOverviewPage = () => {
                             </table>
                         </div>
                     </div>
-                    <YearByYearProfitBarChart />
+                    {overview.hasAcceptedApplications ? (
+                        <YearByYearProfitBarChart />
+                    ) : (
+                        <p className="text-center mt-4">Graphs will appear once applications start to be accepted.</p>
+                    )}
                 </>
             )
             }

@@ -129,9 +129,16 @@ const YearOverviewPage = ({ yearId }) => {
                             </table>
                         </div>
                     </div>
-                    <AreasProfitBarChart yearId={yearId} />
-                    <RetailProfitBarChart yearId={yearId} />
-                    <RetailProfitPieChart yearId={yearId} />
+                    {year.applicationStatusSummary.totalAccepted > 0 ? (
+                        <>
+                            <AreasProfitBarChart yearId={yearId} />
+                            <RetailProfitBarChart yearId={yearId} />
+                            <RetailProfitPieChart yearId={yearId} />
+                        </>
+                    ) : (
+                        <p className="text-center mt-4">Graphs will appear once applications start to be accepted.</p>
+                    )}
+
                 </>
             )}
         </>

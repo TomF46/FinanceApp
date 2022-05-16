@@ -95,9 +95,16 @@ class Overview
         return $total;
     }
 
+    protected function hasAcceptedApplications()
+    {
+        $applications = $this->getAcceptedApplications();
+        return Count($applications) > 0;
+    }
+
     public function map()
     {
         return [
+            'hasAcceptedApplications' => $this->hasAcceptedApplications(), 
             'retailDataSummary' => [
                 'totalNOIncome' => NumberHelper::asMoney($this->getTotalNonOperatingIncome()),
                 'totalSalesIncome' => NumberHelper::asMoney($this->getTotalSalesIncome()),
