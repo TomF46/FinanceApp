@@ -170,19 +170,19 @@ const ApplicationReadOnly = ({
                         <tbody>
                             <tr className="bg-gray-200">
                                 <td className="pl-2">Total Non-operating income</td>
-                                <td><MoneyFormat value={application.incomeRecord.totalIncome} /></td>
+                                <td className={`${getMoneyTextColorClass(application.incomeRecord.totalIncome)}`}><MoneyFormat value={application.incomeRecord.totalIncome} /></td>
                             </tr>
                             <tr>
                                 <td className="pl-2">Total sales income</td>
-                                <td><MoneyFormat value={getTotalSalesIncomeDisplay()} /></td>
+                                <td className={`${getMoneyTextColorClass(getTotalSalesIncomeDisplay())}`}><MoneyFormat value={getTotalSalesIncomeDisplay()} /></td>
                             </tr>
                             <tr className="bg-gray-200">
                                 <td className="pl-2">Overall Total income</td>
-                                <td><MoneyFormat value={getTotalIncome()} /></td>
+                                <td className={`font-bold ${getMoneyTextColorClass(getTotalIncome())}`}><MoneyFormat value={getTotalIncome()} /></td>
                             </tr>
                             <tr>
                                 <td className="pl-2">Total Expenses</td>
-                                <td><MoneyFormat value={application.expensesRecord.totalExpenses} /></td>
+                                <td className="font-bold text-money-negative"><MoneyFormat value={application.expensesRecord.totalExpenses} /></td>
                             </tr>
                             <tr className="border-b border-t">
                                 <td className="pl-2 font-bold">Total profit/loss</td>

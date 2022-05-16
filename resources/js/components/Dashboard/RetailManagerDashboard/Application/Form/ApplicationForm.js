@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import MoneyInput from "../../../../FormComponents/MoneyInput";
 import IncomeSection from "./IncomeSection";
 import ExpensesSection from "./ExpensesSection";
 import SalesSection from "./SalesSection";
@@ -36,14 +35,19 @@ const ApplicationForm = ({
 
             <ExpensesSection expenses={expenses} onExpensesChange={onExpensesChange} expensesErrors={expensesErrors} />
 
-            <div className="flex justify-center mb-4">
-                <button
-                    type="submit"
-                    disabled={saving}
-                    className="bg-primary text-white rounded py-2 px-4 hover:opacity-75"
-                >
-                    {saving ? "Submitting..." : "Submit"}
-                </button>
+            <div className="my-4 card shadow-md rounded-md">
+                <div className="bg-secondary rounded-t-md">
+                    <p className="text-white font-bold text-lg px-2 py-1">Actions</p>
+                </div>
+                <div className="px-2 py-4 flex justify-center">
+                    <button
+                        type="submit"
+                        disabled={saving}
+                        className="bg-secondary hover:opacity-75 text-white font-bold py-2 px-4 rounded pointer"
+                    >
+                        {saving ? "Submitting..." : "Submit"}
+                    </button>
+                </div>
             </div>
         </form>
     );

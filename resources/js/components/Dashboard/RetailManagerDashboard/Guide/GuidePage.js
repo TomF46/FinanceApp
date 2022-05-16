@@ -34,7 +34,7 @@ const GuidePage = () => {
                     <h1 className="text-primary font-bold text-2xl">Done</h1>
                     <p className="my-2">Once your submisson has been accepted you're done, and you wont be required to perform any more actions until next years application becomes available.</p>
                 </div>
-                <Link to={`/`} className="text-primary underline">Return to dashboard</Link>
+                <Link to={`/`} className="text-primary hover:text-secondary underline">Return to dashboard</Link>
             </div>
         </div>
     );

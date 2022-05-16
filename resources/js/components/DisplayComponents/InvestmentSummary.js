@@ -45,15 +45,15 @@ const InvestmentSummary = ({
                         <tbody>
                             <tr className="bg-gray-200">
                                 <td className="pl-2">From Non-operating income</td>
-                                <td><MoneyFormat value={investment.fromNOI} /></td>
+                                <td className={`${getMoneyTextColorClass(investment.fromNOI)}`}><MoneyFormat value={investment.fromNOI} /></td>
                             </tr>
                             <tr>
                                 <td className="pl-2">From Sales</td>
-                                <td><MoneyFormat value={investment.fromSales} /></td>
+                                <td className={`${getMoneyTextColorClass(investment.fromSales)}`}><MoneyFormat value={investment.fromSales} /></td>
                             </tr>
                             <tr className="bg-gray-200">
                                 <td className="pl-2">From Net profit</td>
-                                <td><MoneyFormat value={investment.fromNetProfit} /></td>
+                                <td className={`${getMoneyTextColorClass(investment.fromNetProfit)}`}><MoneyFormat value={investment.fromNetProfit} /></td>
                             </tr>
                             <tr className="border-b border-t">
                                 <td className="font-bold pl-2">Total</td>

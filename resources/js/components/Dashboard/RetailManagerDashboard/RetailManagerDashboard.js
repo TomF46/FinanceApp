@@ -33,7 +33,7 @@ const RetailManagerDashboard = ({ user }) => {
                         Dashboard
                     </h2>
                     <p className="my-2">This is your dashboard, you can manage your retail locations and any current open applications</p>
-                    <p className="my-2">Not sure what to do? <Link to={`/retail/guide`} className="text-primary underline">View our handy step by step guide</Link></p>
+                    <p className="my-2">Not sure what to do? <Link to={`/retail/guide`} className="text-primary hover:text-secondary underline">View our handy step by step guide</Link></p>
                 </div>
                 <div className="col-span-12 lg:col-span-9">
                     {!retailManager ? (

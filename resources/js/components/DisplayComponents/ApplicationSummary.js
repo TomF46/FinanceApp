@@ -33,7 +33,9 @@ const ApplicationSummary = ({
                 </div>
             </div>
             {(application.status == "2" && isRetailer) &&
-                <button onClick={() => { onRestartApplication() }} className="bg-primary hover:opacity-75 text-white font-bold py-2 px-4 mb-4 rounded pointer float-right">Restart application</button>
+                <div className="flex justify-center">
+                    <button onClick={() => { onRestartApplication() }} className="bg-primary hover:opacity-75 text-white font-bold py-2 px-4 mb-4 rounded pointer">Restart application</button>
+                </div>
             }
             {(application.status == "3") &&
                 <InvestmentSummary application={application} />

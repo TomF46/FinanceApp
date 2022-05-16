@@ -14,10 +14,17 @@ const AreaManagerApplicationControls = ({
     const [showRejectControls, setRejectControls] = useState(false);
     return (
         <div className="application-admin-controls">
-            <div className="my-4">
-                <button onClick={() => { setRejectControls(true) }} className="bg-danger hover:opacity-75 text-white font-bold py-2 px-4 rounded pointer">Reject</button>
-                <button onClick={onAccept} className="bg-primary hover:opacity-75 text-white font-bold py-2 px-4 rounded pointer float-right">Accept</button>
+
+            <div className="my-4 card shadow-md rounded-md">
+                <div className="bg-secondary rounded-t-md">
+                    <p className="text-white font-bold text-lg px-2 py-1">Actions</p>
+                </div>
+                <div className="px-2 py-4 flex justify-between">
+                    <button onClick={() => { setRejectControls(true) }} className="bg-danger hover:opacity-75 text-white font-bold py-2 px-4 rounded pointer">Reject</button>
+                    <button onClick={onAccept} className="bg-secondary hover:opacity-75 text-white font-bold py-2 px-4 rounded pointer">Accept</button>
+                </div>
             </div>
+
 
             {showRejectControls && (
                 <div className="my-4">

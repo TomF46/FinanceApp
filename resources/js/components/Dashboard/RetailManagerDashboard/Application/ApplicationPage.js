@@ -137,7 +137,6 @@ const ApplicationPage = ({ applicationId }) => {
         });
     }
 
-
     return (
         <>
             {application && income && expenses && sales ? (
