@@ -45,6 +45,11 @@ class AreasController extends Controller
         return response()->json($area->mapDetail());
     }
 
+    public function showData(Area $area)
+    {
+        return response()->json($area->mapData());
+    }
+
     public function store(Request $request)
     {
         $attributes = $this->validateArea($request);

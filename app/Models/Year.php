@@ -104,8 +104,8 @@ class Year extends Model
         return [
             'id' => $this->id,
             'year' => $this->year,
-            'totalApplications' => $this->getTotalActiveApplications(),
             'applicationStatusSummary' => [
+                'totalApplications' => $this->getTotalActiveApplications(),
                 'totalNotStarted' => $this->getTotalNotStartedApplications(),
                 'totalAwaitingSignOff' => $this->getTotalAwaitingSignOffApplications(),
                 'totalReturned' => $this->getTotalReturnedApplications(),

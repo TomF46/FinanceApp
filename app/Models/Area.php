@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Models\Application;
 use App\Models\Year;
 use App\Enums\ApplicationStatus;
+use App\Helpers\ApplicationDataHelper;
+
 
 class Area extends Model
 {
@@ -48,6 +50,12 @@ class Area extends Model
         return Application::whereIn('retail_location_id', $locationIds)->get()->map(function ($application) {
             return $application->map();
         });
+    }
+
+    protected function getAcceptedApplications()
+    {
+        $locationIds = $this->retailLocations->pluck('id');
+        return Application::whereIn('retail_location_id', $locationIds)->where('status', ApplicationStatus::Accepted)->get();
     }
 
     protected function getAreaManagerRequiredActionCount()
@@ -105,6 +113,18 @@ class Area extends Model
             'applications' => $this->mapApplications(),
             'areaManagerActionsRequired' => $this->getAreaManagerRequiredActionCount(),
             'retailManagerActionsRequired' => $this->getRetailManagerRequiredActionCount()
+        ];
+    }
+
+    public function mapData()
+    {
+        $applications = $this->getAcceptedApplications();
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'hasAcceptedApplications' => Count($applications) > 0, 
+            'retailDataSummary' => ApplicationDataHelper::mapRetailDataSummary($applications),
+            'investmentSummary' => ApplicationDataHelper::mapInvestmentSummary($applications)
         ];
     }
 

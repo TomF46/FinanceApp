@@ -35,6 +35,8 @@ import GuidePage from "./Dashboard/RetailManagerDashboard/Guide/GuidePage";
 import AllTimeOverviewPage from "./Dashboard/HeadOfficeDashboard/AllTime/AllTimeOverviewPage";
 import ProductPage from "./Dashboard/AdminDashboard/ProductsManagement/ProductPage";
 import UserManagePage from "./Dashboard/AdminDashboard/UsersManagement/UserManagePage";
+import RetailLocationDataPage from "./Dashboard/RetailManagerDashboard/RetailLocation/RetailLocationDataPage";
+import AreaDataPage from "./Dashboard/AreaManagerDashboard/AreaDataPage";
 
 const Main = ({ location }) => (
     <>
@@ -137,8 +139,10 @@ const Main = ({ location }) => (
                     <AuthenticatedRoute path="/headOffice/years/:yearId" component={YearOverviewPage} />
                     <AuthenticatedRoute path="/retail/guide" component={GuidePage} />
                     <AuthenticatedRoute path="/retail/:retailLocationId/applications/:applicationId" component={ApplicationPage} />
+                    <AuthenticatedRoute path="/retail/:retailLocationId/data" component={RetailLocationDataPage} />
                     <AuthenticatedRoute path="/retail/:retailLocationId" component={RetailLocationDetailPage} />
                     <AuthenticatedRoute path="/areas/:areaId/retail/:retailLocationId/applications/:applicationId" component={AreaManagerApplicationViewPage} />
+                    <AuthenticatedRoute path="/areas/:areaId/data" component={AreaDataPage} />
                     <AuthenticatedRoute path="/areas/:areaId" component={AreaDetailPage} />
                 </Switch>
             </div>

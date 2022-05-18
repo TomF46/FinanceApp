@@ -11,6 +11,17 @@ export function getRetailLocationById(id) {
         });
 }
 
+export function getRetailLocationDataById(id) {
+    return axiosClient
+        .get(`/api/retailLocations/${id}/data`)
+        .then(response => {
+            return response.data
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
 
 export function createRetailLocation(retailLocation) {
     return axiosClient

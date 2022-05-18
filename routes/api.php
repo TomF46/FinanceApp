@@ -34,10 +34,12 @@ Route::middleware(['auth:api'])->group(function () {
 
     Route::get('/areas', [App\Http\Controllers\AreasController::class, 'index']);
     Route::get('/areas/{area}', [App\Http\Controllers\AreasController::class, 'show']);
+    Route::get('/areas/{area}/data', [App\Http\Controllers\AreasController::class, 'showData']);
     Route::get('/areaManagers/{user}', [App\Http\Controllers\AreaManagersController::class, 'show']);
 
     Route::get('/retailLocations', [App\Http\Controllers\RetailLocationsController::class, 'index']);
     Route::get('/retailLocations/{retailLocation}', [App\Http\Controllers\RetailLocationsController::class, 'show']);
+    Route::get('/retailLocations/{retailLocation}/data', [App\Http\Controllers\RetailLocationsController::class, 'showData']);
     Route::get('/retailManagers/{user}', [App\Http\Controllers\RetailManagersController::class, 'show']);
 
     Route::get('/years', [App\Http\Controllers\YearsController::class, 'index']);

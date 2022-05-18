@@ -9,6 +9,9 @@ import RetailProfitBarChart from "./Breakdown/RetailProfitBarChart";
 import RetailProfitPieChart from "./Breakdown/RetailProfitPieChart";
 import AreasProfitBarChart from "./Breakdown/AreasProfitBarChart";
 import { getMoneyTextColorClass } from "../../../../tools/HelperFunctions";
+import RetailDataSummaryTable from "../../../DisplayComponents/RetailDataSummaryTable";
+import RetailInvestmentSummaryTable from "../../../DisplayComponents/RetailInvestmentSummaryTable";
+import ApplicationsStatusSummary from "../../../DisplayComponents/ApplicationsStatusSummary";
 
 const YearOverviewPage = ({ yearId }) => {
     const [year, setYear] = useState(null);
@@ -40,94 +43,15 @@ const YearOverviewPage = ({ yearId }) => {
                     </h1>
 
                     <div className="my-4">
-                        <div className="my-2 card shadow-md rounded-md">
-                            <div className="bg-primary rounded-t-md">
-                                <p className="text-white font-bold text-lg px-2 py-1">Applications status summary</p>
-                            </div>
-                            <div className="grid grid-cols-10 px-2 py-1 card shadow-md rounded-md border-b border-gray-200 overflow-hidden text-center">
-                                <div className="col-span-2">
-                                    <p className="text-sm text-gray-600">Total Applications:</p>
-                                    <p>{year.totalApplications}</p>
-                                </div>
-                                <div className="col-span-2">
-                                    <p className="text-sm text-gray-600">Not Started:</p>
-                                    <p>{year.applicationStatusSummary.totalNotStarted}</p>
-                                </div>
-                                <div className="col-span-2">
-                                    <p className="text-sm text-gray-600">Awaiting sign off:</p>
-                                    <p>{year.applicationStatusSummary.totalAwaitingSignOff}</p>
-                                </div>
-                                <div className="col-span-2">
-                                    <p className="text-sm text-gray-600">Returned:</p>
-                                    <p>{year.applicationStatusSummary.totalReturned}</p>
-                                </div>
-                                <div className="col-span-2">
-                                    <p className="text-sm text-gray-600">Accepted:</p>
-                                    <p>{year.applicationStatusSummary.totalAccepted}</p>
-                                </div>
-                            </div>
-                        </div>
+                        <ApplicationsStatusSummary summary={year.applicationStatusSummary} />
                     </div>
 
                     <div className="my-4">
-                        <div className="my-2 card shadow-md rounded-md">
-                            <div className="bg-primary rounded-t-md">
-                                <p className="text-white font-bold text-lg px-2 py-1">Summary of signed off applications</p>
-                            </div>
-                            <table className="table-fixed w-full">
-                                <tbody>
-                                    <tr className="bg-gray-200">
-                                        <td className="pl-2">Total Non-operating income</td>
-                                        <td><MoneyFormat value={year.retailDataSummary.totalNOIncome} /></td>
-                                    </tr>
-                                    <tr>
-                                        <td className="pl-2">Total sales income</td>
-                                        <td><MoneyFormat value={year.retailDataSummary.totalSalesIncome} /></td>
-                                    </tr>
-                                    <tr className="bg-gray-200">
-                                        <td className="pl-2">Total Income</td>
-                                        <td><MoneyFormat value={year.retailDataSummary.totalIncome} /></td>
-                                    </tr>
-                                    <tr>
-                                        <td className="pl-2">Total Expenses</td>
-                                        <td><MoneyFormat value={year.retailDataSummary.totalExpenses} /></td>
-                                    </tr>
-                                    <tr className="bg-gray-200">
-                                        <td className="pl-2 font-bold">Total profit/loss</td>
-                                        <td className={`font-bold ${getMoneyTextColorClass(year.retailDataSummary.totalProfitLoss)}`}><MoneyFormat value={year.retailDataSummary.totalProfitLoss} /></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <RetailDataSummaryTable retailDataSummary={year.retailDataSummary} />
                     </div>
 
                     <div className="my-4">
-                        <div className="my-2 card shadow-md rounded-md">
-                            <div className="bg-primary rounded-t-md">
-                                <p className="text-white font-bold text-lg px-2 py-1">Summary of investments</p>
-                            </div>
-                            <table className="table-fixed w-full">
-                                <tbody>
-                                    <tr className="bg-gray-200">
-                                        <td className="pl-2">Total investment from Non-operating income data</td>
-                                        <td><MoneyFormat value={year.investmentSummary.totalFromNOI} /></td>
-                                    </tr>
-                                    <tr>
-                                        <td className="pl-2">Total investment from sales data</td>
-                                        <td><MoneyFormat value={year.investmentSummary.totalFromSales} /></td>
-                                    </tr>
-                                    <tr className="bg-gray-200">
-                                        <td className="pl-2">Total investment from net profit data</td>
-                                        <td><MoneyFormat value={year.investmentSummary.totalFromNetProfit} /></td>
-                                    </tr>
-                                    <tr>
-                                        <td className="pl-2 font-bold">Total investment</td>
-                                        <td className={`font-bold ${getMoneyTextColorClass(year.investmentSummary.total)}`}><MoneyFormat value={year.investmentSummary.total} /></td>
-
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <RetailInvestmentSummaryTable investmentSummary={year.investmentSummary} />
                     </div>
                     {year.applicationStatusSummary.totalAccepted > 0 ? (
                         <>

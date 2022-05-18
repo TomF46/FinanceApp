@@ -5,6 +5,8 @@ import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
 import MoneyFormat from "../../../DisplayComponents/MoneyFormat";
 import YearByYearProfitBarChart from "./charts/YearByYearProfitBarChart";
 import { getMoneyTextColorClass } from "../../../../tools/HelperFunctions";
+import RetailDataSummaryTable from "../../../DisplayComponents/RetailDataSummaryTable";
+import RetailInvestmentSummaryTable from "../../../DisplayComponents/RetailInvestmentSummaryTable";
 
 const AllTimeOverviewPage = () => {
     const [overview, setOverview] = useState(null);
@@ -36,64 +38,11 @@ const AllTimeOverviewPage = () => {
             ) : (
                 <>
                     <div className="my-4">
-                        <div className="my-2 card shadow-md rounded-md">
-                            <div className="bg-primary rounded-t-md">
-                                <p className="text-white font-bold text-lg px-2 py-1">Summary of signed off applications</p>
-                            </div>
-                            <table className="table-fixed w-full">
-                                <tbody>
-                                    <tr className="bg-gray-200">
-                                        <td className="pl-2">Total Non-operating income</td>
-                                        <td><MoneyFormat value={overview.retailDataSummary.totalNOIncome} /></td>
-                                    </tr>
-                                    <tr>
-                                        <td className="pl-2">Total sales income</td>
-                                        <td><MoneyFormat value={overview.retailDataSummary.totalSalesIncome} /></td>
-                                    </tr>
-                                    <tr className="bg-gray-200">
-                                        <td className="pl-2">Total Income</td>
-                                        <td><MoneyFormat value={overview.retailDataSummary.totalIncome} /></td>
-                                    </tr>
-                                    <tr>
-                                        <td className="pl-2">Total Expenses</td>
-                                        <td><MoneyFormat value={overview.retailDataSummary.totalExpenses} /></td>
-                                    </tr>
-                                    <tr className="bg-gray-200">
-                                        <td className="pl-2 font-bold">Total profit/loss</td>
-                                        <td className={`font-bold ${getMoneyTextColorClass(overview.retailDataSummary.totalProfitLoss)}`} ><MoneyFormat value={overview.retailDataSummary.totalProfitLoss} /></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <RetailDataSummaryTable retailDataSummary={overview.retailDataSummary} />
                     </div>
 
                     <div className="my-4">
-                        <div className="my-2 card shadow-md rounded-md">
-                            <div className="bg-primary rounded-t-md">
-                                <p className="text-white font-bold text-lg px-2 py-1">Summary of investments</p>
-                            </div>
-                            <table className="table-fixed w-full">
-                                <tbody>
-                                    <tr className="bg-gray-200">
-                                        <td className="pl-2">Total investment from Non-operating income data</td>
-                                        <td><MoneyFormat value={overview.investmentSummary.totalFromNOI} /></td>
-                                    </tr>
-                                    <tr>
-                                        <td className="pl-2">Total investment from sales data</td>
-                                        <td><MoneyFormat value={overview.investmentSummary.totalFromSales} /></td>
-                                    </tr>
-                                    <tr className="bg-gray-200">
-                                        <td className="pl-2">Total investment from net profit data</td>
-                                        <td><MoneyFormat value={overview.investmentSummary.totalFromNetProfit} /></td>
-                                    </tr>
-                                    <tr>
-                                        <td className="pl-2 font-bold">Total investment</td>
-                                        <td className={`font-bold ${getMoneyTextColorClass(overview.investmentSummary.total)}`}><MoneyFormat value={overview.investmentSummary.total} /></td>
-
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        <RetailInvestmentSummaryTable investmentSummary={overview.investmentSummary} />
                     </div>
                     {overview.hasAcceptedApplications ? (
                         <YearByYearProfitBarChart />

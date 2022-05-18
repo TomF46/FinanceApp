@@ -45,6 +45,10 @@ class RetailLocationsController extends Controller
         return response()->json($retailLocation->mapDetailed());
     }
     
+    public function showData(RetailLocation $retailLocation)
+    {
+        return response()->json($retailLocation->mapData());
+    }
 
     public function store(Request $request)
     {

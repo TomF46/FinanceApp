@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Area;
 use App\Models\User;
+use App\Enums\ApplicationStatus;
+use App\Helpers\NumberHelper;
+use App\Helpers\ApplicationDataHelper;
 
 class RetailLocation extends Model
 {
@@ -31,6 +34,11 @@ class RetailLocation extends Model
     public function applications()
     {
         return $this->hasMany(Application::class);
+    }
+
+    protected function getAcceptedApplications()
+    {
+        return $this->applications()->where('status', ApplicationStatus::Accepted)->get();
     }
 
     protected function mapManagers()
@@ -70,6 +78,19 @@ class RetailLocation extends Model
             "managers" => $this->mapManagers(),
             "totalApplications" => Count($this->applications),
             "applications" => $this->mapApplications()
+        ];
+    }
+
+    public function mapData()
+    {
+        $applications = $this->getAcceptedApplications();
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'location' => $this->location,
+            'hasAcceptedApplications' => Count($applications) > 0, 
+            'retailDataSummary' => ApplicationDataHelper::mapRetailDataSummary($applications),
+            'investmentSummary' => ApplicationDataHelper::mapInvestmentSummary($applications)
         ];
     }
 

@@ -11,6 +11,18 @@ export function getAreaById(id) {
         });
 }
 
+export function getAreaDataById(id) {
+    return axiosClient
+        .get(`/api/areas/${id}/data`)
+        .then(response => {
+            return response.data
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
+
 export function getAreas() {
     return axiosClient
         .get('/api/areas')

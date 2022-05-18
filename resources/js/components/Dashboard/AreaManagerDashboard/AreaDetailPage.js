@@ -36,6 +36,10 @@ const AreaDetailPage = ({ areaId }) => {
                         {area.name}
                     </h1>
 
+                    <div className="my-8 flex justify-center">
+                        <Link to={`/areas/${area.id}/data`} className="bg-primary hover:opacity-75 text-white font-bold py-2 px-4 rounded pointer">Data overview</Link>
+                    </div>
+
                     <div className="my-8">
                         <div className="my-2 card shadow-md rounded-md">
                             <div className="bg-primary rounded-t-md">
