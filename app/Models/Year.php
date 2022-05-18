@@ -9,6 +9,8 @@ use App\Models\RetailLocation;
 use App\Models\Area;
 use App\Enums\ApplicationStatus;
 use App\Helpers\NumberHelper;
+use App\Helpers\ApplicationDataHelper;
+
 
 class Year extends Model
 {
@@ -59,93 +61,12 @@ class Year extends Model
         return $this->applications()->where('status', ApplicationStatus::Accepted)->count();
     }
 
-    protected function getAcceptedApplications()
+    public function getAcceptedApplications()
     {
         return $this->applications()->where('status', ApplicationStatus::Accepted)->get();
     }
 
-    protected function getTotalNonOperatingIncome()
-    {
-        $applications = $this->getAcceptedApplications();
-        $total = 0;
-        foreach ($applications as $application) {
-            $total = $total + $application->getTotalNonOperatingIncome();
-        };
-        return $total;
-    }
-
-    protected function getTotalExpenses()
-    {
-        $applications = $this->getAcceptedApplications();
-        $total = 0;
-        foreach ($applications as $application) {
-            $total = $total + $application->getTotalExpenses();
-        };
-        return $total;
-    }
-
-    protected function getTotalSalesIncome()
-    {
-        $applications = $this->getAcceptedApplications();
-        $total = 0;
-        foreach ($applications as $application) {
-            $total = $total + $application->getTotalSalesIncome();
-        };
-        return $total;   
-    }
-
-    protected function getTotalIncome()
-    {
-        return $this->getTotalNonOperatingIncome() + $this->getTotalSalesIncome();
-    }
-
-    public function getTotalProfitLoss()
-    {
-        return $this->getTotalIncome() - $this->getTotalExpenses();
-    }
-
-    protected function getTotalInvestmentFromNOI()
-    {
-        $applications = $this->getAcceptedApplications();
-        $total = 0;
-        foreach ($applications as $application) {
-            $total = $total + $application->investment->fromNOI;
-        };
-        return $total;
-    }
-
-    protected function getTotalInvestmentFromSales()
-    {
-        $applications = $this->getAcceptedApplications();
-        $total = 0;
-        foreach ($applications as $application) {
-            $total = $total + $application->investment->fromSales;
-        };
-        return $total;
-    }
-
-    protected function getTotalInvestmentFromNetProfit()
-    {
-        $applications = $this->getAcceptedApplications();
-        $total = 0;
-        foreach ($applications as $application) {
-            $total = $total + $application->investment->fromNetProfit;
-        };
-        return $total;
-    }
-
-    protected function getTotalInvestment()
-    {
-        $applications = $this->getAcceptedApplications();
-        $total = 0;
-        foreach ($applications as $application) {
-            $total = $total + $application->investment->getTotalInvestment();
-        };
-        return $total;
-    }
-
-    protected function getRetailTotalProfitDataPoints(){
-        $applications = $this->getAcceptedApplications();
+    protected function getRetailTotalProfitDataPoints($applications){
         return $applications->map(function ($application) {
             return [
                 'title' => $application->retailLocation->name,
@@ -179,6 +100,7 @@ class Year extends Model
 
     public function mapDetail()
     {
+        $applications = $this->getAcceptedApplications();
         return [
             'id' => $this->id,
             'year' => $this->year,
@@ -189,26 +111,16 @@ class Year extends Model
                 'totalReturned' => $this->getTotalReturnedApplications(),
                 'totalAccepted' => $this->getTotalAcceptedApplications(),
             ],
-            'retailDataSummary' => [
-                'totalNOIncome' => NumberHelper::asMoney($this->getTotalNonOperatingIncome()),
-                'totalSalesIncome' => NumberHelper::asMoney($this->getTotalSalesIncome()),
-                'totalIncome' => NumberHelper::asMoney($this->getTotalIncome()),
-                'totalExpenses' => NumberHelper::asMoney($this->getTotalExpenses()),
-                'totalProfitLoss' =>  NumberHelper::asMoney($this->getTotalProfitLoss()),
-            ],
-            'investmentSummary' => [
-                'totalFromNOI' => NumberHelper::asMoney($this->getTotalInvestmentFromNOI()),
-                'totalFromSales' => NumberHelper::asMoney($this->getTotalInvestmentFromSales()),
-                'totalFromNetProfit' => NumberHelper::asMoney($this->getTotalInvestmentFromNetProfit()),
-                'total' => NumberHelper::asMoney($this->getTotalInvestment())
-            ]
+            'retailDataSummary' => ApplicationDataHelper::mapRetailDataSummary($applications),
+            'investmentSummary' => ApplicationDataHelper::mapInvestmentSummary($applications)
         ];
     }
 
     public function mapRetailBarChart()
     {
+        $applications = $this->getAcceptedApplications();
         return [
-            'dataPoints' => $this->getRetailTotalProfitDataPoints(),
+            'dataPoints' => $this->getRetailTotalProfitDataPoints($applications),
             'keys' => [
                 ['key' => "Total Profit", 'color' => "#0096b4"]
             ]
@@ -227,9 +139,10 @@ class Year extends Model
 
     public function mapProfitPieChart()
     {
+        $applications = $this->getAcceptedApplications();
         return [
-            'total' => NumberHelper::asMoney($this->getTotalProfitLoss()),
-            'data' => $this->getRetailTotalProfitDataPoints(),
+            'total' => NumberHelper::asMoney(ApplicationDataHelper::getTotalProfitLoss($applications)),
+            'data' => $this->getRetailTotalProfitDataPoints($applications),
             'dataKey' => 'Total Profit',
             'nameKey' => 'title'
         ];
