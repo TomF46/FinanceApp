@@ -34,6 +34,7 @@ class ProductsTest extends TestCase
             '/api/products',
             [
                 'name' => 'Phone',
+                'description' => 'Its a standard phone',
                 'productCode' => 'XLM203',
                 'cost' => 299.99,
                 'price' => 499.99
@@ -80,6 +81,7 @@ class ProductsTest extends TestCase
             '/api/products/' . $product->id,
             [
                 'name' => 'Console',
+                'description' => 'Its the latest one',
                 'productCode' => 'PSL202',
                 'cost' => 200,
                 'price' => 400
@@ -88,6 +90,7 @@ class ProductsTest extends TestCase
         $response->assertOk();
         $response->assertJson([
             'name' => 'Console',
+            'description' => 'Its the latest one',
             'productCode' => 'PSL202',
             'cost' => 200,
             'price' => 400
@@ -134,6 +137,7 @@ class ProductsTest extends TestCase
             '/api/products',
             [
                 'name' => null,
+                'description' => null,
                 'productCode' => 'XLM203',
                 'cost' => 299.99,
                 'price' => 499.99
