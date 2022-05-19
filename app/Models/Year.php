@@ -116,7 +116,7 @@ class Year extends Model
         ];
     }
 
-    public function mapRetailBarChart()
+    public function mapRetailProfitBarChart()
     {
         $applications = $this->getAcceptedApplications();
         return [
@@ -127,7 +127,7 @@ class Year extends Model
             ];
     }
 
-    public function mapAreasBarChart()
+    public function mapAreasProfitBarChart()
     {
         return [
             'dataPoints' => $this->getAreasTotalProfitDataPoints(),
@@ -137,7 +137,7 @@ class Year extends Model
         ];
     }
 
-    public function mapProfitPieChart()
+    public function mapRetailProfitPieChart()
     {
         $applications = $this->getAcceptedApplications();
         return [

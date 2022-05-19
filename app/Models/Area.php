@@ -136,9 +136,26 @@ class Area extends Model
 
     protected function deactivateLocations()
     {
-
         foreach ($this->retailLocations as $location) {
             $location->deactivate();
         }
+    }
+
+    public function mapYearByYearProfitBarChart()
+    {
+        $years = Year::get();
+        $data = $years->map(function ($year) {
+            return [
+                'title' => $year->year,
+                'Total Profit' => $this->getTotalProfitForYear($year)
+            ];
+        });
+
+        return [
+            'dataPoints' => $data,
+            'keys' => [
+                ['key' => "Total Profit", 'color' => "#0096b4"]
+            ]
+        ];
     }
 }

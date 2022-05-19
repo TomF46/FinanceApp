@@ -9,18 +9,18 @@ use Illuminate\Validation\Rule;
 
 class YearsGraphsController extends Controller
 {
-    public function areasBarChart(Year $year)
+    public function areasProfitBarChart(Year $year)
     {
-        return response()->json($year->mapAreasBarChart());
+        return response()->json($year->mapAreasProfitBarChart());
     }
 
-    public function retailBarChart(Year $year)
+    public function retailProfitBarChart(Year $year)
     {
-        return response()->json($year->mapRetailBarChart());
+        return response()->json($year->mapRetailProfitBarChart());
     }
 
-    public function profitPieChart(Year $year)
+    public function retailProfitPieChart(Year $year)
     {
-        return response()->json($year->mapProfitPieChart());
+        return response()->json($year->mapRetailProfitPieChart());
     }
 }

@@ -105,4 +105,22 @@ class RetailLocation extends Model
             $application->deactivate();
         }
     }
+
+    public function mapYearByYearProfitBarChart()
+    {
+        $applications = $this->getAcceptedApplications();
+        $data = $applications->map(function ($application) {
+            return [
+                'title' => $application->year->year,
+                'Total Profit' => $application->getTotalNetProfit()
+            ];
+        });
+
+        return [
+            'dataPoints' => $data,
+            'keys' => [
+                ['key' => "Total Profit", 'color' => "#0096b4"]
+            ]
+        ];
+    }
 }

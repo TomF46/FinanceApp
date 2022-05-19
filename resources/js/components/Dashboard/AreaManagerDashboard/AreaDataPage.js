@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import RetailDataSummaryTable from "../../DisplayComponents/RetailDataSummaryTable";
 import RetailInvestmentSummaryTable from "../../DisplayComponents/RetailInvestmentSummaryTable";
+import AreaYearByYearProfitBarChart from "./charts/AreaYearByYearProfitBarChart";
 
 
 const AreaDataPage = ({ areaId }) => {
@@ -42,6 +43,12 @@ const AreaDataPage = ({ areaId }) => {
                     <div className="my-4">
                         <RetailInvestmentSummaryTable investmentSummary={area.investmentSummary} />
                     </div>
+
+                    {area.hasAcceptedApplications ? (
+                        <AreaYearByYearProfitBarChart areaId={area.id} />
+                    ) : (
+                        <p className="text-center mt-4">Graphs will appear once applications start to be accepted.</p>
+                    )}
                 </>
             )}
         </>

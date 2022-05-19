@@ -35,7 +35,7 @@ export function AddYear(year) {
 
 export function getYearRetailBarChart(id) {
     return axiosClient
-        .get(`/api/years/${id}/graphs/retailBarChart`)
+        .get(`/api/years/${id}/graphs/retailProfitBarChart`)
         .then(response => {
             return response.data;
         })
@@ -46,7 +46,7 @@ export function getYearRetailBarChart(id) {
 
 export function getProfitPieChart(id) {
     return axiosClient
-        .get(`/api/years/${id}/graphs/profitPieChart`)
+        .get(`/api/years/${id}/graphs/retailProfitPieChart`)
         .then(response => {
             return response.data;
         })
@@ -57,7 +57,7 @@ export function getProfitPieChart(id) {
 
 export function getYearAreasBarChart(id) {
     return axiosClient
-        .get(`/api/years/${id}/graphs/areasBarChart`)
+        .get(`/api/years/${id}/graphs/areasProfitBarChart`)
         .then(response => {
             return response.data;
         })

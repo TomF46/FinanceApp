@@ -8,6 +8,7 @@ import MoneyFormat from "../../../DisplayComponents/MoneyFormat";
 import { getMoneyTextColorClass } from "../../../../tools/HelperFunctions";
 import RetailDataSummaryTable from "../../../DisplayComponents/RetailDataSummaryTable";
 import RetailInvestmentSummaryTable from "../../../DisplayComponents/RetailInvestmentSummaryTable";
+import RetailerYearByYearProfitBarChart from "./charts/RetailerYearByYearProfitBarChart";
 
 const RetailLocationDataPage = ({ retailLocationId }) => {
     const [retailLocation, setRetailLocation] = useState(null);
@@ -43,6 +44,11 @@ const RetailLocationDataPage = ({ retailLocationId }) => {
                     <div className="my-4">
                         <RetailInvestmentSummaryTable investmentSummary={retailLocation.investmentSummary} />
                     </div>
+                    {retailLocation.hasAcceptedApplications ? (
+                        <RetailerYearByYearProfitBarChart retailLocationId={retailLocation.id} />
+                    ) : (
+                        <p className="text-center mt-4">Graphs will appear once applications start to be accepted.</p>
+                    )}
                 </>
             )}
         </>

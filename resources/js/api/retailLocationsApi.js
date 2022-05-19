@@ -119,3 +119,14 @@ export function searchRetailLocationsWithPage(url, searchBody) {
             throw error;
         });
 }
+
+export function getYearByYearProfitBarChart(id) {
+    return axiosClient
+        .get(`/api/retailLocations/${id}/graphs/yearByYearProfitBarChart`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}

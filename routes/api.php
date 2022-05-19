@@ -36,11 +36,14 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/areas/{area}', [App\Http\Controllers\AreasController::class, 'show']);
     Route::get('/areas/{area}/data', [App\Http\Controllers\AreasController::class, 'showData']);
     Route::get('/areaManagers/{user}', [App\Http\Controllers\AreaManagersController::class, 'show']);
+    Route::get('/areas/{area}/graphs/yearByYearProfitBarChart', [App\Http\Controllers\AreaGraphsController::class, 'yearByYearProfitBarChart']);
+
 
     Route::get('/retailLocations', [App\Http\Controllers\RetailLocationsController::class, 'index']);
     Route::get('/retailLocations/{retailLocation}', [App\Http\Controllers\RetailLocationsController::class, 'show']);
     Route::get('/retailLocations/{retailLocation}/data', [App\Http\Controllers\RetailLocationsController::class, 'showData']);
     Route::get('/retailManagers/{user}', [App\Http\Controllers\RetailManagersController::class, 'show']);
+    Route::get('/retailLocations/{retailLocation}/graphs/yearByYearProfitBarChart', [App\Http\Controllers\RetailLocationGraphsController::class, 'yearByYearProfitBarChart']);
 
     Route::get('/years', [App\Http\Controllers\YearsController::class, 'index']);
 
@@ -80,7 +83,6 @@ Route::middleware(['auth:api', 'admin'])->group(function () {
     Route::post('/retailLocations/{retailLocation}/deactivate', [App\Http\Controllers\RetailLocationsController::class, 'deactivate']);
     Route::post('/retailLocations/search', [App\Http\Controllers\RetailLocationsController::class, 'filter']);
 
-
     Route::get('/areaManagers', [App\Http\Controllers\AreaManagersController::class, 'index']);
     Route::get('/retailManagers', [App\Http\Controllers\RetailManagersController::class, 'index']);
 
@@ -95,9 +97,9 @@ Route::middleware(['auth:api', 'admin'])->group(function () {
 Route::middleware(['auth:api', 'headOffice'])->group(function () {
     Route::post('/years', [App\Http\Controllers\YearsController::class, 'store']);
     Route::get('/years/{year}', [App\Http\Controllers\YearsController::class, 'show']);
-    Route::get('/years/{year}/graphs/retailBarChart', [App\Http\Controllers\YearsGraphsController::class, 'retailBarChart']);
-    Route::get('/years/{year}/graphs/areasBarChart', [App\Http\Controllers\YearsGraphsController::class, 'areasBarChart']);
-    Route::get('/years/{year}/graphs/profitPieChart', [App\Http\Controllers\YearsGraphsController::class, 'profitPieChart']);
+    Route::get('/years/{year}/graphs/retailProfitBarChart', [App\Http\Controllers\YearsGraphsController::class, 'retailProfitBarChart']);
+    Route::get('/years/{year}/graphs/areasProfitBarChart', [App\Http\Controllers\YearsGraphsController::class, 'areasProfitBarChart']);
+    Route::get('/years/{year}/graphs/retailProfitPieChart', [App\Http\Controllers\YearsGraphsController::class, 'retailProfitPieChart']);
     
     Route::get('/overview', [App\Http\Controllers\OverviewController::class, 'index']);
     Route::get('/overview/yearByYearProfitBarChart', [App\Http\Controllers\OverviewController::class, 'yearByYearProfitBarChart']);

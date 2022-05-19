@@ -132,3 +132,15 @@ export function removeAreaManager(area, id) {
             throw error.response;
         });
 }
+
+export function getYearByYearProfitBarChart(id) {
+    return axiosClient
+        .get(`/api/areas/${id}/graphs/yearByYearProfitBarChart`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
