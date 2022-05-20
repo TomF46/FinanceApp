@@ -36,7 +36,7 @@ class RetailLocation extends Model
         return $this->hasMany(Application::class);
     }
 
-    protected function getAcceptedApplications()
+    public function getAcceptedApplications()
     {
         return $this->applications()->where('status', ApplicationStatus::Accepted)->get();
     }

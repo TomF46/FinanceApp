@@ -144,3 +144,13 @@ export function getYearByYearProfitBarChart(id) {
         });
 }
 
+export function getRetailerProfitContributionBarChart(id) {
+    return axiosClient
+        .get(`/api/areas/${id}/graphs/retailerProfitContributionBarChart`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}

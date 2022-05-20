@@ -37,7 +37,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/areas/{area}/data', [App\Http\Controllers\AreasController::class, 'showData']);
     Route::get('/areaManagers/{user}', [App\Http\Controllers\AreaManagersController::class, 'show']);
     Route::get('/areas/{area}/graphs/yearByYearProfitBarChart', [App\Http\Controllers\AreaGraphsController::class, 'yearByYearProfitBarChart']);
-
+    Route::get('/areas/{area}/graphs/retailerProfitContributionBarChart', [App\Http\Controllers\AreaGraphsController::class, 'retailerProfitContributionBarChart']);
 
     Route::get('/retailLocations', [App\Http\Controllers\RetailLocationsController::class, 'index']);
     Route::get('/retailLocations/{retailLocation}', [App\Http\Controllers\RetailLocationsController::class, 'show']);

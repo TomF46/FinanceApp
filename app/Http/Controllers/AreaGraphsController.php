@@ -14,4 +14,9 @@ class AreaGraphsController extends Controller
     {
         return response()->json($area->mapYearByYearProfitBarChart());
     }
+
+    public function retailerProfitContributionBarChart(Area $area)
+    {
+        return response()->json($area->mapRetailerProfitContributionBarChart());
+    }
 }

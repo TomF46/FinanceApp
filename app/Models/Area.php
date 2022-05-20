@@ -158,4 +158,21 @@ class Area extends Model
             ]
         ];
     }
+
+    public function mapRetailerProfitContributionBarChart()
+    {
+        $data = $this->retailLocations->map(function ($location) {
+            return [
+                'title' => $location->name,
+                'Total Profit' => ApplicationDataHelper::getTotalProfitLoss($location->getAcceptedApplications())
+            ];
+        });
+
+        return [
+            'dataPoints' => $data,
+            'keys' => [
+                ['key' => "Total Profit", 'color' => "#0096b4"]
+            ]
+        ];
+    }
 }

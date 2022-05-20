@@ -7,6 +7,7 @@ import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import RetailDataSummaryTable from "../../DisplayComponents/RetailDataSummaryTable";
 import RetailInvestmentSummaryTable from "../../DisplayComponents/RetailInvestmentSummaryTable";
 import AreaYearByYearProfitBarChart from "./charts/AreaYearByYearProfitBarChart";
+import AreaRetailerProfitContributionBarChart from "./charts/AreaRetailerProfitContributionBarChart";
 
 
 const AreaDataPage = ({ areaId }) => {
@@ -45,7 +46,10 @@ const AreaDataPage = ({ areaId }) => {
                     </div>
 
                     {area.hasAcceptedApplications ? (
-                        <AreaYearByYearProfitBarChart areaId={area.id} />
+                        <>
+                            <AreaYearByYearProfitBarChart areaId={area.id} />
+                            <AreaRetailerProfitContributionBarChart areaId={area.id} />
+                        </>
                     ) : (
                         <p className="text-center mt-4">Graphs will appear once applications start to be accepted.</p>
                     )}
