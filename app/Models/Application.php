@@ -68,18 +68,6 @@ class Application extends Model
         return [
             'id' => $this->id,
             'year' => $this->year,
-            'retailLocationName' => $this->retailLocation->name,
-            'retailLocationId' => $this->retailLocation->id,
-            'status' => $this->status,
-            'statusText' => $this->getStatusText()
-        ];
-    }
-
-    public function mapForAreaManager()
-    {
-        return [
-            'id' => $this->id,
-            'year' => $this->year,
             'areaName' => $this->retailLocation->area->name,
             'areaId' => $this->retailLocation->area->id,
             'retailLocationName' => $this->retailLocation->name,

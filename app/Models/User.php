@@ -79,27 +79,42 @@ class User extends Authenticatable
         })->values();
     }
 
-    protected function mapApplications()
+    protected function getApplicationsForRetailer()
     {
         $ids = $this->retailLocations->pluck('id');
-        $applications = Application::whereIn('retail_location_id', $ids)->where('status', "!=", ApplicationStatus::Inactive)->get()->map(function ($application) {
-            return $application->map();
-        });
-
-        return $applications;
+        return Application::whereIn('retail_location_id', $ids)->where('status', "!=", ApplicationStatus::Inactive)->get();
     }
 
-    protected function mapAreaApplications()
+    protected function mapApplications($applications)
+    {
+        return $applications->map(function ($application) {
+            return $application->map();
+        })->values();
+    }
+
+    protected function mapApplicationsForAreaManager($applications)
+    {
+        return $applications->map(function ($application) {
+            return $application->mapForAreaManager();
+        })->values();
+    }
+
+    protected function mapApplicationsByStatus($applications) {
+        return [
+            'notSubmitted' => $this->mapApplications($applications->where('status', ApplicationStatus::NotSubmitted)),
+            'submitted' => $this->mapApplications($applications->where('status', ApplicationStatus::Submitted)),
+            'returned' => $this->mapApplications($applications->where('status', ApplicationStatus::Returned)),
+            'accepted' => $this->mapApplications($applications->where('status', ApplicationStatus::Accepted)),
+        ];
+    }
+
+    protected function getAreaManagersApplications()
     {
         $ids = $this->areas->pluck('id');
         $locations = RetailLocation::whereIn('area_id', $ids)->get();
-
         $locationIds = $locations->pluck('id');
-        $applications = Application::whereIn('retail_location_id', $locationIds)->where('status', "!=", ApplicationStatus::Inactive)->get()->map(function ($application) {
-            return $application->mapForAreaManager();
-        });
 
-        return $applications;
+        return $applications = Application::whereIn('retail_location_id', $locationIds)->where('status', "!=", ApplicationStatus::Inactive)->get();
     }
 
     public function getFullName()
@@ -138,6 +153,7 @@ class User extends Authenticatable
 
     public function mapAsRetailManager()
     {
+        $applications = $this->getApplicationsForRetailer();
         return [
             'id' => $this->id,
             'firstName' => $this->firstName,
@@ -147,12 +163,13 @@ class User extends Authenticatable
             'role' => $this->role,
             "roleTitle" => $this->getRoleTitle(),
             "retailLocationsManaged" => $this->mapLocations(),
-            "applications" => $this->mapApplications()
+            "applications" => $this->mapApplicationsByStatus($applications)
         ];
     }
 
     public function mapAsAreaManager()
     {
+        $applications = $this->getAreaManagersApplications();
         return [
             'id' => $this->id,
             'firstName' => $this->firstName,
@@ -162,7 +179,7 @@ class User extends Authenticatable
             'role' => $this->role,
             "roleTitle" => $this->getRoleTitle(),
             "areasManaged" => $this->mapAreas(),
-            "applications" => $this->mapAreaApplications()
+            "applications" => $this->mapApplicationsByStatus($applications)
         ];
     }
 

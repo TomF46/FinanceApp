@@ -24,6 +24,10 @@ const AreaManagerDashboard = ({ user }) => {
         });
     }
 
+    function getApplicationsRequireAttention(applications) {
+        return applications.returned.concat(applications.notSubmitted);
+    }
+
     return (
         <div className="area-manager-dashboard">
             <div className="grid grid-cols-12 pb-4">
@@ -54,13 +58,43 @@ const AreaManagerDashboard = ({ user }) => {
                             </div>
 
                             <div>
-                                <div className="card shadow-md rounded-md">
+                                <div className="card shadow-md rounded-md mb-8">
                                     <div className="bg-primary rounded-t-md">
-                                        <p className="text-white font-bold text-lg px-2 py-1">My Applications</p>
+                                        <p className="text-white font-bold text-lg px-2 py-1">Applications Requiring Attention</p>
                                     </div>
                                     <div>
-                                        {areaManager.applications.length > 0 ? (
-                                            <AreaApplicationsList applications={areaManager.applications} />
+                                        {areaManager.applications.submitted.length > 0 ? (
+                                            <AreaApplicationsList applications={areaManager.applications.submitted} />
+                                        ) : (
+                                            <p className="text-center p-4">You do not currently have any applications awaiting sign off.</p>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div className="card shadow-md rounded-md mb-8">
+                                    <div className="bg-primary rounded-t-md">
+                                        <p className="text-white font-bold text-lg px-2 py-1">Applications Awaiting Response</p>
+                                    </div>
+                                    <div>
+                                        {(areaManager.applications.notSubmitted.length + areaManager.applications.returned.length) > 0 ? (
+                                            <AreaApplicationsList applications={getApplicationsRequireAttention(areaManager.applications)} />
+                                        ) : (
+                                            <p className="text-center p-4">You do not currently have any applications that require attention from retailers.</p>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div className="card shadow-md rounded-md">
+                                    <div className="bg-primary rounded-t-md">
+                                        <p className="text-white font-bold text-lg px-2 py-1">My Finished Applications</p>
+                                    </div>
+                                    <div>
+                                        {areaManager.applications.accepted.length > 0 ? (
+                                            <AreaApplicationsList applications={areaManager.applications.accepted} />
                                         ) : (
                                             <p className="text-center p-4">You do not currently have any applications.</p>
                                         )}

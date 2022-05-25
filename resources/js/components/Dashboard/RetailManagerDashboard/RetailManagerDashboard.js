@@ -17,12 +17,19 @@ const RetailManagerDashboard = ({ user }) => {
 
     function getRetailManager() {
         getRetailManagerById(user.id).then(retailManagerData => {
+            console.log(retailManagerData);
             setRetailManager(retailManagerData);
         }).catch(error => {
             toast.error("Error getting retail manager data " + error.message, {
                 autoClose: false,
             });
         });
+    }
+
+    function getApplicationsRequireAttention(applications) {
+        console.log(applications.returned);
+        console.log(applications.notSubmitted);
+        return applications.returned.concat(applications.notSubmitted);
     }
 
     return (
@@ -52,13 +59,43 @@ const RetailManagerDashboard = ({ user }) => {
                             </div>
 
                             <div>
-                                <div className="card shadow-md rounded-md">
+                                <div className="card shadow-md rounded-md mb-8">
                                     <div className="bg-primary rounded-t-md">
-                                        <p className="text-white font-bold text-lg px-2 py-1">My Applications</p>
+                                        <p className="text-white font-bold text-lg px-2 py-1">Applications Requiring Attention</p>
                                     </div>
                                     <div>
-                                        {retailManager.applications.length > 0 ? (
-                                            <ApplicationsList applications={retailManager.applications} />
+                                        {(retailManager.applications.notSubmitted.length + retailManager.applications.returned.length) > 0 ? (
+                                            <ApplicationsList applications={getApplicationsRequireAttention(retailManager.applications)} />
+                                        ) : (
+                                            <p className="text-center p-4">You do not currently have any applications that require attention.</p>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div className="card shadow-md rounded-md mb-8">
+                                    <div className="bg-primary rounded-t-md">
+                                        <p className="text-white font-bold text-lg px-2 py-1">Applications Awaiting Response</p>
+                                    </div>
+                                    <div>
+                                        {retailManager.applications.submitted.length > 0 ? (
+                                            <ApplicationsList applications={retailManager.applications.submitted} />
+                                        ) : (
+                                            <p className="text-center p-4">You do not currently have any applications awaiting sign off.</p>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div className="card shadow-md rounded-md">
+                                    <div className="bg-primary rounded-t-md">
+                                        <p className="text-white font-bold text-lg px-2 py-1">My Finished Applications</p>
+                                    </div>
+                                    <div>
+                                        {retailManager.applications.accepted.length > 0 ? (
+                                            <ApplicationsList applications={retailManager.applications.accepted} />
                                         ) : (
                                             <p className="text-center p-4">You do not currently have any applications.</p>
                                         )}
