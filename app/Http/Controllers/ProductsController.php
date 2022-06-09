@@ -10,7 +10,13 @@ use Illuminate\Validation\Rule;
 
 class ProductsController extends Controller
 {
-    public function index(Request $request)
+
+    /**
+     * Return list of active products.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
         $products = Product::where('active', true)->get()->map(function ($product) {
             return $product->map();
@@ -18,6 +24,12 @@ class ProductsController extends Controller
         return response()->json($products);
     }
 
+    /**
+     * Returns Products that match filter request
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function filter(Request $request)
     {
         $paginator = ProductSearch::apply($request)->paginate(20);
@@ -28,6 +40,12 @@ class ProductsController extends Controller
         return response()->json($paginator);
     }
 
+    /**
+     * Store new product
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
         $attributes = $this->validateProduct($request);
@@ -43,6 +61,13 @@ class ProductsController extends Controller
         return response()->json($product, 201);
     }
 
+    /**
+     * Updates the product by its ID.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param Product $product
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, Product $product)
     {
         $attributes = $this->validateProduct($request);
@@ -56,11 +81,23 @@ class ProductsController extends Controller
         return response()->json($product);
     }
 
+    /**
+     * Returns product by its ID.
+     *
+     * @param Product $product
+     * @return \Illuminate\Http\Response
+     */
     public function show(Product $product)
     {
         return response()->json($product->map());
     }
 
+    /**
+     * Deactivate the product by its ID. (Product is not deleted from DB)
+     *
+     * @param Product $product
+     * @return \Illuminate\Http\Response
+     */
     public function deactivate(Product $product)
     {
         $product->deactivate();

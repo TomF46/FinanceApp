@@ -11,7 +11,12 @@ use Illuminate\Validation\Rule;
 
 class RetailManagersController extends Controller
 {
-    public function index(Request $request)
+    /**
+     * Returns list of Retail managers who are active
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
         $retailManagers = User::where('role', '=', Roles::RetailManager)->where('active', true)->get();
         $retailManagers = $retailManagers->map(function ($user) {
@@ -20,7 +25,13 @@ class RetailManagersController extends Controller
         return response()->json($retailManagers);
     }
 
-    public function show(Request $request, User $user)
+    /**
+     * Returns Retail Manager by ID
+     *
+     * @param User $user
+     * @return \Illuminate\Http\Response
+     */
+    public function show(User $user)
     {
         return response()->json($user->mapAsRetailManager());
     }

@@ -11,7 +11,12 @@ use Illuminate\Validation\Rule;
 
 class AreaManagersController extends Controller
 {
-    public function index(Request $request)
+    /**
+     * Returns list of Area managers who are active
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
         $areaManagers = User::where('role', '=', Roles::AreaManager)->where('active', true)->get();
         $areaManagers = $areaManagers->map(function ($user) {
@@ -20,7 +25,13 @@ class AreaManagersController extends Controller
         return response()->json($areaManagers);
     }
 
-    public function show(Request $request, User $user)
+    /**
+     * Returns Area Manager by ID
+     *
+     * @param User $user
+     * @return \Illuminate\Http\Response
+     */
+    public function show(User $user)
     {
         return response()->json($user->mapAsAreaManager());
     }

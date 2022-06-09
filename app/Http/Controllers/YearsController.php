@@ -9,7 +9,12 @@ use Illuminate\Validation\Rule;
 
 class YearsController extends Controller
 {
-    public function index(Request $request)
+    /**
+     * Returns list of Years
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
         $years = Year::all()->map(function ($year) {
             return $year->map();
@@ -17,11 +22,23 @@ class YearsController extends Controller
         return response()->json($years);
     }
 
+    /**
+     * Returns the Year by its ID.
+     *
+     * @param Year $year
+     * @return \Illuminate\Http\Response
+     */
     public function show(Year $year)
     {
         return response()->json($year->mapDetail());
     }
 
+    /**
+     * Stores a new Year
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
         $attributes = $this->validateYear($request);

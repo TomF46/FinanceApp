@@ -10,6 +10,12 @@ use App\Enums\Roles;
 
 class AuthController extends Controller
 {
+    /**
+     * Create a new user
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function register(Request $request)
     {
         $attributes = $this->validateRegistration($request);
@@ -25,6 +31,12 @@ class AuthController extends Controller
         ], 201);
     }
 
+    /**
+     * Create a new user with head office role
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function registerHeadOffice(Request $request)
     {
         $attributes = $this->validateRegistration($request);
@@ -35,6 +47,12 @@ class AuthController extends Controller
         ], 201);
     }
 
+    /**
+     * Create a new user with area manager role
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function registerAreaManager(Request $request)
     {
         $attributes = $this->validateRegistration($request);
@@ -45,6 +63,12 @@ class AuthController extends Controller
         ], 201);
     }
 
+    /**
+     * Create a new user with retailer role
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function registerRetailer(Request $request)
     {
         $attributes = $this->validateRegistration($request);
@@ -55,6 +79,12 @@ class AuthController extends Controller
         ], 201);
     }
 
+    /**
+     * Return access token if details match stored user
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function login(Request $request)
     {
         $attributes = $this->validateLogin($request);
@@ -88,6 +118,12 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * Revoke access token for current user
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function logout(Request $request)
     {
         $request->user()->token()->revoke();
@@ -96,11 +132,23 @@ class AuthController extends Controller
         ]);
     }
 
+    /**
+     * Return currently logged in user
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function user(Request $request)
     {
         return response()->json($request->user()->map());
     }
 
+    /**
+     * Updates password for the current user
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function changePassword(Request $request)
     {
         $user = $request->user();

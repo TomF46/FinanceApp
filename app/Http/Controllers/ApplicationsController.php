@@ -9,11 +9,24 @@ use Illuminate\Validation\Rule;
 
 class ApplicationsController extends Controller
 {
-    public function show(Request $request, Application $application)
+    /**
+     * Returns selected application by ID
+     *
+     * @param Application $application
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Application $application)
     {
         return response()->json($application->mapDetail());
     }
 
+    /**
+     * Submits application by ID
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param Application $application
+     * @return \Illuminate\Http\Response
+     */
     public function submit(Request $request, Application $application)
     {
         $user = $request->user();
@@ -31,6 +44,13 @@ class ApplicationsController extends Controller
         ], 200);
     }
 
+    /**
+     * Accepts application by ID
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param Application $application
+     * @return \Illuminate\Http\Response
+     */
     public function accept(Request $request, Application $application)
     {
         $user = $request->user();
@@ -46,6 +66,13 @@ class ApplicationsController extends Controller
         ], 200);
     }
 
+    /**
+     * Rejects application by ID
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param Application $application
+     * @return \Illuminate\Http\Response
+     */
     public function reject(Request $request, Application $application)
     {
         $user = $request->user();
@@ -63,14 +90,26 @@ class ApplicationsController extends Controller
         ], 200);
     }
 
-    public function showRejectMessage(Request $request, Application $application)
+    /**
+     * Returns rejection message linked to rejected application with ID
+     *
+     * @param Application $application
+     * @return \Illuminate\Http\Response
+     */
+    public function showRejectMessage(Application $application)
     {
         $message = $application->getRejectionMessage();
 
         return response()->json($message);
     }
 
-    public function showInvestment(Request $request, Application $application)
+    /**
+     * Returns investment summary linked to accepted application with ID
+     *
+     * @param Application $application
+     * @return \Illuminate\Http\Response
+     */
+    public function showInvestment(Application $application)
     {
         $investment = $application->investment->map();
         return response()->json($investment);

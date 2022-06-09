@@ -8,9 +8,15 @@ use App\Enums\Roles;
 use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 
+
 class UsersController extends Controller
 {
-    public function index(Request $request)
+    /**
+     * Return paginated list of active users.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
         $users = User::orderBy('role', 'asc')->where('active', true)->paginate(20);
         $users->getCollection()->transform(function ($user){
@@ -19,6 +25,12 @@ class UsersController extends Controller
         return response()->json($users);
     }
 
+    /**
+     * Returns Users that match filter request
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function filter(Request $request)
     {
         $paginator = UserSearch::apply($request)->paginate(20);
@@ -29,11 +41,24 @@ class UsersController extends Controller
         return response()->json($paginator);
     }
 
-    public function show(Request $request, User $user)
+    /**
+     * Returns the user given by its ID.
+     *
+     * @param User $user
+     * @return \Illuminate\Http\Response
+     */
+    public function show(User $user)
     {
         return response()->json($user->mapDetailed());
     }
 
+    /**
+     * Updates the user given by its ID.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param User $user
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, User $user)
     {
         $attributes = $this->validateUpdate($request);
@@ -42,6 +67,12 @@ class UsersController extends Controller
         return response()->json($user);
     }
 
+    /**
+     * Deactivate the user given by its ID. (User is not deleted from DB)
+     *
+     * @param User $user
+     * @return \Illuminate\Http\Response
+     */
     public function deactivate(User $user)
     {
         $user->active = false;
@@ -49,6 +80,13 @@ class UsersController extends Controller
         return response()->noContent();
     }
 
+    /**
+     * Updates password for the user given by its ID. (Admins can change non admins passwords)
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param User $user
+     * @return \Illuminate\Http\Response
+     */
     public function changePassword(Request $request, User $user)
     {
         $attributes = $this->validatePasswordChange($request);

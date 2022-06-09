@@ -13,6 +13,11 @@ use Illuminate\Validation\Rule;
 
 class RetailLocationsController extends Controller
 {
+    /**
+     * Return paginated list of active retail locations.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index(Request $request)
     {
         $retailLocations = null;
@@ -30,6 +35,12 @@ class RetailLocationsController extends Controller
         return response()->json($retailLocations);
     }
 
+    /**
+     * Returns retail locations that match filter request
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function filter(Request $request)
     {
         $paginator = RetailLocationSearch::apply($request)->paginate(20);
@@ -40,16 +51,34 @@ class RetailLocationsController extends Controller
         return response()->json($paginator);
     }
 
+    /**
+     * Returns retail location by its ID.
+     *
+     * @param RetailLocation $retailLocation
+     * @return \Illuminate\Http\Response
+     */
     public function show(RetailLocation $retailLocation)
     {
         return response()->json($retailLocation->mapDetailed());
     }
     
+    /**
+     * Returns retail location data view by its ID.
+     *
+     * @param RetailLocation $retailLocation
+     * @return \Illuminate\Http\Response
+     */
     public function showData(RetailLocation $retailLocation)
     {
         return response()->json($retailLocation->mapData());
     }
 
+    /**
+     * Store new Retail Location
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
         $attributes = $this->validateRetailLocation($request);
@@ -66,6 +95,13 @@ class RetailLocationsController extends Controller
         return response()->json($retailLocation, 201);
     }
 
+    /**
+     * Updates the retail location by its ID.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param RetailLocation $retailLocation
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, RetailLocation $retailLocation)
     {
         $attributes = $this->validateRetailLocationUpdate($request, $retailLocation);
@@ -79,14 +115,27 @@ class RetailLocationsController extends Controller
         $retailLocation->save();
         $retailLocation = $retailLocation->fresh();
         return response()->json($retailLocation);
-    }
+    }   
 
+    /**
+     * Deactivate the retail location by its ID. (Location is not deleted from DB)
+     *
+     * @param RetailLocation $retailLocation
+     * @return \Illuminate\Http\Response
+     */
     public function deactivate(RetailLocation $retailLocation)
     {
         $retailLocation->deactivate();
         return response()->noContent();
     }
 
+    /**
+     * Assign manager (User) to Retail Location
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param RetailLocation $retailLocation
+     * @return \Illuminate\Http\Response
+     */
     public function addManager(Request $request, RetailLocation $retailLocation)
     {
         $attributes = $this->validateAddManager($request);
@@ -101,6 +150,13 @@ class RetailLocationsController extends Controller
         return response()->json($retailLocation);
     }
 
+    /**
+     * Deassign manager (User) from Retail Location
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param RetailLocation $retailLocation
+     * @return \Illuminate\Http\Response
+     */
     public function removeManager(RetailLocation $retailLocation, User $user)
     {
         $retailLocation->managers()->detach($user);

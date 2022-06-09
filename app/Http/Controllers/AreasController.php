@@ -12,6 +12,11 @@ use Illuminate\Validation\Rule;
 
 class AreasController extends Controller
 {
+    /**
+     * Return paginated list of active areas.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index(Request $request)
     {
         $areas = null;
@@ -30,6 +35,12 @@ class AreasController extends Controller
     return response()->json($areas);
     }
 
+    /**
+     * Returns Areas that match filter request
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function filter(Request $request)
     {
         $paginator = AreaSearch::apply($request)->paginate(20);
@@ -40,16 +51,34 @@ class AreasController extends Controller
         return response()->json($paginator);
     }
 
+    /**
+     * Returns area by its ID.
+     *
+     * @param Area $area
+     * @return \Illuminate\Http\Response
+     */
     public function show(Area $area)
     {
         return response()->json($area->mapDetail());
     }
 
+    /**
+     * Returns area data view by area ID.
+     *
+     * @param Area $area
+     * @return \Illuminate\Http\Response
+     */
     public function showData(Area $area)
     {
         return response()->json($area->mapData());
     }
 
+    /**
+     * Store new Area
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function store(Request $request)
     {
         $attributes = $this->validateArea($request);
@@ -61,6 +90,13 @@ class AreasController extends Controller
         return response()->json($area, 201);
     }
 
+    /**
+     * Updates the area by its ID.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param Area $area
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, Area $area)
     {
         $attributes = $this->validateAreaUpdate($request, $area);
@@ -70,12 +106,25 @@ class AreasController extends Controller
         return response()->json($area);
     }
 
+    /**
+     * Deactivate the area by its ID. (Area is not deleted from DB)
+     *
+     * @param Area $area
+     * @return \Illuminate\Http\Response
+     */
     public function deactivate(Area $area)
     {
         $area->deactivate();
         return response()->noContent();
     }
 
+    /**
+     * Assign manager (User) to Area
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param Area $area
+     * @return \Illuminate\Http\Response
+     */
     public function addManager(Request $request, Area $area)
     {
         $attributes = $this->validateAddManager($request);
@@ -90,6 +139,13 @@ class AreasController extends Controller
         return response()->json($area);
     }
 
+    /**
+     * Deassign manager (User) from Area
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param Area $area
+     * @return \Illuminate\Http\Response
+     */
     public function removeManager(Area $area, User $user)
     {
         $area->managers()->detach($user);
