@@ -96,3 +96,12 @@ If Accepted
 - Docker with Laravel sail
 - PHP packages see `composer.json`
 - JS packages see `package.json`
+
+## Media
+
+- [Admin employee creation](https://www.youtube.com/watch?v=WCDHkjoU5WI)
+- [Admin product creation](https://www.youtube.com/watch?v=lNrl2kBRAVE)
+- [Application year creation](https://www.youtube.com/watch?v=1kHOFyMa_6A)
+- [Retail manager application](https://www.youtube.com/watch?v=YlqPyZKBnks)
+- [Area manager review](https://www.youtube.com/watch?v=0WcvZku3F4A)
+- [Head office overview](https://www.youtube.com/watch?v=opaKzj7ZPV4)
