@@ -40,8 +40,17 @@ class AdvancedSeeder extends Seeder
             'role' => Roles::AreaManager
         ]);
 
+        $areaManager2 = User::factory()->create([
+            'email' => 'areaManager2@email.com',
+            'password' => bcrypt(env('TESTING_PASSWORD')),
+            'role' => Roles::AreaManager
+        ]);
+
         $area = Area::factory()->create();
         $area->managers()->save($areaManager);
+
+        $area2 = Area::factory()->create();
+        $area2->managers()->save($areaManager2);
 
         $retailManager = User::factory()->create([
             'email' => 'retailManager@email.com',
@@ -53,6 +62,39 @@ class AdvancedSeeder extends Seeder
             'area_id' => $area->id
         ]);
         $location->managers()->save($retailManager);
+
+        $retailManager2 = User::factory()->create([
+            'email' => 'retailManager2@email.com',
+            'password' => bcrypt(env('TESTING_PASSWORD')),
+            'role' => Roles::RetailManager
+        ]);
+
+        $location2 = RetailLocation::factory()->create([
+            'area_id' => $area->id
+        ]);
+        $location2->managers()->save($retailManager2);
+
+        $retailManager3 = User::factory()->create([
+            'email' => 'retailManager3@email.com',
+            'password' => bcrypt(env('TESTING_PASSWORD')),
+            'role' => Roles::RetailManager
+        ]);
+
+        $location3 = RetailLocation::factory()->create([
+            'area_id' => $area2->id
+        ]);
+        $location3->managers()->save($retailManager3);
+
+        $retailManager4 = User::factory()->create([
+            'email' => 'retailManager4@email.com',
+            'password' => bcrypt(env('TESTING_PASSWORD')),
+            'role' => Roles::RetailManager
+        ]);
+
+        $location4 = RetailLocation::factory()->create([
+            'area_id' => $area2->id
+        ]);
+        $location4->managers()->save($retailManager4);
 
         $product1 = Product::factory()->create([
             'name' => 'Boss Katana 50',
