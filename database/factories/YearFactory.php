@@ -22,7 +22,8 @@ class YearFactory extends Factory
     public function definition()
     {
         return [
-            'year' => $this->faker->unique()->year()
+            'year' => $this->faker->unique()->year(),
+            'published' => true
         ];
     }
 }

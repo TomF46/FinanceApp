@@ -44,18 +44,26 @@ class YearsController extends Controller
         $attributes = $this->validateYear($request);
 
         $year = Year::create([
-            'year' => $attributes['year']
+            'year' => $attributes['year'],
+            'published' => $attributes['publish']
         ]);
 
-        $year->generateApplications();
+        if($year->published) $year->generateApplications();
 
         return response()->json($year, 201);
+    }
+
+    public function publish(Request $request, Year $year)
+    {
+        $year->publish();
+        return response()->noContent();
     }
 
     protected function validateYear(Request $request)
     {
         return $request->validate([
-            'year' => 'required|unique:years|max:40'
+            'year' => 'required|unique:years|max:40',
+            'publish' => 'required|boolean'
         ]);
     }
 

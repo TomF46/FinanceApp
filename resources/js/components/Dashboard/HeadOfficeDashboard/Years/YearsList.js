@@ -20,6 +20,14 @@ const YearsList = () => {
         }
     }, [years])
 
+    function getStatus(year){
+        if(!year.published) return "Unpublished";
+
+        if(year.totalAccepted == year.totalApplications) return "Complete";
+
+        return "Active";
+    }
+
     return (
         <div className="years-list">
             <div className="col-span-12">
@@ -38,7 +46,7 @@ const YearsList = () => {
                                             {years.map((year) => {
                                                 return (
                                                     <div key={year.id} className="grid grid-cols-12 px-2 py-1 border-b border-gray-200 overflow-hidden">
-                                                        <div className="col-span-2">
+                                                        <div className="col-span-1">
                                                             <p className="text-sm text-gray-600">Year:</p>
                                                             <Link to={`/headOffice/years/${year.id}`} className="font-bold text-primary hover:text-secondary text-lg items-center pointer">{year.year}</Link>
                                                         </div>
@@ -61,6 +69,10 @@ const YearsList = () => {
                                                         <div className="col-span-2">
                                                             <p className="text-sm text-gray-600">Accepted:</p>
                                                             <p>{year.totalAccepted}</p>
+                                                        </div>
+                                                        <div className="col-span-1">
+                                                            <p className="text-sm text-gray-600">Status:</p>
+                                                            <p className="text-sm">{getStatus(year)}</p>
                                                         </div>
                                                     </div>
                                                 )

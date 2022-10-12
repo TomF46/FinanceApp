@@ -65,3 +65,14 @@ export function getYearAreasBarChart(id) {
             throw error;
         });
 }
+
+export function publishYear(yearId){
+    return axiosClient
+        .post(`/api/years/${yearId}/publish`, {})
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}

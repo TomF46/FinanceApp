@@ -17,7 +17,6 @@ const RetailManagerDashboard = ({ user }) => {
 
     function getRetailManager() {
         getRetailManagerById(user.id).then(retailManagerData => {
-            console.log(retailManagerData);
             setRetailManager(retailManagerData);
         }).catch(error => {
             toast.error("Error getting retail manager data " + error.message, {
@@ -27,8 +26,6 @@ const RetailManagerDashboard = ({ user }) => {
     }
 
     function getApplicationsRequireAttention(applications) {
-        console.log(applications.returned);
-        console.log(applications.notSubmitted);
         return applications.returned.concat(applications.notSubmitted);
     }
 

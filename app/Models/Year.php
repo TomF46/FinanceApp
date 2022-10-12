@@ -17,7 +17,8 @@ class Year extends Model
     use HasFactory;
     public $timestamps = false;
     protected $fillable = [
-        'year'
+        'year',
+        'published'
     ];
 
     public function applications()
@@ -94,7 +95,8 @@ class Year extends Model
             'totalNotStarted' => $this->getTotalNotStartedApplications(),
             'totalAwaitingSignOff' => $this->getTotalAwaitingSignOffApplications(),
             'totalReturned' => $this->getTotalReturnedApplications(),
-            'totalAccepted' => $this->getTotalAcceptedApplications()
+            'totalAccepted' => $this->getTotalAcceptedApplications(),
+            'published' => $this->published
         ];
     }
 
@@ -104,6 +106,7 @@ class Year extends Model
         return [
             'id' => $this->id,
             'year' => $this->year,
+            'published' => $this->published,
             'applicationStatusSummary' => [
                 'totalApplications' => $this->getTotalActiveApplications(),
                 'totalNotStarted' => $this->getTotalNotStartedApplications(),
@@ -148,5 +151,11 @@ class Year extends Model
         ];
     }
 
+    public function publish()
+    {
+        $this->published = true;
+        $this->generateApplications();
+        $this->save();
+    }
 
 }

@@ -107,7 +107,8 @@ class AdvancedSeeder extends Seeder
         ]);
 
         $year = Year::factory()->create([
-            'year' => 2021
+            'year' => 2021,
+            'published' => true
         ]);
         $year->generateApplications();
     }

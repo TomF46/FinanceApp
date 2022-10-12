@@ -3,15 +3,14 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
-import { getYearById } from "../../../../api/yearsApi";
-import MoneyFormat from "../../../DisplayComponents/MoneyFormat";
+import { getYearById, publishYear } from "../../../../api/yearsApi";
 import RetailProfitBarChart from "./Breakdown/RetailProfitBarChart";
 import RetailProfitPieChart from "./Breakdown/RetailProfitPieChart";
 import AreasProfitBarChart from "./Breakdown/AreasProfitBarChart";
-import { getMoneyTextColorClass } from "../../../../tools/HelperFunctions";
 import RetailDataSummaryTable from "../../../DisplayComponents/RetailDataSummaryTable";
 import RetailInvestmentSummaryTable from "../../../DisplayComponents/RetailInvestmentSummaryTable";
 import ApplicationsStatusSummary from "../../../DisplayComponents/ApplicationsStatusSummary";
+import { confirmAlert } from "react-confirm-alert";
 
 const YearOverviewPage = ({ yearId }) => {
     const [year, setYear] = useState(null);
@@ -32,6 +31,34 @@ const YearOverviewPage = ({ yearId }) => {
         });
     }
 
+    function confirmPublish(){
+        confirmAlert({
+            title: "Confirm publish",
+            message: `Are you sure you want to publish ${year.year} applications? (This is a one time action once published you can't unpublish)`,
+            buttons: [
+                {
+                    label: "Yes",
+                    onClick: () => handlePublish(),
+                },
+                {
+                    label: "No",
+                    onClick: () => { },
+                },
+            ],
+        });
+    }
+
+    function handlePublish(){
+        publishYear(year.id).then(res => {
+            toast.success("Year published")
+            getYear();
+        }).catch(error => {
+            toast.error(`Error publishing year ${error.message}`, {
+                autoClose: false,
+            });
+        })
+    }
+
     return (
         <>
             {!year ? (
@@ -41,6 +68,15 @@ const YearOverviewPage = ({ yearId }) => {
                     <h1 className="text-center font-bold text-4xl">
                         {year.year}
                     </h1>
+
+                    {!year.published && (
+                        <button
+                        onClick={confirmPublish}
+                        className="bg-primary text-white rounded py-2 px-4 hover:opacity-75"
+                    >
+                        Publish
+                    </button>
+                    )}
 
                     <div className="my-4">
                         <ApplicationsStatusSummary summary={year.applicationStatusSummary} />

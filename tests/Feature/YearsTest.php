@@ -34,6 +34,7 @@ class YearsTest extends TestCase
             '/api/years',
             [
                 'year' => 2021,
+                'publish' => true
             ]
         );
 
@@ -79,7 +80,8 @@ class YearsTest extends TestCase
         ])->postJson(
             '/api/years',
             [
-                'year' => null
+                'year' => null,
+                'publish' => true
             ]
         );
 
