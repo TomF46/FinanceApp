@@ -6,9 +6,8 @@ import { acceptApplication, getApplicationById, rejectApplication } from "../../
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
 import ApplicationReadOnly from "../../../DisplayComponents/ApplicationReadOnly";
 import AreaManagerApplicationControls from "./AreaManagerApplicationControls";
-import { confirmAlert } from "react-confirm-alert";
 import ApplicationSummary from "../../../DisplayComponents/ApplicationSummary";
-import InvestmentSummary from "../../../DisplayComponents/InvestmentSummary";
+import { confirm } from "../../../../tools/PopupHelper";
 
 
 const AreaManagerApplicationViewPage = ({ applicationId }) => {
@@ -34,22 +33,11 @@ const AreaManagerApplicationViewPage = ({ applicationId }) => {
     }
 
     function handleAccept() {
-        confirmAlert({
-            title: "Confirm acceptence",
-            message: `Are you sure you want to accept this application?`,
-            buttons: [
-                {
-                    label: "Yes",
-                    onClick: () => {
-                        accept();
-                    },
-                },
-                {
-                    label: "No",
-                    onClick: () => { },
-                },
-            ],
-        });
+        confirm(
+            "Confirm acceptence",
+            `Are you sure you want to accept this application?`,
+            accept
+        );
     }
 
     function accept() {
@@ -65,28 +53,17 @@ const AreaManagerApplicationViewPage = ({ applicationId }) => {
 
     function handleReject(event) {
         event.preventDefault();
-        if (!messageIsValid()) return;
-        setSaving(true);
-
-        confirmAlert({
-            title: "Confirm rejection",
-            message: `Are you sure you want to reject this application?`,
-            buttons: [
-                {
-                    label: "Yes",
-                    onClick: () => {
-                        reject();
-                    },
-                },
-                {
-                    label: "No",
-                    onClick: () => { },
-                },
-            ],
-        });
+        confirm(
+            "Confirm rejection",
+            `Are you sure you want to reject this application?`,
+            reject
+        )
     }
 
     function reject() {
+        if (!messageIsValid()) return;
+        setSaving(true);
+
         rejectApplication(application, { message: rejectionMessage }).then(res => {
             toast.success("Application rejected");
             getApplication();

@@ -10,6 +10,7 @@ import { getAllProducts } from "../../../../api/productsApi";
 import ApplicationReadOnly from "../../../DisplayComponents/ApplicationReadOnly";
 import ApplicationSummary from "../../../DisplayComponents/ApplicationSummary";
 import * as ApplicationService from "../../../../tools/ApplicationService";
+import { confirm } from "../../../../tools/PopupHelper";
 
 
 const ApplicationPage = ({ applicationId }) => {
@@ -117,8 +118,16 @@ const ApplicationPage = ({ applicationId }) => {
         return totalErrors === 0;
     }
 
-    function handleSave(event) {
+    function handleSave(event){
         event.preventDefault();
+        confirm(
+            "Confirm submission?",
+            "Please ensure you have checked your figures before submitting",
+            save
+        )
+    }
+
+    function save() {
         if (!formIsValid()) return;
         setSaving(true);
 

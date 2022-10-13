@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 import { deactivateProductById, getProductById } from "../../../../api/productsApi";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
 import MoneyFormat from "../../../DisplayComponents/MoneyFormat";
+import { confirm } from "../../../../tools/PopupHelper";
 
 const ProductPage = ({ productId, history }) => {
     const [product, setProduct] = useState(null);
@@ -19,6 +20,13 @@ const ProductPage = ({ productId, history }) => {
         });
     }, [productId]);
 
+    function confirmDeactivate(id){
+        confirm(
+            "Confirm deletion",
+            `Are you sure you want to remove the ${product.name} product?`,
+            () => {deactivate(id)}
+        )
+    }
     function deactivate(id) {
         deactivateProductById(id).then(response => {
             toast.success("Product deactivated");
@@ -70,7 +78,7 @@ const ProductPage = ({ productId, history }) => {
                                 Edit
                             </button>
                             <button
-                                onClick={() => (deactivate(product.id))}
+                                onClick={() => (confirmDeactivate(product.id))}
                                 className="bg-danger hover:opacity-75 text-white font-bold py-2 px-4 rounded pointer"
                             >
                                 Remove
