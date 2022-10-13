@@ -4,6 +4,8 @@ import { saveTokens, removeTokens } from "../../tools/localStorage";
 import * as authenticationApi from "../../api/authenticationApi";
 import { attatchBearerToken } from "../../tools/axiosClient";
 import history from "../../history";
+import { toast } from "react-toastify";
+
 export function userLoginSuccess(tokens) {
     return { type: types.USER_LOGIN_SUCCESS, tokens };
 }
@@ -34,5 +36,6 @@ export function logout() {
         removeTokens();
         history.push("/login");
         dispatch(userLogoutSuccess());
+        toast.info("Logged out.");
     };
 }

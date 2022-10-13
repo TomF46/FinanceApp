@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom'
 import { checkUserIsAdmin } from "../../redux/actions/isAdminActions"
 import { logout } from "../../redux/actions/authenticationActions";
 import { toast } from "react-toastify";
-import { confirmAlert } from "react-confirm-alert";
+import { confirm } from "../../tools/PopupHelper";
 
 const Header = ({ userIsAuthenticated, isAdmin, checkUserIsAdmin, logout }) => {
     const [mobileIsOpen, setMobileIsOpen] = useState(null);
@@ -21,23 +21,11 @@ const Header = ({ userIsAuthenticated, isAdmin, checkUserIsAdmin, logout }) => {
     }
 
     function handleLogout() {
-        confirmAlert({
-            title: "Confirm logout",
-            message: `Are you sure you want to logout?`,
-            buttons: [
-                {
-                    label: "Yes",
-                    onClick: () => {
-                        logout();
-                        toast.info("Logged out.");
-                    },
-                },
-                {
-                    label: "No",
-                    onClick: () => { },
-                },
-            ],
-        });
+        confirm(
+            "Confirm logout",
+            `Are you sure you want to logout?`,
+            logout
+        );
     }
 
     return (

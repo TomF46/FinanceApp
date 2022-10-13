@@ -10,7 +10,7 @@ import AreasProfitBarChart from "./Breakdown/AreasProfitBarChart";
 import RetailDataSummaryTable from "../../../DisplayComponents/RetailDataSummaryTable";
 import RetailInvestmentSummaryTable from "../../../DisplayComponents/RetailInvestmentSummaryTable";
 import ApplicationsStatusSummary from "../../../DisplayComponents/ApplicationsStatusSummary";
-import { confirmAlert } from "react-confirm-alert";
+import { confirm } from "../../../../tools/PopupHelper";
 
 const YearOverviewPage = ({ yearId }) => {
     const [year, setYear] = useState(null);
@@ -32,20 +32,11 @@ const YearOverviewPage = ({ yearId }) => {
     }
 
     function confirmPublish(){
-        confirmAlert({
-            title: "Confirm publish",
-            message: `Are you sure you want to publish ${year.year} applications? (This is a one time action once published you can't unpublish)`,
-            buttons: [
-                {
-                    label: "Yes",
-                    onClick: () => handlePublish(),
-                },
-                {
-                    label: "No",
-                    onClick: () => { },
-                },
-            ],
-        });
+        confirm(
+            "Confirm publish",
+            `Are you sure you want to publish ${year.year} applications? (This is a one time action once published you can't unpublish)`,
+            handlePublish
+        )
     }
 
     function handlePublish(){

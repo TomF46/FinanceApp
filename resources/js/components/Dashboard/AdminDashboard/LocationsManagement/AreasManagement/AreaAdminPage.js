@@ -8,8 +8,8 @@ import LoadingMessage from "../../../../DisplayComponents/LoadingMessage";
 import RetailLocationsList from "../../../../DisplayComponents/RetailLocationsList";
 import ManagersList from "../../../../DisplayComponents/ManagersList";
 import AddAreaManagerForm from "./AddAreaManagerForm";
-import { confirmAlert } from "react-confirm-alert";
 import history from "../../../../../history";
+import { confirm } from "../../../../../tools/PopupHelper";
 
 
 const AreaAdminPage = ({ areaId }) => {
@@ -35,22 +35,11 @@ const AreaAdminPage = ({ areaId }) => {
     }
 
     function handleManagerRemove(id) {
-        confirmAlert({
-            title: "Confirm removal",
-            message: `Are you sure you want to remove this area manager?`,
-            buttons: [
-                {
-                    label: "Yes",
-                    onClick: () => {
-                        removeManager(id);
-                    },
-                },
-                {
-                    label: "No",
-                    onClick: () => { },
-                },
-            ],
-        });
+        confirm(
+            "Confirm removal",
+            `Are you sure you want to remove this area manager?`,
+            () => {removeManager(id)}
+        );
     }
 
     function removeManager(id) {
@@ -65,22 +54,11 @@ const AreaAdminPage = ({ areaId }) => {
     }
 
     function handleDeactivate() {
-        confirmAlert({
-            title: "Confirm deactivation",
-            message: `Are you sure you want to deactivate this area?`,
-            buttons: [
-                {
-                    label: "Yes",
-                    onClick: () => {
-                        deactivate()
-                    },
-                },
-                {
-                    label: "No",
-                    onClick: () => { },
-                },
-            ],
-        });
+        confirm(
+            "Confirm deactivation",
+            `Are you sure you want to deactivate this area?`,
+            deactivate
+        );
     }
 
     function deactivate() {

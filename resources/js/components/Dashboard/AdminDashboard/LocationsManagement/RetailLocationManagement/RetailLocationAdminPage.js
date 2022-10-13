@@ -7,8 +7,8 @@ import { toast } from "react-toastify";
 import LoadingMessage from "../../../../DisplayComponents/LoadingMessage";
 import ManagersList from "../../../../DisplayComponents/ManagersList";
 import AddRetailManagerForm from "./AddRetailManagerForm";
-import { confirmAlert } from "react-confirm-alert";
 import history from "../../../../../history";
+import { confirm } from "../../../../../tools/PopupHelper";
 
 
 const RetailLocationAdminPage = ({ retailLocationId }) => {
@@ -34,22 +34,11 @@ const RetailLocationAdminPage = ({ retailLocationId }) => {
     }
 
     function handleManagerRemove(id) {
-        confirmAlert({
-            title: "Confirm removal",
-            message: `Are you sure you want to remove this manager?`,
-            buttons: [
-                {
-                    label: "Yes",
-                    onClick: () => {
-                        removeManager(id);
-                    },
-                },
-                {
-                    label: "No",
-                    onClick: () => { },
-                },
-            ],
-        });
+        confirm(
+            "Confirm removal",
+            `Are you sure you want to remove this manager?`,
+            () => {removeManager(id)}
+        );
     }
 
     function removeManager(id) {
@@ -64,22 +53,11 @@ const RetailLocationAdminPage = ({ retailLocationId }) => {
     }
 
     function handleDeactivate() {
-        confirmAlert({
-            title: "Confirm deactivation",
-            message: `Are you sure you want to deactivate this location?`,
-            buttons: [
-                {
-                    label: "Yes",
-                    onClick: () => {
-                        deactivate()
-                    },
-                },
-                {
-                    label: "No",
-                    onClick: () => { },
-                },
-            ],
-        });
+        confirm(
+            "Confirm deactivation",
+            `Are you sure you want to deactivate this location?`,
+            deactivate
+        );
     }
 
     function deactivate() {

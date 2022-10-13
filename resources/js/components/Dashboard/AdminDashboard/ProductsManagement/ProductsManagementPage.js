@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { confirmAlert } from "react-confirm-alert";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { deactivateProductById, searchProducts, searchProductsWithPage } from "../../../../api/productsApi";
 import ProductsListWithPagination from "../../../DisplayComponents/ProductsListWithPagination";
 import _, { debounce } from 'lodash';
 import ProductsSearchForm from "../../../DisplayComponents/ProductsSearchForm";
+import { confirm } from "../../../../tools/PopupHelper";
 
 
 const ProductsManagementPage = () => {
@@ -37,22 +37,11 @@ const ProductsManagementPage = () => {
     }
 
     function handleDeactivate(id) {
-        confirmAlert({
-            title: "Confirm deactivation",
-            message: `Are you sure you want to deactivate this product?`,
-            buttons: [
-                {
-                    label: "Yes",
-                    onClick: () => {
-                        deactivate(id)
-                    },
-                },
-                {
-                    label: "No",
-                    onClick: () => { },
-                },
-            ],
-        });
+        confirm(
+            "Confirm deactivation",
+            `Are you sure you want to deactivate this product?`,
+            () => {deactivate(id)}
+        );
     }
 
     function deactivate(id) {

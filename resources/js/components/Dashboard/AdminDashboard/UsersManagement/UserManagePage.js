@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
 import { deactivateUserById, getUserById } from "../../../../api/usersApi";
-import { confirmAlert } from "react-confirm-alert";
 import history from "../../../../history";
 import UserEditForm from "./UserEditForm";
 import UserPasswordChangeForm from "./UserPasswordChangeForm";
+import { confirm } from "../../../../tools/PopupHelper";
 
 const UserManagePage = ({ userId }) => {
     const [user, setUser] = useState(null);
@@ -29,22 +28,11 @@ const UserManagePage = ({ userId }) => {
     }
 
     function handleDeactivate() {
-        confirmAlert({
-            title: "Confirm deactivation",
-            message: `Are you sure you want to deactivate this user?`,
-            buttons: [
-                {
-                    label: "Yes",
-                    onClick: () => {
-                        deactivate()
-                    },
-                },
-                {
-                    label: "No",
-                    onClick: () => { },
-                },
-            ],
-        });
+        confirm(
+            "Confirm deactivation",
+            `Are you sure you want to deactivate this user?`,
+            deactivate
+        );
     }
 
     function deactivate() {
