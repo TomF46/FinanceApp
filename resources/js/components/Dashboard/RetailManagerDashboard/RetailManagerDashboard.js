@@ -73,7 +73,7 @@ const RetailManagerDashboard = ({ user }) => {
                             <div>
                                 <div className="card shadow-md rounded-md mb-8">
                                     <div className="bg-primary rounded-t-md">
-                                        <p className="text-white font-bold text-lg px-2 py-1">Applications Awaiting Response</p>
+                                        <p className="text-white font-bold text-lg px-2 py-1">Applications Awaiting Area Manager Response</p>
                                     </div>
                                     <div>
                                         {retailManager.applications.submitted.length > 0 ? (

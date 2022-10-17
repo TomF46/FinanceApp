@@ -2,13 +2,23 @@ import React from "react";
 import PropTypes from "prop-types";
 import MoneyInput from "../../../../FormComponents/MoneyInput";
 import tooltips from "../../../../../tools/TooltipConstants";
-
+import MoneyFormat from "../../../../DisplayComponents/MoneyFormat";
 
 const ApplicationForm = ({
     income,
     onIncomeChange,
     incomeErrors
 }) => {
+
+    function getTotalNoIncome()
+    {
+        return Number(income.dividends) 
+        + Number(income.assetSales)
+        + Number(income.maintenanceGrant)
+        + Number(income.sponsorship) 
+        + Number(income.rewards);
+    }
+
     return (
         <>
             <div className="my-8">
@@ -70,6 +80,9 @@ const ApplicationForm = ({
                                 error={incomeErrors.rewards}
                                 tooltipText={tooltips.income.rewards}
                             />
+                        </div>
+                        <div className="mb-2">
+                            <p className="font-bold text-money-positive">Total non-operating income: <MoneyFormat value={getTotalNoIncome()} /></p>
                         </div>
                     </div>
                 </div>

@@ -2,12 +2,26 @@ import React from "react";
 import PropTypes from "prop-types";
 import MoneyInput from "../../../../FormComponents/MoneyInput";
 import tooltips from "../../../../../tools/TooltipConstants";
+import MoneyFormat from "../../../../DisplayComponents/MoneyFormat";
 
 const ExpensesSection = ({
     expenses,
     onExpensesChange,
     expensesErrors
 }) => {
+
+    function getTotalExpenses(){
+        return Number(expenses.rent)
+        + Number(expenses.payroll)
+        + Number(expenses.utilities)
+        + Number(expenses.equipment)
+        + Number(expenses.travel)
+        + Number(expenses.training)
+        + Number(expenses.maintenance)
+        + Number(expenses.employeeBonus)
+        + Number(expenses.employeeExpenses);
+    }
+
     return (
         <>
 
@@ -106,7 +120,6 @@ const ExpensesSection = ({
                                 onChange={onExpensesChange}
                                 error={expensesErrors.employeeBonus}
                                 tooltipText={tooltips.expenses.employeeBonus}
-
                             />
                         </div>
 
@@ -118,8 +131,10 @@ const ExpensesSection = ({
                                 onChange={onExpensesChange}
                                 error={expensesErrors.employeeExpenses}
                                 tooltipText={tooltips.expenses.employeeExpenses}
-
                             />
+                        </div>
+                        <div className="mb-2">
+                            <p className="font-bold text-money-negative">Total expenses: <MoneyFormat value={getTotalExpenses()} /></p>
                         </div>
                     </div>
                 </div>

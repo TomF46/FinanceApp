@@ -75,7 +75,7 @@ const AreaManagerDashboard = ({ user }) => {
                             <div>
                                 <div className="card shadow-md rounded-md mb-8">
                                     <div className="bg-primary rounded-t-md">
-                                        <p className="text-white font-bold text-lg px-2 py-1">Applications Awaiting Response</p>
+                                        <p className="text-white font-bold text-lg px-2 py-1">Applications Awaiting Retail Manager Response</p>
                                     </div>
                                     <div>
                                         {(areaManager.applications.notSubmitted.length + areaManager.applications.returned.length) > 0 ? (
