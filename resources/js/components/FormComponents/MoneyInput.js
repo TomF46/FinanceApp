@@ -7,7 +7,7 @@ const MoneyInput = ({ name, label, onChange, placeholder, value, error, tooltipT
         <div className="field">
             {label &&
                 <label
-                    className="block mb-2 font-bold text-xs text-gray-700"
+                    className="block mb-1 font-bold text-xs text-gray-700"
                     htmlFor={name}
                     data-tip={tooltipText}
                 >

@@ -42,7 +42,7 @@ const AreaManagerDashboard = ({ user }) => {
                         <LoadingMessage message={"Loading dashboard"} />
                     ) : (
                         <>
-                            <div className="mb-8">
+                            <div className="mb-4">
                                 <div className="card shadow-md rounded-md">
                                     <div className="bg-primary rounded-t-md">
                                         <p className="text-white font-bold text-lg px-2 py-1">My Areas Managed</p>
@@ -58,7 +58,7 @@ const AreaManagerDashboard = ({ user }) => {
                             </div>
 
                             <div>
-                                <div className="card shadow-md rounded-md mb-8">
+                                <div className="card shadow-md rounded-md mb-4">
                                     <div className="bg-primary rounded-t-md">
                                         <p className="text-white font-bold text-lg px-2 py-1">Applications Requiring Attention</p>
                                     </div>
@@ -73,7 +73,7 @@ const AreaManagerDashboard = ({ user }) => {
                             </div>
 
                             <div>
-                                <div className="card shadow-md rounded-md mb-8">
+                                <div className="card shadow-md rounded-md mb-4">
                                     <div className="bg-primary rounded-t-md">
                                         <p className="text-white font-bold text-lg px-2 py-1">Applications Awaiting Retail Manager Response</p>
                                     </div>

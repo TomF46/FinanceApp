@@ -8,7 +8,7 @@ const RetailLocationSearchForm = ({ searchTerms, onSearchTermsChange }) => {
         <div className="mt-8 mb-4">
             <div className="my-2 card shadow-md rounded-md">
                 <div className="bg-gray-500 rounded-t-md">
-                    <p className="text-white font-bold text-lg px-2 py-1">Search</p>
+                    <p className="text-white font-bold text-lg px-2 py-1">Retail Location Search</p>
                 </div>
                 <div>
                     <div className="grid grid-cols-12 px-2 py-1">
