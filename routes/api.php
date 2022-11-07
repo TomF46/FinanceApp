@@ -101,6 +101,7 @@ Route::middleware(['auth:api', 'headOffice'])->group(function () {
     Route::get('/years/{year}/graphs/retailProfitBarChart', [App\Http\Controllers\YearsGraphsController::class, 'retailProfitBarChart']);
     Route::get('/years/{year}/graphs/areasProfitBarChart', [App\Http\Controllers\YearsGraphsController::class, 'areasProfitBarChart']);
     Route::get('/years/{year}/graphs/retailProfitPieChart', [App\Http\Controllers\YearsGraphsController::class, 'retailProfitPieChart']);
+    Route::get('/years/{year}/applications/completed', [App\Http\Controllers\YearsController::class, 'getCompletedApplications']);
     
     Route::get('/overview', [App\Http\Controllers\OverviewController::class, 'index']);
     Route::get('/overview/yearByYearProfitBarChart', [App\Http\Controllers\OverviewController::class, 'yearByYearProfitBarChart']);

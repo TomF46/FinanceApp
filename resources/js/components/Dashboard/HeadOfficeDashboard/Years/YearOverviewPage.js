@@ -4,13 +4,11 @@ import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
 import { getYearById, publishYear } from "../../../../api/yearsApi";
-import RetailProfitBarChart from "./Breakdown/RetailProfitBarChart";
-import RetailProfitPieChart from "./Breakdown/RetailProfitPieChart";
-import AreasProfitBarChart from "./Breakdown/AreasProfitBarChart";
 import RetailDataSummaryTable from "../../../DisplayComponents/RetailDataSummaryTable";
 import RetailInvestmentSummaryTable from "../../../DisplayComponents/RetailInvestmentSummaryTable";
 import ApplicationsStatusSummary from "../../../DisplayComponents/ApplicationsStatusSummary";
 import { confirm } from "../../../../tools/PopupHelper";
+import { Link } from "react-router-dom";
 
 const YearOverviewPage = ({ yearId }) => {
     const [year, setYear] = useState(null);
@@ -81,11 +79,25 @@ const YearOverviewPage = ({ yearId }) => {
                         <RetailInvestmentSummaryTable investmentSummary={year.investmentSummary} />
                     </div>
                     {year.applicationStatusSummary.totalAccepted > 0 ? (
-                        <>
-                            <AreasProfitBarChart yearId={yearId} />
-                            <RetailProfitBarChart yearId={yearId} />
-                            <RetailProfitPieChart yearId={yearId} />
-                        </>
+                        <div className="my-4 card shadow-md rounded-md">
+                            <div className="bg-primary rounded-t-md">
+                                <p className="text-white font-bold text-lg px-2 py-1">View</p>
+                            </div>
+                            <div className="px-2 py-2 flex">
+                                <Link
+                                    to={`/headOffice/years/${yearId}/applications`}
+                                    className="bg-primary text-white rounded py-2 px-4 hover:opacity-75 shadow mr-2"
+                                >
+                                    Completed applications
+                                </Link>
+                                <Link
+                                    to={`/headOffice/years/${yearId}/charts`}
+                                    className="bg-primary text-white rounded py-2 px-4 hover:opacity-75 shadow"
+                                >
+                                    Charts
+                                </Link>
+                            </div>
+                        </div>
                     ) : (
                         <p className="text-center mt-4">Graphs will appear once applications start to be accepted.</p>
                     )}

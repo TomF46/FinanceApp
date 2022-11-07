@@ -76,3 +76,14 @@ export function publishYear(yearId){
             throw error;
         });
 }
+
+export function getCompletedApplicationForYearById(id) {
+    return axiosClient
+        .get(`/api/years/${id}/applications/completed`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}

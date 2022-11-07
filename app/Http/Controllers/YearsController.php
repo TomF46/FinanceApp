@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Year;
+use App\Enums\ApplicationStatus;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -57,6 +58,16 @@ class YearsController extends Controller
     {
         $year->publish();
         return response()->noContent();
+    }
+
+    public function getCompletedApplications(Request $request, Year $year)
+    {
+        $applications = $year->applications()->where('status', ApplicationStatus::Accepted)->paginate(20);
+        $applications->getCollection()->transform(function ($application) {
+            return $application->map();
+        });
+
+        return response()->json($applications);
     }
 
     protected function validateYear(Request $request)

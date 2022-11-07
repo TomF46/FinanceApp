@@ -37,6 +37,8 @@ import ProductPage from "./Dashboard/AdminDashboard/ProductsManagement/ProductPa
 import UserManagePage from "./Dashboard/AdminDashboard/UsersManagement/UserManagePage";
 import RetailLocationDataPage from "./Dashboard/RetailManagerDashboard/RetailLocation/RetailLocationDataPage";
 import AreaDataPage from "./Dashboard/AreaManagerDashboard/AreaDataPage";
+import YearApplicationsPage from "./Dashboard/HeadOfficeDashboard/Years/Applications/YearApplicationsPage";
+import YearChartsPage from "./Dashboard/HeadOfficeDashboard/Years/Breakdown/YearChartsPage";
 
 const Main = ({ location }) => (
     <>
@@ -136,6 +138,8 @@ const Main = ({ location }) => (
                     />
                     <AuthenticatedRoute path="/headOffice/years/add" component={AddYearPage} />
                     <AuthenticatedRoute path="/headOffice/overview" component={AllTimeOverviewPage} />
+                    <AuthenticatedRoute path="/headOffice/years/:yearId/charts" component={YearChartsPage} />
+                    <AuthenticatedRoute path="/headOffice/years/:yearId/applications" component={YearApplicationsPage} />
                     <AuthenticatedRoute path="/headOffice/years/:yearId" component={YearOverviewPage} />
                     <AuthenticatedRoute path="/retail/guide" component={GuidePage} />
                     <AuthenticatedRoute path="/retail/:retailLocationId/applications/:applicationId" component={ApplicationPage} />
