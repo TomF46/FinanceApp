@@ -25,16 +25,16 @@ const AreaRetailerProfitContributionBarChart = ({ areaId }) => {
 
 
     return (
-        <>
+        <div className="card shadow-md rounded-md py-4">
             {!graphData ? (
                 <LoadingMessage message={"Loading graph"} />
             ) : (
-                <div className="my-8">
+                <div>
                     <h2 className="text-center text-xl mb-4">Total Profit Per Retailer</h2>
                     <BarChart graphData={graphData} />
                 </div>
             )}
-        </>
+        </div>
     )
 };
 

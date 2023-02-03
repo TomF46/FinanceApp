@@ -47,8 +47,12 @@ const AreaDataPage = ({ areaId }) => {
 
                     {area.hasAcceptedApplications ? (
                         <>
-                            <AreaYearByYearProfitBarChart areaId={area.id} />
-                            <AreaRetailerProfitContributionBarChart areaId={area.id} />
+                            <div className="mb-4">
+                                <AreaYearByYearProfitBarChart areaId={area.id} />
+                            </div>
+                            <div className="mb-4">
+                                <AreaRetailerProfitContributionBarChart areaId={area.id} />
+                            </div>
                         </>
                     ) : (
                         <p className="text-center mt-4">Graphs will appear once applications start to be accepted.</p>
