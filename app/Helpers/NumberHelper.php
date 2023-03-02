@@ -8,4 +8,9 @@ class NumberHelper
     {
         return number_format($value, 2, '.', '');
     }
+
+    public static function asMoneyText($value)
+    {
+        return "£" . number_format($value, 2, '.', '');
+    }
 }

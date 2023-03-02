@@ -3,12 +3,13 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
-import { getYearById, publishYear } from "../../../../api/yearsApi";
+import { getYearApplicationsCSV, getYearById, publishYear } from "../../../../api/yearsApi";
 import RetailDataSummaryTable from "../../../DisplayComponents/RetailDataSummaryTable";
 import RetailInvestmentSummaryTable from "../../../DisplayComponents/RetailInvestmentSummaryTable";
 import ApplicationsStatusSummary from "../../../DisplayComponents/ApplicationsStatusSummary";
 import { confirm } from "../../../../tools/PopupHelper";
 import { Link } from "react-router-dom";
+import { downloadCSVStream } from "../../../../tools/HelperFunctions";
 
 const YearOverviewPage = ({ yearId }) => {
     const [year, setYear] = useState(null);
@@ -46,6 +47,16 @@ const YearOverviewPage = ({ yearId }) => {
                 autoClose: false,
             });
         })
+    }
+
+    function downloadApplicationsCSV(){
+        getYearApplicationsCSV(yearId).then(data => {
+            downloadCSVStream(data,`${year.year}Applications.csv`);
+        }).catch(error => {
+            toast.error("Error getting CSV " + error.message, {
+                autoClose: false,
+            });
+        });
     }
 
     return (
@@ -92,10 +103,13 @@ const YearOverviewPage = ({ yearId }) => {
                                 </Link>
                                 <Link
                                     to={`/headOffice/years/${yearId}/charts`}
-                                    className="bg-primary text-white rounded py-2 px-4 hover:opacity-75 shadow"
+                                    className="bg-primary text-white rounded py-2 px-4 hover:opacity-75 shadow mr-2"
                                 >
                                     Charts
                                 </Link>
+                                <button onClick={() => downloadApplicationsCSV()} className="bg-primary text-white rounded py-2 px-4 hover:opacity-75 shadow pointer">
+                                    Download applications CSV
+                                </button>
                             </div>
                         </div>
                     ) : (

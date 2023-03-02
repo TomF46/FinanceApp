@@ -130,3 +130,14 @@ export function getYearByYearProfitBarChart(id) {
             throw error;
         });
 }
+
+export function getLocationApplicationsCSV(id) {
+    return axiosClient
+        .get(`/api/retailLocations/${id}/downloads/applications`)
+        .then(response => {
+            return response.data
+        })
+        .catch(error => {
+            throw error;
+        });
+}

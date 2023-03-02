@@ -45,4 +45,18 @@ class OverviewController extends Controller
         
         return response()->stream($overview->mapYearByYearOverviewCSV(), 200, $headers);
     }
+
+    public function downloadAllApplicationsCSV(){
+        $overview = new Overview();
+        $fileName = 'AllApplications.csv';
+        $headers = array(
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        );
+        
+        return response()->stream($overview->mapApplicationsAsCSV(), 200, $headers);
+    }
 }

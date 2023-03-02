@@ -70,6 +70,19 @@ class YearsController extends Controller
         return response()->json($applications);
     }
 
+    public function downloadApplicationsAsCSV(Year $year){
+        $fileName = $year->year . 'Applications.csv';
+        $headers = array(
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        );
+        
+        return response()->stream($year->mapApplicationsAsCSV(), 200, $headers);
+    }
+
     protected function validateYear(Request $request)
     {
         return $request->validate([

@@ -87,3 +87,14 @@ export function getCompletedApplicationForYearById(id) {
             throw error;
         });
 }
+
+export function getYearApplicationsCSV(id) {
+    return axiosClient
+        .get(`/api/years/${id}/downloads/applications`)
+        .then(response => {
+            return response.data
+        })
+        .catch(error => {
+            throw error;
+        });
+}

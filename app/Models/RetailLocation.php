@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Enums\ApplicationStatus;
 use App\Helpers\NumberHelper;
 use App\Helpers\ApplicationDataHelper;
+use App\Helpers\CSVHelper;
 
 class RetailLocation extends Model
 {
@@ -122,5 +123,11 @@ class RetailLocation extends Model
                 ['key' => "Total Profit", 'color' => "#0096b4"]
             ]
         ];
+    }
+
+    public function mapApplicationsAsCSV()
+    {
+        $applications = $this->getAcceptedApplications();
+        return CSVHelper::getCSVForApplications($applications);
     }
 }

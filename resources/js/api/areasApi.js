@@ -154,3 +154,15 @@ export function getRetailerProfitContributionBarChart(id) {
             throw error;
         });
 }
+
+export function getAreaApplicationsCSV(id) {
+    return axiosClient
+        .get(`/api/areas/${id}/downloads/applications`)
+        .then(response => {
+            return response.data
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+

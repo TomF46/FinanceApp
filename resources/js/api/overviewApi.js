@@ -32,3 +32,14 @@ export function getYearByYearCSV() {
             throw error;
         });
 }
+
+export function getAllApplicationsCSV() {
+    return axiosClient
+        .get(`/api/overview/downloads/applications`)
+        .then(response => {
+            return response.data
+        })
+        .catch(error => {
+            throw error;
+        });
+}

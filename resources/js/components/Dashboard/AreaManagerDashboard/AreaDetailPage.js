@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { getAreaById } from "../../../api/areasApi"
+import { getAreaApplicationsCSV, getAreaById } from "../../../api/areasApi"
 import { toast } from "react-toastify";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import ApplicationsList from "../../DisplayComponents/ApplicationList";
 import RetailLocationsList from "../../DisplayComponents/RetailLocationsList";
+import { downloadCSVStream } from "../../../tools/HelperFunctions";
 
 
 const AreaDetailPage = ({ areaId }) => {
@@ -26,6 +27,17 @@ const AreaDetailPage = ({ areaId }) => {
             });
         });
     }
+
+    function downloadApplicationsCSV(){
+        getAreaApplicationsCSV(areaId).then(data => {
+            downloadCSVStream(data, `${area.name}Applications.csv`);
+        }).catch(error => {
+            toast.error("Error getting CSV " + error.message, {
+                autoClose: false,
+            });
+        });
+    }
+
     return (
         <>
             {!area ? (
@@ -35,10 +47,6 @@ const AreaDetailPage = ({ areaId }) => {
                     <h1 className="text-center font-bold text-4xl">
                         {area.name}
                     </h1>
-
-                    <div className="my-8 flex justify-center">
-                        <Link to={`/areas/${area.id}/data`} className="bg-primary hover:opacity-75 text-white font-bold py-2 px-4 rounded pointer">Data overview</Link>
-                    </div>
 
                     <div className="my-8">
                         <div className="my-2 card shadow-md rounded-md">
@@ -61,6 +69,18 @@ const AreaDetailPage = ({ areaId }) => {
                                     <p>No manager assigned</p>
                                 )}
                             </div>
+                        </div>
+                    </div>
+
+                    <div className="my-4 card shadow-md rounded-md">
+                        <div className="bg-primary rounded-t-md">
+                            <p className="text-white font-bold text-lg px-2 py-1">Actions</p>
+                        </div>
+                        <div className="px-2 py-2 flex">
+                        <Link to={`/areas/${area.id}/data`} className="bg-primary hover:opacity-75 text-white py-2 px-4 rounded pointer mr-2">Data overview</Link>
+                            <button onClick={() => downloadApplicationsCSV()} className="bg-primary text-white rounded py-2 px-4 hover:opacity-75 shadow pointer">
+                                Download applications CSV
+                            </button>
                         </div>
                     </div>
 

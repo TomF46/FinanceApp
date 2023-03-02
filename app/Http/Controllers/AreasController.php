@@ -154,6 +154,19 @@ class AreasController extends Controller
         return response()->json($area);
     }
 
+    public function downloadApplicationsAsCSV(Area $area){
+        $fileName = $area->name . 'Applications.csv';
+        $headers = array(
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        );
+        
+        return response()->stream($area->mapApplicationsAsCSV(), 200, $headers);
+    }
+
     protected function validateArea(Request $request)
     {
         return $request->validate([

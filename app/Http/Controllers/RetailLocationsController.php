@@ -165,6 +165,19 @@ class RetailLocationsController extends Controller
         return response()->json($retailLocation);
     }
 
+    public function downloadApplicationsAsCSV(RetailLocation $retailLocation){
+        $fileName = $retailLocation->name . 'Applications.csv';
+        $headers = array(
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        );
+        
+        return response()->stream($retailLocation->mapApplicationsAsCSV(), 200, $headers);
+    }
+
 
     protected function validateRetailLocation(Request $request)
     {

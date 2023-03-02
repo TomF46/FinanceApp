@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import { getRetailLocationById } from "../../../../api/retailLocationsApi"
+import { getLocationApplicationsCSV, getRetailLocationById } from "../../../../api/retailLocationsApi"
 import { toast } from "react-toastify";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
 import ApplicationsList from "../../../DisplayComponents/ApplicationList";
 import ManagersList from "../../../DisplayComponents/ManagersList";
+import { downloadCSVStream } from "../../../../tools/HelperFunctions";
 
 
 const RetailLocationDetailPage = ({ retailLocationId }) => {
@@ -26,6 +27,18 @@ const RetailLocationDetailPage = ({ retailLocationId }) => {
             });
         });
     }
+
+    function downloadApplicationsCSV(){
+        getLocationApplicationsCSV(retailLocationId).then(data => {
+            downloadCSVStream(data, `${retailLocation.name}Applications.csv`);
+        }).catch(error => {
+            toast.error("Error getting CSV " + error.message, {
+                autoClose: false,
+            });
+        });
+    }
+
+
     return (
         <>
             {!retailLocation ? (
@@ -35,10 +48,6 @@ const RetailLocationDetailPage = ({ retailLocationId }) => {
                     <h1 className="text-center font-bold text-4xl">
                         {retailLocation.name}
                     </h1>
-
-                    <div className="my-8 flex justify-center">
-                        <Link to={`/retail/${retailLocation.id}/data`} className="bg-primary hover:opacity-75 text-white font-bold py-2 px-4 rounded pointer">Data overview</Link>
-                    </div>
 
                     <div className="my-8">
                         <div className="my-2 card shadow-md rounded-md">
@@ -62,6 +71,18 @@ const RetailLocationDetailPage = ({ retailLocationId }) => {
                                     <p>No manager assigned</p>
                                 )}
                             </div>
+                        </div>
+                    </div>
+
+                    <div className="my-4 card shadow-md rounded-md">
+                        <div className="bg-primary rounded-t-md">
+                            <p className="text-white font-bold text-lg px-2 py-1">Actions</p>
+                        </div>
+                        <div className="px-2 py-2 flex">
+                        <Link to={`/retail/${retailLocation.id}/data`} className="bg-primary hover:opacity-75 text-white py-2 px-4 mr-2 rounded pointer">Data overview</Link>
+                            <button onClick={() => downloadApplicationsCSV()} className="bg-primary text-white rounded py-2 px-4 hover:opacity-75 shadow pointer">
+                                Download applications CSV
+                            </button>
                         </div>
                     </div>
 

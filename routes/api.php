@@ -35,6 +35,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/areas', [App\Http\Controllers\AreasController::class, 'index']);
     Route::get('/areas/{area}', [App\Http\Controllers\AreasController::class, 'show']);
     Route::get('/areas/{area}/data', [App\Http\Controllers\AreasController::class, 'showData']);
+    Route::get('/areas/{area}/downloads/applications', [App\Http\Controllers\AreasController::class, 'downloadApplicationsAsCSV']);
     Route::get('/areaManagers/{user}', [App\Http\Controllers\AreaManagersController::class, 'show']);
     Route::get('/areas/{area}/graphs/yearByYearProfitBarChart', [App\Http\Controllers\AreaGraphsController::class, 'yearByYearProfitBarChart']);
     Route::get('/areas/{area}/graphs/retailerProfitContributionBarChart', [App\Http\Controllers\AreaGraphsController::class, 'retailerProfitContributionBarChart']);
@@ -42,6 +43,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/retailLocations', [App\Http\Controllers\RetailLocationsController::class, 'index']);
     Route::get('/retailLocations/{retailLocation}', [App\Http\Controllers\RetailLocationsController::class, 'show']);
     Route::get('/retailLocations/{retailLocation}/data', [App\Http\Controllers\RetailLocationsController::class, 'showData']);
+    Route::get('/retailLocations/{retailLocation}/downloads/applications', [App\Http\Controllers\RetailLocationsController::class, 'downloadApplicationsAsCSV']);
     Route::get('/retailManagers/{user}', [App\Http\Controllers\RetailManagersController::class, 'show']);
     Route::get('/retailLocations/{retailLocation}/graphs/yearByYearProfitBarChart', [App\Http\Controllers\RetailLocationGraphsController::class, 'yearByYearProfitBarChart']);
 
@@ -102,10 +104,12 @@ Route::middleware(['auth:api', 'headOffice'])->group(function () {
     Route::get('/years/{year}/graphs/areasProfitBarChart', [App\Http\Controllers\YearsGraphsController::class, 'areasProfitBarChart']);
     Route::get('/years/{year}/graphs/retailProfitPieChart', [App\Http\Controllers\YearsGraphsController::class, 'retailProfitPieChart']);
     Route::get('/years/{year}/applications/completed', [App\Http\Controllers\YearsController::class, 'getCompletedApplications']);
+    Route::get('/years/{year}/downloads/applications', [App\Http\Controllers\YearsController::class, 'downloadApplicationsAsCSV']);
     
     Route::get('/overview', [App\Http\Controllers\OverviewController::class, 'index']);
     Route::get('/overview/yearByYearProfitBarChart', [App\Http\Controllers\OverviewController::class, 'yearByYearProfitBarChart']);
     Route::get('/overview/downloads/yearByYear', [App\Http\Controllers\OverviewController::class, 'downloadYearByYearCSV']);
+    Route::get('/overview/downloads/applications', [App\Http\Controllers\OverviewController::class, 'downloadAllApplicationsCSV']);
 
 });
 

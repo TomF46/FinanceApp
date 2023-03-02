@@ -10,6 +10,7 @@ use App\Models\Area;
 use App\Enums\ApplicationStatus;
 use App\Helpers\NumberHelper;
 use App\Helpers\ApplicationDataHelper;
+use App\Helpers\CSVHelper;
 
 
 class Year extends Model
@@ -156,6 +157,12 @@ class Year extends Model
         $this->published = true;
         $this->generateApplications();
         $this->save();
+    }
+
+    public function mapApplicationsAsCSV()
+    {
+        $applications = $this->getAcceptedApplications();
+        return CSVHelper::getCSVForApplications($applications);
     }
 
 }

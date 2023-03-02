@@ -10,6 +10,7 @@ use App\Models\Application;
 use App\Models\Year;
 use App\Enums\ApplicationStatus;
 use App\Helpers\ApplicationDataHelper;
+use App\Helpers\CSVHelper;
 
 
 class Area extends Model
@@ -174,5 +175,11 @@ class Area extends Model
                 ['key' => "Total Profit", 'color' => "#0096b4"]
             ]
         ];
+    }
+
+    public function mapApplicationsAsCSV()
+    {
+        $applications = $this->getAcceptedApplications();
+        return CSVHelper::getCSVForApplications($applications);
     }
 }

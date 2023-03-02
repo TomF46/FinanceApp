@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { getOverview, getYearByYearCSV } from "../../../../api/overviewApi";
+import { getAllApplicationsCSV, getOverview, getYearByYearCSV } from "../../../../api/overviewApi";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
 import MoneyFormat from "../../../DisplayComponents/MoneyFormat";
 import YearByYearProfitBarChart from "./charts/YearByYearProfitBarChart";
-import { getMoneyTextColorClass } from "../../../../tools/HelperFunctions";
+import { downloadCSVStream, getMoneyTextColorClass } from "../../../../tools/HelperFunctions";
 import RetailDataSummaryTable from "../../../DisplayComponents/RetailDataSummaryTable";
 import RetailInvestmentSummaryTable from "../../../DisplayComponents/RetailInvestmentSummaryTable";
 
@@ -29,13 +29,17 @@ const AllTimeOverviewPage = () => {
 
     function downloadOverviewCSV(){
         getYearByYearCSV().then(data => {
-            const url = window.URL.createObjectURL(new Blob([data])) 
-            const link = document.createElement('a')
-            link.href = url
-            link.setAttribute('download', "YearByYearOverview.csv")
-            document.body.appendChild(link)
-            link.click()
-            link.remove()
+            downloadCSVStream(data, "YearByYearOverview.csv");
+        }).catch(error => {
+            toast.error("Error getting CSV " + error.message, {
+                autoClose: false,
+            });
+        });
+    }
+
+    function downloadAllApplicationsCSV(){
+        getAllApplicationsCSV().then(data => {
+            downloadCSVStream(data, "AllApplications.csv");
         }).catch(error => {
             toast.error("Error getting CSV " + error.message, {
                 autoClose: false,
@@ -66,8 +70,11 @@ const AllTimeOverviewPage = () => {
                             <p className="text-white font-bold text-lg px-2 py-1">Actions</p>
                         </div>
                         <div className="px-2 py-2 flex">
-                            <button onClick={() => downloadOverviewCSV()} className="bg-primary text-white rounded py-2 px-4 hover:opacity-75 shadow">
+                            <button onClick={() => downloadOverviewCSV()} className="bg-primary text-white rounded py-2 px-4 hover:opacity-75 shadow mr-2">
                                 Download overview CSV
+                            </button>
+                            <button onClick={() => downloadAllApplicationsCSV()} className="bg-primary text-white rounded py-2 px-4 hover:opacity-75 shadow">
+                                Download all applications CSV
                             </button>
                         </div>
                     </div>

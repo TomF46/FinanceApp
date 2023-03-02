@@ -8,6 +8,7 @@ use App\Models\RetailLocation;
 use App\Enums\ApplicationStatus;
 use App\Helpers\NumberHelper;
 use App\Helpers\ApplicationDataHelper;
+use App\Helpers\CSVHelper;
 
 class Overview
 {
@@ -72,5 +73,9 @@ class Overview
         return $data;
     }
 
-
+    public function mapApplicationsAsCSV()
+    {
+        $applications = Application::get();
+        return CSVHelper::getCSVForApplications($applications);
+    }
 }
