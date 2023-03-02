@@ -21,3 +21,14 @@ export function getYearByYearProfitBarChart() {
             throw error;
         });
 }
+
+export function getYearByYearCSV() {
+    return axiosClient
+        .get(`/api/overview/downloads/yearByYear`)
+        .then(response => {
+            return response.data
+        })
+        .catch(error => {
+            throw error;
+        });
+}

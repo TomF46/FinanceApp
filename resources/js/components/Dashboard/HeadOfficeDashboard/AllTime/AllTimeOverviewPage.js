@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getOverview } from "../../../../api/overviewApi";
+import { getOverview, getYearByYearCSV } from "../../../../api/overviewApi";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
 import MoneyFormat from "../../../DisplayComponents/MoneyFormat";
@@ -27,6 +27,22 @@ const AllTimeOverviewPage = () => {
         });
     }
 
+    function downloadOverviewCSV(){
+        getYearByYearCSV().then(data => {
+            const url = window.URL.createObjectURL(new Blob([data])) 
+            const link = document.createElement('a')
+            link.href = url
+            link.setAttribute('download', "YearByYearOverview.csv")
+            document.body.appendChild(link)
+            link.click()
+            link.remove()
+        }).catch(error => {
+            toast.error("Error getting CSV " + error.message, {
+                autoClose: false,
+            });
+        });
+    }
+
 
     return (
         <div className="headoffice-overview">
@@ -43,6 +59,17 @@ const AllTimeOverviewPage = () => {
 
                     <div className="my-4">
                         <RetailInvestmentSummaryTable investmentSummary={overview.investmentSummary} />
+                    </div>
+
+                    <div className="my-4 card shadow-md rounded-md">
+                        <div className="bg-primary rounded-t-md">
+                            <p className="text-white font-bold text-lg px-2 py-1">Actions</p>
+                        </div>
+                        <div className="px-2 py-2 flex">
+                            <button onClick={() => downloadOverviewCSV()} className="bg-primary text-white rounded py-2 px-4 hover:opacity-75 shadow">
+                                Download overview CSV
+                            </button>
+                        </div>
                     </div>
                     {overview.hasAcceptedApplications ? (
                         <YearByYearProfitBarChart />

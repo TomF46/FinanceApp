@@ -105,6 +105,7 @@ Route::middleware(['auth:api', 'headOffice'])->group(function () {
     
     Route::get('/overview', [App\Http\Controllers\OverviewController::class, 'index']);
     Route::get('/overview/yearByYearProfitBarChart', [App\Http\Controllers\OverviewController::class, 'yearByYearProfitBarChart']);
+    Route::get('/overview/downloads/yearByYear', [App\Http\Controllers\OverviewController::class, 'downloadYearByYearCSV']);
 
 });
 

@@ -31,4 +31,18 @@ class OverviewController extends Controller
         $overview = new Overview();
         return response()->json($overview->mapYearByYearProfitBarChart());
     }
+
+    public function downloadYearByYearCSV(){
+        $overview = new Overview();
+        $fileName = 'YearByYearOverview.csv';
+        $headers = array(
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        );
+        
+        return response()->stream($overview->mapYearByYearOverviewCSV(), 200, $headers);
+    }
 }

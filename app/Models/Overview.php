@@ -46,5 +46,31 @@ class Overview
         ];
     }
 
+    public function mapYearByYearOverviewCSV()
+    {
+        $years = Year::get();
+        $columns = array('Year','Non operating income', 'Sales income', 'Expenses', 'Total profit', 'Total investment');
+
+        $data = function() use($years, $columns) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+
+            foreach ($years as $year) {
+                $row['Year'] = $year->year;
+                $row['Non operating income']  = NumberHelper::asMoney(ApplicationDataHelper::getTotalNonOperatingIncome($year->getAcceptedApplications()));
+                $row['Sales income']    = NumberHelper::asMoney(ApplicationDataHelper::getTotalSalesIncome($year->getAcceptedApplications()));
+                $row['Expenses']    = NumberHelper::asMoney(ApplicationDataHelper::getTotalExpenses($year->getAcceptedApplications()));
+                $row['Total profit']  = NumberHelper::asMoney(ApplicationDataHelper::getTotalProfitLoss($year->getAcceptedApplications()));
+                $row['Total investment']  = NumberHelper::asMoney(ApplicationDataHelper::getTotalInvestment($year->getAcceptedApplications()));
+
+                fputcsv($file, array($row['Year'] ,$row['Non operating income'], $row['Sales income'], $row['Expenses'], $row['Total profit'], $row['Total investment']));
+            }
+
+            fclose($file);
+        };
+
+        return $data;
+    }
+
 
 }
