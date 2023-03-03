@@ -32,6 +32,8 @@ Route::group([
 Route::middleware(['auth:api'])->group(function () {
     Route::get('/me/isAdmin', [App\Http\Controllers\MeController::class, 'isAdmin']);
 
+    Route::get('/products/salesData', [App\Http\Controllers\ProductsController::class, 'salesData']);
+
     Route::get('/areas', [App\Http\Controllers\AreasController::class, 'index']);
     Route::get('/areas/{area}', [App\Http\Controllers\AreasController::class, 'show']);
     Route::get('/areas/{area}/data', [App\Http\Controllers\AreasController::class, 'showData']);
@@ -110,7 +112,6 @@ Route::middleware(['auth:api', 'headOffice'])->group(function () {
     Route::get('/overview/yearByYearProfitBarChart', [App\Http\Controllers\OverviewController::class, 'yearByYearProfitBarChart']);
     Route::get('/overview/downloads/yearByYear', [App\Http\Controllers\OverviewController::class, 'downloadYearByYearCSV']);
     Route::get('/overview/downloads/applications', [App\Http\Controllers\OverviewController::class, 'downloadAllApplicationsCSV']);
-
 });
 
 Route::middleware(['auth:api', 'areaManager'])->group(function () {

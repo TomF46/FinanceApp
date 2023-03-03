@@ -88,3 +88,14 @@ export function deactivateProductById(id) {
             throw error;
         });
 }
+
+export function getSalesData() {
+    return axiosClient
+        .get(`/api/products/salesData`)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}

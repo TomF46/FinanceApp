@@ -40,6 +40,16 @@ class ProductsController extends Controller
         return response()->json($paginator);
     }
 
+    public function salesData(Request $request)
+    {
+        $paginator = ProductSearch::apply($request)->paginate(20);
+        $paginator->getCollection()->transform(function ($product){
+            return $product->mapWithSalesData();
+        });
+
+        return response()->json($paginator);
+    }
+
     /**
      * Store new product
      *

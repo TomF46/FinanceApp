@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { getAllApplicationsCSV, getOverview, getYearByYearCSV } from "../../../../api/overviewApi";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
-import MoneyFormat from "../../../DisplayComponents/MoneyFormat";
 import YearByYearProfitBarChart from "./charts/YearByYearProfitBarChart";
 import { downloadCSVStream, getMoneyTextColorClass } from "../../../../tools/HelperFunctions";
 import RetailDataSummaryTable from "../../../DisplayComponents/RetailDataSummaryTable";
 import RetailInvestmentSummaryTable from "../../../DisplayComponents/RetailInvestmentSummaryTable";
+import { Link } from "react-router-dom";
 
 const AllTimeOverviewPage = () => {
     const [overview, setOverview] = useState(null);
@@ -47,14 +47,13 @@ const AllTimeOverviewPage = () => {
         });
     }
 
-
     return (
         <div className="headoffice-overview">
             <h1 className="text-center font-bold text-4xl">
                 Organisational financial overview
             </h1>
             {!overview ? (
-                <LoadingMessage message={"Loading Year Overview"} />
+                <LoadingMessage message={"Loading all time overview"} />
             ) : (
                 <>
                     <div className="my-4">
@@ -70,6 +69,9 @@ const AllTimeOverviewPage = () => {
                             <p className="text-white font-bold text-lg px-2 py-1">Actions</p>
                         </div>
                         <div className="px-2 py-2 flex">
+                            <Link to={'/headOffice/overview/sales'} className="bg-primary text-white rounded py-2 px-4 hover:opacity-75 shadow mr-2">
+                                Product sales overview
+                            </Link>
                             <button onClick={() => downloadOverviewCSV()} className="bg-primary text-white rounded py-2 px-4 hover:opacity-75 shadow mr-2">
                                 Download overview CSV
                             </button>

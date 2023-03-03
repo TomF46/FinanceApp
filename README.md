@@ -63,28 +63,32 @@ If Accepted
 ### Role of each user role
 
 #### Administrator
--  Add, edit, and remove Head office users/ Area manager users / Retail manager users
-- Add, edit, and remove Areas and Retail locations
-- Assign Retail locations to Areas
-- Assign Area managers to Area
-- Assign Retail managers to Retail location
-- Create, edit, and remove Products
+-  Add, edit, and remove Head office users/ Area manager users / Retail manager users.
+- Add, edit, and remove Areas and Retail locations.
+- Assign Retail locations to Areas.
+- Assign Area managers to Area.
+- Assign Retail managers to Retail location.
+- Create, edit, and remove Products.
 
 #### Head Office
-- Create reporting year/period
-- View high level overview of each year/period
+- Create reporting year/period.
+- View high level overview of each year/period.
+- View graphs.
+- Download various data in CSV format.
 
 #### Area manager
-- View overview of areas managed and retail locations within them
-- View status of  all applications in areas managed
-- View applications for retail locations within areas managed
-- Manage (Accept/Reject) applications submitted by retail managers in area
+- View overview of areas managed and retail locations within them.
+- View status of  all applications in areas managed.
+- View applications for retail locations within areas managed.
+- Manage (Accept/Reject) applications submitted by retail managers in area.
+- Download all applications submitted in area as CSV.
 
 #### Retail manager
-- View overview of retail locations managed
-- View applications for retail locations managed
-- Complete and submit applications for retail locations managed
-- View funding/investment data from accepted applications
+- View overview of retail locations managed.
+- View applications for retail locations managed.
+- Complete and submit applications for retail locations managed.
+- View funding/investment data from accepted applications.
+- Download all applications submitted by location as CSV.
 
 ## Application overview
 - Laravel API
