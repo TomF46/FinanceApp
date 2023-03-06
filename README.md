@@ -17,8 +17,12 @@ run `setup.sh`
 This creates the database with a single admin user, the default admin users username and password can be set in the `.env` file by editing the values for `ADMIN_EMAIL` & `ADMIN_PASSWORD`.
 
 Option 2: Advanced seeder
-run `advancedSeeder.sh`
+run `advancedSetup.sh`
 This creates the database with the same Admin as the above open as well as a user from each role, an area, a retail location, and products, all the data needed to get straight in to completing applications. Usernames can be found in `database/seeders/AdvancedSeeder.php` and all non admin passwords are set to the environment variable `TESTING_PASSWORD` by default.
+
+Option 2: Pre populated year seeder
+run `populatedYearSetup.sh`
+This setup creates a couple of areas each with a couple of retail locations, each with 1 years worth of completed applications, allowing the user to quickly view end of year summaries and graphs.
 
 ### Advanced Setup
 Note: If using own environment and not sail replace all instances of `sail`  with `php`
@@ -29,7 +33,7 @@ Steps:
  4.  Now you can run sail by entering `/vendor/bin/sail up` or `/vendor/bin/sail up -d` for a detached process. This uses the docker file to create the environment required to run the application and run tests.
  5. Run migrations using `sail artisan migrate` to create the database tables.
  6. **Option 1:** Run `sail artisan db:seed` to add a admin user to the project, see Quick setup - Basic seeder for more information.
-**Option 2:** Alternatively you can run `sail artisan db:seed --class=AdvancedSeeder` see Quick setup - Advanced seeder for more information.
+**Option 2:** Alternatively you can run `sail artisan db:seed --class=AdvancedSeeder` or `sail artisan db:seed --class=PrePopulatedYearSeeder` see Quick setup - Options 2/3 for more information.
 
     **NOTE** Step 5: Performing both options will cause an error, if you want to try the other option after previously performing one run `sail artisan migrate:fresh` to reset the database first.
 

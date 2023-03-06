@@ -1,0 +1,672 @@
+-- MySQL dump 10.13  Distrib 8.0.18, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: financeapp
+-- ------------------------------------------------------
+-- Server version	8.0.31
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `application_revisions`
+--
+
+DROP TABLE IF EXISTS `application_revisions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `application_revisions` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `application_id` bigint unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `application_revisions_application_id_foreign` (`application_id`),
+  CONSTRAINT `application_revisions_application_id_foreign` FOREIGN KEY (`application_id`) REFERENCES `applications` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `application_revisions`
+--
+
+LOCK TABLES `application_revisions` WRITE;
+/*!40000 ALTER TABLE `application_revisions` DISABLE KEYS */;
+INSERT INTO `application_revisions` VALUES (1,1,'2022-10-28 11:11:42','2022-10-28 11:11:42'),(2,2,'2023-03-02 10:35:10','2023-03-02 10:35:10'),(3,3,'2023-03-02 10:39:11','2023-03-02 10:39:11'),(4,4,'2023-03-02 10:41:22','2023-03-02 10:41:22');
+/*!40000 ALTER TABLE `application_revisions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `applications`
+--
+
+DROP TABLE IF EXISTS `applications`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `applications` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `year_id` bigint unsigned NOT NULL,
+  `retail_location_id` bigint unsigned NOT NULL,
+  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `applications_year_id_foreign` (`year_id`),
+  KEY `applications_retail_location_id_foreign` (`retail_location_id`),
+  CONSTRAINT `applications_retail_location_id_foreign` FOREIGN KEY (`retail_location_id`) REFERENCES `retail_locations` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `applications_year_id_foreign` FOREIGN KEY (`year_id`) REFERENCES `years` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `applications`
+--
+
+LOCK TABLES `applications` WRITE;
+/*!40000 ALTER TABLE `applications` DISABLE KEYS */;
+INSERT INTO `applications` VALUES (1,1,1,'3','2022-10-18 09:52:29','2022-11-07 11:04:11'),(2,1,2,'3','2022-10-18 09:52:29','2023-03-02 10:35:40'),(3,1,3,'3','2022-10-18 09:52:29','2023-03-02 10:41:35'),(4,1,4,'3','2022-10-18 09:52:29','2023-03-02 10:41:42');
+/*!40000 ALTER TABLE `applications` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `areas`
+--
+
+DROP TABLE IF EXISTS `areas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `areas` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `areas`
+--
+
+LOCK TABLES `areas` WRITE;
+/*!40000 ALTER TABLE `areas` DISABLE KEYS */;
+INSERT INTO `areas` VALUES (1,'California',1),(2,'Wisconsin',1);
+/*!40000 ALTER TABLE `areas` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `expenses_records`
+--
+
+DROP TABLE IF EXISTS `expenses_records`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `expenses_records` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `application_revision_id` bigint unsigned NOT NULL,
+  `rent` decimal(19,4) NOT NULL,
+  `payroll` decimal(19,4) NOT NULL,
+  `utilities` decimal(19,4) NOT NULL,
+  `equipment` decimal(19,4) NOT NULL,
+  `travel` decimal(19,4) NOT NULL,
+  `training` decimal(19,4) NOT NULL,
+  `maintenance` decimal(19,4) NOT NULL,
+  `employeeBonus` decimal(19,4) NOT NULL,
+  `employeeExpenses` decimal(19,4) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `expenses_records_application_revision_id_foreign` (`application_revision_id`),
+  CONSTRAINT `expenses_records_application_revision_id_foreign` FOREIGN KEY (`application_revision_id`) REFERENCES `application_revisions` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `expenses_records`
+--
+
+LOCK TABLES `expenses_records` WRITE;
+/*!40000 ALTER TABLE `expenses_records` DISABLE KEYS */;
+INSERT INTO `expenses_records` VALUES (1,1,21.0000,23.0000,21.0000,23.0000,21.0000,321.0000,321.0000,23.0000,231.0000),(2,2,80000.0000,125000.0000,10000.0000,8000.0000,4500.0000,8000.0000,7500.0000,15000.0000,25000.0000),(3,3,160000.0000,200000.0000,12500.0000,7800.0000,4500.0000,14000.0000,8000.0000,45000.0000,12500.0000),(4,4,75000.0000,125000.0000,12000.0000,8000.0000,4700.0000,5750.0000,11000.0000,12000.0000,6000.0000);
+/*!40000 ALTER TABLE `expenses_records` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `failed_jobs`
+--
+
+DROP TABLE IF EXISTS `failed_jobs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `failed_jobs` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `failed_jobs`
+--
+
+LOCK TABLES `failed_jobs` WRITE;
+/*!40000 ALTER TABLE `failed_jobs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `failed_jobs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `income_records`
+--
+
+DROP TABLE IF EXISTS `income_records`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `income_records` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `application_revision_id` bigint unsigned NOT NULL,
+  `dividends` decimal(19,4) NOT NULL,
+  `assetSales` decimal(19,4) NOT NULL,
+  `maintenanceGrant` decimal(19,4) NOT NULL,
+  `sponsorship` decimal(19,4) NOT NULL,
+  `rewards` decimal(19,4) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `income_records_application_revision_id_foreign` (`application_revision_id`),
+  CONSTRAINT `income_records_application_revision_id_foreign` FOREIGN KEY (`application_revision_id`) REFERENCES `application_revisions` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `income_records`
+--
+
+LOCK TABLES `income_records` WRITE;
+/*!40000 ALTER TABLE `income_records` DISABLE KEYS */;
+INSERT INTO `income_records` VALUES (1,1,21312.0000,3212.0000,213.0000,213.0000,2321.0000),(2,2,6000.0000,12000.0000,8000.0000,5000.0000,12500.0000),(3,3,14000.0000,7800.0000,1250.0000,7800.0000,4500.0000),(4,4,5000.0000,9000.0000,3400.0000,6400.0000,15000.0000);
+/*!40000 ALTER TABLE `income_records` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `investments`
+--
+
+DROP TABLE IF EXISTS `investments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `investments` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `application_id` bigint unsigned NOT NULL,
+  `fromNOI` decimal(19,4) NOT NULL,
+  `fromSales` decimal(19,4) NOT NULL,
+  `fromNetProfit` decimal(19,4) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `investments_application_id_foreign` (`application_id`),
+  CONSTRAINT `investments_application_id_foreign` FOREIGN KEY (`application_id`) REFERENCES `applications` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `investments`
+--
+
+LOCK TABLES `investments` WRITE;
+/*!40000 ALTER TABLE `investments` DISABLE KEYS */;
+INSERT INTO `investments` VALUES (1,1,5454.2000,2906.5000,74696.8500,'2022-11-07 11:04:11','2022-11-07 11:04:11'),(2,2,8700.0000,43938.0000,269838.0000,'2023-03-02 10:35:40','2023-03-02 10:35:40'),(3,3,7070.0000,83220.9000,544399.6500,'2023-03-02 10:41:35','2023-03-02 10:41:35'),(4,4,7760.0000,28606.6000,88311.6000,'2023-03-02 10:41:42','2023-03-02 10:41:42');
+/*!40000 ALTER TABLE `investments` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `manager_area`
+--
+
+DROP TABLE IF EXISTS `manager_area`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `manager_area` (
+  `user_id` bigint unsigned NOT NULL,
+  `area_id` bigint unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`user_id`,`area_id`),
+  KEY `manager_area_area_id_foreign` (`area_id`),
+  CONSTRAINT `manager_area_area_id_foreign` FOREIGN KEY (`area_id`) REFERENCES `areas` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `manager_area_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `manager_area`
+--
+
+LOCK TABLES `manager_area` WRITE;
+/*!40000 ALTER TABLE `manager_area` DISABLE KEYS */;
+INSERT INTO `manager_area` VALUES (3,1,NULL,NULL),(4,2,NULL,NULL);
+/*!40000 ALTER TABLE `manager_area` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `manager_location`
+--
+
+DROP TABLE IF EXISTS `manager_location`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `manager_location` (
+  `user_id` bigint unsigned NOT NULL,
+  `retail_location_id` bigint unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`user_id`,`retail_location_id`),
+  KEY `manager_location_retail_location_id_foreign` (`retail_location_id`),
+  CONSTRAINT `manager_location_retail_location_id_foreign` FOREIGN KEY (`retail_location_id`) REFERENCES `retail_locations` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `manager_location_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `manager_location`
+--
+
+LOCK TABLES `manager_location` WRITE;
+/*!40000 ALTER TABLE `manager_location` DISABLE KEYS */;
+INSERT INTO `manager_location` VALUES (5,1,NULL,NULL),(6,2,NULL,NULL),(7,3,NULL,NULL),(8,4,NULL,NULL);
+/*!40000 ALTER TABLE `manager_location` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `migrations`
+--
+
+DROP TABLE IF EXISTS `migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `migrations` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `migrations`
+--
+
+LOCK TABLES `migrations` WRITE;
+/*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
+INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_resets_table',1),(3,'2016_06_01_000001_create_oauth_auth_codes_table',1),(4,'2016_06_01_000002_create_oauth_access_tokens_table',1),(5,'2016_06_01_000003_create_oauth_refresh_tokens_table',1),(6,'2016_06_01_000004_create_oauth_clients_table',1),(7,'2016_06_01_000005_create_oauth_personal_access_clients_table',1),(8,'2019_08_19_000000_create_failed_jobs_table',1),(9,'2021_06_22_110225_create_areas_table',1),(10,'2021_06_22_111225_create_retail_location_table',1),(11,'2021_06_22_143212_create_retail_manager_retail_location_table',1),(12,'2021_06_22_144638_create_manager_area_table',1),(13,'2021_06_23_105851_create_years_table',1),(14,'2021_06_23_122342_create_application_table',1),(15,'2021_06_23_145312_create_products_table',1),(16,'2021_06_23_185739_create_application_revisions_table',1),(17,'2021_06_24_125859_create_sales_table',1),(18,'2021_06_24_132559_create_income_records_table',1),(19,'2021_06_24_142100_create_expenses_records_table',1),(20,'2021_06_30_093938_create_rejection_messages_table',1),(21,'2021_07_05_095100_create_investments_table',1);
+/*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `oauth_access_tokens`
+--
+
+DROP TABLE IF EXISTS `oauth_access_tokens`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `oauth_access_tokens` (
+  `id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` bigint unsigned DEFAULT NULL,
+  `client_id` bigint unsigned NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `scopes` text COLLATE utf8mb4_unicode_ci,
+  `revoked` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `expires_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `oauth_access_tokens_user_id_index` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `oauth_access_tokens`
+--
+
+LOCK TABLES `oauth_access_tokens` WRITE;
+/*!40000 ALTER TABLE `oauth_access_tokens` DISABLE KEYS */;
+INSERT INTO `oauth_access_tokens` VALUES ('0169ea0bdeadad2b487aa5cdc666800c798e4c93c1ea4252692e9a81133d5dc7ceef1c24cf54d1ea',3,1,'Personal Access Token','[]',0,'2023-02-03 12:06:14','2023-02-03 12:06:14','2023-02-10 12:06:14'),('0e25004cda0893f3477bed3de9f7828130afd98935ee1827380b3d92a130345ccc35e0f1f10d93ef',3,1,'Personal Access Token','[]',0,'2023-03-02 11:41:13','2023-03-02 11:41:13','2023-03-09 11:41:14'),('194798a314811d9be84d19a2419c7532f747ae5e721077bf7bbe42ce87301ae86fd3ae770d04f898',2,1,'Personal Access Token','[]',0,'2022-11-07 10:42:18','2022-11-07 10:42:18','2022-11-14 10:42:18'),('254a9472b9f999ecebff662dcd3eabc572604a3cf4450901999e69d2a746c350922295f34897899f',5,1,'Personal Access Token','[]',0,'2023-03-02 11:42:59','2023-03-02 11:42:59','2023-03-09 11:42:59'),('26154b514ef701767f93c65528f7a3de979777dfc781417060f258849f1208b098077989fa6208e6',7,1,'Personal Access Token','[]',0,'2023-03-02 10:37:58','2023-03-02 10:37:58','2023-03-09 10:37:58'),('32ad51eda955d486e70fa444f07eaf83f1035e9e12b2483db9187f4f310632896598b026f64e6097',6,1,'Personal Access Token','[]',0,'2023-03-02 10:33:11','2023-03-02 10:33:11','2023-03-09 10:33:11'),('37679cb69df2bf1b2916eb1adc7bc1937ab8802f07e94496175d8020cddf986f24b9f111fbb19573',2,1,'Personal Access Token','[]',0,'2023-02-03 12:00:49','2023-02-03 12:00:49','2023-02-10 12:00:49'),('428871b2b2ce9901e811f0891dd85fa8db3c4c96ee8c96a9ead869d74e79b058582a079bc70f7611',5,1,'Personal Access Token','[]',0,'2023-03-02 14:39:55','2023-03-02 14:39:55','2023-03-09 14:39:56'),('438ddc2d4596dbe357e4111b2895d3dcfb9b167ade60236c5b1045c01531721cdae07d2abf74aad5',3,1,'Personal Access Token','[]',0,'2022-10-28 11:12:14','2022-10-28 11:12:14','2022-11-04 11:12:14'),('508f44e90ee67b5d091b148921bba378fe600999e1d76a5e114eb281346cdf56d25ee5fab4ea17e2',2,1,'Personal Access Token','[]',0,'2022-10-28 12:14:56','2022-10-28 12:14:56','2022-11-04 12:14:57'),('551746e5ca1c76474e0931b612698acbdd5a16e176d0339ad23d80a112bef45bdc1f1999e9853b5a',3,1,'Personal Access Token','[]',0,'2023-03-02 13:50:54','2023-03-02 13:50:54','2023-03-09 13:50:54'),('5caa0c5da7789ffa9274afc120266190faefbcbdd55fbab0630d8a2b294bc900f47cd4981745545b',2,1,'Personal Access Token','[]',0,'2023-03-03 10:15:03','2023-03-03 10:15:03','2023-03-10 10:15:03'),('694b702b01245199e66dac12358b15263a54e336f3f8719f205f22f51a86ecaa42ef985017405fb8',3,1,'Personal Access Token','[]',0,'2023-03-02 10:30:48','2023-03-02 10:30:48','2023-03-09 10:30:48'),('7143c06e5da4ac5584b312c6d3f176b6fd8830fe6a12ec7d1e8545a7527cda5f850bad91965e2a84',1,1,'Personal Access Token','[]',0,'2022-10-28 10:53:29','2022-10-28 10:53:29','2022-11-04 10:53:29'),('888ecb5d41506f7c803e52b931e3c1b3aff77fe6036c3609bd62cfc192d4f4a9235dd333323bf228',5,1,'Personal Access Token','[]',0,'2023-02-03 12:17:49','2023-02-03 12:17:49','2023-02-10 12:17:49'),('a582c38695de17142abd57906db7edf13a01398b02232a5848b0e3c697693c64618141b7b2b3df78',1,1,'Personal Access Token','[]',0,'2023-03-02 10:30:11','2023-03-02 10:30:11','2023-03-09 10:30:11'),('a704f88bde630278c81a54d6f3784b41d52fd6f87dcb7f43e93b5f424c21a1f90653b0a9fae7100b',3,1,'Personal Access Token','[]',0,'2023-03-02 14:38:50','2023-03-02 14:38:50','2023-03-09 14:38:50'),('adbbb4dc5b69b7d02ae51ed3b4cac54154ac6f15f19faef99a657140cf18b33bfefd638ce95db8a5',5,1,'Personal Access Token','[]',0,'2023-03-02 10:32:10','2023-03-02 10:32:10','2023-03-09 10:32:10'),('ae1cf414186726b20e01b0b4e855a06e9176a64c464f4f898942d1f4656bea760ba491e87676f1fd',2,1,'Personal Access Token','[]',0,'2023-03-02 13:59:27','2023-03-02 13:59:27','2023-03-09 13:59:27'),('afa0a4f3889bcf48f24abe925834ec8f0c10a4cb141470dc4dabb1077debcd2c49e4eac491e12665',4,1,'Personal Access Token','[]',0,'2023-03-02 10:37:40','2023-03-02 10:37:40','2023-03-09 10:37:40'),('b51ef30d93c86cbc1ce09671c8197c2b65785e0c4f1df196efd6ff6cb59d123165f598c892265e18',2,1,'Personal Access Token','[]',0,'2023-03-02 10:42:16','2023-03-02 10:42:16','2023-03-09 10:42:16'),('c5f2adef497cd2bc62a2a4f2239102eb136ea9977c835f8d90e787b583ecf5680f503eca872cf91d',2,1,'Personal Access Token','[]',0,'2022-10-28 11:07:07','2022-10-28 11:07:07','2022-11-04 11:07:07'),('d5d8088839dd84129b01b7d9758767f1664705de5ee197a01a09a10bca55a7d98900874e7f27bade',5,1,'Personal Access Token','[]',0,'2023-03-02 13:37:16','2023-03-02 13:37:16','2023-03-09 13:37:16'),('e287ef54904f6b9b7ed8fb6aa4ac07807419349820fe80daf2f13ed045dd7c3522775efffaef7160',3,1,'Personal Access Token','[]',0,'2022-11-07 10:45:31','2022-11-07 10:45:31','2022-11-14 10:45:31'),('e9513759ba4fee7e3aac10889630d0fe176256417a27c9c655531e3d4b43e6ab1d2153c49c95d85b',5,1,'Personal Access Token','[]',0,'2022-10-28 11:09:16','2022-10-28 11:09:16','2022-11-04 11:09:16'),('eab7202900e55646f267016433c9b1a9a87e378e57722397c75cea69eaa01e29fb69292394d94ecc',2,1,'Personal Access Token','[]',0,'2023-03-03 11:34:17','2023-03-03 11:34:17','2023-03-10 11:34:17'),('eb62a8d4c5bb9341e5a3292b4587ebf824fd5319aafa794a8b6f8ca2676c7da8a4381492cff56cf0',1,1,'Personal Access Token','[]',0,'2023-03-03 11:07:05','2023-03-03 11:07:05','2023-03-10 11:07:05'),('ef5a28e6d3195cf4f69c19518ed4a26821c2ff628362fbe6fb082e02ca83b3973e69fa9761468174',3,1,'Personal Access Token','[]',0,'2022-10-28 11:04:51','2022-10-28 11:04:51','2022-11-04 11:04:51'),('f373dc1b7ff59182cdcde8691b2b56fea8719040f741238c46a9d11c45535ccc81e91efaf0ac405a',8,1,'Personal Access Token','[]',0,'2023-03-02 10:39:41','2023-03-02 10:39:41','2023-03-09 10:39:42'),('f3f2ef4798f6a03a144b0327f99979f935f3bb799f8e6066042f07ecad2cc016ffdc69dcbf874f69',5,1,'Personal Access Token','[]',0,'2022-10-28 11:03:17','2022-10-28 11:03:17','2022-11-04 11:03:17'),('fb7f433e663c167aa655a5e66dc5e3efc75d6cbdf7b26bb07c370b61b6bf6e23acf5d03c0b7cd20b',2,1,'Personal Access Token','[]',0,'2022-10-28 12:16:27','2022-10-28 12:16:27','2022-11-04 12:16:27');
+/*!40000 ALTER TABLE `oauth_access_tokens` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `oauth_auth_codes`
+--
+
+DROP TABLE IF EXISTS `oauth_auth_codes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `oauth_auth_codes` (
+  `id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_id` bigint unsigned NOT NULL,
+  `client_id` bigint unsigned NOT NULL,
+  `scopes` text COLLATE utf8mb4_unicode_ci,
+  `revoked` tinyint(1) NOT NULL,
+  `expires_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `oauth_auth_codes_user_id_index` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `oauth_auth_codes`
+--
+
+LOCK TABLES `oauth_auth_codes` WRITE;
+/*!40000 ALTER TABLE `oauth_auth_codes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `oauth_auth_codes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `oauth_clients`
+--
+
+DROP TABLE IF EXISTS `oauth_clients`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `oauth_clients` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint unsigned DEFAULT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `secret` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `provider` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `redirect` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `personal_access_client` tinyint(1) NOT NULL,
+  `password_client` tinyint(1) NOT NULL,
+  `revoked` tinyint(1) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `oauth_clients_user_id_index` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `oauth_clients`
+--
+
+LOCK TABLES `oauth_clients` WRITE;
+/*!40000 ALTER TABLE `oauth_clients` DISABLE KEYS */;
+INSERT INTO `oauth_clients` VALUES (1,NULL,'Laravel Personal Access Client','b4HsblhxICFbmLXsNIOIIu4eDmoTPNGuDkiOAS7z',NULL,'http://localhost',1,0,0,'2022-10-18 09:52:30','2022-10-18 09:52:30'),(2,NULL,'Laravel Password Grant Client','1wVzCul6hidlXdbcvmUDiT2nSpP2dWBLiNtfikYq','users','http://localhost',0,1,0,'2022-10-18 09:52:30','2022-10-18 09:52:30');
+/*!40000 ALTER TABLE `oauth_clients` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `oauth_personal_access_clients`
+--
+
+DROP TABLE IF EXISTS `oauth_personal_access_clients`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `oauth_personal_access_clients` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `client_id` bigint unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `oauth_personal_access_clients`
+--
+
+LOCK TABLES `oauth_personal_access_clients` WRITE;
+/*!40000 ALTER TABLE `oauth_personal_access_clients` DISABLE KEYS */;
+INSERT INTO `oauth_personal_access_clients` VALUES (1,1,'2022-10-18 09:52:30','2022-10-18 09:52:30');
+/*!40000 ALTER TABLE `oauth_personal_access_clients` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `oauth_refresh_tokens`
+--
+
+DROP TABLE IF EXISTS `oauth_refresh_tokens`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `oauth_refresh_tokens` (
+  `id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `access_token_id` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `revoked` tinyint(1) NOT NULL,
+  `expires_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `oauth_refresh_tokens_access_token_id_index` (`access_token_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `oauth_refresh_tokens`
+--
+
+LOCK TABLES `oauth_refresh_tokens` WRITE;
+/*!40000 ALTER TABLE `oauth_refresh_tokens` DISABLE KEYS */;
+/*!40000 ALTER TABLE `oauth_refresh_tokens` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `password_resets`
+--
+
+DROP TABLE IF EXISTS `password_resets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `password_resets` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  KEY `password_resets_email_index` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `password_resets`
+--
+
+LOCK TABLES `password_resets` WRITE;
+/*!40000 ALTER TABLE `password_resets` DISABLE KEYS */;
+/*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `products`
+--
+
+DROP TABLE IF EXISTS `products`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `products` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `productCode` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cost` decimal(19,4) NOT NULL,
+  `price` decimal(19,4) NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `products_productcode_unique` (`productCode`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `products`
+--
+
+LOCK TABLES `products` WRITE;
+/*!40000 ALTER TABLE `products` DISABLE KEYS */;
+INSERT INTO `products` VALUES (1,'Boss Katana 50','A Boss 50 watt guitar amp','3537254350',85.0000,894.0000,1),(2,'Fender Rumble Studio 40','A Fender 40 watt bass amp with sound modeling','351004875X',53.0000,551.0000,1);
+/*!40000 ALTER TABLE `products` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `rejection_messages`
+--
+
+DROP TABLE IF EXISTS `rejection_messages`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `rejection_messages` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `application_revision_id` bigint unsigned NOT NULL,
+  `user_id` bigint unsigned NOT NULL,
+  `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `rejection_messages_application_revision_id_foreign` (`application_revision_id`),
+  CONSTRAINT `rejection_messages_application_revision_id_foreign` FOREIGN KEY (`application_revision_id`) REFERENCES `application_revisions` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rejection_messages`
+--
+
+LOCK TABLES `rejection_messages` WRITE;
+/*!40000 ALTER TABLE `rejection_messages` DISABLE KEYS */;
+/*!40000 ALTER TABLE `rejection_messages` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `retail_locations`
+--
+
+DROP TABLE IF EXISTS `retail_locations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `retail_locations` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `area_id` bigint unsigned NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `location` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `retail_locations`
+--
+
+LOCK TABLES `retail_locations` WRITE;
+/*!40000 ALTER TABLE `retail_locations` DISABLE KEYS */;
+INSERT INTO `retail_locations` VALUES (1,1,'Bernhard Group','South Erin',1),(2,1,'White, Wiza and Goldner','East Carley',1),(3,2,'Rutherford and Sons','Lake Cheyenneton',1),(4,2,'Reinger Ltd','North Jazmyne',1);
+/*!40000 ALTER TABLE `retail_locations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `sales`
+--
+
+DROP TABLE IF EXISTS `sales`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `sales` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `application_revision_id` bigint unsigned NOT NULL,
+  `product_id` bigint unsigned NOT NULL,
+  `quantity` int NOT NULL,
+  `income` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `sales_application_revision_id_foreign` (`application_revision_id`),
+  KEY `sales_product_id_foreign` (`product_id`),
+  CONSTRAINT `sales_application_revision_id_foreign` FOREIGN KEY (`application_revision_id`) REFERENCES `application_revisions` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `sales_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `sales`
+--
+
+LOCK TABLES `sales` WRITE;
+/*!40000 ALTER TABLE `sales` DISABLE KEYS */;
+INSERT INTO `sales` VALUES (1,1,1,23,18607),(2,1,2,21,10458),(3,2,1,420,339780),(4,2,2,200,99600),(5,3,1,543,439287),(6,3,2,789,392922),(7,4,1,140,113260),(8,4,2,347,172806);
+/*!40000 ALTER TABLE `sales` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `users` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `firstName` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lastName` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `role` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '4',
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (2,'Reid','Hilpert','headOffice@email.com','2022-10-18 09:52:27','$2y$10$ZPxYtnTn3jhV65geffIKXeck7wtyTczo2h7N6AIFcD..qgnuzbswu','FWKQ7VMxJJ','2022-10-18 09:52:27','2022-10-18 09:52:27','1',1),(3,'Marjory','Sauer','areaManager@email.com','2022-10-18 09:52:28','$2y$10$wnGr1Tos/5zmqK/sW9HGsew39H99Lmwnzmt4OBs7JLzdZ.mqwBRfC','N8MOd814yJ','2022-10-18 09:52:28','2022-10-18 09:52:28','2',1),(4,'Alysson','Bartell','areaManager2@email.com','2022-10-18 09:52:28','$2y$10$RUXAev/n7/RJAa6Z6HkGxe2LaW8ze3xt9d.ebh6BQsn5CiAAjmUfS','1rNSvMiizo','2022-10-18 09:52:28','2022-10-18 09:52:28','2',1),(5,'Mabel','Hills','retailManager@email.com','2022-10-18 09:52:28','$2y$10$0HBwg3ZeJP0v7Uowv7Isq.gYg3..GtqpjsGVMkUea0ugFHRUMWmLC','oJt0mTH4Js','2022-10-18 09:52:28','2022-10-18 09:52:28','3',1),(6,'Filiberto','Howell','retailManager2@email.com','2022-10-18 09:52:28','$2y$10$3ALc2Kqu9Ye8u9ZW3vU3IeDXHPaZ6W7sAFVcMKatBXbaQVi1qaW6K','1u5uNbKm5f','2022-10-18 09:52:28','2022-10-18 09:52:28','3',1),(7,'Rodrigo','Rosenbaum','retailManager3@email.com','2022-10-18 09:52:28','$2y$10$knuk1PpY7MVZP0PKyAyP9usNRiD4ezAlCamGjjpGtn/IC/5q6NLTa','2QpoJiy23E','2022-10-18 09:52:28','2022-10-18 09:52:28','3',1),(8,'Macie','Thiel','retailManager4@email.com','2022-10-18 09:52:28','$2y$10$s2Uj33RAAy6tM.fZnKAhp.ntb1w8mk1Jwyc1iMvwIE/I1VjpygH1y','vHT7kUatIA','2022-10-18 09:52:29','2022-10-18 09:52:29','3',1);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `years`
+--
+
+DROP TABLE IF EXISTS `years`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `years` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `year` year NOT NULL,
+  `published` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `years_year_unique` (`year`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `years`
+--
+
+LOCK TABLES `years` WRITE;
+/*!40000 ALTER TABLE `years` DISABLE KEYS */;
+INSERT INTO `years` VALUES (1,2021,1);
+/*!40000 ALTER TABLE `years` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'financeapp'
+--
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-03-06 11:32:24
