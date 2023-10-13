@@ -83,6 +83,25 @@ class YearsController extends Controller
         return response()->stream($year->mapApplicationsAsCSV(), 200, $headers);
     }
 
+    public function setPriorityLevel(Request $request, Year $year)
+    {
+        $user = $request->user();
+
+        $attributes = $this->validatePriorityLevel($request);
+
+        $year->setPriorityLevelForApplications($attributes['priority']);
+
+        $year = $year->fresh();
+        return response()->json($year->map());
+    }
+
+    protected function validatePriorityLevel(Request $request)
+    {
+        return $request->validate([
+            'priority' => 'required'
+        ]);
+    }
+
     protected function validateYear(Request $request)
     {
         return $request->validate([

@@ -63,6 +63,11 @@ class Year extends Model
         return $this->applications()->where('status', ApplicationStatus::Accepted)->count();
     }
 
+    public function getNonAcceptedApplications()
+    {
+        return $this->applications()->where('status', "!=", ApplicationStatus::Accepted)->get();
+    }
+
     public function getAcceptedApplications()
     {
         return $this->applications()->where('status', ApplicationStatus::Accepted)->get();
@@ -163,6 +168,14 @@ class Year extends Model
     {
         $applications = $this->getAcceptedApplications();
         return CSVHelper::getCSVForApplications($applications);
+    }
+
+    public function setPriorityLevelForApplications($priority){
+        $applications = $this->getNonAcceptedApplications();
+
+        foreach ($applications as $application) {
+            $application->setPriorityLevel($priority);
+        };
     }
 
 }
