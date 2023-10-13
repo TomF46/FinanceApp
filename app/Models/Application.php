@@ -9,6 +9,7 @@ use App\Models\RetailLocation;
 use App\Models\ApplicationRevision;
 use App\Models\Investment;
 use App\Enums\ApplicationStatus;
+use App\Enums\ApplicationPriority;
 
 class Application extends Model
 {
@@ -73,7 +74,10 @@ class Application extends Model
             'retailLocationName' => $this->retailLocation->name,
             'retailLocationId' => $this->retailLocation->id,
             'status' => $this->status,
-            'statusText' => $this->getStatusText()
+            'statusText' => $this->getStatusText(),
+            'priority' => $this->priority,
+            'priorityText' => $this->getPriorityText()
+
         ];
     }
 
@@ -86,6 +90,8 @@ class Application extends Model
             'retailLocationId' => $this->retailLocation->id,
             'status' => $this->status,
             'statusText' => $this->getStatusText(),
+            'priority' => $this->priority,
+            'priorityText' => $this->getPriorityText(),
             'sales' => $this->latestRevision() ? $this->latestRevision()->mapSales() : [],
             'incomeRecord' => $this->latestRevision() ? $this->latestRevision()->mapIncomeRecord(): null,
             'expensesRecord' => $this->latestRevision() ? $this->latestRevision()->mapExpensesRecord() : null,
@@ -107,6 +113,25 @@ class Application extends Model
             case ApplicationStatus::Accepted:
                 return "Accepted";
                 break;
+        }
+    }
+
+    public function getPriorityText()
+    {
+        switch ($this->priority) {
+            case ApplicationPriority::Low:
+                return "Low";
+                break;
+            case ApplicationPriority::Medium:
+                return "Medium";
+                break;
+            case ApplicationPriority::High:
+                return "High";
+                break;
+            case ApplicationPriority::Severe:
+                return "Severe";
+                break;
+                
         }
     }
 
@@ -166,5 +191,11 @@ class Application extends Model
             'application_id' => $this->id
         ]);
         $investment->calculateInvestment();
+    }
+
+    public function setPriorityLevel($level)
+    {
+        $this->priority = $level;
+        $this->save();
     }
 }

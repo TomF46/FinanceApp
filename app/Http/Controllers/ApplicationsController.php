@@ -115,6 +115,25 @@ class ApplicationsController extends Controller
         return response()->json($investment);
     }
 
+    public function setPriorityLevel(Request $request, Application $application)
+    {
+        $user = $request->user();
+
+        $attributes = $this->validatePriorityLevel($request);
+
+        $application->setPriorityLevel($attributes['priority']);
+
+        $application = $application->fresh();
+        return response()->json($application->map());
+    }
+
+    protected function validatePriorityLevel(Request $request)
+    {
+        return $request->validate([
+            'priority' => 'required'
+        ]);
+    }
+
     protected function validateRejectionMessage(Request $request)
     {
         return $request->validate([

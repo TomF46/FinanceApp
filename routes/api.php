@@ -112,6 +112,9 @@ Route::middleware(['auth:api', 'headOffice'])->group(function () {
     Route::get('/overview/yearByYearProfitBarChart', [App\Http\Controllers\OverviewController::class, 'yearByYearProfitBarChart']);
     Route::get('/overview/downloads/yearByYear', [App\Http\Controllers\OverviewController::class, 'downloadYearByYearCSV']);
     Route::get('/overview/downloads/applications', [App\Http\Controllers\OverviewController::class, 'downloadAllApplicationsCSV']);
+
+    Route::post('/applications/{application}/priority', [App\Http\Controllers\ApplicationsController::class, 'setPriorityLevel']);
+
 });
 
 Route::middleware(['auth:api', 'areaManager'])->group(function () {
