@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { getAreaApplicationsCSV, getAreaById } from "../../../api/areasApi"
 import { toast } from "react-toastify";
@@ -8,9 +6,11 @@ import LoadingMessage from "../../DisplayComponents/LoadingMessage";
 import ApplicationsList from "../../DisplayComponents/ApplicationList";
 import RetailLocationsList from "../../DisplayComponents/RetailLocationsList";
 import { downloadCSVStream } from "../../../tools/HelperFunctions";
+import { useParams } from "react-router-dom";
 
 
-const AreaDetailPage = ({ areaId }) => {
+const AreaDetailPage = () => {
+    const { areaId } = useParams();
     const [area, setArea] = useState(null);
     useEffect(() => {
         if (!area) {
@@ -115,15 +115,4 @@ const AreaDetailPage = ({ areaId }) => {
     )
 };
 
-AreaDetailPage.propTypes = {
-    areaId: PropTypes.any.isRequired,
-};
-
-const mapStateToProps = (state, ownProps) => {
-    return {
-        areaId: ownProps.match.params.areaId,
-    };
-};
-
-
-export default connect(mapStateToProps)(AreaDetailPage);
+export default AreaDetailPage;

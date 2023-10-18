@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { getAreaDataById } from "../../../api/areasApi"
 import { toast } from "react-toastify";
 import LoadingMessage from "../../DisplayComponents/LoadingMessage";
@@ -8,9 +6,11 @@ import RetailDataSummaryTable from "../../DisplayComponents/RetailDataSummaryTab
 import RetailInvestmentSummaryTable from "../../DisplayComponents/RetailInvestmentSummaryTable";
 import AreaYearByYearProfitBarChart from "./charts/AreaYearByYearProfitBarChart";
 import AreaRetailerProfitContributionBarChart from "./charts/AreaRetailerProfitContributionBarChart";
+import { useParams } from "react-router-dom";
 
 
-const AreaDataPage = ({ areaId }) => {
+const AreaDataPage = () => {
+    const { areaId } = useParams();
     const [area, setArea] = useState(null);
     useEffect(() => {
         if (!area) {
@@ -63,15 +63,4 @@ const AreaDataPage = ({ areaId }) => {
     )
 };
 
-AreaDataPage.propTypes = {
-    areaId: PropTypes.any.isRequired,
-};
-
-const mapStateToProps = (state, ownProps) => {
-    return {
-        areaId: ownProps.match.params.areaId,
-    };
-};
-
-
-export default connect(mapStateToProps)(AreaDataPage);
+export default AreaDataPage;

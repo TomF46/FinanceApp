@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import { acceptApplication, getApplicationById, rejectApplication } from "../../../../api/applicationsApi";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
@@ -8,9 +6,11 @@ import ApplicationReadOnly from "../../../DisplayComponents/ApplicationReadOnly"
 import AreaManagerApplicationControls from "./AreaManagerApplicationControls";
 import ApplicationSummary from "../../../DisplayComponents/ApplicationSummary";
 import { confirm } from "../../../../tools/PopupHelper";
+import { useParams } from "react-router-dom";
 
 
-const AreaManagerApplicationViewPage = ({ applicationId }) => {
+const AreaManagerApplicationViewPage = () => {
+    const { applicationId } = useParams();
     const [application, setApplication] = useState(null);
     const [rejectionMessage, setRejectionMessage] = useState("");
     const [errors, setErrors] = useState({});
@@ -114,15 +114,4 @@ const AreaManagerApplicationViewPage = ({ applicationId }) => {
     )
 };
 
-AreaManagerApplicationViewPage.propTypes = {
-    applicationId: PropTypes.any.isRequired,
-};
-
-const mapStateToProps = (state, ownProps) => {
-    return {
-        applicationId: ownProps.match.params.applicationId,
-    };
-};
-
-
-export default connect(mapStateToProps)(AreaManagerApplicationViewPage);
+export default AreaManagerApplicationViewPage;
