@@ -40,6 +40,7 @@ import AreaDataPage from "./Dashboard/AreaManagerDashboard/AreaDataPage";
 import YearApplicationsPage from "./Dashboard/HeadOfficeDashboard/Years/Applications/YearApplicationsPage";
 import YearChartsPage from "./Dashboard/HeadOfficeDashboard/Years/Breakdown/YearChartsPage";
 import SalesOverviewPage from "./Dashboard/HeadOfficeDashboard/AllTime/SalesOverviewPage";
+import YearPriorityUpdatePage from "./Dashboard/HeadOfficeDashboard/Years/Admin/YearPriorityUpdatePage";
 
 const Main = ({ location }) => (
     <>
@@ -140,6 +141,7 @@ const Main = ({ location }) => (
                     <AuthenticatedRoute path="/headOffice/years/add" component={AddYearPage} />
                     <AuthenticatedRoute path="/headOffice/overview/sales" component={SalesOverviewPage} />
                     <AuthenticatedRoute path="/headOffice/overview" component={AllTimeOverviewPage} />
+                    <AuthenticatedRoute path="/headOffice/years/:yearId/priority" component={YearPriorityUpdatePage} />
                     <AuthenticatedRoute path="/headOffice/years/:yearId/charts" component={YearChartsPage} />
                     <AuthenticatedRoute path="/headOffice/years/:yearId/applications" component={YearApplicationsPage} />
                     <AuthenticatedRoute path="/headOffice/years/:yearId" component={YearOverviewPage} />

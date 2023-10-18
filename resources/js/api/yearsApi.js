@@ -98,3 +98,14 @@ export function getYearApplicationsCSV(id) {
             throw error;
         });
 }
+
+export function setYearPriority(yearId, priority){
+    return axiosClient
+        .post(`/api/years/${yearId}/applications/priority`, {priority: priority})
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}

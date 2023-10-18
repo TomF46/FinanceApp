@@ -78,6 +78,13 @@ const YearOverviewPage = ({ yearId }) => {
                     </button>
                     )}
 
+                    <Link
+                        to={`/headOffice/years/${yearId}/priority`}
+                        className="bg-primary text-white rounded py-2 px-4 hover:opacity-75"
+                    >
+                        Set priority
+                    </Link>
+
                     <div className="my-4">
                         <ApplicationsStatusSummary summary={year.applicationStatusSummary} />
                     </div>
