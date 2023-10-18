@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { AddYear } from "../../../../../api/yearsApi";
 import history from "../../../../../history";

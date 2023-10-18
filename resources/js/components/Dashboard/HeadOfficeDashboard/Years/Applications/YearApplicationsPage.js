@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import { getYearById, getCompletedApplicationForYearById } from "../../../../../api/yearsApi";
 import LoadingMessage from "../../../../DisplayComponents/LoadingMessage";
 import AreaApplicationsListWithPagination from "../../../../DisplayComponents/AreaApplicationListWithPagination";
 import { getPaginationPage } from "../../../../../api/applicationsApi";
+import { useParams } from "react-router-dom";
 
-const YearApplicationsPage = ({ yearId }) => {
+const YearApplicationsPage = () => {
+    const { yearId } = useParams();
     const [year, setYear] = useState(null);
     const [applicationsPaginator, setApplicationsPaginator] = useState(null);
 
@@ -82,15 +82,4 @@ const YearApplicationsPage = ({ yearId }) => {
     )
 };
 
-YearApplicationsPage.propTypes = {
-    yearId: PropTypes.any.isRequired,
-};
-
-const mapStateToProps = (state, ownProps) => {
-    return {
-        yearId: ownProps.match.params.yearId,
-    };
-};
-
-
-export default connect(mapStateToProps)(YearApplicationsPage);
+export default YearApplicationsPage;

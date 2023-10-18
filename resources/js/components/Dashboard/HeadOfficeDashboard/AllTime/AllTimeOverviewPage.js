@@ -3,7 +3,7 @@ import { getAllApplicationsCSV, getOverview, getYearByYearCSV } from "../../../.
 import { toast } from "react-toastify";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
 import YearByYearProfitBarChart from "./charts/YearByYearProfitBarChart";
-import { downloadCSVStream, getMoneyTextColorClass } from "../../../../tools/HelperFunctions";
+import { downloadCSVStream} from "../../../../tools/HelperFunctions";
 import RetailDataSummaryTable from "../../../DisplayComponents/RetailDataSummaryTable";
 import RetailInvestmentSummaryTable from "../../../DisplayComponents/RetailInvestmentSummaryTable";
 import { Link } from "react-router-dom";

@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import SelectInput from "../../../../FormComponents/SelectInput";
 import { getYearById, setYearPriority } from "../../../../../api/yearsApi";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../../../DisplayComponents/LoadingMessage";
-import { confirmAlert } from "react-confirm-alert";
 import { confirm } from "../../../../../tools/PopupHelper";
+import { useParams } from "react-router-dom";
 
-const YearPriorityUpdatePage = ({ yearId }) => {
+const YearPriorityUpdatePage = () => {
+    const { yearId } = useParams();
     const [year, setYear] = useState(null);
     const [priority, setPriority] = useState(0);
 
@@ -98,14 +97,4 @@ const YearPriorityUpdatePage = ({ yearId }) => {
     );
 };
 
-YearPriorityUpdatePage.propTypes = {
-    yearId: PropTypes.any.isRequired
-};
-
-const mapStateToProps = (state, ownProps) => {
-    return {
-        yearId: ownProps.match.params.yearId,
-    };
-};
-
-export default connect(mapStateToProps)(YearPriorityUpdatePage);
+export default YearPriorityUpdatePage;

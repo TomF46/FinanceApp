@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
 import { getYearApplicationsCSV, getYearById, publishYear } from "../../../../api/yearsApi";
@@ -10,8 +8,10 @@ import ApplicationsStatusSummary from "../../../DisplayComponents/ApplicationsSt
 import { confirm } from "../../../../tools/PopupHelper";
 import { Link } from "react-router-dom";
 import { downloadCSVStream } from "../../../../tools/HelperFunctions";
+import { useParams } from "react-router-dom";
 
-const YearOverviewPage = ({ yearId }) => {
+const YearOverviewPage = () => {
+    const { yearId } = useParams();
     const [year, setYear] = useState(null);
 
     useEffect(() => {
@@ -129,15 +129,4 @@ const YearOverviewPage = ({ yearId }) => {
     )
 };
 
-YearOverviewPage.propTypes = {
-    yearId: PropTypes.any.isRequired,
-};
-
-const mapStateToProps = (state, ownProps) => {
-    return {
-        yearId: ownProps.match.params.yearId,
-    };
-};
-
-
-export default connect(mapStateToProps)(YearOverviewPage);
+export default YearOverviewPage;
