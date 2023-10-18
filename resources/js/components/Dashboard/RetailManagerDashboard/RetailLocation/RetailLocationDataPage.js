@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { getRetailLocationDataById } from "../../../../api/retailLocationsApi"
 import { toast } from "react-toastify";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
-import MoneyFormat from "../../../DisplayComponents/MoneyFormat";
-import { getMoneyTextColorClass } from "../../../../tools/HelperFunctions";
 import RetailDataSummaryTable from "../../../DisplayComponents/RetailDataSummaryTable";
 import RetailInvestmentSummaryTable from "../../../DisplayComponents/RetailInvestmentSummaryTable";
 import RetailerYearByYearProfitBarChart from "./charts/RetailerYearByYearProfitBarChart";
+import { useParams } from "react-router-dom";
 
-const RetailLocationDataPage = ({ retailLocationId }) => {
+const RetailLocationDataPage = () => {
+    const { retailLocationId } = useParams();
     const [retailLocation, setRetailLocation] = useState(null);
     useEffect(() => {
         if (!retailLocation) {
@@ -55,15 +53,4 @@ const RetailLocationDataPage = ({ retailLocationId }) => {
     )
 };
 
-RetailLocationDataPage.propTypes = {
-    retailLocationId: PropTypes.any.isRequired,
-};
-
-const mapStateToProps = (state, ownProps) => {
-    return {
-        retailLocationId: ownProps.match.params.retailLocationId,
-    };
-};
-
-
-export default connect(mapStateToProps)(RetailLocationDataPage);
+export default RetailLocationDataPage;

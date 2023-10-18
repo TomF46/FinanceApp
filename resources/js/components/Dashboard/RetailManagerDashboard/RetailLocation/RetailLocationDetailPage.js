@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { getLocationApplicationsCSV, getRetailLocationById } from "../../../../api/retailLocationsApi"
 import { toast } from "react-toastify";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
 import ApplicationsList from "../../../DisplayComponents/ApplicationList";
-import ManagersList from "../../../DisplayComponents/ManagersList";
 import { downloadCSVStream } from "../../../../tools/HelperFunctions";
+import { useParams } from "react-router-dom";
 
 
-const RetailLocationDetailPage = ({ retailLocationId }) => {
+const RetailLocationDetailPage = () => {
+    const { retailLocationId } = useParams();
     const [retailLocation, setRetailLocation] = useState(null);
     useEffect(() => {
         if (!retailLocation) {
@@ -106,15 +105,4 @@ const RetailLocationDetailPage = ({ retailLocationId }) => {
     )
 };
 
-RetailLocationDetailPage.propTypes = {
-    retailLocationId: PropTypes.any.isRequired,
-};
-
-const mapStateToProps = (state, ownProps) => {
-    return {
-        retailLocationId: ownProps.match.params.retailLocationId,
-    };
-};
-
-
-export default connect(mapStateToProps)(RetailLocationDetailPage);
+export default RetailLocationDetailPage;

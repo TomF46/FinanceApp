@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import { getApplicationById, submitApplication } from "../../../../api/applicationsApi";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
@@ -11,9 +9,11 @@ import ApplicationReadOnly from "../../../DisplayComponents/ApplicationReadOnly"
 import ApplicationSummary from "../../../DisplayComponents/ApplicationSummary";
 import * as ApplicationService from "../../../../tools/ApplicationService";
 import { confirm } from "../../../../tools/PopupHelper";
+import { useParams } from "react-router-dom";
 
 
-const ApplicationPage = ({ applicationId }) => {
+const ApplicationPage = () => {
+    const { applicationId } = useParams();
     const [application, setApplication] = useState(null);
     const [applicationRestarted, setApplicationRestarted] = useState(false);
     const [income, setIncome] = useState(null);
@@ -180,14 +180,4 @@ const ApplicationPage = ({ applicationId }) => {
     )
 };
 
-ApplicationPage.propTypes = {
-    applicationId: PropTypes.any.isRequired,
-};
-
-const mapStateToProps = (state, ownProps) => {
-    return {
-        applicationId: ownProps.match.params.applicationId,
-    };
-};
-
-export default connect(mapStateToProps)(ApplicationPage);
+export default ApplicationPage;
