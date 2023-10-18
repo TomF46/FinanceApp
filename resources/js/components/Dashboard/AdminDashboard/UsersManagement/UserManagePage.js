@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
 import { deactivateUserById, getUserById } from "../../../../api/usersApi";
@@ -8,8 +6,10 @@ import history from "../../../../history";
 import UserEditForm from "./UserEditForm";
 import UserPasswordChangeForm from "./UserPasswordChangeForm";
 import { confirm } from "../../../../tools/PopupHelper";
+import { useParams } from "react-router-dom";
 
-const UserManagePage = ({ userId }) => {
+const UserManagePage = () => {
+    const { userId } = useParams();
     const [user, setUser] = useState(null);
     useEffect(() => {
         if (!user) {
@@ -83,15 +83,4 @@ const UserManagePage = ({ userId }) => {
     )
 };
 
-UserManagePage.propTypes = {
-    userId: PropTypes.any.isRequired,
-};
-
-const mapStateToProps = (state, ownProps) => {
-    return {
-        userId: ownProps.match.params.userId,
-    };
-};
-
-
-export default connect(mapStateToProps)(UserManagePage);
+export default UserManagePage;

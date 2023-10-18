@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import history from "../../../../../history";
 import RetailLocationManageForm from "./RetailLocationManageForm";
 import { editRetailLocation, getRetailLocationById } from "../../../../../api/retailLocationsApi"
 import { getAreas } from "../../../../../api/areasApi";
 import LoadingMessage from "../../../../DisplayComponents/LoadingMessage";
+import { useParams } from "react-router-dom";
 
-const RetailLocationEditPage = ({ retailLocationId }) => {
-
+const RetailLocationEditPage = () => {
+    const { retailLocationId } = useParams();
     const [retailLocation, setRetailLocation] = useState(null);
     const [areas, setAreas] = useState(null);
     const [errors, setErrors] = useState({});
@@ -92,17 +91,5 @@ const RetailLocationEditPage = ({ retailLocationId }) => {
     );
 };
 
-
-RetailLocationEditPage.propTypes = {
-    retailLocationId: PropTypes.any.isRequired,
-};
-
-const mapStateToProps = (state, ownProps) => {
-    return {
-        retailLocationId: ownProps.match.params.retailLocationId,
-    };
-};
-
-
-export default connect(mapStateToProps)(RetailLocationEditPage);
+export default RetailLocationEditPage;
 

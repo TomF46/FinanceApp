@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { deactivateRetailLocationById, getRetailLocationById, removeRetailManager } from "../../../../../api/retailLocationsApi"
 import { toast } from "react-toastify";
@@ -9,9 +7,11 @@ import ManagersList from "../../../../DisplayComponents/ManagersList";
 import AddRetailManagerForm from "./AddRetailManagerForm";
 import history from "../../../../../history";
 import { confirm } from "../../../../../tools/PopupHelper";
+import { useParams } from "react-router-dom";
 
 
-const RetailLocationAdminPage = ({ retailLocationId }) => {
+const RetailLocationAdminPage = () => {
+    const { retailLocationId } = useParams();
     const [retailLocation, setRetailLocation] = useState(null);
     useEffect(() => {
         if (!retailLocation) {
@@ -125,15 +125,4 @@ const RetailLocationAdminPage = ({ retailLocationId }) => {
     )
 };
 
-RetailLocationAdminPage.propTypes = {
-    retailLocationId: PropTypes.any.isRequired,
-};
-
-const mapStateToProps = (state, ownProps) => {
-    return {
-        retailLocationId: ownProps.match.params.retailLocationId,
-    };
-};
-
-
-export default connect(mapStateToProps)(RetailLocationAdminPage);
+export default RetailLocationAdminPage;

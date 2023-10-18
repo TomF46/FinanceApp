@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import { searchUsers, searchUsersWithPage } from "../../../../api/usersApi"
 import { toast } from "react-toastify";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage"
 import UsersListWithPagination from "../../../DisplayComponents/UsersListWithPagination";
-import { Link } from "react-router-dom";
 import _, { debounce } from 'lodash';
 import UserSearchForm from "../../../DisplayComponents/UsersSearchForm";
 
@@ -83,9 +81,6 @@ const UsersPage = () => {
             </div>
         </div>
     );
-};
-
-UsersPage.propTypes = {
 };
 
 export default UsersPage;

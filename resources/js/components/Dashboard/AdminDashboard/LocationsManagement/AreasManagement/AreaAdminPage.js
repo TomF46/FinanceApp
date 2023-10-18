@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { deactivateAreaById, getAreaById, removeAreaManager } from "../../../../../api/areasApi"
 import { toast } from "react-toastify";
@@ -10,9 +8,11 @@ import ManagersList from "../../../../DisplayComponents/ManagersList";
 import AddAreaManagerForm from "./AddAreaManagerForm";
 import history from "../../../../../history";
 import { confirm } from "../../../../../tools/PopupHelper";
+import { useParams } from "react-router-dom";
 
 
-const AreaAdminPage = ({ areaId }) => {
+const AreaAdminPage = () => {
+    const { areaId } = useParams();
     const [area, setArea] = useState(null);
     useEffect(() => {
         if (!area) {
@@ -137,15 +137,4 @@ const AreaAdminPage = ({ areaId }) => {
     )
 };
 
-AreaAdminPage.propTypes = {
-    areaId: PropTypes.any.isRequired,
-};
-
-const mapStateToProps = (state, ownProps) => {
-    return {
-        areaId: ownProps.match.params.areaId,
-    };
-};
-
-
-export default connect(mapStateToProps)(AreaAdminPage);
+export default AreaAdminPage;

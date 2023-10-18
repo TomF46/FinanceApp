@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import history from "../../../../../history";
 import AreaManageForm from "./AreaManageForm";
 import { editArea, getAreaById } from "../../../../../api/areasApi"
 import LoadingMessage from "../../../../DisplayComponents/LoadingMessage";
+import { useParams } from "react-router-dom";
 
-const AreaEditPage = ({ areaId }) => {
-
+const AreaEditPage = () => {
+    const { areaId } = useParams();
     const [area, setArea] = useState(null);
     const [errors, setErrors] = useState({});
     const [saving, setSaving] = useState(false);
@@ -81,17 +80,5 @@ const AreaEditPage = ({ areaId }) => {
     );
 };
 
-
-AreaEditPage.propTypes = {
-    areaId: PropTypes.any.isRequired,
-};
-
-const mapStateToProps = (state, ownProps) => {
-    return {
-        areaId: ownProps.match.params.areaId,
-    };
-};
-
-
-export default connect(mapStateToProps)(AreaEditPage);
+export default AreaEditPage;
 

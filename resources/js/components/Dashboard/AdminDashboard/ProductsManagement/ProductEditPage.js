@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import ProductManageForm from "./ProductManageForm";
 import { editProduct, getProductById } from "../../../../api/productsApi";
 import history from "../../../../history";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
+import { useParams } from "react-router-dom";
 
-const ProductEditPage = ({ productId }) => {
+const ProductEditPage = () => {
+    const { productId } = useParams();
     const [product, setProduct] = useState(null);
     const [errors, setErrors] = useState({});
     const [saving, setSaving] = useState(false);
@@ -84,17 +84,5 @@ const ProductEditPage = ({ productId }) => {
     );
 };
 
-
-ProductEditPage.propTypes = {
-    productId: PropTypes.any.isRequired,
-};
-
-const mapStateToProps = (state, ownProps) => {
-    return {
-        productId: ownProps.match.params.productId,
-    };
-};
-
-
-export default connect(mapStateToProps)(ProductEditPage);
+export default ProductEditPage;
 

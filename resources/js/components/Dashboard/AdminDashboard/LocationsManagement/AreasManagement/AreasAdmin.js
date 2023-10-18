@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import { searchAreas, searchAreasWithPage } from "../../../../../api/areasApi"
 import { toast } from "react-toastify";
 import LoadingMessage from "../../../../DisplayComponents/LoadingMessage"
@@ -81,9 +80,6 @@ const AreasAdmin = () => {
             </div>
         </div >
     );
-};
-
-AreasAdmin.propTypes = {
 };
 
 export default AreasAdmin;

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import { getYearById } from "../../../../../api/yearsApi";
 import LoadingMessage from "../../../../DisplayComponents/LoadingMessage";
 import RetailProfitBarChart from "./RetailProfitBarChart";
 import RetailProfitPieChart from "./RetailProfitPieChart";
 import AreasProfitBarChart from "./AreasProfitBarChart";
+import { useParams } from "react-router-dom";
 
-const YearChartsPage = ({ yearId }) => {
+const YearChartsPage = () => {
+    const { yearId } = useParams();
     const [year, setYear] = useState(null);
 
     useEffect(() => {
@@ -54,15 +54,4 @@ const YearChartsPage = ({ yearId }) => {
     )
 };
 
-YearChartsPage.propTypes = {
-    yearId: PropTypes.any.isRequired,
-};
-
-const mapStateToProps = (state, ownProps) => {
-    return {
-        yearId: ownProps.match.params.yearId,
-    };
-};
-
-
-export default connect(mapStateToProps)(YearChartsPage);
+export default YearChartsPage;

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { toast } from "react-toastify";
 import { deactivateProductById, getProductById } from "../../../../api/productsApi";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
 import MoneyFormat from "../../../DisplayComponents/MoneyFormat";
 import { confirm } from "../../../../tools/PopupHelper";
+import { useParams } from "react-router-dom";
 
-const ProductPage = ({ productId, history }) => {
+const ProductPage = ({ history }) => {
+    const { productId } = useParams();
     const [product, setProduct] = useState(null);
 
     useEffect(() => {
@@ -91,17 +91,5 @@ const ProductPage = ({ productId, history }) => {
     );
 };
 
-
-ProductPage.propTypes = {
-    productId: PropTypes.any.isRequired,
-};
-
-const mapStateToProps = (state, ownProps) => {
-    return {
-        productId: ownProps.match.params.productId,
-    };
-};
-
-
-export default connect(mapStateToProps)(ProductPage);
+export default ProductPage;
 

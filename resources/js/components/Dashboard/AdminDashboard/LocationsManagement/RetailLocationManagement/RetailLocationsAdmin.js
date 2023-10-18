@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { getRetailLocationsPaginated, getRetailLocationsWithPaginator, searchRetailLocations, searchRetailLocationsWithPage } from "../../../../../api/retailLocationsApi"
+import { searchRetailLocations, searchRetailLocationsWithPage } from "../../../../../api/retailLocationsApi"
 import { toast } from "react-toastify";
 import LoadingMessage from "../../../../DisplayComponents/LoadingMessage"
 import RetailLocationsListWithPagination from "../../../../DisplayComponents/RetailLocationsListWithPagination";
@@ -83,9 +82,6 @@ const RetailLocationsAdmin = () => {
             </div>
         </div>
     );
-};
-
-RetailLocationsAdmin.propTypes = {
 };
 
 export default RetailLocationsAdmin;

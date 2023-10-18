@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
 import { getUserById } from "../../../../api/usersApi";
+import { useParams } from "react-router-dom";
 
-const UserDetailPage = ({ userId }) => {
+const UserDetailPage = () => {
+    const { userId } = useParams();
     const [user, setUser] = useState(null);
     useEffect(() => {
         if (!user) {
@@ -87,15 +87,4 @@ const UserDetailPage = ({ userId }) => {
     )
 };
 
-UserDetailPage.propTypes = {
-    userId: PropTypes.any.isRequired,
-};
-
-const mapStateToProps = (state, ownProps) => {
-    return {
-        userId: ownProps.match.params.userId,
-    };
-};
-
-
-export default connect(mapStateToProps)(UserDetailPage);
+export default UserDetailPage;
