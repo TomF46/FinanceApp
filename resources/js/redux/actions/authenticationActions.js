@@ -6,15 +6,15 @@ import { attatchBearerToken } from "../../tools/axiosClient";
 import history from "../../history";
 import { toast } from "react-toastify";
 
-export function userLoginSuccess(tokens) {
+const userLoginSuccess = (tokens) => {
     return { type: types.USER_LOGIN_SUCCESS, tokens };
 }
 
-export function userLogoutSuccess() {
+const userLogoutSuccess = () => {
     return { type: types.USER_LOGOUT_SUCCESS };
 }
 
-export function login(userLoginDetails) {
+export const login = (userLoginDetails) => {
     return function (dispatch) {
         dispatch(beginApiCall());
         return authenticationApi
@@ -31,7 +31,7 @@ export function login(userLoginDetails) {
     };
 }
 
-export function logout() {
+export const logout = () => {
     return function (dispatch) {
         removeTokens();
         history.push("/login");

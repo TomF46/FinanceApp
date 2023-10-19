@@ -1,38 +1,40 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useLocation } from 'react-router-dom'
-import { checkUserIsAdmin } from "../../redux/actions/isAdminActions"
 import { logout } from "../../redux/actions/authenticationActions";
-import { toast } from "react-toastify";
 import { confirm } from "../../tools/PopupHelper";
 
-const Header = ({ userIsAuthenticated, isAdmin, checkUserIsAdmin, logout }) => {
+const Header = () => {
+    const dispatch = useDispatch();
+    const userIsAuthenticated = useSelector((state) => state.tokens != null);
     const [mobileIsOpen, setMobileIsOpen] = useState(null);
     const location = useLocation();
 
     useEffect(() => {
         setMobileIsOpen(false);
     }, [location]);
-
     function toggleMobileNavigation() {
         setMobileIsOpen(!mobileIsOpen);
     }
 
-    function handleLogout() {
+    function confirmLogout() {
         confirm(
             "Confirm logout",
             `Are you sure you want to logout?`,
-            logout
+            handleLogout
         );
+    }
+
+    function handleLogout(){
+        dispatch(logout());
     }
 
     return (
         <nav className="flex items-center justify-between flex-wrap p-4 shadow-md">
             <div className="flex items-center flex-shrink-0  mr-6">
                 <Link to="/">
-                    <h1 className="logo-text font-bold text-2xl">Mentior Corp Finance Tool</h1>
+                    <h1 className="logo-text font-bold text-2xl">Mentior Corp Finance Tooll</h1>
                 </Link>
             </div>
             <div className="block md:hidden">
@@ -72,7 +74,7 @@ const Header = ({ userIsAuthenticated, isAdmin, checkUserIsAdmin, logout }) => {
                                 <span className="ml-1">Change password</span>
                             </Link>
                             <button
-                                onClick={handleLogout}
+                                onClick={confirmLogout}
                                 className="bg-primary text-sm md:px-4 md:py-2 md:leading-none md:border rounded text-white  mt-4 md:mt-0 md:ml-2 inline-flex items-center hover:opacity-75"
                             >
                                 <svg className="text-grey-800 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -88,22 +90,4 @@ const Header = ({ userIsAuthenticated, isAdmin, checkUserIsAdmin, logout }) => {
     );
 };
 
-Header.propTypes = {
-    userIsAuthenticated: PropTypes.bool.isRequired,
-    isAdmin: PropTypes.bool.isRequired,
-    checkUserIsAdmin: PropTypes.func.isRequired
-};
-
-const mapStateToProps = (state, ownProps) => {
-    return {
-        userIsAuthenticated: state.tokens != null,
-        isAdmin: state.isAdmin
-    };
-};
-
-const mapDispatchToProps = {
-    checkUserIsAdmin,
-    logout
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;
