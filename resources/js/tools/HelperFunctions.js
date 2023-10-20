@@ -13,3 +13,18 @@ export function downloadCSVStream(stream, fileName) {
     link.click();
     link.remove();
 }
+
+export function getPriorityTextClass(priority){
+    switch(Number(priority)){
+        case 0:
+            return 'text-priority-low';
+        case 1:
+            return 'text-priority-medium';
+        case 2:
+            return 'text-priority-high';
+        case 3:
+            return 'text-priority-severe';
+        default:
+            return '';
+    }
+}

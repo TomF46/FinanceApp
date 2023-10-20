@@ -123,8 +123,18 @@ section.route-section {
     color: #00b478;
 }
 
-.text-money-negative{
+.text-money-negative, .text-priority-severe{
     color: #b41e00;
 }
 
+.text-priority-low{
+    color: #0096b4;
+}
 
+.text-priority-medium{
+    color: #F28500;
+}
+
+.text-priority-high{
+    color: #f00;
+}

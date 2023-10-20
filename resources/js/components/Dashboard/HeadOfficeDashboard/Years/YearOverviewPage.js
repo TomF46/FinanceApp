@@ -72,7 +72,7 @@ const YearOverviewPage = () => {
                     {!year.published && (
                         <button
                         onClick={confirmPublish}
-                        className="bg-primary text-white rounded py-2 px-4 hover:opacity-75"
+                        className="bg-primary text-white rounded py-2 px-4 hover:opacity-75 mr-4"
                     >
                         Publish
                     </button>
