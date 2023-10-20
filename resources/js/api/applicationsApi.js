@@ -76,3 +76,14 @@ export function getPaginationPage(url) {
             throw error;
         });
 }
+
+export function setApplicationPriority(applicationId, priority){
+    return axiosClient
+        .post(`/api/applications/${applicationId}/priority`, {priority: priority})
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}

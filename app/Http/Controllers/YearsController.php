@@ -60,9 +60,9 @@ class YearsController extends Controller
         return response()->noContent();
     }
 
-    public function getCompletedApplications(Request $request, Year $year)
+    public function getApplicationsForYear(Request $request, Year $year)
     {
-        $applications = $year->applications()->where('status', ApplicationStatus::Accepted)->paginate(20);
+        $applications = $year->applications()->paginate(20);
         $applications->getCollection()->transform(function ($application) {
             return $application->map();
         });

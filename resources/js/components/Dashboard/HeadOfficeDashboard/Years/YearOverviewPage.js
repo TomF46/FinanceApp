@@ -69,21 +69,29 @@ const YearOverviewPage = () => {
                         {year.year}
                     </h1>
 
-                    {!year.published && (
-                        <button
-                        onClick={confirmPublish}
-                        className="bg-primary text-white rounded py-2 px-4 hover:opacity-75 mr-4"
-                    >
-                        Publish
-                    </button>
-                    )}
+                    <div className="flex">
+                        {!year.published && (
+                            <button
+                            onClick={confirmPublish}
+                            className="bg-primary text-white rounded py-2 px-4 hover:opacity-75 mr-4"
+                        >
+                            Publish
+                        </button>
+                        )}
+                        <Link
+                            to={`/headOffice/years/${yearId}/applications`}
+                            className="bg-primary text-white rounded py-2 px-4 hover:opacity-75 shadow mr-4"
+                        >
+                            Applications
+                        </Link>
+                        <Link
+                            to={`/headOffice/years/${yearId}/priority`}
+                            className="bg-primary text-white rounded py-2 px-4 hover:opacity-75 mr-4"
+                        >
+                            Set priority
+                        </Link>
+                    </div>
 
-                    <Link
-                        to={`/headOffice/years/${yearId}/priority`}
-                        className="bg-primary text-white rounded py-2 px-4 hover:opacity-75"
-                    >
-                        Set priority
-                    </Link>
 
                     <div className="my-4">
                         <ApplicationsStatusSummary summary={year.applicationStatusSummary} />
@@ -102,12 +110,6 @@ const YearOverviewPage = () => {
                                 <p className="text-white font-bold text-lg px-2 py-1">View</p>
                             </div>
                             <div className="px-2 py-2 flex">
-                                <Link
-                                    to={`/headOffice/years/${yearId}/applications`}
-                                    className="bg-primary text-white rounded py-2 px-4 hover:opacity-75 shadow mr-2"
-                                >
-                                    Completed applications
-                                </Link>
                                 <Link
                                     to={`/headOffice/years/${yearId}/charts`}
                                     className="bg-primary text-white rounded py-2 px-4 hover:opacity-75 shadow mr-2"

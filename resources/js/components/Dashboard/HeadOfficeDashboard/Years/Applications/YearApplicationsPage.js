@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { getYearById, getCompletedApplicationForYearById } from "../../../../../api/yearsApi";
+import { getYearById, getApplicationForYearById } from "../../../../../api/yearsApi";
 import LoadingMessage from "../../../../DisplayComponents/LoadingMessage";
-import AreaApplicationsListWithPagination from "../../../../DisplayComponents/AreaApplicationListWithPagination";
 import { getPaginationPage } from "../../../../../api/applicationsApi";
 import { useParams } from "react-router-dom";
+import HeadOfficeApplicationsListWithPagination from "../../../../DisplayComponents/HeadOfficeApplicationsListWithPagination";
 
 const YearApplicationsPage = () => {
     const { yearId } = useParams();
@@ -31,7 +31,7 @@ const YearApplicationsPage = () => {
     }
 
     function getCompletedApplications() {
-        getCompletedApplicationForYearById(yearId).then(applicationData => {
+        getApplicationForYearById(yearId).then(applicationData => {
             setApplicationsPaginator(applicationData);
         }).catch(error => {
             toast.error("Error getting completed applications for year " + error.message, {
@@ -57,7 +57,7 @@ const YearApplicationsPage = () => {
             ) : (
                 <>
                     <h1 className="text-center font-bold text-4xl mb-4">
-                        {year.year} completed applications
+                        {year.year} applications
                     </h1>
 
                     {!applicationsPaginator ? (
@@ -65,11 +65,11 @@ const YearApplicationsPage = () => {
                     ) : (
                         <div className="card shadow-md rounded-md">
                             <div className="bg-primary rounded-t-md">
-                                <p className="text-white font-bold text-lg px-2 py-1">Completed applications</p>
+                                <p className="text-white font-bold text-lg px-2 py-1">Applications</p>
                             </div>
                             <div>
                                 {applicationsPaginator.total > 0 ? (
-                                    <AreaApplicationsListWithPagination paginationData={applicationsPaginator} onPageChange={getPage}/>
+                                    <HeadOfficeApplicationsListWithPagination paginationData={applicationsPaginator} onPageChange={getPage}/>
                                 ) : (
                                     <p className="text-center p-4">This year has no completed applications.</p>
                                 )}

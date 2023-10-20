@@ -36,7 +36,6 @@ const YearPriorityUpdatePage = () => {
 
     function handleChange(event){
         const { value } = event.target;
-        console.log(value);
         setPriority(value);
     }
 

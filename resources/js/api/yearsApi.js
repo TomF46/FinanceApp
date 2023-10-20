@@ -77,9 +77,9 @@ export function publishYear(yearId){
         });
 }
 
-export function getCompletedApplicationForYearById(id) {
+export function getApplicationForYearById(id) {
     return axiosClient
-        .get(`/api/years/${id}/applications/completed`)
+        .get(`/api/years/${id}/applications`)
         .then(response => {
             return response.data;
         })

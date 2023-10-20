@@ -24,6 +24,7 @@ const ApplicationSummary = ({
                     </div>
                     <div className="p-4">
                         <p className="font-bold">Status: {application.statusText}</p>
+                        <p className="font-bold">Priority: {application.priorityText}</p>
                         {application.status == 2 ? (
                             <RejectionMessage application={application} />
                         ) : (

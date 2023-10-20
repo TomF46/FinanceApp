@@ -105,7 +105,7 @@ Route::middleware(['auth:api', 'headOffice'])->group(function () {
     Route::get('/years/{year}/graphs/retailProfitBarChart', [App\Http\Controllers\YearsGraphsController::class, 'retailProfitBarChart']);
     Route::get('/years/{year}/graphs/areasProfitBarChart', [App\Http\Controllers\YearsGraphsController::class, 'areasProfitBarChart']);
     Route::get('/years/{year}/graphs/retailProfitPieChart', [App\Http\Controllers\YearsGraphsController::class, 'retailProfitPieChart']);
-    Route::get('/years/{year}/applications/completed', [App\Http\Controllers\YearsController::class, 'getCompletedApplications']);
+    Route::get('/years/{year}/applications', [App\Http\Controllers\YearsController::class, 'getApplicationsForYear']);
     Route::get('/years/{year}/downloads/applications', [App\Http\Controllers\YearsController::class, 'downloadApplicationsAsCSV']);
     Route::post('/years/{year}/applications/priority', [App\Http\Controllers\YearsController::class, 'setPriorityLevel']);
     
