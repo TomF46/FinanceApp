@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { AddYear } from "../../../../../api/yearsApi";
-import history from "../../../../../history";
 import YearInput from "../../../../FormComponents/YearInput";
+import { useHistory } from "react-router-dom";
 
 const AddYearPage = () => {
-
+    const history = useHistory();
     const [year, setYear] = useState({
         year: "",
         publish: false

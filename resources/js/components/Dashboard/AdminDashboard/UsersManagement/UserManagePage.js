@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
 import { deactivateUserById, getUserById } from "../../../../api/usersApi";
-import history from "../../../../history";
 import UserEditForm from "./UserEditForm";
 import UserPasswordChangeForm from "./UserPasswordChangeForm";
 import { confirm } from "../../../../tools/PopupHelper";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 const UserManagePage = () => {
     const { userId } = useParams();
+    const history = useHistory();
     const [user, setUser] = useState(null);
     useEffect(() => {
         if (!user) {

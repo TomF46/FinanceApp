@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import history from "../../../../../history";
 import RetailLocationManageForm from "./RetailLocationManageForm";
 import { createRetailLocation } from "../../../../../api/retailLocationsApi"
 import { getAreas } from "../../../../../api/areasApi";
+import { useHistory } from "react-router-dom";
 
 const RetailLocationCreatePage = () => {
-
+    const history = useHistory();
     const [retailLocation, setRetailLocation] = useState({
         name: "",
         location: "",

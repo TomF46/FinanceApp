@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import history from "../../../../../history";
 import AreaManageForm from "./AreaManageForm";
 import { editArea, getAreaById } from "../../../../../api/areasApi"
 import LoadingMessage from "../../../../DisplayComponents/LoadingMessage";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 const AreaEditPage = () => {
     const { areaId } = useParams();
+    const history = useHistory();
     const [area, setArea] = useState(null);
     const [errors, setErrors] = useState({});
     const [saving, setSaving] = useState(false);

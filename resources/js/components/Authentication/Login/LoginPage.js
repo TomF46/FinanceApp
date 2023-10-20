@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import LoginForm from "./LoginForm";
 import { login } from "../../../redux/actions/authenticationActions";
-import { Redirect } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 
-const LoginPage = ({ history }) => {
+const LoginPage = () => {
     const dispatch = useDispatch();
+    const history = useHistory();
     const userIsAuthenticated = useSelector((state) => state.tokens != null);
     const [user, setUser] = useState({
         email: "",

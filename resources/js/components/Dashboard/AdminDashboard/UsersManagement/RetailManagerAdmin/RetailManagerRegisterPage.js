@@ -5,7 +5,7 @@ const RetailManagerRegisterPage = () => {
     return (
         <div className="retail-manager-registration">
             <div>
-                <RetailManagerRegisterForm onComplete={() => { history.push("/") }} />
+                <RetailManagerRegisterForm />
             </div>
         </div>
     );

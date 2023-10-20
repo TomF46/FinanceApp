@@ -6,13 +6,13 @@ import LoadingMessage from "../../../../DisplayComponents/LoadingMessage";
 import RetailLocationsList from "../../../../DisplayComponents/RetailLocationsList";
 import ManagersList from "../../../../DisplayComponents/ManagersList";
 import AddAreaManagerForm from "./AddAreaManagerForm";
-import history from "../../../../../history";
 import { confirm } from "../../../../../tools/PopupHelper";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 
 const AreaAdminPage = () => {
     const { areaId } = useParams();
+    const history = useHistory();
     const [area, setArea] = useState(null);
     useEffect(() => {
         if (!area) {

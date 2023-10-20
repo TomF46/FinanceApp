@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { RegisterAreaManager } from "../../../../../api/authenticationApi";
-import history from "../../../../../history";
-import CenterFormCard from "../../../../DisplayComponents/CenterFormCard";
 import RegisterForm from "../../../../DisplayComponents/RegisterForm";
+import { useHistory } from "react-router-dom";
 
 const AreaManagerRegisterForm = () => {
-
+    const history = useHistory();
     const [user, setUser] = useState({
         firstName: "",
         lastName: "",

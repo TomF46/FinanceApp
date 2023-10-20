@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { ChangePassword } from "../../../api/authenticationApi";
-import history from "../../../history";
 import ChangePasswordForm from "./ChangePasswordForm";
+import { useHistory } from "react-router-dom";
 
 const ChangePasswordPage = () => {
-
+    const history = useHistory();
     const [user, setUser] = useState({
         currentPassword: "",
         password: "",

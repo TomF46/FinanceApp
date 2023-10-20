@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams, useHistory } from "react-router-dom";
 import { deactivateRetailLocationById, getRetailLocationById, removeRetailManager } from "../../../../../api/retailLocationsApi"
 import { toast } from "react-toastify";
 import LoadingMessage from "../../../../DisplayComponents/LoadingMessage";
 import ManagersList from "../../../../DisplayComponents/ManagersList";
 import AddRetailManagerForm from "./AddRetailManagerForm";
-import history from "../../../../../history";
 import { confirm } from "../../../../../tools/PopupHelper";
-import { useParams } from "react-router-dom";
-
 
 const RetailLocationAdminPage = () => {
     const { retailLocationId } = useParams();
+    const history = useHistory();
     const [retailLocation, setRetailLocation] = useState(null);
     useEffect(() => {
         if (!retailLocation) {

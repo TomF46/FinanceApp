@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { RegisterHeadOffice } from "../../../../../api/authenticationApi";
-import CenterFormCard from "../../../../DisplayComponents/CenterFormCard";
 import RegisterForm from "../../../../DisplayComponents/RegisterForm";
-import history from "../../../../../history";
+import { useHistory } from "react-router-dom";
 
 const HeadOfficeRegisterForm = () => {
-
+    const history = useHistory();
     const [user, setUser] = useState({
         firstName: "",
         lastName: "",

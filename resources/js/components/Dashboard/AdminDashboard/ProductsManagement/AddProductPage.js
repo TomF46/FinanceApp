@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { AddProduct } from "../../../../api/productsApi";
-import history from "../../../../history"
 import ProductManageForm from "./ProductManageForm";
+import { useHistory } from "react-router-dom";
 
 const AddProductPage = () => {
-
+    const history = useHistory();
     const [product, setProduct] = useState({
         name: "",
         description: "",

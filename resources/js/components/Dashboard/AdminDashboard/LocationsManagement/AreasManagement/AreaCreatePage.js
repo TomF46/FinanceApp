@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { toast } from "react-toastify";
-import history from "../../../../../history";
 import AreaManageForm from "./AreaManageForm";
 import { createArea } from "../../../../../api/areasApi"
+import { useHistory } from "react-router-dom";
 
 const AreaCreatePage = () => {
-
+    const history = useHistory();
     const [area, setArea] = useState({
         name: "",
     });

@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import ProductManageForm from "./ProductManageForm";
 import { editProduct, getProductById } from "../../../../api/productsApi";
-import history from "../../../../history";
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 const ProductEditPage = () => {
     const { productId } = useParams();
+    const history = useHistory();
     const [product, setProduct] = useState(null);
     const [errors, setErrors] = useState({});
     const [saving, setSaving] = useState(false);

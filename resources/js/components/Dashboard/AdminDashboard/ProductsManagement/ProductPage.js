@@ -4,10 +4,11 @@ import { deactivateProductById, getProductById } from "../../../../api/productsA
 import LoadingMessage from "../../../DisplayComponents/LoadingMessage";
 import MoneyFormat from "../../../DisplayComponents/MoneyFormat";
 import { confirm } from "../../../../tools/PopupHelper";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
-const ProductPage = ({ history }) => {
+const ProductPage = () => {
     const { productId } = useParams();
+    const history = useHistory();
     const [product, setProduct] = useState(null);
 
     useEffect(() => {
