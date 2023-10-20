@@ -80,7 +80,7 @@ class ProductsController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        $attributes = $this->validateProduct($request);
+        $attributes = $this->validateProductUpdate($request, $product);
         $product->name = $attributes['name'];
         $product->description = $attributes['description'];
         $product->productCode = $attributes['productCode'];
@@ -120,6 +120,17 @@ class ProductsController extends Controller
             'name' => 'required|max:40',
             'description' => 'required|max:255',
             'productCode' => 'required|unique:products|max:10',
+            'price' => 'required',
+            'cost' => 'required',
+        ]);
+    }
+
+    protected function validateProductUpdate(Request $request, Product $product)
+    {
+        return $request->validate([
+            'name' => 'required|max:40',
+            'description' => 'required|max:255',
+            'productCode' => ['required', Rule::unique('products')->ignore($product), 'max:10'],
             'price' => 'required',
             'cost' => 'required',
         ]);

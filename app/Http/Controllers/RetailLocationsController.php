@@ -108,7 +108,7 @@ class RetailLocationsController extends Controller
         $retailLocation->name = $attributes['name'];
         $retailLocation->location = $attributes['location'];
 
-        $area = Area::find($attributes['area_id']);
+        $area = Area::find($attributes['areaId']);
         if (!$area) return response()->json(['error' => 'Area must exist.'], 400);
         $retailLocation->area_id = $area->id;
 
@@ -193,7 +193,7 @@ class RetailLocationsController extends Controller
         return $request->validate([
             'name' => ['required', 'max:40', Rule::unique('retail_locations')->ignore($retailLocation)],
             'location' => ['required', 'max:60', Rule::unique('retail_locations')->ignore($retailLocation)],
-            'area_id' => ['required', 'exists:areas,id']
+            'areaId' => ['required', 'exists:areas,id']
         ]);
     }
 
