@@ -16,6 +16,7 @@ const RetailLocationEditPage = () => {
 
     useEffect(() => {
         getRetailLocationById(retailLocationId).then(retailLocationData => {
+            retailLocationData.area_id = retailLocationData.areaId;
             setRetailLocation(retailLocationData);
         }).catch(error => {
             toast.error("Error getting retail location " + error.message, {

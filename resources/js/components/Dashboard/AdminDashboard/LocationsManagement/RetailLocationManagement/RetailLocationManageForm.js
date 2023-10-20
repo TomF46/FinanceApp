@@ -55,16 +55,18 @@ const RetailLocationManageForm = ({
                                 error={errors.area_id}
                             />
                         </div>
-
-                        <div className="flex justify-center">
-                            <button
-                                type="submit"
-                                disabled={saving}
-                                className="bg-primary text-white rounded py-2 px-4 hover:opacity-75"
-                            >
-                                {saving ? "Saving..." : "Save"}
-                            </button>
-                        </div>
+                        
+                        {retailLocation.area_id && (
+                            <div className="flex justify-center">
+                                <button
+                                    type="submit"
+                                    disabled={saving}
+                                    className="bg-primary text-white rounded py-2 px-4 hover:opacity-75"
+                                >
+                                    {saving ? "Saving..." : "Save"}
+                                </button>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
