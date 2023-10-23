@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Application;
+use App\Filters\ApplicationSearch;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -19,6 +20,25 @@ class ApplicationsController extends Controller
     {
         return response()->json($application->mapDetail());
     }
+
+    /**
+     * Returns filters application
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function filter(Request $request)
+    {
+        $applications = ApplicationSearch::apply($request)->paginate(20);
+
+        $applications->getCollection()->transform(function ($application) {
+            return $application->map();
+        });
+
+        return response()->json($applications);
+    }
+
+
 
     /**
      * Submits application by ID

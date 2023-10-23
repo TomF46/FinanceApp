@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { getYearById, getApplicationForYearById } from "../../../../../api/yearsApi";
+import { getYearById } from "../../../../../api/yearsApi";
 import LoadingMessage from "../../../../DisplayComponents/LoadingMessage";
-import { getPaginationPage } from "../../../../../api/applicationsApi";
+import { getPaginationPage, searchApplications } from "../../../../../api/applicationsApi";
 import { useParams } from "react-router-dom";
 import HeadOfficeApplicationsListWithPagination from "../../../../DisplayComponents/HeadOfficeApplicationsListWithPagination";
 
@@ -10,13 +10,14 @@ const YearApplicationsPage = () => {
     const { yearId } = useParams();
     const [year, setYear] = useState(null);
     const [applicationsPaginator, setApplicationsPaginator] = useState(null);
+    const [filters, setFilters] = useState({ year: yearId});
 
     useEffect(() => {
         if (!year) {
             getYear();
         }
         if (!applicationsPaginator) {
-            getCompletedApplications();
+            getApplications();
         }
     }, [yearId, year])
 
@@ -30,11 +31,11 @@ const YearApplicationsPage = () => {
         });
     }
 
-    function getCompletedApplications() {
-        getApplicationForYearById(yearId).then(applicationData => {
+    function getApplications() {
+        searchApplications(filters).then(applicationData => {
             setApplicationsPaginator(applicationData);
         }).catch(error => {
-            toast.error("Error getting completed applications for year " + error.message, {
+            toast.error("Error applications for year " + error.message, {
                 autoClose: false,
             });
         });
@@ -44,7 +45,7 @@ const YearApplicationsPage = () => {
         getPaginationPage(url).then(applicationData => {
             setApplicationsPaginator(applicationData);
         }).catch(error => {
-            toast.error("Error getting completed applications for year " + error.message, {
+            toast.error("Error getting applications for year " + error.message, {
                 autoClose: false,
             });
         });

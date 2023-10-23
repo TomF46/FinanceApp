@@ -11,6 +11,17 @@ export function getApplicationById(id) {
         });
 }
 
+export function searchApplications(filters) {
+    return axiosClient
+        .post(`/api/applications`, filters)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
 export function submitApplication(application) {
     return axiosClient
         .post(`/api/applications/${application.applicationId}`, application)
