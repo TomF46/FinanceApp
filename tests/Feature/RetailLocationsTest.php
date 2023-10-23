@@ -96,7 +96,7 @@ class RetailLocationsTest extends TestCase
             [
                 'name' => 'Test shop',
                 'location' => "Test town",
-                'area_id' => $retailLocation->area->id
+                'areaId' => $retailLocation->area->id
             ]
         );
         $response->assertOk();

@@ -7,8 +7,11 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Artisan;
 use Tests\TestCase;
 use App\Enums\Roles;
+use App\Enums\ApplicationStatus;
+use App\Enums\ApplicationPriority;
 use App\Models\User;
 use App\Models\Application;
+use App\Models\Year;
 use Tests\Helpers\TestHelper;
 
 class ApplicationsTest extends TestCase
@@ -37,6 +40,157 @@ class ApplicationsTest extends TestCase
         $response->assertOk();
         $response->assertJson([
             'id' => $application->id
+        ]);
+    }
+
+    public function testCanSearchApplicationsNoFilters()
+    {
+        $headOffice = User::factory()->create([
+            'role' => Roles::HeadOffice
+        ]);
+        $applications = Application::factory()->count(20)->create();
+
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($headOffice)
+        ])->postJson(
+            '/api/applications',
+            [
+                'year' => null,
+                'status' => null,
+                'priority' => null
+            ]
+        );
+
+        $response->assertOk();
+        $response->assertJson([
+            'total' => Count($applications),
+        ]);
+    }
+
+    public function testCanSearchApplicationsWithYearFilter()
+    {
+        $headOffice = User::factory()->create([
+            'role' => Roles::HeadOffice
+        ]);
+        $year1 = Year::factory()->create();
+        $year2 = Year::factory()->create();
+
+
+        $applications1 = Application::factory()->count(20)->create([
+            'year_id' => $year1->id
+        ]);
+
+        $applications2 = Application::factory()->count(10)->create([
+            'year_id' => $year2->id
+        ]);
+
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($headOffice)
+        ])->postJson(
+            '/api/applications',
+            [
+                'year' => $year2->id,
+                'status' => null,
+                'priority' => null
+            ]
+        );
+
+        $response->assertOk();
+        $response->assertJson([
+            'total' => Count($applications2),
+        ]);
+    }
+
+    public function testCanSearchApplicationsWithStatus()
+    {
+        $headOffice = User::factory()->create([
+            'role' => Roles::HeadOffice
+        ]);
+
+        $applications1 = Application::factory()->count(10)->create(['status' => ApplicationStatus::NotSubmitted]);
+        $applications2 = Application::factory()->count(7)->create(['status' => ApplicationStatus::Accepted]);
+
+        
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($headOffice)
+        ])->postJson(
+            '/api/applications',
+            [
+                'year' => null,
+                'status' => ApplicationStatus::Accepted,
+                'priority' => null
+            ]
+        );
+
+        $response->assertOk();
+        $response->assertJson([
+            'total' => Count($applications2),
+        ]);
+    }
+
+    public function testCanSearchApplicationsWithPriority()
+    {
+        $headOffice = User::factory()->create([
+            'role' => Roles::HeadOffice
+        ]);
+
+        $applications1 = Application::factory()->count(8)->create(['priority' => ApplicationPriority::Severe]);
+        $applications2 = Application::factory()->count(4)->create(['priority' => ApplicationPriority::Low]);
+
+        
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($headOffice)
+        ])->postJson(
+            '/api/applications',
+            [
+                'year' => null,
+                'status' => null,
+                'priority' => ApplicationPriority::Low
+            ]
+        );
+
+        $response->assertOk();
+        $response->assertJson([
+            'total' => Count($applications2),
+        ]);
+    }
+
+    public function testCanSearchApplicationsWithMultipleFilters()
+    {
+        $headOffice = User::factory()->create([
+            'role' => Roles::HeadOffice
+        ]);
+
+        $applications1 = Application::factory()->count(20)->create();
+
+        $year = Year::factory()->create();
+
+        $applications2 = Application::factory()->count(2)->create([
+            'year_id' => $year->id,
+            'status' => ApplicationStatus::Accepted,
+            'priority' => ApplicationPriority::Low
+        ]);
+
+        
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($headOffice)
+        ])->postJson(
+            '/api/applications',
+            [
+                'year_id' => $year->id,
+                'status' => ApplicationStatus::Accepted,
+                'priority' => ApplicationPriority::Low
+            ]
+        );
+
+        $response->assertOk();
+        $response->assertJson([
+            'total' => Count($applications2),
         ]);
     }
 }
