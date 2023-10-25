@@ -15,6 +15,12 @@ class ApplicationSearch
             $application->where('year_id', $filters->input('year'));
         }
 
+        if ($filters->has('area') && $filters->input('area') !== null){
+            $application->whereHas('retailLocation', function ($query) use ($filters) {
+                $query->where('area_id', $filters->input('area'));
+            });
+        }
+
         if ($filters->has('status') && $filters->input('status') !== null) {
             $application->where('status', $filters->input('status'));
         }

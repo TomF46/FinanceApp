@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { getAreas } from "../../../../../api/areasApi";
 import SelectInput from "../../../../FormComponents/SelectInput";
 
 const ApplicationsSearch = ({ filters,  onUpdateFilters}) => {
-    // const [areas, setAreas] = useState(null);
+    const [areas, setAreas] = useState(null);
 
     const prioritOptions = [
         {text: "Low", value: 0},
@@ -21,17 +21,17 @@ const ApplicationsSearch = ({ filters,  onUpdateFilters}) => {
         {text: "Inactive", value: 4},
     ];
 
-    // useEffect(()=>{
-    //     getAreas().then(data => {
-    //         setAreas(data);
-    //     })
-    // }, []);
+    useEffect(()=>{
+        getAreas().then(data => {
+            setAreas(data);
+        })
+    }, []);
 
     function onChange(event){
         const { name, value } = event.target;
         let input = value;
 
-        input = name == ("priority" || name == "status") && value == "All" ? null : Number(input);
+        input = value == "All" ? null : Number(input);
 
         let copy = structuredClone(filters);
         console.log(input);
@@ -44,15 +44,19 @@ const ApplicationsSearch = ({ filters,  onUpdateFilters}) => {
                 <p className="text-white font-bold text-lg px-2 py-1">Search</p>
             </div>
             <div className="px-2 py-4 flex">
-                {/* <SelectInput
-                    name="area"
-                    label="Area"
-                    value={filters.area}
-                    options={areas}
-                    onChange={onChange}
-                    error={errors.area_id}
-                /> */}
-                <div>
+                {areas && (
+                    <div>
+                        <SelectInput
+                            name="area"
+                            label="Area"
+                            value={filters.area}
+                            defaultOption={'All'}
+                            options={areas}
+                            onChange={onChange}
+                        />
+                    </div>
+                )}
+                <div className="mx-2">
                     <SelectInput
                         name="status"
                         label="Status"
@@ -62,7 +66,7 @@ const ApplicationsSearch = ({ filters,  onUpdateFilters}) => {
                         onChange={onChange}
                     />
                 </div>
-                <div className="mx-2">
+                <div>
                     <SelectInput
                         name="priority"
                         label="Priority"

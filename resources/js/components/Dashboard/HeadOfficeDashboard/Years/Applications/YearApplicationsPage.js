@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { getYearById } from "../../../../../api/yearsApi";
 import LoadingMessage from "../../../../DisplayComponents/LoadingMessage";
-import { getPageWithPaginationUrlAndFilters, getPaginationPage, searchApplications } from "../../../../../api/applicationsApi";
+import { getPageWithPaginationUrlAndFilters, searchApplications } from "../../../../../api/applicationsApi";
 import { useParams } from "react-router-dom";
 import HeadOfficeApplicationsListWithPagination from "../../../../DisplayComponents/HeadOfficeApplicationsListWithPagination";
 import ApplicationsSearch from "./ApplicationsSearch";
@@ -12,7 +12,7 @@ const YearApplicationsPage = () => {
     const { yearId } = useParams();
     const [year, setYear] = useState(null);
     const [applicationsPaginator, setApplicationsPaginator] = useState(null);
-    const [filters, setFilters] = useState({ year: yearId, status: null, priority: null});
+    const [filters, setFilters] = useState({ year: yearId, area: null, status: null, priority: null});
 
     useEffect(() => {
         if (!year) {
@@ -64,7 +64,7 @@ const YearApplicationsPage = () => {
     return (
         <>
             {!year ? (
-                <LoadingMessage message={"Loading Year Overview"} />
+                <LoadingMessage message={"Loading Years applications"} />
             ) : (
                 <>
                     <h1 className="text-center font-bold text-4xl mb-4">

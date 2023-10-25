@@ -12,6 +12,8 @@ use App\Enums\ApplicationPriority;
 use App\Models\User;
 use App\Models\Application;
 use App\Models\Year;
+use App\Models\Area;
+use App\Models\RetailLocation;
 use Tests\Helpers\TestHelper;
 
 class ApplicationsTest extends TestCase
@@ -57,6 +59,7 @@ class ApplicationsTest extends TestCase
             '/api/applications',
             [
                 'year' => null,
+                'area' => null,
                 'status' => null,
                 'priority' => null
             ]
@@ -92,6 +95,7 @@ class ApplicationsTest extends TestCase
             '/api/applications',
             [
                 'year' => $year2->id,
+                'area' => null,
                 'status' => null,
                 'priority' => null
             ]
@@ -120,6 +124,7 @@ class ApplicationsTest extends TestCase
             '/api/applications',
             [
                 'year' => null,
+                'area' => null,
                 'status' => ApplicationStatus::Accepted,
                 'priority' => null
             ]
@@ -148,6 +153,7 @@ class ApplicationsTest extends TestCase
             '/api/applications',
             [
                 'year' => null,
+                'area' => null,
                 'status' => null,
                 'priority' => ApplicationPriority::Low
             ]
@@ -183,8 +189,43 @@ class ApplicationsTest extends TestCase
             '/api/applications',
             [
                 'year_id' => $year->id,
+                'area' => null,
                 'status' => ApplicationStatus::Accepted,
                 'priority' => ApplicationPriority::Low
+            ]
+        );
+
+        $response->assertOk();
+        $response->assertJson([
+            'total' => Count($applications2),
+        ]);
+    }
+
+    public function testCanSearchApplicationsWithArea()
+    {
+        $headOffice = User::factory()->create([
+            'role' => Roles::HeadOffice
+        ]);
+
+        $area = Area::factory()->create();
+        $area2 = Area::factory()->create();
+        $retailLocation = RetailLocation::factory()->create(['area_id' => $area->id]);
+        $retailLocation2 = RetailLocation::factory()->create(['area_id' => $area2->id]);
+
+        $applications1 = Application::factory()->count(7)->create(['retail_location_id' => $retailLocation->id]);
+        $applications2 = Application::factory()->count(3)->create(['retail_location_id' => $retailLocation2->id]);
+
+        
+        $response = $this->withHeaders([
+            'Accept' => 'application/json',
+            'Authorization' => 'Bearer ' . TestHelper::getBearerTokenForUser($headOffice)
+        ])->postJson(
+            '/api/applications',
+            [
+                'year' => null,
+                'area' => $area2->id,
+                'status' => null,
+                'priority' => null
             ]
         );
 
