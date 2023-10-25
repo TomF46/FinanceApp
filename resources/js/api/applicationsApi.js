@@ -88,6 +88,17 @@ export function getPaginationPage(url) {
         });
 }
 
+export function getPageWithPaginationUrlAndFilters(url, filters) {
+    return axiosClient
+        .post(url, filters)
+        .then(response => {
+            return response.data;
+        })
+        .catch(error => {
+            throw error;
+        });
+}
+
 export function setApplicationPriority(applicationId, priority){
     return axiosClient
         .post(`/api/applications/${applicationId}/priority`, {priority: priority})

@@ -39,6 +39,7 @@ const UserSearchForm = ({ searchTerms, onSearchTermsChange }) => {
                             <SelectInput
                                 name="role"
                                 label="Role"
+                                defaultOption={'All'}
                                 value={searchTerms.role}
                                 options={roles}
                                 onChange={onSearchTermsChange}

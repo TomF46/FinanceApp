@@ -93,15 +93,17 @@ const AddRetailManagerForm = ({ retailLocation, onManagerAdded }) => {
                                 />
                             </div>
 
-                            <div className="flex justify-center">
-                                <button
-                                    type="submit"
-                                    disabled={saving}
-                                    className="bg-primary text-white rounded py-2 px-4 hover:opacity-75"
-                                >
-                                    {saving ? "Adding..." : "Add"}
-                                </button>
-                            </div>
+                            {manager.user_id && (
+                                <div className="flex justify-center">
+                                    <button
+                                        type="submit"
+                                        disabled={saving}
+                                        className="bg-primary text-white rounded py-2 px-4 hover:opacity-75"
+                                    >
+                                        {saving ? "Adding..." : "Add"}
+                                    </button>
+                                </div>
+                            )}
                         </form>
                     ) : (
                         <p className="text-center p-4">There are currently no retail managers registered, please add one to be able to assign a manager.</p>

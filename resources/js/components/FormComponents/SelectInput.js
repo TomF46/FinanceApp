@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const SelectInput = ({ name, label, onChange, value, options, error }) => {
+const SelectInput = ({ name, label, defaultOption ,onChange, value, options, error }) => {
     return (
         <div className="field">
             <label
@@ -17,7 +17,11 @@ const SelectInput = ({ name, label, onChange, value, options, error }) => {
                     onChange={onChange}
                     className="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 leading-tight focus:outline-none focus:outline"
                 >
-                    <option selected disabled>Select</option>
+                    {defaultOption ? (
+                        <option value={null} >{defaultOption}</option>
+                    ) : (
+                        <option selected disabled>Select</option>
+                    )}
                     {options &&
                         options.map((option) => {
                             return (
