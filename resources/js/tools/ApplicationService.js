@@ -44,6 +44,15 @@ export function checkExpensesIsValid(expenses) {
   return errors;
 }
 
+export function checkSalesIsValid(sales) {
+  let errors = [];
+  sales.forEach((sales) => {
+    if (!sales || sales.quantity < 0)
+      errors.push(`Quantity for ${sale.productName} is invalid.`);
+  });
+  return errors;
+}
+
 export function isValidMoney(value) {
   let $decimals = 0;
   if (value % 1 != 0) $decimals = value.toString().split('.')[1].length;

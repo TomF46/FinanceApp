@@ -61,6 +61,11 @@ const SalesSection = ({ sales, onChange, errors }) => {
             })}
           </div>
           <div className='py-2 px-2'>
+            {errors.map((error) => {
+              return <p key={error}>{error}</p>;
+            })}
+          </div>
+          <div className='py-2 px-2'>
             <p className='font-bold text-money-positive'>
               Total sales profit: <MoneyFormat value={getTotalSalesIncome()} />
             </p>
@@ -73,7 +78,7 @@ const SalesSection = ({ sales, onChange, errors }) => {
 
 SalesSection.propTypes = {
   sales: PropTypes.array.isRequired,
-  errors: PropTypes.object,
+  errors: PropTypes.Array,
   onChange: PropTypes.func.isRequired,
 };
 

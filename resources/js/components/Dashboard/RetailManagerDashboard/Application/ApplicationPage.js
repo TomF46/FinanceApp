@@ -23,7 +23,7 @@ const ApplicationPage = () => {
   const [expenses, setExpenses] = useState(null);
   const [expensesErrors, setExpensesErrors] = useState({});
   const [sales, setSales] = useState(null);
-  const [salesErrors, setSalesErrors] = useState({});
+  const [salesErrors, setSalesErrors] = useState([]);
   const [errors, setErrors] = useState({});
   const [saving, setSaving] = useState(false);
 
@@ -119,14 +119,17 @@ const ApplicationPage = () => {
   }
 
   function formIsValid() {
-    const incomeErrors = ApplicationService.checkIncomeIsValid(income);
-    setIncomeErrors(incomeErrors);
-    const expensesErrors = ApplicationService.checkExpensesIsValid(expenses);
-    setExpensesErrors(expensesErrors);
+    const currentIncomeErrors = ApplicationService.checkIncomeIsValid(income);
+    setIncomeErrors(currentIncomeErrors);
+    const currentExpensesErrors =
+      ApplicationService.checkExpensesIsValid(expenses);
+    setExpensesErrors(currentExpensesErrors);
+    const currentSalesErrors = ApplicationService.checkSalesIsValid(sales);
+    setSalesErrors(currentSalesErrors);
     let totalErrors =
       Object.keys(incomeErrors).length +
       Object.keys(expensesErrors).length +
-      Object.keys(salesErrors).length;
+      salesErrors.length;
     return totalErrors === 0;
   }
 

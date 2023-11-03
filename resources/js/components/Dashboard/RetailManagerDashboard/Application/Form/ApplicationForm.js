@@ -74,7 +74,7 @@ ApplicationForm.propTypes = {
   errors: PropTypes.object,
   incomeErrors: PropTypes.object,
   expensesErrors: PropTypes.object,
-  salesErrors: PropTypes.object,
+  salesErrors: PropTypes.array,
   onSave: PropTypes.func.isRequired,
   onIncomeChange: PropTypes.func.isRequired,
   onExpensesChange: PropTypes.func.isRequired,
