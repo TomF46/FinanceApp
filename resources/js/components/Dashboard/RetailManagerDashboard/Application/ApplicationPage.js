@@ -119,17 +119,17 @@ const ApplicationPage = () => {
   }
 
   function formIsValid() {
-    const currentIncomeErrors = ApplicationService.checkIncomeIsValid(income);
-    setIncomeErrors(currentIncomeErrors);
-    const currentExpensesErrors =
-      ApplicationService.checkExpensesIsValid(expenses);
-    setExpensesErrors(currentExpensesErrors);
-    const currentSalesErrors = ApplicationService.checkSalesIsValid(sales);
-    setSalesErrors(currentSalesErrors);
+    const incomeErrors = ApplicationService.checkIncomeIsValid(income);
+    setIncomeErrors(incomeErrors);
+    const expensesErrors = ApplicationService.checkExpensesIsValid(expenses);
+    setExpensesErrors(expensesErrors);
+    const salesErrors = ApplicationService.checkSalesIsValid(sales);
+    setSalesErrors(salesErrors);
     let totalErrors =
       Object.keys(incomeErrors).length +
       Object.keys(expensesErrors).length +
       salesErrors.length;
+    console.log(totalErrors);
     return totalErrors === 0;
   }
 
@@ -143,7 +143,10 @@ const ApplicationPage = () => {
   }
 
   function save() {
-    if (!formIsValid()) return;
+    if (!formIsValid()) {
+      toast.error('Form is not valid, check validation errors and try again.');
+      return;
+    }
     setSaving(true);
 
     submitApplication(

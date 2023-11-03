@@ -46,10 +46,12 @@ export function checkExpensesIsValid(expenses) {
 
 export function checkSalesIsValid(sales) {
   let errors = [];
-  sales.forEach((sales) => {
-    if (!sales || sales.quantity < 0)
-      errors.push(`Quantity for ${sale.productName} is invalid.`);
+  sales.forEach((sale) => {
+    console.log(sale);
+    if (!sale || sale.quantity < 0)
+      errors.push(`Quantity for ${sale.name} is invalid.`);
   });
+  console.log(errors);
   return errors;
 }
 

@@ -62,7 +62,11 @@ const SalesSection = ({ sales, onChange, errors }) => {
           </div>
           <div className='py-2 px-2'>
             {errors.map((error) => {
-              return <p key={error}>{error}</p>;
+              return (
+                <p key={error} className='text-red-500'>
+                  {error}
+                </p>
+              );
             })}
           </div>
           <div className='py-2 px-2'>
