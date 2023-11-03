@@ -54,7 +54,7 @@ const AddProductPage = () => {
       })
       .catch((err) => {
         setSaving(false);
-        toast.error('Error creating product', {
+        toast.error(formatErrorText(err), {
           autoClose: false,
         });
         let tempErrors = { ...errors };

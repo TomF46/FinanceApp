@@ -54,7 +54,7 @@ const RetailLocationCreatePage = () => {
       })
       .catch((err) => {
         setSaving(false);
-        toast.error('Error creating retail location', {
+        toast.error(formatErrorText(err), {
           autoClose: false,
         });
         let tempErrors = { ...errors };

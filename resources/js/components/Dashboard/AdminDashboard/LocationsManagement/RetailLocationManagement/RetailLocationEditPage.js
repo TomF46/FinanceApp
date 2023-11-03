@@ -67,7 +67,7 @@ const RetailLocationEditPage = () => {
       })
       .catch((err) => {
         setSaving(false);
-        toast.error('Error editing retail location', {
+        toast.error(formatErrorText(err), {
           autoClose: false,
         });
         let tempErrors = { ...errors };

@@ -41,7 +41,7 @@ const AreaCreatePage = () => {
       })
       .catch((err) => {
         setSaving(false);
-        toast.error('Error creating area', {
+        toast.error(formatErrorText(err), {
           autoClose: false,
         });
         let tempErrors = { ...errors };

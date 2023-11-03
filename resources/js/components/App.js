@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch, withRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import PropTypes from 'prop-types';
 import Header from './DisplayComponents/Header';
 import AuthenticatedRoute from '../AuthenticatedRoute';
 import AdminRoute from '../AdminRoute';
@@ -178,4 +178,9 @@ const Main = ({ location }) => (
     <ToastContainer autoClose={3000} hideProgressBar />
   </>
 );
+
+Main.propTypes = {
+  location: PropTypes.object.isRequired,
+};
+
 export default withRouter(Main);

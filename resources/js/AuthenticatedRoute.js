@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Redirect, Route, withRouter } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
@@ -27,6 +28,10 @@ const AuthenticatedRoute = ({ component: Component, path, ...rest }) => {
   );
 };
 
-const authenticationRouteWithRouter = withRouter(AuthenticatedRoute);
+AuthenticatedRoute.propTypes = {
+  component: PropTypes.func.isRequired,
+  path: PropTypes.string.isRequired,
+};
 
+const authenticationRouteWithRouter = withRouter(AuthenticatedRoute);
 export default authenticationRouteWithRouter;
