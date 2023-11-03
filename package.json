@@ -7,7 +7,8 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production"
+        "production": "mix --production",
+        "format": "prettier --write resources/js/**/*.{js,jsx,ts,tsx,css,md,json,scss} --config ./.prettierrc.json"
     },
     "devDependencies": {
         "@babel/preset-react": "^7.13.13",
@@ -19,6 +20,7 @@
         "lodash": "^4.17.19",
         "popper.js": "^1.16.1",
         "postcss": "^8.1.14",
+        "prettier": "^3.0.3",
         "react": "^17.0.2",
         "react-confirm-alert": "^2.6.2",
         "react-dom": "^17.0.2",

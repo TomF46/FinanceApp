@@ -1,14 +1,14 @@
-import React from "react";
-import RetailManagerRegisterForm from "./RetailManagerRegisterForm";
+import React from 'react';
+import RetailManagerRegisterForm from './RetailManagerRegisterForm';
 
 const RetailManagerRegisterPage = () => {
-    return (
-        <div className="retail-manager-registration">
-            <div>
-                <RetailManagerRegisterForm />
-            </div>
-        </div>
-    );
+  return (
+    <div className='retail-manager-registration'>
+      <div>
+        <RetailManagerRegisterForm />
+      </div>
+    </div>
+  );
 };
 
 export default RetailManagerRegisterPage;
