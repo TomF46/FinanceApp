@@ -2,14 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
-  deactivateProductById,
   searchProducts,
   searchProductsWithPage,
 } from '../../../../api/productsApi';
 import ProductsListWithPagination from '../../../DisplayComponents/ProductsListWithPagination';
 import _, { debounce } from 'lodash';
 import ProductsSearchForm from '../../../DisplayComponents/ProductsSearchForm';
-import { confirm } from '../../../../tools/PopupHelper';
 
 const ProductsManagementPage = () => {
   const [productsPaginator, setProductsPaginator] = useState(null);
@@ -36,29 +34,6 @@ const ProductsManagementPage = () => {
       })
       .catch((error) => {
         toast.error('Error getting products ' + error.message, {
-          autoClose: false,
-        });
-      });
-  }
-
-  function handleDeactivate(id) {
-    confirm(
-      'Confirm deactivation',
-      `Are you sure you want to deactivate this product?`,
-      () => {
-        deactivate(id);
-      },
-    );
-  }
-
-  function deactivate(id) {
-    deactivateProductById(id)
-      .then((response) => {
-        toast.success('Product deactivated');
-        getProducts();
-      })
-      .catch((error) => {
-        toast.error('Error deactivating product' + error.message, {
           autoClose: false,
         });
       });
@@ -104,7 +79,6 @@ const ProductsManagementPage = () => {
               <div>
                 <ProductsListWithPagination
                   paginationData={productsPaginator}
-                  onProductDeactivate={handleDeactivate}
                   onPageChange={getProductsPage}
                 />
               </div>

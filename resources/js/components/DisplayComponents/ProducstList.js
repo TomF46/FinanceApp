@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import MoneyFormat from './MoneyFormat';
 
-const ProductsList = ({ products, onProductDeactivate }) => {
+const ProductsList = ({ products }) => {
   return (
     <div>
       {products.length > 0 ? (
@@ -50,7 +50,6 @@ const ProductsList = ({ products, onProductDeactivate }) => {
 
 ProductsList.propTypes = {
   products: PropTypes.array.isRequired,
-  onProductDeactivate: PropTypes.func.isRequired,
 };
 
 export default ProductsList;

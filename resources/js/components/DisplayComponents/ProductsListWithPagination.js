@@ -3,17 +3,10 @@ import PropTypes from 'prop-types';
 import PaginationControls from './PaginationControls';
 import ProductsList from './ProducstList';
 
-const ProductsListWithPagination = ({
-  paginationData,
-  onProductDeactivate,
-  onPageChange,
-}) => {
+const ProductsListWithPagination = ({ paginationData, onPageChange }) => {
   return (
     <div className='users-list-w-pagination'>
-      <ProductsList
-        products={paginationData.data}
-        onProductDeactivate={onProductDeactivate}
-      />
+      <ProductsList products={paginationData.data} />
       <PaginationControls
         to={paginationData.to}
         from={paginationData.from}
@@ -30,7 +23,6 @@ const ProductsListWithPagination = ({
 ProductsListWithPagination.propTypes = {
   paginationData: PropTypes.object.isRequired,
   onPageChange: PropTypes.func.isRequired,
-  onProductDeactivate: PropTypes.func.isRequired,
 };
 
 export default ProductsListWithPagination;
