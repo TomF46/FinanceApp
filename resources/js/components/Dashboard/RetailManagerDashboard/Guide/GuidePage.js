@@ -10,7 +10,7 @@ const GuidePage = () => {
         </h1>
         <div className='my-4'>
           <p>
-            Welcome to the 'Metior Corp Finance Tool' retailer user guide a step
+            Welcome to the Metior Corp Finance Tool retailer user guide a step
             by step guide for both first time users and retailer returning years
             later for subsequent applications that need a refresher. If we cant
             answer all of your queries please contact your local area manager
@@ -36,10 +36,10 @@ const GuidePage = () => {
           <h1 className='text-primary font-bold text-2xl'>Step 1</h1>
           <p className='mt-2'>
             First you need to select which application you want to action from
-            the 'My Applications' section of your dashboard incomplete
-            applications will have the status 'Not submitted'. Clicking this
-            will take you to a page where you will be able to begin submitting
-            your locations information.
+            the &apos;My Applications&apos; section of your dashboard incomplete
+            applications will have the status &apos;Not submitted&apos;.
+            Clicking this will take you to a page where you will be able to
+            begin submitting your locations information.
           </p>
         </div>
         <div className='my-4'>
@@ -65,7 +65,7 @@ const GuidePage = () => {
               Rejected - The form you previously completed will be editable with
               your previous inputs as well as showing a section with the reasons
               for the rejection so you can fix these issues. Once resubmitted
-              'Step 3 will be repeated'.
+              &apos;Step 3&apos; will be repeated.
             </li>
             <li>
               Accepted - An overview of your application as well as an overview
@@ -77,8 +77,8 @@ const GuidePage = () => {
         <div className='my-4'>
           <h1 className='text-primary font-bold text-2xl'>Done</h1>
           <p className='my-2'>
-            Once your submisson has been accepted you're done, and you wont be
-            required to perform any more actions until next years application
+            Once your submisson has been accepted you&apos;re done, and you wont
+            be required to perform any more actions until next years application
             becomes available.
           </p>
         </div>

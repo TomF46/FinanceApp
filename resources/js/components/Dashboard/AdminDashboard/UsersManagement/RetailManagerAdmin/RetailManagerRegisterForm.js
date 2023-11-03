@@ -47,7 +47,7 @@ const RetailManagerRegisterForm = () => {
     if (!formIsValid()) return;
     setSaving(true);
     RegisterRetailer(user)
-      .then((response) => {
+      .then(() => {
         toast.success('Successfully registered retail manager');
         history.push('/admin/users');
       })
@@ -62,7 +62,7 @@ const RetailManagerRegisterForm = () => {
   function formatErrorText(error) {
     let errorText = '';
 
-    for (const [key, value] of Object.entries(error.data.errors)) {
+    for (const [value] of Object.entries(error.data.errors)) {
       errorText = `${errorText} ${value}`;
     }
 

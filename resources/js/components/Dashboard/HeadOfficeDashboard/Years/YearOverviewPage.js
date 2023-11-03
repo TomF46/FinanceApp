@@ -46,7 +46,7 @@ const YearOverviewPage = () => {
 
   function handlePublish() {
     publishYear(year.id)
-      .then((res) => {
+      .then(() => {
         toast.success('Year published');
         getYear();
       })

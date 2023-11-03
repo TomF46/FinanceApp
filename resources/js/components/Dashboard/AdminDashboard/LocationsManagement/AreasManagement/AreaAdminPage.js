@@ -51,7 +51,7 @@ const AreaAdminPage = () => {
 
   function removeManager(id) {
     removeAreaManager(area, id)
-      .then((response) => {
+      .then(() => {
         toast.success('Manager removed.');
         getArea();
       })
@@ -72,7 +72,7 @@ const AreaAdminPage = () => {
 
   function deactivate() {
     deactivateAreaById(areaId)
-      .then((response) => {
+      .then(() => {
         toast.success('Area deactivated');
         history.push('/admin/locations');
       })

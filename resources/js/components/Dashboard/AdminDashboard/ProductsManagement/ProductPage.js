@@ -37,7 +37,7 @@ const ProductPage = () => {
   }
   function deactivate(id) {
     deactivateProductById(id)
-      .then((response) => {
+      .then(() => {
         toast.success('Product deactivated');
         history.push('/admin/products');
       })

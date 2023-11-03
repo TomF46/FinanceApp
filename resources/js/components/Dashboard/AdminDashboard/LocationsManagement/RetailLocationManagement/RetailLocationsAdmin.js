@@ -6,7 +6,7 @@ import {
 import { toast } from 'react-toastify';
 import LoadingMessage from '../../../../DisplayComponents/LoadingMessage';
 import RetailLocationsListWithPagination from '../../../../DisplayComponents/RetailLocationsListWithPagination';
-import _, { debounce } from 'lodash';
+import { debounce } from 'lodash';
 import RetailLocationSearchForm from '../../../../DisplayComponents/RetailLocationSearchForm';
 
 const RetailLocationsAdmin = () => {

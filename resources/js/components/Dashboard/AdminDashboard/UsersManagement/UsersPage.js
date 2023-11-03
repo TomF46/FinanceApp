@@ -3,7 +3,7 @@ import { searchUsers, searchUsersWithPage } from '../../../../api/usersApi';
 import { toast } from 'react-toastify';
 import LoadingMessage from '../../../DisplayComponents/LoadingMessage';
 import UsersListWithPagination from '../../../DisplayComponents/UsersListWithPagination';
-import _, { debounce } from 'lodash';
+import { debounce } from 'lodash';
 import UserSearchForm from '../../../DisplayComponents/UsersSearchForm';
 
 const UsersPage = () => {

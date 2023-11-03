@@ -47,7 +47,7 @@ const AreaManagerApplicationViewPage = () => {
 
   function accept() {
     acceptApplication(application)
-      .then((res) => {
+      .then(() => {
         toast.success('Application accepted');
         getApplication();
       })
@@ -72,7 +72,7 @@ const AreaManagerApplicationViewPage = () => {
     setSaving(true);
 
     rejectApplication(application, { message: rejectionMessage })
-      .then((res) => {
+      .then(() => {
         toast.success('Application rejected');
         getApplication();
       })
@@ -107,7 +107,6 @@ const AreaManagerApplicationViewPage = () => {
             <>
               <ApplicationReadOnly application={application} />
               <AreaManagerApplicationControls
-                application={application}
                 onAccept={handleAccept}
                 onReject={handleReject}
                 rejectionMessage={rejectionMessage}

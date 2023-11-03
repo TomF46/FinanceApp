@@ -61,7 +61,7 @@ const UserDetailPage = () => {
                       user.areasManaged.length > 1 ? 's' : ''
                     } managed:`}</p>
                     {user.areasManaged.map((area) => {
-                      return <p>{area.name}</p>;
+                      return <p key={area.id}>{area.name}</p>;
                     })}
                   </>
                 )}
@@ -72,7 +72,7 @@ const UserDetailPage = () => {
                     } managed:`}</p>
                     {user.retailLocationsManaged.map((location) => {
                       return (
-                        <p>
+                        <p key={location.id}>
                           {location.name} ({location.area})
                         </p>
                       );

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import LoadingMessage from './LoadingMessage';
 import { getRejectionMessage } from '../../api/applicationsApi';
-import { toast } from 'react-toastify';
 
 const RejectionMessage = ({ application }) => {
   const [rejectionMessage, setRejectionMessage] = useState(null);

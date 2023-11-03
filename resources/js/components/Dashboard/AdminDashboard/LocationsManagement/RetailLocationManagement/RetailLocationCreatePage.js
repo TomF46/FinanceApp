@@ -25,7 +25,7 @@ const RetailLocationCreatePage = () => {
   }, [areas]);
 
   function handleChange(event) {
-    const { name, location, area_id, value } = event.target;
+    const { name, value } = event.target;
     setRetailLocation((prevRetailLocation) => ({
       ...prevRetailLocation,
       [name]: value,
@@ -66,7 +66,7 @@ const RetailLocationCreatePage = () => {
   function formatErrorText(error) {
     let errorText = '';
 
-    for (const [key, value] of Object.entries(error.data.errors)) {
+    for (const [value] of Object.entries(error.data.errors)) {
       errorText = `${errorText} ${value}`;
     }
 

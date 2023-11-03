@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import PasswordInput from '../../../FormComponents/PasswordInput';
@@ -40,7 +40,7 @@ const UserPasswordChangeForm = ({ user }) => {
     setSaving(true);
 
     changeUserPassword(user.id, userPassword)
-      .then((response) => {
+      .then(() => {
         toast.success('Successfully changed user password');
         setSaving(false);
         setUserPassword({
@@ -59,7 +59,7 @@ const UserPasswordChangeForm = ({ user }) => {
   function formatErrorText(error) {
     let errorText = '';
 
-    for (const [key, value] of Object.entries(error.data.errors)) {
+    for (const [value] of Object.entries(error.data.errors)) {
       errorText = `${errorText} ${value}`;
     }
 

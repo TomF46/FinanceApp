@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import TextAreaInput from '../../../FormComponents/TextAreaInput';
 
 const AreaManagerApplicationControls = ({
-  application,
   onAccept,
   rejectionMessage,
   onReject,
@@ -87,12 +86,10 @@ const AreaManagerApplicationControls = ({
 };
 
 AreaManagerApplicationControls.propTypes = {
-  application: PropTypes.object.isRequired,
   onReject: PropTypes.func.isRequired,
   onAccept: PropTypes.func.isRequired,
   rejectionMessage: PropTypes.string,
   errors: PropTypes.object,
-  onReject: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   saving: PropTypes.bool,
 };

@@ -43,7 +43,6 @@ const LoginForm = ({ user, onSave, onChange, saving = false, errors = {} }) => {
                     name='remember_me'
                     label='Remember me?'
                     value={user.remember_me}
-                    checked={user.remember_me}
                     onChange={onChange}
                     error={errors.password}
                   />

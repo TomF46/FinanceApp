@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { Router, Link, Route, Switch } from 'react-router-dom';
+import React from 'react';
+import { Router } from 'react-router-dom';
 import Main from './components/App';
 import configureStore from './redux/configureStore';
 import { Provider as ReduxProvider } from 'react-redux';

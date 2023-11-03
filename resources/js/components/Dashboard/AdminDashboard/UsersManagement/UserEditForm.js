@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import TextInput from '../../../FormComponents/TextInput';
-import { Link } from 'react-router-dom';
 import { editUser } from '../../../../api/usersApi';
 import { toast } from 'react-toastify';
 
@@ -34,7 +33,7 @@ const UserEditForm = ({ user, onUserUpdated }) => {
     setSaving(true);
 
     editUser(user.id, editedUser)
-      .then((response) => {
+      .then(() => {
         toast.success('Successfully updated user');
         onUserUpdated();
         setSaving(false);
@@ -50,7 +49,7 @@ const UserEditForm = ({ user, onUserUpdated }) => {
   function formatErrorText(error) {
     let errorText = '';
 
-    for (const [key, value] of Object.entries(error.data.errors)) {
+    for (const [value] of Object.entries(error.data.errors)) {
       errorText = `${errorText} ${value}`;
     }
 

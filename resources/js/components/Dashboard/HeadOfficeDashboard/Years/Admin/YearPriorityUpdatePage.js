@@ -51,7 +51,7 @@ const YearPriorityUpdatePage = () => {
 
   function handleUpdate() {
     setYearPriority(yearId, priority)
-      .then((res) => {
+      .then(() => {
         toast.success('Priority updated!');
       })
       .catch((error) => {

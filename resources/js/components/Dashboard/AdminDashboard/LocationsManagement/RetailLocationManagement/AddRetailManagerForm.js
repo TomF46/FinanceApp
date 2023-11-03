@@ -44,7 +44,7 @@ const AddRetailManagerForm = ({ retailLocation, onManagerAdded }) => {
     if (!formIsValid()) return;
     setSaving(true);
     addRetailManager(retailLocation, manager)
-      .then((response) => {
+      .then(() => {
         toast.success('Successfully added retail manager');
         setSaving(false);
         setManager({
@@ -63,7 +63,7 @@ const AddRetailManagerForm = ({ retailLocation, onManagerAdded }) => {
   function formatErrorText(error) {
     let errorText = '';
 
-    for (const [key, value] of Object.entries(error.data.errors)) {
+    for (const [value] of Object.entries(error.data.errors)) {
       errorText = `${errorText} ${value}`;
     }
 

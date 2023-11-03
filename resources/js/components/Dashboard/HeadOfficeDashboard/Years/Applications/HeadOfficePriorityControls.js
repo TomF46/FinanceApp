@@ -34,7 +34,7 @@ const HeadOfficePriorityControls = ({ application, onPriorityUpdated }) => {
 
   function handleUpdate() {
     setApplicationPriority(application.id, priority)
-      .then((res) => {
+      .then(() => {
         toast.success('Priority updated!');
         onPriorityUpdated();
       })

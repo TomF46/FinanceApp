@@ -47,7 +47,7 @@ const AreaEditPage = () => {
     setSaving(true);
 
     editArea(area.id, area)
-      .then((response) => {
+      .then(() => {
         toast.success('Area updated');
         history.push(`/admin/locations/areas/${area.id}`);
       })
@@ -65,7 +65,7 @@ const AreaEditPage = () => {
   function formatErrorText(error) {
     let errorText = '';
 
-    for (const [key, value] of Object.entries(error.data.errors)) {
+    for (const [value] of Object.entries(error.data.errors)) {
       errorText = `${errorText} ${value}`;
     }
 

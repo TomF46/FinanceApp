@@ -146,7 +146,7 @@ const ApplicationPage = () => {
     submitApplication(
       ApplicationService.mapCreatePayload(application, income, expenses, sales),
     )
-      .then((res) => {
+      .then(() => {
         toast.success('Application submitted');
         setApplicationRestarted(false);
         getApplication();

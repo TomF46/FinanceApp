@@ -51,7 +51,7 @@ const ProductEditPage = () => {
     setSaving(true);
 
     editProduct(product.id, product)
-      .then((response) => {
+      .then(() => {
         toast.success('Product updated');
         history.push(`/admin/products`);
       })
@@ -69,7 +69,7 @@ const ProductEditPage = () => {
   function formatErrorText(error) {
     let errorText = '';
 
-    for (const [key, value] of Object.entries(error.data.errors)) {
+    for (const [value] of Object.entries(error.data.errors)) {
       errorText = `${errorText} ${value}`;
     }
 

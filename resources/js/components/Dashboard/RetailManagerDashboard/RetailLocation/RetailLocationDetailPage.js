@@ -77,7 +77,11 @@ const RetailLocationDetailPage = () => {
                       retailLocation.managers.length > 1 ? 's' : ''
                     }:`}</p>
                     {retailLocation.managers.map((manager) => {
-                      return <p>{`${manager.fullName} (${manager.email})`} </p>;
+                      return (
+                        <p key={manager.id}>
+                          {`${manager.fullName} (${manager.email})`}{' '}
+                        </p>
+                      );
                     })}
                   </>
                 ) : (
@@ -121,7 +125,7 @@ const RetailLocationDetailPage = () => {
                   />
                 ) : (
                   <p className='text-center p-4'>
-                    This location doesn't currently have any applications.
+                    This location doesn&apos;t currently have any applications.
                   </p>
                 )}
               </div>

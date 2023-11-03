@@ -12,7 +12,7 @@ const AdminRoute = ({ component: Component, path, ...rest }) => {
         setIsAdmin(res.isAdmin);
         setIsChecked(true);
       })
-      .catch((err) => {
+      .catch(() => {
         //If call fails then assume they are not admin
         setIsChecked(true);
       });

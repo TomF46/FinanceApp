@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import YearsDashboard from './Years/YearsDashboard';
 
-const HeadOfficeDashboard = ({ user }) => {
+const HeadOfficeDashboard = () => {
   return (
     <div className='headoffice-dashboard'>
       <div className='grid grid-cols-12 pb-4'>
@@ -44,10 +43,6 @@ const HeadOfficeDashboard = ({ user }) => {
       </div>
     </div>
   );
-};
-
-HeadOfficeDashboard.propTypes = {
-  user: PropTypes.object.isRequired,
 };
 
 export default HeadOfficeDashboard;

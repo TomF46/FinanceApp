@@ -49,7 +49,7 @@ const RetailLocationAdminPage = () => {
 
   function removeManager(id) {
     removeRetailManager(retailLocation, id)
-      .then((response) => {
+      .then(() => {
         toast.success('Manager removed.');
         getRetailLocation();
       })
@@ -70,7 +70,7 @@ const RetailLocationAdminPage = () => {
 
   function deactivate() {
     deactivateRetailLocationById(retailLocationId)
-      .then((response) => {
+      .then(() => {
         toast.success('Retail location deactivated');
         history.push('/admin/locations');
       })

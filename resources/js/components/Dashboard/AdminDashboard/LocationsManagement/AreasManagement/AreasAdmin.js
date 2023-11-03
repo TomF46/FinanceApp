@@ -3,7 +3,7 @@ import { searchAreas, searchAreasWithPage } from '../../../../../api/areasApi';
 import { toast } from 'react-toastify';
 import LoadingMessage from '../../../../DisplayComponents/LoadingMessage';
 import AreasListWithPagination from '../../../../DisplayComponents/AreasListWithPagination';
-import _, { debounce } from 'lodash';
+import { debounce } from 'lodash';
 import AreaSearchForm from '../../../../DisplayComponents/AreaSearchForm';
 
 const AreasAdmin = () => {

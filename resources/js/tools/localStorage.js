@@ -11,16 +11,10 @@ export const loadState = () => {
 };
 
 export const saveTokens = (tokens) => {
-  try {
-    const serializedState = JSON.stringify(tokens);
-    localStorage.setItem('tokens', serializedState);
-  } catch {
-    // ignore write errors
-  }
+  const serializedState = JSON.stringify(tokens);
+  localStorage.setItem('tokens', serializedState);
 };
 
 export const removeTokens = () => {
-  try {
-    localStorage.removeItem('tokens');
-  } catch {}
+  localStorage.removeItem('tokens');
 };

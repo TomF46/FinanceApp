@@ -70,7 +70,11 @@ const AreaDetailPage = () => {
                       area.managers.length > 1 ? 's' : ''
                     }:`}</p>
                     {area.managers.map((manager) => {
-                      return <p>{`${manager.fullName} (${manager.email})`} </p>;
+                      return (
+                        <p key={manager.id}>
+                          {`${manager.fullName} (${manager.email})`}{' '}
+                        </p>
+                      );
                     })}
                   </>
                 ) : (

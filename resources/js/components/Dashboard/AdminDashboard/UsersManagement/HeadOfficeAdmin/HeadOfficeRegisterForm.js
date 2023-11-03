@@ -47,7 +47,7 @@ const HeadOfficeRegisterForm = () => {
     if (!formIsValid()) return;
     setSaving(true);
     RegisterHeadOffice(user)
-      .then((response) => {
+      .then(() => {
         toast.success('Successfully registered head office user');
         history.push('/admin/users');
       })
@@ -62,7 +62,7 @@ const HeadOfficeRegisterForm = () => {
   function formatErrorText(error) {
     let errorText = '';
 
-    for (const [key, value] of Object.entries(error.data.errors)) {
+    for (const [value] of Object.entries(error.data.errors)) {
       errorText = `${errorText} ${value}`;
     }
 

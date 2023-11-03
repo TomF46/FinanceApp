@@ -39,7 +39,7 @@ const UserManagePage = () => {
 
   function deactivate() {
     deactivateUserById(userId)
-      .then((response) => {
+      .then(() => {
         toast.success('User deactivated');
         history.push('/admin/users');
       })

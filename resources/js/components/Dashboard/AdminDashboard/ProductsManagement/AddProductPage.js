@@ -48,7 +48,7 @@ const AddProductPage = () => {
     setSaving(true);
 
     AddProduct(product)
-      .then((response) => {
+      .then(() => {
         toast.success('Product added');
         history.push(`/admin/products`);
       })
@@ -66,7 +66,7 @@ const AddProductPage = () => {
   function formatErrorText(error) {
     let errorText = '';
 
-    for (const [key, value] of Object.entries(error.data.errors)) {
+    for (const [value] of Object.entries(error.data.errors)) {
       errorText = `${errorText} ${value}`;
     }
 

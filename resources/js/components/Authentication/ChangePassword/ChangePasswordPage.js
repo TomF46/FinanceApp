@@ -43,7 +43,7 @@ const ChangePasswordPage = () => {
     if (!formIsValid()) return;
     setSaving(true);
     ChangePassword(user)
-      .then((response) => {
+      .then(() => {
         toast.success('Successfully changed password');
         history.push('/');
       })
@@ -58,7 +58,7 @@ const ChangePasswordPage = () => {
   function formatErrorText(error) {
     let errorText = '';
 
-    for (const [key, value] of Object.entries(error.data.errors)) {
+    for (const [value] of Object.entries(error.data.errors)) {
       errorText = `${errorText} ${value}`;
     }
 

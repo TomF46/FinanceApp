@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { getCurrentUser } from '../../api/authenticationApi';
 import { toast } from 'react-toastify';
 import AdminDashboard from './AdminDashboard/AdminDashboard';
@@ -7,7 +6,7 @@ import HeadOfficeDashboard from './HeadOfficeDashboard/HeadOfficeDashboard';
 import AreaManagerDashboard from './AreaManagerDashboard/AreaManagerDashboard';
 import RetailManagerDashboard from './RetailManagerDashboard/RetailManagerDashboard';
 
-const DashboardPage = ({ history }) => {
+const DashboardPage = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -32,8 +31,8 @@ const DashboardPage = ({ history }) => {
             {' '}
             Welcome {user.firstName}
           </h1>
-          {user.role == '0' && <AdminDashboard user={user} />}
-          {user.role == '1' && <HeadOfficeDashboard user={user} />}
+          {user.role == '0' && <AdminDashboard />}
+          {user.role == '1' && <HeadOfficeDashboard />}
           {user.role == '2' && <AreaManagerDashboard user={user} />}
           {user.role == '3' && <RetailManagerDashboard user={user} />}
           {user.role == '4' && (
@@ -45,10 +44,6 @@ const DashboardPage = ({ history }) => {
       )}
     </div>
   );
-};
-
-DashboardPage.propTypes = {
-  history: PropTypes.object.isRequired,
 };
 
 export default DashboardPage;

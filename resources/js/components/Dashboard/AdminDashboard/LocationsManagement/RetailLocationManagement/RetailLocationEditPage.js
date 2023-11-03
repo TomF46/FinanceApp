@@ -61,7 +61,7 @@ const RetailLocationEditPage = () => {
     setSaving(true);
 
     editRetailLocation(retailLocation.id, retailLocation)
-      .then((response) => {
+      .then(() => {
         toast.success('Retail Location updated');
         history.push(`/admin/locations/retail/${retailLocation.id}`);
       })
@@ -79,7 +79,7 @@ const RetailLocationEditPage = () => {
   function formatErrorText(error) {
     let errorText = '';
 
-    for (const [key, value] of Object.entries(error.data.errors)) {
+    for (const [value] of Object.entries(error.data.errors)) {
       errorText = `${errorText} ${value}`;
     }
 

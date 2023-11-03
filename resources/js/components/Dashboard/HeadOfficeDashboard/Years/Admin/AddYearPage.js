@@ -37,7 +37,7 @@ const AddYearPage = () => {
     yearToPost.publish = publish;
 
     AddYear(yearToPost)
-      .then((response) => {
+      .then(() => {
         toast.success(`Year ${publish ? 'published' : 'saved'}`);
         history.push('/');
       })
