@@ -34,7 +34,6 @@ const ApplicationsSearch = ({ filters, onUpdateFilters }) => {
     input = value == 'All' ? null : Number(input);
 
     let copy = structuredClone(filters);
-    console.log(input);
     onUpdateFilters({ ...copy, [name]: input });
   }
 

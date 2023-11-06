@@ -6,7 +6,7 @@ import {
   searchProductsWithPage,
 } from '../../../../api/productsApi';
 import ProductsListWithPagination from '../../../DisplayComponents/ProductsListWithPagination';
-import { debounce } from 'lodash';
+import debounce from 'lodash/debounce';
 import ProductsSearchForm from '../../../DisplayComponents/ProductsSearchForm';
 
 const ProductsManagementPage = () => {

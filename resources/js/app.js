@@ -1,15 +1,19 @@
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes React and other helpers. It's a great starting point while
- * building robust, powerful web applications using React + Laravel.
- */
+import React from 'react';
+import { Router } from 'react-router-dom';
+import Main from './components/App';
+import configureStore from './redux/configureStore';
+import { Provider as ReduxProvider } from 'react-redux';
+import { render } from 'react-dom';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import history from './history';
 
-require('./bootstrap');
+const store = configureStore();
 
-/**
- * Next, we will create a fresh React component instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-require('./index');
+render(
+  <ReduxProvider store={store}>
+    <Router history={history}>
+      <Main component={Main} />
+    </Router>
+  </ReduxProvider>,
+  document.getElementById('index'),
+);

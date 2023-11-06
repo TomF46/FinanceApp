@@ -129,7 +129,6 @@ const ApplicationPage = () => {
       Object.keys(incomeErrors).length +
       Object.keys(expensesErrors).length +
       salesErrors.length;
-    console.log(totalErrors);
     return totalErrors === 0;
   }
 

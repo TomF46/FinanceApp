@@ -9,7 +9,7 @@ import {
 import { useParams } from 'react-router-dom';
 import HeadOfficeApplicationsListWithPagination from '../../../../DisplayComponents/HeadOfficeApplicationsListWithPagination';
 import ApplicationsSearch from './ApplicationsSearch';
-import { debounce } from 'lodash';
+import debounce from 'lodash/debounce';
 
 const YearApplicationsPage = () => {
   const { yearId } = useParams();
