@@ -13,13 +13,8 @@ import { useParams } from 'react-router-dom';
 const RetailLocationDetailPage = () => {
   const { retailLocationId } = useParams();
   const [retailLocation, setRetailLocation] = useState(null);
-  useEffect(() => {
-    if (!retailLocation) {
-      getRetailLocation();
-    }
-  }, [retailLocationId, retailLocation]);
 
-  function getRetailLocation() {
+  useEffect(() => {
     getRetailLocationById(retailLocationId)
       .then((retailLocationData) => {
         setRetailLocation(retailLocationData);
@@ -29,7 +24,7 @@ const RetailLocationDetailPage = () => {
           autoClose: false,
         });
       });
-  }
+  }, [retailLocationId]);
 
   function downloadApplicationsCSV() {
     getLocationApplicationsCSV(retailLocationId)

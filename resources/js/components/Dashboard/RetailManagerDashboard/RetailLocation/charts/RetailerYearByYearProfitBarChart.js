@@ -9,10 +9,6 @@ const RetailerYearByYearProfitBarChart = ({ retailLocationId }) => {
   const [graphData, setGraphData] = useState(null);
 
   useEffect(() => {
-    getGraphData();
-  }, [retailLocationId]);
-
-  function getGraphData() {
     getYearByYearProfitBarChart(retailLocationId)
       .then((data) => {
         setGraphData(data);
@@ -22,7 +18,7 @@ const RetailerYearByYearProfitBarChart = ({ retailLocationId }) => {
           autoClose: false,
         });
       });
-  }
+  }, [retailLocationId]);
 
   return (
     <div className='card shadow-md rounded-md py-4'>

@@ -10,13 +10,8 @@ import { useParams } from 'react-router-dom';
 const RetailLocationDataPage = () => {
   const { retailLocationId } = useParams();
   const [retailLocation, setRetailLocation] = useState(null);
-  useEffect(() => {
-    if (!retailLocation) {
-      getRetailLocation();
-    }
-  }, [retailLocationId, retailLocation]);
 
-  function getRetailLocation() {
+  useEffect(() => {
     getRetailLocationDataById(retailLocationId)
       .then((retailLocationData) => {
         setRetailLocation(retailLocationData);
@@ -26,7 +21,8 @@ const RetailLocationDataPage = () => {
           autoClose: false,
         });
       });
-  }
+  }, [retailLocationId]);
+
   return (
     <>
       {!retailLocation ? (

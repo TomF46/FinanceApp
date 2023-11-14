@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import {
   getApplicationById,
@@ -27,13 +27,13 @@ const ApplicationPage = () => {
   const [errors, setErrors] = useState({});
   const [saving, setSaving] = useState(false);
 
-  useEffect(() => {
-    if (!application) {
-      getApplication();
-    }
-  }, [applicationId, application]);
+  const createBlankApplication = useCallback(() => {
+    setIncome({ ...blankIncome });
+    setExpenses({ ...blankExpenses });
+    getSalesProducts();
+  }, []);
 
-  function getApplication() {
+  const getApplication = useCallback(() => {
     getApplicationById(applicationId)
       .then((applicationData) => {
         setApplication(applicationData);
@@ -48,13 +48,11 @@ const ApplicationPage = () => {
           autoClose: false,
         });
       });
-  }
+  }, [applicationId, createBlankApplication]);
 
-  function createBlankApplication() {
-    setIncome({ ...blankIncome });
-    setExpenses({ ...blankExpenses });
-    getSalesProducts();
-  }
+  useEffect(() => {
+    getApplication();
+  }, [applicationId, getApplication]);
 
   function createPrePopulatedApplication(application) {
     setIncome(application.incomeRecord);
