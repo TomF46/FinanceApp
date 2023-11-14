@@ -19,12 +19,6 @@ const YearPriorityUpdatePage = () => {
   ];
 
   useEffect(() => {
-    if (!year) {
-      getYear();
-    }
-  }, [yearId, year]);
-
-  function getYear() {
     getYearById(yearId)
       .then((yearData) => {
         setYear(yearData);
@@ -34,7 +28,7 @@ const YearPriorityUpdatePage = () => {
           autoClose: false,
         });
       });
-  }
+  }, [yearId]);
 
   function handleChange(event) {
     const { value } = event.target;

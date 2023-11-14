@@ -9,10 +9,6 @@ const AreasProfitBarChart = ({ yearId }) => {
   const [graphData, setGraphData] = useState(null);
 
   useEffect(() => {
-    getGraphData();
-  }, [yearId]);
-
-  function getGraphData() {
     getYearAreasBarChart(yearId)
       .then((data) => {
         setGraphData(data);
@@ -22,7 +18,7 @@ const AreasProfitBarChart = ({ yearId }) => {
           autoClose: false,
         });
       });
-  }
+  }, [yearId]);
 
   return (
     <>

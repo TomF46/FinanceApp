@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import LoadingMessage from '../../../DisplayComponents/LoadingMessage';
 import {
@@ -18,13 +18,7 @@ const YearOverviewPage = () => {
   const { yearId } = useParams();
   const [year, setYear] = useState(null);
 
-  useEffect(() => {
-    if (!year) {
-      getYear();
-    }
-  }, [yearId, year]);
-
-  function getYear() {
+  const getYear = useCallback(() => {
     getYearById(yearId)
       .then((yearData) => {
         setYear(yearData);
@@ -34,7 +28,11 @@ const YearOverviewPage = () => {
           autoClose: false,
         });
       });
-  }
+  }, [yearId]);
+
+  useEffect(() => {
+    getYear();
+  }, [yearId, getYear]);
 
   function confirmPublish() {
     confirm(

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import HeadOfficePriorityControls from './HeadOfficePriorityControls';
@@ -11,13 +11,7 @@ const HeadOfficeApplicationViewPage = () => {
   const { applicationId } = useParams();
   const [application, setApplication] = useState(null);
 
-  useEffect(() => {
-    if (!application) {
-      getApplication();
-    }
-  }, [applicationId, application]);
-
-  function getApplication() {
+  const getApplication = useCallback(() => {
     getApplicationById(applicationId)
       .then((applicationData) => {
         setApplication(applicationData);
@@ -27,7 +21,11 @@ const HeadOfficeApplicationViewPage = () => {
           autoClose: false,
         });
       });
-  }
+  }, [applicationId]);
+
+  useEffect(() => {
+    getApplication();
+  }, [applicationId, getApplication]);
 
   return (
     <div className='pb-8'>

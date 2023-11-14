@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { getYearById } from '../../../../../api/yearsApi';
 import LoadingMessage from '../../../../DisplayComponents/LoadingMessage';
@@ -22,36 +22,7 @@ const YearApplicationsPage = () => {
     priority: null,
   });
 
-  useEffect(() => {
-    if (!year) {
-      getYear();
-    }
-    if (!applicationsPaginator) {
-      getApplications();
-    }
-  }, [yearId, year]);
-
-  useEffect(() => {
-    let debounced = debounce(() => {
-      getApplications();
-    }, 50);
-
-    debounced();
-  }, [filters]);
-
-  function getYear() {
-    getYearById(yearId)
-      .then((yearData) => {
-        setYear(yearData);
-      })
-      .catch((error) => {
-        toast.error('Error getting year ' + error.message, {
-          autoClose: false,
-        });
-      });
-  }
-
-  function getApplications() {
+  const getApplications = useCallback(() => {
     searchApplications(filters)
       .then((applicationData) => {
         setApplicationsPaginator(applicationData);
@@ -61,7 +32,27 @@ const YearApplicationsPage = () => {
           autoClose: false,
         });
       });
-  }
+  }, [filters]);
+
+  useEffect(() => {
+    getYearById(yearId)
+      .then((yearData) => {
+        setYear(yearData);
+      })
+      .catch((error) => {
+        toast.error('Error getting year ' + error.message, {
+          autoClose: false,
+        });
+      });
+  }, [yearId]);
+
+  useEffect(() => {
+    let debounced = debounce(() => {
+      getApplications();
+    }, 50);
+
+    debounced();
+  }, [yearId, filters, getApplications]);
 
   function getPage(url) {
     getPageWithPaginationUrlAndFilters(url, filters)

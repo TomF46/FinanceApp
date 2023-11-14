@@ -9,10 +9,6 @@ const RetailProfitBarChart = ({ yearId }) => {
   const [graphData, setGraphData] = useState(null);
 
   useEffect(() => {
-    getGraphData();
-  }, [yearId]);
-
-  function getGraphData() {
     getYearRetailBarChart(yearId)
       .then((data) => {
         setGraphData(data);
@@ -22,7 +18,7 @@ const RetailProfitBarChart = ({ yearId }) => {
           autoClose: false,
         });
       });
-  }
+  }, [yearId]);
 
   return (
     <>

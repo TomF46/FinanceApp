@@ -10,10 +10,6 @@ const RetailProfitPieChart = ({ yearId }) => {
   const [graphData, setGraphData] = useState(null);
 
   useEffect(() => {
-    getGraphData();
-  }, [yearId]);
-
-  function getGraphData() {
     getProfitPieChart(yearId)
       .then((data) => {
         setGraphData(data);
@@ -23,7 +19,7 @@ const RetailProfitPieChart = ({ yearId }) => {
           autoClose: false,
         });
       });
-  }
+  }, [yearId]);
 
   return (
     <>

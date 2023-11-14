@@ -12,12 +12,6 @@ const YearChartsPage = () => {
   const [year, setYear] = useState(null);
 
   useEffect(() => {
-    if (!year) {
-      getYear();
-    }
-  }, [yearId, year]);
-
-  function getYear() {
     getYearById(yearId)
       .then((yearData) => {
         setYear(yearData);
@@ -27,7 +21,7 @@ const YearChartsPage = () => {
           autoClose: false,
         });
       });
-  }
+  }, [yearId]);
 
   return (
     <>
