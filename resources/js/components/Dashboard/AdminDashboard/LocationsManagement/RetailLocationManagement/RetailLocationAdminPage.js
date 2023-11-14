@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link, useParams, useHistory } from 'react-router-dom';
 import {
   deactivateRetailLocationById,
@@ -15,13 +15,8 @@ const RetailLocationAdminPage = () => {
   const { retailLocationId } = useParams();
   const history = useHistory();
   const [retailLocation, setRetailLocation] = useState(null);
-  useEffect(() => {
-    if (!retailLocation) {
-      getRetailLocation();
-    }
-  }, [retailLocationId, retailLocation]);
 
-  function getRetailLocation() {
+  const getRetailLocation = useCallback(() => {
     getRetailLocationById(retailLocationId)
       .then((retailLocationData) => {
         setRetailLocation(retailLocationData);
@@ -31,7 +26,11 @@ const RetailLocationAdminPage = () => {
           autoClose: false,
         });
       });
-  }
+  }, [retailLocationId]);
+
+  useEffect(() => {
+    getRetailLocation();
+  }, [retailLocationId, getRetailLocation]);
 
   function handleManagerAdded() {
     getRetailLocation();

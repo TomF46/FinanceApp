@@ -9,13 +9,8 @@ import ApplicationsList from '../../DisplayComponents/ApplicationList';
 
 const RetailManagerDashboard = ({ user }) => {
   const [retailManager, setRetailManager] = useState(null);
-  useEffect(() => {
-    if (!retailManager) {
-      getRetailManager();
-    }
-  }, [user, retailManager]);
 
-  function getRetailManager() {
+  useEffect(() => {
     getRetailManagerById(user.id)
       .then((retailManagerData) => {
         setRetailManager(retailManagerData);
@@ -25,7 +20,7 @@ const RetailManagerDashboard = ({ user }) => {
           autoClose: false,
         });
       });
-  }
+  }, [user]);
 
   function getApplicationsRequireAttention(applications) {
     return applications.returned.concat(applications.notSubmitted);

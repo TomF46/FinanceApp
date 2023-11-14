@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import {
@@ -13,21 +13,7 @@ const ProductsManagementPage = () => {
   const [productsPaginator, setProductsPaginator] = useState(null);
   const [searchTerms, setSearchTerms] = useState({ name: '', productCode: '' });
 
-  useEffect(() => {
-    if (!productsPaginator) {
-      search();
-    }
-  }, [productsPaginator]);
-
-  useEffect(() => {
-    let debounced = debounce(() => {
-      search();
-    }, 50);
-
-    debounced();
-  }, [searchTerms]);
-
-  function search() {
+  const search = useCallback(() => {
     searchProducts(searchTerms)
       .then((productsData) => {
         setProductsPaginator(productsData);
@@ -37,7 +23,15 @@ const ProductsManagementPage = () => {
           autoClose: false,
         });
       });
-  }
+  }, [searchTerms]);
+
+  useEffect(() => {
+    let debounced = debounce(() => {
+      search();
+    }, 50);
+
+    debounced();
+  }, [searchTerms, search]);
 
   function getProductsPage(url) {
     searchProductsWithPage(url, searchTerms)

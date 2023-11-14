@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   deactivateAreaById,
@@ -17,13 +17,8 @@ const AreaAdminPage = () => {
   const { areaId } = useParams();
   const history = useHistory();
   const [area, setArea] = useState(null);
-  useEffect(() => {
-    if (!area) {
-      getArea();
-    }
-  }, [areaId, area]);
 
-  function getArea() {
+  const getArea = useCallback(() => {
     getAreaById(areaId)
       .then((areaData) => {
         setArea(areaData);
@@ -33,7 +28,11 @@ const AreaAdminPage = () => {
           autoClose: false,
         });
       });
-  }
+  }, [areaId]);
+
+  useEffect(() => {
+    getArea();
+  }, [areaId, getArea]);
 
   function handleManagerAdded() {
     getArea();

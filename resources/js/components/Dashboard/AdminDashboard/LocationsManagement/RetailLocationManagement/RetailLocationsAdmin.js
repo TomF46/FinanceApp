@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   searchRetailLocations,
   searchRetailLocationsWithPage,
@@ -14,21 +14,7 @@ const RetailLocationsAdmin = () => {
     useState(null);
   const [searchTerms, setSearchTerms] = useState({ name: '', location: '' });
 
-  useEffect(() => {
-    if (!retailLocationsPaginator) {
-      search();
-    }
-  }, [retailLocationsPaginator]);
-
-  useEffect(() => {
-    let debounced = debounce(() => {
-      search();
-    }, 50);
-
-    debounced();
-  }, [searchTerms]);
-
-  function search() {
+  const search = useCallback(() => {
     searchRetailLocations(searchTerms)
       .then((retailLocationsData) => {
         setRetailLocationsPaginator(retailLocationsData);
@@ -38,7 +24,15 @@ const RetailLocationsAdmin = () => {
           autoClose: false,
         });
       });
-  }
+  }, [searchTerms]);
+
+  useEffect(() => {
+    let debounced = debounce(() => {
+      search();
+    }, 50);
+
+    debounced();
+  }, [searchTerms, search]);
 
   function getRetailLocationsPage(url) {
     searchRetailLocationsWithPage(url, searchTerms)

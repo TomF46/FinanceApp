@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { searchUsers, searchUsersWithPage } from '../../../../api/usersApi';
 import { toast } from 'react-toastify';
 import LoadingMessage from '../../../DisplayComponents/LoadingMessage';
@@ -14,21 +14,7 @@ const UsersPage = () => {
     role: null,
   });
 
-  useEffect(() => {
-    if (!usersPaginator) {
-      search();
-    }
-  }, [usersPaginator]);
-
-  useEffect(() => {
-    let debounced = debounce(() => {
-      search();
-    }, 50);
-
-    debounced();
-  }, [searchTerms]);
-
-  function search() {
+  const search = useCallback(() => {
     searchUsers(searchTerms)
       .then((usersData) => {
         setUsersPaginator(usersData);
@@ -38,7 +24,15 @@ const UsersPage = () => {
           autoClose: false,
         });
       });
-  }
+  }, [searchTerms]);
+
+  useEffect(() => {
+    let debounced = debounce(() => {
+      search();
+    }, 50);
+
+    debounced();
+  }, [searchTerms, search]);
 
   function getUsersPage(url) {
     searchUsersWithPage(url, searchTerms)

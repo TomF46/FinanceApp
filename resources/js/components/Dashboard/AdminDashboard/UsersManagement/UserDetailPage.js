@@ -8,13 +8,8 @@ import { useParams } from 'react-router-dom';
 const UserDetailPage = () => {
   const { userId } = useParams();
   const [user, setUser] = useState(null);
-  useEffect(() => {
-    if (!user) {
-      getUser();
-    }
-  }, [userId, user]);
 
-  function getUser() {
+  useEffect(() => {
     getUserById(userId)
       .then((userData) => {
         setUser(userData);
@@ -24,7 +19,7 @@ const UserDetailPage = () => {
           autoClose: false,
         });
       });
-  }
+  }, [userId]);
 
   return (
     <>

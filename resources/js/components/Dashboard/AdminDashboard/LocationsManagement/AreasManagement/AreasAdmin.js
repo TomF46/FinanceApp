@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { searchAreas, searchAreasWithPage } from '../../../../../api/areasApi';
 import { toast } from 'react-toastify';
 import LoadingMessage from '../../../../DisplayComponents/LoadingMessage';
@@ -10,21 +10,7 @@ const AreasAdmin = () => {
   const [areasPaginator, setAreasPaginator] = useState(null);
   const [searchTerms, setSearchTerms] = useState({ name: '' });
 
-  useEffect(() => {
-    if (!areasPaginator) {
-      search();
-    }
-  }, [areasPaginator]);
-
-  useEffect(() => {
-    let debounced = debounce(() => {
-      search();
-    }, 50);
-
-    debounced();
-  }, [searchTerms]);
-
-  function search() {
+  const search = useCallback(() => {
     searchAreas(searchTerms)
       .then((areasData) => {
         setAreasPaginator(areasData);
@@ -34,7 +20,15 @@ const AreasAdmin = () => {
           autoClose: false,
         });
       });
-  }
+  }, [searchTerms]);
+
+  useEffect(() => {
+    let debounced = debounce(() => {
+      search();
+    }, 50);
+
+    debounced();
+  }, [searchTerms, search]);
 
   function getAreasPage(url) {
     searchAreasWithPage(url, searchTerms)

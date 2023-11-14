@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import LoadingMessage from '../../../DisplayComponents/LoadingMessage';
 import { deactivateUserById, getUserById } from '../../../../api/usersApi';
@@ -11,13 +11,8 @@ const UserManagePage = () => {
   const { userId } = useParams();
   const history = useHistory();
   const [user, setUser] = useState(null);
-  useEffect(() => {
-    if (!user) {
-      getUser();
-    }
-  }, [userId, user]);
 
-  function getUser() {
+  const getUser = useCallback(() => {
     getUserById(userId)
       .then((userData) => {
         setUser(userData);
@@ -27,7 +22,11 @@ const UserManagePage = () => {
           autoClose: false,
         });
       });
-  }
+  }, [userId]);
+
+  useEffect(() => {
+    getUser();
+  }, [userId, getUser]);
 
   function handleDeactivate() {
     confirm(
