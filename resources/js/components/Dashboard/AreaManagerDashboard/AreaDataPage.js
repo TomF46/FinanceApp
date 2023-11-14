@@ -11,13 +11,8 @@ import { useParams } from 'react-router-dom';
 const AreaDataPage = () => {
   const { areaId } = useParams();
   const [area, setArea] = useState(null);
-  useEffect(() => {
-    if (!area) {
-      getArea();
-    }
-  }, [areaId, area]);
 
-  function getArea() {
+  useEffect(() => {
     getAreaDataById(areaId)
       .then((areaData) => {
         setArea(areaData);
@@ -27,7 +22,8 @@ const AreaDataPage = () => {
           autoClose: false,
         });
       });
-  }
+  }, [areaId]);
+
   return (
     <>
       {!area ? (

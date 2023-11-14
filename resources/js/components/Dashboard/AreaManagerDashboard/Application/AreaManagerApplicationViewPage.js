@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import {
   acceptApplication,
@@ -19,13 +19,7 @@ const AreaManagerApplicationViewPage = () => {
   const [errors, setErrors] = useState({});
   const [saving, setSaving] = useState(false);
 
-  useEffect(() => {
-    if (!application) {
-      getApplication();
-    }
-  }, [applicationId, application]);
-
-  function getApplication() {
+  const getApplication = useCallback(() => {
     getApplicationById(applicationId)
       .then((applicationData) => {
         setApplication(applicationData);
@@ -35,7 +29,11 @@ const AreaManagerApplicationViewPage = () => {
           autoClose: false,
         });
       });
-  }
+  }, [applicationId]);
+
+  useEffect(() => {
+    getApplication();
+  }, [applicationId, getApplication]);
 
   function handleAccept() {
     confirm(

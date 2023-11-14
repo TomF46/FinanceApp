@@ -11,13 +11,8 @@ import { useParams } from 'react-router-dom';
 const AreaDetailPage = () => {
   const { areaId } = useParams();
   const [area, setArea] = useState(null);
-  useEffect(() => {
-    if (!area) {
-      getArea();
-    }
-  }, [areaId, area]);
 
-  function getArea() {
+  useEffect(() => {
     getAreaById(areaId)
       .then((areaData) => {
         setArea(areaData);
@@ -27,7 +22,7 @@ const AreaDetailPage = () => {
           autoClose: false,
         });
       });
-  }
+  }, [areaId]);
 
   function downloadApplicationsCSV() {
     getAreaApplicationsCSV(areaId)

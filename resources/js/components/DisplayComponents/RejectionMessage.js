@@ -7,16 +7,10 @@ const RejectionMessage = ({ application }) => {
   const [rejectionMessage, setRejectionMessage] = useState(null);
 
   useEffect(() => {
-    if (!rejectionMessage) {
-      getMessage();
-    }
-  }, [rejectionMessage]);
-
-  function getMessage() {
     getRejectionMessage(application).then((message) => {
       setRejectionMessage(message);
     });
-  }
+  }, [application]);
 
   return (
     <>

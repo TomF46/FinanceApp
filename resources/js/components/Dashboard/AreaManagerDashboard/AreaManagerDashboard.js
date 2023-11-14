@@ -8,13 +8,8 @@ import AreasList from '../../DisplayComponents/AreasList';
 
 const AreaManagerDashboard = ({ user }) => {
   const [areaManager, setAreaManager] = useState(null);
-  useEffect(() => {
-    if (!areaManager) {
-      getAreaManager();
-    }
-  }, [user, areaManager]);
 
-  function getAreaManager() {
+  useEffect(() => {
     getAreaManagerById(user.id)
       .then((areaManagerData) => {
         setAreaManager(areaManagerData);
@@ -24,7 +19,7 @@ const AreaManagerDashboard = ({ user }) => {
           autoClose: false,
         });
       });
-  }
+  }, [user]);
 
   function getApplicationsRequireAttention(applications) {
     return applications.returned.concat(applications.notSubmitted);

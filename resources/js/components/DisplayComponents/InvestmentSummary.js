@@ -10,12 +10,6 @@ const InvestmentSummary = ({ application }) => {
   const [investment, setInvestment] = useState(null);
 
   useEffect(() => {
-    if (!investment) {
-      getInvestmentSummary();
-    }
-  }, [investment]);
-
-  function getInvestmentSummary() {
     getInvestment(application)
       .then((investmentData) => {
         setInvestment(investmentData);
@@ -25,7 +19,7 @@ const InvestmentSummary = ({ application }) => {
           autoClose: false,
         });
       });
-  }
+  }, [application]);
 
   return (
     <>

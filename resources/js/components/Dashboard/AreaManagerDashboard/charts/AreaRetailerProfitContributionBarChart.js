@@ -9,10 +9,6 @@ const AreaRetailerProfitContributionBarChart = ({ areaId }) => {
   const [graphData, setGraphData] = useState(null);
 
   useEffect(() => {
-    getGraphData();
-  }, [areaId]);
-
-  function getGraphData() {
     getRetailerProfitContributionBarChart(areaId)
       .then((data) => {
         setGraphData(data);
@@ -22,7 +18,7 @@ const AreaRetailerProfitContributionBarChart = ({ areaId }) => {
           autoClose: false,
         });
       });
-  }
+  }, [areaId]);
 
   return (
     <div className='card shadow-md rounded-md py-4'>
